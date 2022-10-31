@@ -38,6 +38,13 @@ function OpenClearanceF(SId,ei,d,ci)
 function FunClickHistoryReq(ID)
 { window.open("MyAssetEmpCHistoryitReq.php?CheckAct=ExtraReqField&ID="+ID,"AForm","menubar=no,scrollbars=yes,resizable=no,directories=no,width=1200,height=500"); }
 
+function FUnchkVV(d)
+{
+   if(document.getElementById("chkVV").checked==true){ var chkVV='N';}
+   else{var chkVV='Y'; }
+   window.location="EmpDeptNOC.php?e=4e&w=234&d="+d+"&y=10234&e=4e2&e=4e&w=234&y=110022344&retd=ee&rr=09drfGe&S=eewwqq&wwrew=t%T@sed818&ede=101&chkvv="+chkVV;
+}
+
 </script>
 </head>
 <body class="body">
@@ -77,6 +84,10 @@ function FunClickHistoryReq(ID)
   <td style="display:block;"> <?php //if($_REQUEST['a']=='hod'){echo 'block';}elseif($_REQUEST['a']=='app'){echo 'none';}?>
    <table>
       <tr><td height="30" colspan="7" valign="top" style="font-size:18px;font-family:Times New Roman;"><b>Employee Department NOC Clearance </b>&nbsp;&nbsp;
+      
+      <input type="checkbox" id="chkVV" <?php if($_REQUEST['chkvv']=='N'){echo 'checked';} ?> onclick="FUnchkVV(<?=$_REQUEST['d']?>)" />Pending
+      
+      
 	  <font color="#014E05" style='font-family:Times New Roman;' size="3"><b><?php echo $msg; ?></b></font>
 	</td>
  </tr>
@@ -98,10 +109,18 @@ function FunClickHistoryReq(ID)
 <?php } ?>
 	  <td width="80" class="TableHead" align="center"><b>Clearance Form</b></td>
      </tr>
-<?php $sql_statement = mysql_query("select * from hrm_employee_separation s inner join hrm_employee e on s.EmployeeID=e.EmployeeID where e.CompanyId=".$CompanyId." AND HR_Approved='Y'", $con); $total_records = mysql_num_rows($sql_statement);
+<?php 
+//$_REQUEST['chkvv']
+if($_REQUEST['d']==8 OR $_REQUEST['d']==20){ $subQ="Acc_NOC='".$_REQUEST['chkvv']."'"; }
+elseif($_REQUEST['d']==9){ $subQ="IT_NOC='".$_REQUEST['chkvv']."'"; }
+elseif($_REQUEST['d']==11){ $subQ="Admin_NOC='".$_REQUEST['chkvv']."'"; }
+else{ $subQ='1=1';  }
+
+
+$sql_statement = mysql_query("select * from hrm_employee_separation s inner join hrm_employee e on s.EmployeeID=e.EmployeeID where e.CompanyId=".$CompanyId." AND HR_Approved='Y' AND ".$subQ." ", $con); $total_records = mysql_num_rows($sql_statement);
 if(isset($_GET['page'])) $page = $_GET['page']; else $page = 1;  $offset = 10;
 if ($page){ $from = ($page * $offset) - $offset; }else{ $from = 0;}
-$sql_statement = mysql_query("select * from hrm_employee_separation s inner join hrm_employee e on s.EmployeeID=e.EmployeeID where e.CompanyId=".$CompanyId." AND HR_Approved='Y' order by ResignationStatus ASC, Emp_ResignationDate DESC LIMIT " . $from . "," . $offset, $con);  $rowCheck=mysql_num_rows($sql_statement); if($rowCheck>0){ 
+$sql_statement = mysql_query("select * from hrm_employee_separation s inner join hrm_employee e on s.EmployeeID=e.EmployeeID where e.CompanyId=".$CompanyId." AND HR_Approved='Y' AND ".$subQ." order by ResignationStatus ASC, Emp_ResignationDate DESC  LIMIT " . $from . "," . $offset, $con);  $rowCheck=mysql_num_rows($sql_statement); if($rowCheck>0){ 
 if($_REQUEST['page']==1){$sno=1;} elseif($_REQUEST['page']==2){$sno=11;} elseif($_REQUEST['page']==3){$sno=21;} elseif($_REQUEST['page']==4){$sno=31;} elseif($_REQUEST['page']==5){$sno=41;} elseif($_REQUEST['page']==6){$sno=51;} elseif($_REQUEST['page']==7){$sno=61;} elseif($_REQUEST['page']==8){$sno=71;} elseif($_REQUEST['page']==9){$sno=81;} elseif($_REQUEST['page']==10){$sno=91;} elseif($_REQUEST['page']==11){$sno=101;} elseif($_REQUEST['page']==12){$sno=111;} elseif($_REQUEST['page']==13){$sno=121;} else{$sno=1;}
 while($res=mysql_fetch_array($sql_statement)){	  
 $sqlE=mysql_query("select EmpCode,Fname,Sname,Lname,DesigId,DepartmentId,EmailId_Vnr from hrm_employee INNER JOIN hrm_employee_general ON hrm_employee.EmployeeID=hrm_employee_general.EmployeeID where hrm_employee.EmployeeID=".$res['EmployeeID'], $con); $resE=mysql_fetch_assoc($sqlE); $EmpName=$resE['Fname'].' '.$resE['Sname'].' '.$resE['Lname'];
@@ -217,28 +236,28 @@ if($current==1) {
 echo '<span class="prn">&lt; Previous</span>&nbsp;';
 } else {
 $i = $current-1;
-echo '<a href="'.$thepage.'?page='.$i.$query.'&ls='.$_REQUEST['ls'].'&e=4e&w=234&d='.$_REQUEST['d'].'&y=10234&e=4e2&e=4e&w=234&y=110022344&retd=ee&rr=09drfGe&S=eewwqq&wwrew=t%T@sed818&ede=101" class="prn" rel="nofollow" title="go to page '.$i.'">&lt; Previous</a>&nbsp;';
+echo '<a href="'.$thepage.'?page='.$i.$query.'&ls='.$_REQUEST['ls'].'&e=4e&w=234&d='.$_REQUEST['d'].'&y=10234&e=4e2&e=4e&w=234&y=110022344&retd=ee&rr=09drfGe&S=eewwqq&wwrew=t%T@sed818&ede=101&chkvv='.$_REQUEST['chkvv'].'" class="prn" rel="nofollow" title="go to page '.$i.'">&lt; Previous</a>&nbsp;';
 echo '<span class="prn">...</span>&nbsp;';
 }
-if($start > 1) {
+if($start > 1) { 
 $i = 1;
-echo '<a href="'.$thepage.'?page='.$i.$query.'&ls='.$_REQUEST['ls'].'&e=4e&w=234&d='.$_REQUEST['d'].'&y=10234&e=4e2&e=4e&w=234&y=110022344&retd=ee&rr=09drfGe&S=eewwqq&wwrew=t%T@sed818&ede=101" title="go to page '.$i.'">'.$i.'</a>&nbsp;';
+echo '<a href="'.$thepage.'?page='.$i.$query.'&ls='.$_REQUEST['ls'].'&e=4e&w=234&d='.$_REQUEST['d'].'&y=10234&e=4e2&e=4e&w=234&y=110022344&retd=ee&rr=09drfGe&S=eewwqq&wwrew=t%T@sed818&ede=101&chkvv='.$_REQUEST['chkvv'].'" title="go to page '.$i.'">'.$i.'</a>&nbsp;';
 }
 for ($i = $start; $i <= $end && $i <= $total_pages; $i++){
 if($i==$current) {
 echo '<span>'.$i.'</span>&nbsp;';
 } else {
-echo '<a href="'.$thepage.'?page='.$i.$query.'&ls='.$_REQUEST['ls'].'&e=4e&w=234&d='.$_REQUEST['d'].'&y=10234&e=4e2&e=4e&w=234&y=110022344&retd=ee&rr=09drfGe&S=eewwqq&wwrew=t%T@sed818&ede=101" title="go to page '.$i.'">'.$i.'</a>&nbsp;';
+echo '<a href="'.$thepage.'?page='.$i.$query.'&ls='.$_REQUEST['ls'].'&e=4e&w=234&d='.$_REQUEST['d'].'&y=10234&e=4e2&e=4e&w=234&y=110022344&retd=ee&rr=09drfGe&S=eewwqq&wwrew=t%T@sed818&ede=101&chkvv='.$_REQUEST['chkvv'].'" title="go to page '.$i.'">'.$i.'</a>&nbsp;';
 }
 }
 if($total_pages > $end){
 $i = $total_pages;
-echo '<a href="'.$thepage.'?page='.$i.$query.'&ls='.$_REQUEST['ls'].'&e=4e&w=234&d='.$_REQUEST['d'].'&y=10234&e=4e2&e=4e&w=234&y=110022344&retd=ee&rr=09drfGe&S=eewwqq&wwrew=t%T@sed818&ede=101" title="go to page '.$i.'">'.$i.'</a>&nbsp;';
+echo '<a href="'.$thepage.'?page='.$i.$query.'&ls='.$_REQUEST['ls'].'&e=4e&w=234&d='.$_REQUEST['d'].'&y=10234&e=4e2&e=4e&w=234&y=110022344&retd=ee&rr=09drfGe&S=eewwqq&wwrew=t%T@sed818&ede=101&chkvv='.$_REQUEST['chkvv'].'" title="go to page '.$i.'">'.$i.'</a>&nbsp;';
 }
 if($current < $total_pages) {
 $i = $current+1;
 echo '<span class="prn">...</span>&nbsp;';
-echo '<a href="'.$thepage.'?page='.$i.$query.'&ls='.$_REQUEST['ls'].'&e=4e&w=234&d='.$_REQUEST['d'].'&y=10234&e=4e2&e=4e&w=234&y=110022344&retd=ee&rr=09drfGe&S=eewwqq&wwrew=t%T@sed818&ede=101" class="prn" rel="nofollow" title="go to page '.$i.'">Next &gt;</a>&nbsp;';
+echo '<a href="'.$thepage.'?page='.$i.$query.'&ls='.$_REQUEST['ls'].'&e=4e&w=234&d='.$_REQUEST['d'].'&y=10234&e=4e2&e=4e&w=234&y=110022344&retd=ee&rr=09drfGe&S=eewwqq&wwrew=t%T@sed818&ede=101&chkvv='.$_REQUEST['chkvv'].'" class="prn" rel="nofollow" title="go to page '.$i.'">Next &gt;</a>&nbsp;';
 } else {
 echo '<span class="prn">Next &gt;</span>&nbsp;';
 }

@@ -88,9 +88,9 @@ function ExportCo(v){ window.open("ReportCSVDtl.php?action=FarmerCountry&value="
 	    <td style="font-size:11px;height:18px;width:90px;color:#E6E6E6;" align="right"><b>Country :</b></td>
 	    <td><select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="Coutry" id="Coutry" onChange="ClickCoutry(this.value)"> 
 <?php if($_REQUEST['c']>0){ $sqlC=mysql_query("SELECT CountryName FROM hrm_country where CountryId=".$_REQUEST['c'], $con); $resC=mysql_fetch_array($sqlC); ?>
-<option value="<?php echo $_REQUEST['c']; ?>"><?php echo strtoupper($resC['CountryName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>		
+<option value="<?php echo $_REQUEST['c']; ?>"><?php echo ucwords(strtolower($resC['CountryName'])); ?></option><?php }else{ ?><option value="">Select</option><?php } ?>		
 <?php $SqlCountry=mysql_query("SELECT * FROM hrm_country order by CountryName ASC", $con); while($ResCountry=mysql_fetch_array($SqlCountry)) { ?>
-<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo strtoupper($ResCountry['CountryName']); ?></option><?php } ?></select>
+<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo ucwords(strtolower($ResCountry['CountryName'])); ?></option><?php } ?></select>
        </td>
 	   <td>&nbsp;</td>
 	   <td style="font-size:11px;height:18px;width:80px;color:#E6E6E6;" align="right"><b>State :</b></td>
@@ -98,10 +98,10 @@ function ExportCo(v){ window.open("ReportCSVDtl.php?action=FarmerCountry&value="
 		 <span id="StateSpan">
 		 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="State" id="State" onChange="ClickState(this.value)">
 <?php if($_REQUEST['s']>0){ $sqlS=mysql_query("SELECT StateName FROM hrm_state where StateId=".$_REQUEST['s'], $con); $resS=mysql_fetch_array($sqlS); ?>
-<option value="<?php echo $_REQUEST['s']; ?>"><?php echo strtoupper($resS['StateName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>
-<?php if($_REQUEST['c']>0){ $sqlS2 = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); while($resS2 = mysql_fetch_array($sqlS2)){ ?><option value="<?php echo $resS2['StateId']; ?>"><?php echo strtoupper($resS2['StateName']); ?></option><?php } ?>	
+<option value="<?php echo $_REQUEST['s']; ?>"><?php echo ucwords(strtolower($resS['StateName'])); ?></option><?php }else{ ?><option value="">Select</option><?php } ?>
+<?php if($_REQUEST['c']>0){ $sqlS2 = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); while($resS2 = mysql_fetch_array($sqlS2)){ ?><option value="<?php echo $resS2['StateId']; ?>"><?php echo ucwords(strtolower($resS2['StateName'])); ?></option><?php } ?>	
 <?php } else{$sql = mysql_query("SELECT * FROM hrm_state order by StateName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-        <option value="<?php echo $res['StateId']; ?>"><?php echo strtoupper($res['StateName']); ?></option><?php } } ?></select>
+        <option value="<?php echo $res['StateId']; ?>"><?php echo ucwords(strtolower($res['StateName'])); ?></option><?php } } ?></select>
 		 </span>
 		</td>
 		<td>&nbsp;</td>
@@ -110,8 +110,8 @@ function ExportCo(v){ window.open("ReportCSVDtl.php?action=FarmerCountry&value="
 		 <span id="HqSpan">
 		 <select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="Hq" id="Hq" onChange="ClickHq(this.value)">
 <?php if($_REQUEST['hq']>0){ $sqlhq=mysql_query("SELECT DistName FROM hrm_sales_distric where DistId=".$_REQUEST['hq'], $con); $reshq=mysql_fetch_array($sqlhq); ?>
-<option value="<?php echo $_REQUEST['hq']; ?>"><?php echo strtoupper($reshq['DistName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>
-<?php if($_REQUEST['s']>0){ $sqlhq2 = mysql_query("SELECT * FROM hrm_sales_distric where StateId=".$_REQUEST['s']." order by DistName ASC", $con); while($reshq2 = mysql_fetch_array($sqlhq2)){ ?><option value="<?php echo $reshq2['DistId']; ?>"><?php echo strtoupper($reshq2['DistName']); ?></option><?php } ?>
+<option value="<?php echo $_REQUEST['hq']; ?>"><?php echo ucwords(strtolower($reshq['DistName'])); ?></option><?php }else{ ?><option value="">Select</option><?php } ?>
+<?php if($_REQUEST['s']>0){ $sqlhq2 = mysql_query("SELECT * FROM hrm_sales_distric where StateId=".$_REQUEST['s']." order by DistName ASC", $con); while($reshq2 = mysql_fetch_array($sqlhq2)){ ?><option value="<?php echo $reshq2['DistId']; ?>"><?php echo ucwords(strtolower($reshq2['DistName'])); ?></option><?php } ?>
 <?php } ?></select>
 		 </span>
 		 </td>
@@ -127,15 +127,15 @@ function ExportCo(v){ window.open("ReportCSVDtl.php?action=FarmerCountry&value="
 <table border="1" cellpadding="0" cellspacing="0" style="font-family:Times New Roman;font-size:14px;vertical-align:top;">	   
   <tr style="background-color:#D9F28C;color:#000000;"> 
    <?php if($_REQUEST['Area']>0){ $sqlhq=mysql_query("SELECT AreaName FROM hrm_sales_areavillage where AreaId=".$_REQUEST['Area'], $con); $reshq=mysql_fetch_array($sqlhq); ?> 
-   <td colspan="2">&nbsp;&nbsp;<b>AreaName:&nbsp;<?php echo strtoupper($reshq['AreaName']); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   <td colspan="2">&nbsp;&nbsp;<b>AreaName:&nbsp;<?php echo ucwords(strtolower($reshq['AreaName'])); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
    <?php }else if($_REQUEST['hq']>0){ $sqlhq=mysql_query("SELECT DistName FROM hrm_sales_distric where DistId=".$_REQUEST['hq'], $con); $reshq=mysql_fetch_array($sqlhq); ?> 
-   <td colspan="5">&nbsp;&nbsp;<b>DistName:&nbsp;<?php echo strtoupper($reshq['DistName']); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <td colspan="5">&nbsp;&nbsp;<b>DistName:&nbsp;<?php echo ucwords(strtolower($reshq['DistName'])); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    <a href="#" onClick="ExportHq(<?php echo $_REQUEST['hq']; ?>)" style="color:#3D7900;font-size:12px;text-decoration:none;">Export Excel</a></td>
    <?php } elseif($_REQUEST['s']>0){ $sqlS=mysql_query("SELECT StateName FROM hrm_state where StateId=".$_REQUEST['s'], $con); $resS=mysql_fetch_array($sqlS);?>
-   <td colspan="6">&nbsp;&nbsp;<b>State:&nbsp;<?php echo strtoupper($resS['StateName']); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <td colspan="6">&nbsp;&nbsp;<b>State:&nbsp;<?php echo ucwords(strtolower($resS['StateName'])); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    <a href="#" onClick="ExportSt(<?php echo $_REQUEST['s']; ?>)" style="color:#3D7900;font-size:12px;text-decoration:none;">Export Excel</a></td>
    <?php } elseif($_REQUEST['c']>0){ $sqlC=mysql_query("SELECT CountryName FROM hrm_country where CountryId=".$_REQUEST['c'], $con); $resC=mysql_fetch_array($sqlC); ?> 
-    <td colspan="7">&nbsp;&nbsp;<b>Country:&nbsp;<?php echo strtoupper($resC['CountryName']); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <td colspan="7">&nbsp;&nbsp;<b>Country:&nbsp;<?php echo ucwords(strtolower($resC['CountryName'])); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    <a href="#" onClick="ExportCo(<?php echo $_REQUEST['c']; ?>)" style="color:#3D7900;font-size:12px;text-decoration:none;">Export Excel</a></td>
    <?php } ?>	
    <td rowspan="2" align="center" style="width:17px;"><b>&nbsp;</b></td>		

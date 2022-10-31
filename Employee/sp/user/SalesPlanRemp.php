@@ -190,17 +190,17 @@ function ExportEmpPlan(y,g,i,e)
 	   <td style="font-size:11px;height:18px;width:60px;color:#E6E6E6;" align="right"><b>Crop :</b></td>
 	    <td>
 		 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="CropGrp" id="CropGrp" onChange="ClickGrp(this.value)">
-         <option value="1" <?php if($_REQUEST['grp']==1){echo 'selected';}?>>VEGETABLE CROP</option>
-		 <option value="2" <?php if($_REQUEST['grp']==2){echo 'selected';}?>>FIELD CROP</option>
-		 <?php /*?><option value="3" <?php if($_REQUEST['grp']==3){echo 'selected';}?>>All CROP</option><?php */?>
+		 <option value="1" <?php if($_REQUEST['grp']==1){echo 'selected';}?>>Vegitable Crop</option>
+		 <option value="2" <?php if($_REQUEST['grp']==2){echo 'selected';}?>>Field Crop</option>
+		 <?php /*?><option value="3" <?php if($_REQUEST['grp']==3){echo 'selected';}?>>All crop</option><?php */?>
         </select>
 		</td>
 		<td style="font-size:11px; height:18px;width:60px;color:#E6E6E6;" align="right"><b>Name :</b></td>
 	     <td>
 		 <select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="ItemV" id="ItemV" onChange="ChangeII(this.value)">
 <?php if($_REQUEST['ii']>0){ $sqlI=mysql_query("select ItemName from hrm_sales_seedsitem where ItemId=".$_REQUEST['ii'], $con); $resI=mysql_fetch_assoc($sqlI); ?>	
-         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo strtoupper($resI['ItemName']); ?></option>
-		 <?php }else{ ?><option value="0" selected>SELECT</option><?php } ?>
+         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo ucwords(strtolower($resI['ItemName'])); ?></option>
+		 <?php }else{ ?><option value="0" selected>Select</option><?php } ?>
 <?php if($_REQUEST['grp']==1){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=1 order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==2){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=2 order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==3){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where (GroupId=1 OR GroupId=2) order by GroupId ASC,ItemName ASC", $con);}
@@ -230,7 +230,7 @@ function ExportEmpPlan(y,g,i,e)
 		<td><select style="font-family:Georgia;font-size:14px;width:px;background-color:#E4E0FC;height:23px;width:180px;" onChange="ChangeCo(this.value)">
 	        <option>Select Country </option>
 <?php $sql4=mysql_query("select hrm_employee.EmployeeID,EmpCode,Fname,Sname,Lname,CostCenter,HqId,Gender,Married,DR,hrm_grade.GradeId from hrm_grade INNER JOIN hrm_employee_general ON hrm_grade.GradeId=hrm_employee_general.GradeId INNER JOIN hrm_employee ON hrm_employee_general.EmployeeID=hrm_employee.EmployeeID INNER JOIN hrm_employee_personal ON hrm_employee_general.EmployeeID=hrm_employee_personal.EmployeeID where hrm_employee.EmpStatus='A' AND hrm_employee.CompanyId=".$CompanyId." AND (hrm_grade.GradeValue='L5' OR hrm_grade.GradeValue='MG') AND hrm_employee_general.DepartmentId=6 order by Fname ASC", $con); 
-$sn4=1; while($res4=mysql_fetch_array($sql4)){  if($res4['DR']=='Y'){$M4='Dr.';} elseif($res4['Gender']=='M'){$M4='Mr.';} elseif($res4['Gender']=='F' AND $res4['Married']=='Y'){$M4='Mrs.';} elseif($res4['Gender']=='F' AND $res4['Married']=='N'){$M4='Miss.';} $NameCo=$res4['Fname'].' '.$res4['Sname'].' '.$res4['Lname'];
+$sn4=1; while($res4=mysql_fetch_array($sql4)){  if($res4['DR']=='Y'){$M4='Dr.';} elseif($res4['Gender']=='M'){$M4='Mr.';} elseif($res4['Gender']=='F' AND $res4['Married']=='Y'){$M4='Mrs.';} elseif($res4['Gender']=='F' AND $res4['Married']=='N'){$M4='Miss.';} $NameCo=ucwords(strtolower($res4['Fname'].' '.$res4['Sname'].' '.$res4['Lname']));
 //$sqlGrade=mysql_query("select GradeValue from hrm_grade where GradeId=".$res['GradeId'], $con); $resGrade=mysql_fetch_assoc($sqlGrade);
 $sqlHq4 = mysql_query("SELECT HqName FROM hrm_headquater WHERE HqId=".$res4['HqId'], $con) or die(mysql_error()); $resHq4 = mysql_fetch_assoc($sqlHq4); 
 $sqlSt4=mysql_query("select StateName from hrm_state where StateId=".$res4['CostCenter'], $con); $resSt4=mysql_fetch_assoc($sqlSt4); ?>  	  
@@ -240,7 +240,7 @@ $sqlSt4=mysql_query("select StateName from hrm_state where StateId=".$res4['Cost
 	   <td><select style="font-family:Georgia;font-size:14px;width:px;background-color:#E4E0FC;height:23px;width:180px;" onChange="ChangeZZ(this.value)">
 	       <option>Select Zone </option>
 <?php $sql3=mysql_query("select hrm_employee.EmployeeID,EmpCode,Fname,Sname,Lname,CostCenter,HqId,Gender,Married,DR,hrm_grade.GradeId from hrm_grade INNER JOIN hrm_employee_general ON hrm_grade.GradeId=hrm_employee_general.GradeId INNER JOIN hrm_employee ON hrm_employee_general.EmployeeID=hrm_employee.EmployeeID INNER JOIN hrm_employee_personal ON hrm_employee_general.EmployeeID=hrm_employee_personal.EmployeeID where hrm_employee.EmpStatus='A' AND hrm_employee.CompanyId=".$CompanyId." AND (hrm_grade.GradeValue='L1' OR hrm_grade.GradeValue='L2' OR hrm_grade.GradeValue='L3' OR hrm_grade.GradeValue='L4') AND hrm_employee_general.DepartmentId=6 order by Fname ASC", $con); 
-$sn3=1; while($res3=mysql_fetch_array($sql3)){  if($res3['DR']=='Y'){$M3='Dr.';} elseif($res3['Gender']=='M'){$M3='Mr.';} elseif($res3['Gender']=='F' AND $res3['Married']=='Y'){$M3='Mrs.';} elseif($res3['Gender']=='F' AND $res3['Married']=='N'){$M3='Miss.';} $NameZ=$res3['Fname'].' '.$res3['Sname'].' '.$res3['Lname'];
+$sn3=1; while($res3=mysql_fetch_array($sql3)){  if($res3['DR']=='Y'){$M3='Dr.';} elseif($res3['Gender']=='M'){$M3='Mr.';} elseif($res3['Gender']=='F' AND $res3['Married']=='Y'){$M3='Mrs.';} elseif($res3['Gender']=='F' AND $res3['Married']=='N'){$M3='Miss.';} $NameZ=ucwords(strtolower($res3['Fname'].' '.$res3['Sname'].' '.$res3['Lname']));
 //$sqlGrade=mysql_query("select GradeValue from hrm_grade where GradeId=".$res['GradeId'], $con); $resGrade=mysql_fetch_assoc($sqlGrade);
 $sqlHq3 = mysql_query("SELECT HqName FROM hrm_headquater WHERE HqId=".$res3['HqId'], $con) or die(mysql_error()); $resHq3 = mysql_fetch_assoc($sqlHq3); 
 $sqlSt3=mysql_query("select StateName from hrm_state where StateId=".$res3['CostCenter'], $con); $resSt3=mysql_fetch_assoc($sqlSt3); ?>  	  
@@ -250,7 +250,7 @@ $sqlSt3=mysql_query("select StateName from hrm_state where StateId=".$res3['Cost
 	   <td><select style="font-family:Georgia;font-size:14px;width:px;background-color:#E4E0FC;height:23px;width:180px;" onChange="ChangeAR(this.value)">
 	       <option>Select Area/Region </option>
 <?php $sql2=mysql_query("select hrm_employee.EmployeeID,EmpCode,Fname,Sname,Lname,CostCenter,HqId,Gender,Married,DR,hrm_grade.GradeId from hrm_grade INNER JOIN hrm_employee_general ON hrm_grade.GradeId=hrm_employee_general.GradeId INNER JOIN hrm_employee ON hrm_employee_general.EmployeeID=hrm_employee.EmployeeID INNER JOIN hrm_employee_personal ON hrm_employee_general.EmployeeID=hrm_employee_personal.EmployeeID where hrm_employee.EmpStatus='A' AND hrm_employee.CompanyId=".$CompanyId." AND (hrm_grade.GradeValue='M2' OR hrm_grade.GradeValue='M3' OR hrm_grade.GradeValue='M4' OR hrm_grade.GradeValue='M5') AND hrm_employee_general.DepartmentId=6 order by Fname ASC", $con); 
-$sn2=1; while($res2=mysql_fetch_array($sql2)){  if($res2['DR']=='Y'){$M2='Dr.';} elseif($res2['Gender']=='M'){$M2='Mr.';} elseif($res2['Gender']=='F' AND $res2['Married']=='Y'){$M2='Mrs.';} elseif($res2['Gender']=='F' AND $res2['Married']=='N'){$M2='Miss.';} $NameAR=$res2['Fname'].' '.$res2['Sname'].' '.$res2['Lname'];
+$sn2=1; while($res2=mysql_fetch_array($sql2)){  if($res2['DR']=='Y'){$M2='Dr.';} elseif($res2['Gender']=='M'){$M2='Mr.';} elseif($res2['Gender']=='F' AND $res2['Married']=='Y'){$M2='Mrs.';} elseif($res2['Gender']=='F' AND $res2['Married']=='N'){$M2='Miss.';} $NameAR=ucwords(strtolower($res2['Fname'].' '.$res2['Sname'].' '.$res2['Lname']));
 //$sqlGrade=mysql_query("select GradeValue from hrm_grade where GradeId=".$res['GradeId'], $con); $resGrade=mysql_fetch_assoc($sqlGrade);
 $sqlHq2 = mysql_query("SELECT HqName FROM hrm_headquater WHERE HqId=".$res2['HqId'], $con) or die(mysql_error()); $resHq2 = mysql_fetch_assoc($sqlHq2); 
 $sqlSt2=mysql_query("select StateName from hrm_state where StateId=".$res2['CostCenter'], $con); $resSt2=mysql_fetch_assoc($sqlSt2); ?>  	  
@@ -262,7 +262,7 @@ $sqlSt2=mysql_query("select StateName from hrm_state where StateId=".$res2['Cost
 <?php $sql=mysql_query("select e.EmployeeID,EmpCode,Fname,Sname,Lname,CostCenter,HqName,Gender,StateName,Married,DR,gr.GradeId from hrm_grade gr INNER JOIN hrm_employee_general g ON gr.GradeId=g.GradeId INNER JOIN hrm_headquater hq ON g.HqId=hq.HqId INNER JOIN hrm_state s ON hq.StateId=s.StateId INNER JOIN hrm_employee e ON g.EmployeeID=e.EmployeeID INNER JOIN hrm_employee_personal p ON g.EmployeeID=p.EmployeeID where e.EmpStatus='A' AND e.CompanyId=".$CompanyId." AND (gr.GradeValue='M1' OR gr.GradeValue='J4' OR gr.GradeValue='J3' OR gr.GradeValue='J2' OR gr.GradeValue='J1' OR gr.GradeValue='S2' OR gr.GradeValue='S1') AND g.DepartmentId=6 order by Fname ASC", $con); 
 
 //$sql=mysql_query("select hrm_sales_hq_temp.EmployeeID,hrm_sales_hq_temp.HqId,EmpCode,Fname,Sname,Lname,CostCenter,Gender,Married,DR,HqName,StateName,hrm_grade.GradeId from hrm_sales_hq_temp INNER JOIN hrm_headquater ON hrm_sales_hq_temp.HqId=hrm_headquater.HqId INNER JOIN hrm_state ON hrm_headquater.StateId=hrm_state.StateId INNER JOIN hrm_employee_general ON hrm_sales_hq_temp.EmployeeID=hrm_employee_general.EmployeeID INNER JOIN hrm_grade ON hrm_employee_general.GradeId=hrm_grade.GradeId INNER JOIN hrm_employee ON hrm_employee_general.EmployeeID=hrm_employee.EmployeeID INNER JOIN hrm_employee_personal ON hrm_employee_general.EmployeeID=hrm_employee_personal.EmployeeID where hrm_employee.EmpStatus='A' AND hrm_employee.CompanyId=".$CompanyId." AND hrm_employee_general.DepartmentId=6 order by Fname ASC,HqName ASC", $con); 
-$sn=1; while($res=mysql_fetch_array($sql)){  if($res['DR']=='Y'){$M='Dr.';} elseif($res['Gender']=='M'){$M='Mr.';} elseif($res['Gender']=='F' AND $res['Married']=='Y'){$M='Mrs.';} elseif($res['Gender']=='F' AND $res['Married']=='N'){$M='Miss.';} $NameT=$res['Fname'].' '.$res['Sname'].' '.$res['Lname'];
+$sn=1; while($res=mysql_fetch_array($sql)){  if($res['DR']=='Y'){$M='Dr.';} elseif($res['Gender']=='M'){$M='Mr.';} elseif($res['Gender']=='F' AND $res['Married']=='Y'){$M='Mrs.';} elseif($res['Gender']=='F' AND $res['Married']=='N'){$M='Miss.';} $NameT=ucwords(strtolower($res['Fname'].' '.$res['Sname'].' '.$res['Lname']));
 //$sqlGrade=mysql_query("select GradeValue from hrm_grade where GradeId=".$res['GradeId'], $con); $resGrade=mysql_fetch_assoc($sqlGrade);
 //$sqlHq = mysql_query("SELECT HqName FROM hrm_headquater WHERE HqId=".$res['HqId'], $con) or die(mysql_error()); $resHq = mysql_fetch_assoc($sqlHq); 
 //$sqlSt=mysql_query("select StateName from hrm_state where StateId=".$res['CostCenter'], $con); $resSt=mysql_fetch_assoc($sqlSt); ?>  	  
@@ -315,7 +315,7 @@ $fy5=date("Y",strtotime($resY3['FromDate'])); $ty5=date("Y",strtotime($resY3['To
 <table border="1" cellpadding="0" cellspacing="0" style="font-family:Times New Roman;font-size:12px;width:1251px;vertical-align:top;">
 <?php ///////////////////////////////////////////////////////////?>
 <?php if($_REQUEST['emp']>0){ $sqlE=mysql_query("select Fname,Sname,Lname,HqId from hrm_employee INNER JOIN hrm_employee_general ON hrm_employee.EmployeeID=hrm_employee_general.EmployeeID where hrm_employee.EmployeeID=".$_REQUEST['emp'],$con);  $resE=mysql_fetch_assoc($sqlE);
-$Ename=$resE['Fname'].' '.$resE['Sname'].' '.$resE['Lname']; 
+$Ename=ucwords(strtolower($resE['Fname'].' '.$resE['Sname'].' '.$resE['Lname'])); 
 $sqlHq = mysql_query("SELECT HqName FROM hrm_headquater WHERE HqId=".$resE['HqId'], $con); $resHq=mysql_fetch_assoc($sqlHq); 
 }
  ?>  

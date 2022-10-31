@@ -75,7 +75,7 @@ function newsave() { var x = "PlanRevisedMonth.php?ern2w=234&ern3y=10234&ern=4e2
  <select id="Yv" name="Yv" class="font2" style="width:60px;"><?php for($i=2015;$i<=2050;$i++){ ?><option value="<?php echo $i; ?>"><?php echo $i; ?></option><?php } ?></select>
  </td> 
  <td align="center">
- <select id="Mv" name="Mv" class="font2" style="width:100px;"><?php for($j=1;$j<=12;$j++){ ?><option value="<?php echo $j; ?>"><?php if($j==1){echo 'JANUARY';}elseif($j==2){echo 'FEBRUARY';}elseif($j==3){echo 'MARCH';}elseif($j==4){echo 'APIRL';}elseif($j==5){echo 'MAY';}elseif($j==6){echo 'JUNE';}elseif($j==7){echo 'JULY';}elseif($j==8){echo 'AUGUST';}elseif($j==9){echo 'SETEMBER';}elseif($j==10){echo 'OCTOBER';}elseif($j==11){echo 'NOVEMBER';}elseif($j==12){echo 'DECEMBER';} ?></option><?php } ?></select>
+ <select id="Mv" name="Mv" class="font2" style="width:100px;"><?php for($j=1;$j<=12;$j++){ ?><option value="<?php echo $j; ?>"><?php if($j==1){echo 'January';}elseif($j==2){echo 'February';}elseif($j==3){echo 'March';}elseif($j==4){echo 'April';}elseif($j==5){echo 'May';}elseif($j==6){echo 'June';}elseif($j==7){echo 'July';}elseif($j==8){echo 'August';}elseif($j==9){echo 'September';}elseif($j==10){echo 'October';}elseif($j==11){echo 'November';}elseif($j==12){echo 'December';} ?></option><?php } ?></select>
  </td>
  <td align="center">
   <select id="Qv" name="Qv" class="font2" style="width:100px;"><?php for($k=1;$k<=4;$k++){ ?><option value="<?php echo $k; ?>"><?php if($k==1){echo 'Quarter - 01';}elseif($k==2){echo 'Quarter - 02';}if($k==3){echo 'Quarter - 03';}if($k==4){echo 'Quarter - 04';} ?></option><?php } ?></select>
@@ -90,7 +90,7 @@ function newsave() { var x = "PlanRevisedMonth.php?ern2w=234&ern3y=10234&ern=4e2
 <?php } ?>
 
 <?php $sql=mysql_query("select * from hrm_sales_revised_opnclose order by Year DESC, Month DESC, Quarter DESC", $con); while($res=mysql_fetch_array($sql)) {
-if($res['Month']==1){$m='JANUARY';}elseif($res['Month']==2){$m='FEBRUARY';}elseif($res['Month']==3){$m='MARCH';}elseif($res['Month']==4){$m='APIRL';}elseif($res['Month']==5){$m='MAY';}elseif($res['Month']==6){$m='JUNE';}elseif($res['Month']==7){$m='JULY';}elseif($res['Month']==8){$m='AUGUST';}elseif($res['Month']==9){$m='SETEMBER';}elseif($res['Month']==10){$m='OCTOBER';}elseif($res['Month']==11){$m='NOVEMBER';}elseif($res['Month']==12){$m='DECEMBER';}
+if($res['Month']==1){$m='January';}elseif($res['Month']==2){$m='February';}elseif($res['Month']==3){$m='March';}elseif($res['Month']==4){$m='April';}elseif($res['Month']==5){$m='May';}elseif($res['Month']==6){$m='June';}elseif($res['Month']==7){$m='July';}elseif($res['Month']==8){$m='August';}elseif($res['Month']==9){$m='September';}elseif($res['Month']==10){$m='October';}elseif($res['Month']==11){$m='November';}elseif($res['Month']==12){$m='December';}
 if($res['Quarter']==1){$q='Quarter - 01';}elseif($res['Quarter']==2){$q='Quarter - 02';}if($res['Quarter']==3){$q='Quarter - 03';}if($res['Quarter']==4){$q='Quarter - 04';} ?>
 
 <?php $sy=mysql_query("select FromDate,ToDate from hrm_year where YearId=".$res['YearId'],$con); $ry=mysql_fetch_assoc($sy); ?>
@@ -103,7 +103,7 @@ if($res['Quarter']==1){$q='Quarter - 01';}elseif($res['Quarter']==2){$q='Quarter
  <select id="Yv" name="Yv" class="font2" style="width:60px;"><option value="<?php echo $res['Year']; ?>" selected><?php echo $res['Year']; ?></option><?php for($i=2015;$i<=2050;$i++){ if($i!=$res['Year']){ ?><option value="<?php echo $i; ?>"><?php echo $i; ?></option><?php } } ?></select>
  </td> 
  <td align="center">
- <select id="Mv" name="Mv" class="font2" style="width:100px;"><option value="<?php echo $res['Month']; ?>" selected><?php echo $m; ?></option><?php for($j=1;$j<=12;$j++){ if($j!=$res['Month']){ ?><option value="<?php echo $j; ?>"><?php if($j==1){echo 'JANUARY';}elseif($j==2){echo 'FEBRUARY';}elseif($j==3){echo 'MARCH';}elseif($j==4){echo 'APIRL';}elseif($j==5){echo 'MAY';}elseif($j==6){echo 'JUNE';}elseif($j==7){echo 'JULY';}elseif($j==8){echo 'AUGUST';}elseif($j==9){echo 'SETEMBER';}elseif($j==10){echo 'OCTOBER';}elseif($j==11){echo 'NOVEMBER';}elseif($j==12){echo 'DECEMBER';} ?></option><?php } } ?></select>
+ <select id="Mv" name="Mv" class="font2" style="width:100px;"><option value="<?php echo $res['Month']; ?>" selected><?php echo $m; ?></option><?php for($j=1;$j<=12;$j++){ if($j!=$res['Month']){ ?><option value="<?php echo $j; ?>"><?php if($j==1){echo 'January';}elseif($j==2){echo 'February';}elseif($j==3){echo 'March';}elseif($j==4){echo 'April';}elseif($j==5){echo 'May';}elseif($j==6){echo 'June';}elseif($j==7){echo 'July';}elseif($j==8){echo 'August';}elseif($j==9){echo 'September';}elseif($j==10){echo 'October';}elseif($j==11){echo 'November';}elseif($j==12){echo 'December';} ?></option><?php } } ?></select>
  </td>
  <td align="center">
   <select id="Qv" name="Qv" class="font2" style="width:100px;"><option value="<?php echo $res['Quarter']; ?>" selected><?php echo $q; ?></option><?php for($k=1;$k<=4;$k++){ if($k!=$res['Quarter']){ ?><option value="<?php echo $k; ?>"><?php if($k==1){echo 'Quarter - 01';}elseif($k==2){echo 'Quarter - 02';}if($k==3){echo 'Quarter - 03';}if($k==4){echo 'Quarter - 04';} ?></option><?php } } ?></select>

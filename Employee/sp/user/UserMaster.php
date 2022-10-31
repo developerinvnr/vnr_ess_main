@@ -105,7 +105,7 @@ function EPerm(id)
 					<td style="color:#ffffff; font-family:Georgia;font-size:11px;">
 <?php $sqlUn=mysql_query("select Fname,Sname,Lname from hrm_employee where EmployeeID=".$ResultUser['UserEmpId'], $con); $resUn=mysql_fetch_assoc($sqlUn); ?>					
 					<select class="EditInput" name="username" id="username" style="width:250px;">
-					<option value="<?php echo $ResultUser['UserEmpId'];?>"><?php echo $resUn['Fname'].' '.$resUn['Sname'].' '.$resUn['Lname'];?></option>
+					<option value="<?php echo $ResultUser['UserEmpId'];?>"><?php echo ucwords(strtolower($resUn['Fname'].' '.$resUn['Sname'].' '.$resUn['Lname']));?></option>
 <?php /* $sqlUn2=mysql_query("select hrm_employee.EmployeeID,Fname,Sname,Lname from hrm_employee INNER JOIN hrm_employee_general ON hrm_employee.EmployeeID=hrm_employee_general.EmployeeID where hrm_employee.EmpStatus='A' AND hrm_employee.CompanyId=".$CompanyId." AND (hrm_employee_general.DepartmentId=7 OR hrm_employee_general.DepartmentId=17 OR hrm_employee_general.DepartmentId=12 OR hrm_employee.EmployeeID=331) order by Fname ASC", $con); while($resUn2=mysql_fetch_assoc($sqlUn2)){ ?>					
 					<option value="<?php echo $resUn2['EmployeeID']; ?>"><?php echo $resUn2['Fname'].' '.$resUn2['Sname'].' '.$resUn2['Lname'];?></option><?php } */ ?></select></td>
 					<td align="center" class="font1"><select class="EditInput" name="status" id="status" style="width:80px;">
@@ -134,7 +134,7 @@ function EPerm(id)
 					<td align="center" class="font1"><?php echo $Sno; ?></td>
 					<td style="font-family:Georgia;font-size:11px;">&nbsp;
 <?php $sqlUn=mysql_query("select Fname,Sname,Lname from hrm_employee where EmployeeID=".$ResultUser['UserEmpId'], $con); $resUn=mysql_fetch_assoc($sqlUn); ?>					
-					<?php echo $resUn['Fname'].' '.$resUn['Sname'].' '.$resUn['Lname'];?></td>
+					<?php echo ucwords(strtolower($resUn['Fname'].' '.$resUn['Sname'].' '.$resUn['Lname']));?></td>
 					<td align="center" class="font1">&nbsp;<?php if($ResultUser['Status']=='A'){echo 'Active';}else{echo 'Block';}?></td>
 					<td align="center" class="font1">&nbsp;<?php if($ResultUser['UserEmpType']=='A'){echo 'Admin';}else{echo 'User';} ?></td>									
 					
@@ -160,8 +160,8 @@ function EPerm(id)
 				  <td align="center" class="font1"><?php echo $Sno; ?></td>
 					<td style="color:#ffffff; font-family:Georgia;font-size:11px;">	
 					<select class="EditInput" name="username" id="username" style="width:250px;">
-<?php $sqlUn2=mysql_query("select e.EmployeeID,Fname,Sname,Lname from hrm_employee e INNER JOIN hrm_employee_general g ON e.EmployeeID=g.EmployeeID where e.EmpStatus='A' AND e.CompanyId=".$CompanyId." AND (g.DepartmentId=5 OR g.DepartmentId=7 OR g.DepartmentId=17 OR g.DepartmentId=11 OR g.DepartmentId=12 OR g.DepartmentId=8 OR e.EmployeeID=331 OR e.EmployeeID=84) order by Fname ASC", $con); while($resUn2=mysql_fetch_assoc($sqlUn2)){ ?>					
-					<option value="<?php echo $resUn2['EmployeeID']; ?>"><?php echo $resUn2['Fname'].' '.$resUn2['Sname'].' '.$resUn2['Lname'];?></option><?php } ?></select></td>
+<?php $sqlUn2=mysql_query("select e.EmployeeID,Fname,Sname,Lname from hrm_employee e INNER JOIN hrm_employee_general g ON e.EmployeeID=g.EmployeeID where e.EmpStatus='A' AND e.CompanyId=".$CompanyId." AND (g.DepartmentId=5 OR g.DepartmentId=7 OR g.DepartmentId=17 OR g.DepartmentId=11 OR g.DepartmentId=12 OR g.DepartmentId=8 OR g.DepartmentId=9 OR e.EmployeeID=331 OR e.EmployeeID=84) order by Fname ASC", $con); while($resUn2=mysql_fetch_assoc($sqlUn2)){ ?>					
+					<option value="<?php echo $resUn2['EmployeeID']; ?>"><?php echo ucwords(strtolower($resUn2['Fname'].' '.$resUn2['Sname'].' '.$resUn2['Lname']));?></option><?php } ?></select></td>
 					<td align="center" class="font1"><select class="EditInput" name="status" id="status" style="width:80px;">
                     <option value="A" selected>&nbsp;Active</option><option value="D">&nbsp;Block</option></select></td>
 					<td align="center" class="font1"><select class="EditInput" name="type" id="type" style="width:80px;">

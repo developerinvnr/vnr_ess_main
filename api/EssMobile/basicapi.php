@@ -319,7 +319,10 @@ elseif($_REQUEST['value'] == 'Punch_Time' && $_REQUEST['empid']!= '' && $_REQUES
 	  $sT2=mysqli_query($con,"select InTime from hrm_api_punch_time where CompanyId=".$_REQUEST['comid']." and Sts='Y'");
 	  $rT2=mysqli_fetch_assoc($sT2); $InTime=$rT2['InTime']; 
 	}
-    echo json_encode(array("Code"=>"300", "In_PunchTime"=>$InTime, "In_Status"=>$InStatus, "Out_Status"=>$OutStatus) );
+	
+	if($InTime<='date("H:i:s")'){$allowPunchIn='Y';}else{$allowPunchIn='N';}
+	
+    echo json_encode(array("Code"=>"300", "AllowInPunch"=>$allowPunchIn, "In_PunchTime"=>$InTime, "In_Status"=>$InStatus, "Out_Status"=>$OutStatus) );
   }
   
   else{ echo json_encode(array("Code" => "100", "msg" => "Data Not Found!") ); }
@@ -1041,6 +1044,8 @@ elseif($_REQUEST['value'] == 'payslip_overall' && $_REQUEST['empid']!= '' && $_R
  if($resPayM['Nov']=='N'){ $q11=" AND Month!=11"; } 
  if($resPayM['Decm']=='N'){ $q12=" AND Month!=12"; }
  
+ $q9='AND 1=1';
+ 
  $Qp1 = $q1.''.$q2.''.$q3.''.$q4.''.$q5.''.$q6.''.$q7.''.$q8.''.$q9.''.$q10.''.$q11.''.$q12;
  
  
@@ -1120,7 +1125,7 @@ elseif($_REQUEST['value'] == 'payslip_overall' && $_REQUEST['empid']!= '' && $_R
   
   /*** ---------------------------------------- ***/
   /*** ---------------------------------------- ***/
-  $selQ="Month, Year, (Tot_Gross + Bonus + DA + Arreares + LeaveEncash + Incentive + VariableAdjustment + PerformancePay + CCA + RA + Arr_Basic + Arr_Hra + Arr_Spl + Arr_Conv + Arr_Bonus + Arr_LTARemb + Arr_RA + Arr_PP + YCea+YMr + YLta + Car_Allowance + Car_Allowance_Arr + VarRemburmnt + TA + Arr_LvEnCash) as Earning, (TDS + Tot_Deduct + Arr_Pf + VolContrib + Arr_Esic + DeductAdjmt + RecConAllow + RA_Recover) as Deduction, ((Tot_Gross + Bonus + DA + Arreares + LeaveEncash + Incentive + VariableAdjustment + PerformancePay + CCA + RA + Arr_Basic + Arr_Hra + Arr_Spl + Arr_Conv + Arr_Bonus + Arr_LTARemb + Arr_RA + Arr_PP + YCea+YMr + YLta + Car_Allowance + Car_Allowance_Arr + VarRemburmnt + TA + Arr_LvEnCash) - (TDS + Tot_Deduct + Arr_Pf + VolContrib + Arr_Esic + DeductAdjmt + RecConAllow + RA_Recover)) as NetAmount";
+  $selQ="Month, Year, (Tot_Gross + Bonus + DA + Arreares + LeaveEncash + Incentive + VariableAdjustment + PerformancePay + PP_Inc + CCA + RA + Arr_Basic + Arr_Hra + Arr_Spl + Arr_Conv + Arr_Bonus + Arr_LTARemb + Arr_RA + Arr_PP + YCea+YMr + YLta + Car_Allowance + Car_Allowance_Arr + VarRemburmnt + TA + Arr_LvEnCash) as Earning, (TDS + Tot_Deduct + Arr_Pf + VolContrib + Arr_Esic + DeductAdjmt + RecConAllow + RA_Recover) as Deduction, ((Tot_Gross + Bonus + DA + Arreares + LeaveEncash + Incentive + VariableAdjustment + PerformancePay + PP_Inc + CCA + RA + Arr_Basic + Arr_Hra + Arr_Spl + Arr_Conv + Arr_Bonus + Arr_LTARemb + Arr_RA + Arr_PP + YCea+YMr + YLta + Car_Allowance + Car_Allowance_Arr + VarRemburmnt + TA + Arr_LvEnCash) - (TDS + Tot_Deduct + Arr_Pf + VolContrib + Arr_Esic + DeductAdjmt + RecConAllow + RA_Recover)) as NetAmount";
   
   
   if($tbl1!='' && $mIn1!=''){ $qry="SELECT ".$selQ." FROM ".$tbl1." WHERE EmployeeID=".$ei." AND ".$mIn1." $Qp1 UNION SELECT ".$selQ." FROM ".$tbl2." WHERE EmployeeID=".$ei." AND ".$mIn2." $Qp1 AND ".$subQ." order by Year DESC, Month Desc"; }
@@ -1197,7 +1202,7 @@ elseif($_REQUEST['value'] == 'payslip' && $_REQUEST['empid']!= '' && $_REQUEST['
    $ResPay=mysqli_fetch_assoc($SqlPay);
   
   }
-  else{ $pTbl=$PayTable; $ResPay=mysqli_fetch_assoc($SqlPay); }
+  else{ $pTbl=$PayTable; $ResPay=mysqli_fetch_assoc($SqlPay);  }
  
   if($ResPay['GradeId']>0)
   {
@@ -1243,7 +1248,7 @@ elseif($_REQUEST['value'] == 'payslip' && $_REQUEST['empid']!= '' && $_REQUEST['
   $SelM=strtoupper(date("F",strtotime(date("Y-".$m."-01")))).'-'.$y;
   if($resE['Gender']=='M'){ $Gender='MALE'; }else{ $Gender='FEMALE'; }
   
-  $TotGross=$ResPay['Tot_Gross']+$ResPay['Bonus']+$ResPay['DA']+$ResPay['Arreares']+$ResPay['LeaveEncash']+$ResPay['Incentive']+$ResPay['VariableAdjustment']+$ResPay['PerformancePay']+$ResPay['CCA']+$ResPay['RA']+$ResPay['Arr_Basic']+$ResPay['Arr_Hra']+$ResPay['Arr_Spl']+$ResPay['Arr_Conv']+$ResPay['Arr_Bonus']+$ResPay['Bonus_Adjustment']+$ResPay['Arr_LTARemb']+$ResPay['Arr_RA']+$ResPay['Arr_PP']+$ResPay['YCea']+$ResPay['YMr']+$ResPay['YLta']+$ResPay['Car_Allowance']+$ResPay['Car_Allowance_Arr']+$ResPay['VarRemburmnt']+$ResPay['TA']+$ResPay['Arr_LvEnCash'];
+  $TotGross=$ResPay['Tot_Gross']+$ResPay['Bonus']+$ResPay['DA']+$ResPay['Arreares']+$ResPay['LeaveEncash']+$ResPay['Incentive']+$ResPay['VariableAdjustment']+$ResPay['PerformancePay']+$ResPay['PP_Inc']+$ResPay['CCA']+$ResPay['RA']+$ResPay['Arr_Basic']+$ResPay['Arr_Hra']+$ResPay['Arr_Spl']+$ResPay['Arr_Conv']+$ResPay['Arr_Bonus']+$ResPay['Bonus_Adjustment']+$ResPay['Arr_LTARemb']+$ResPay['Arr_RA']+$ResPay['Arr_PP']+$ResPay['YCea']+$ResPay['YMr']+$ResPay['YLta']+$ResPay['Car_Allowance']+$ResPay['Car_Allowance_Arr']+$ResPay['VarRemburmnt']+$ResPay['TA']+$ResPay['Arr_LvEnCash'];
   $TotDeduct=$ResPay['TDS']+$ResPay['Tot_Deduct']+$ResPay['Arr_Pf']+$ResPay['VolContrib']+$ResPay['Arr_Esic']+$ResPay['DeductAdjmt']+$ResPay['RecConAllow']+$ResPay['RA_Recover'];
   $TotNetAmount=$TotGross-$TotDeduct;
   
@@ -1269,7 +1274,7 @@ elseif($_REQUEST['value'] == 'payslip' && $_REQUEST['empid']!= '' && $_REQUEST['
 	$InWorld=no_to_words($TotNetAmount);
     $NetWord=strtoupper($InWorld).' RUPEES ONLY';
   
-  $sqlEr=mysqli_query($con, "SELECT Basic, Hra, Bonus_Month as Bonus, Special, Convance, TA, DA, LeaveEncash, Arreares, Incentive, VariableAdjustment, PerformancePay, CCA, RA, VarRemburmnt, Car_Allowance, Car_Allowance_Arr as Arr_CarAllow, Arr_Basic, Arr_Hra, Arr_Spl, Arr_Conv, Arr_Bonus, Bonus_Adjustment, Arr_LTARemb, Arr_RA, Arr_PP, Arr_LvEnCash, YCea, YMr, YLta FROM ".$pTbl." WHERE EmployeeID=".$ei." AND Month=".$m." AND Year=".$y.""); 
+  $sqlEr=mysqli_query($con, "SELECT Basic, Hra, Bonus_Month as Bonus, Special, Convance, TA, DA, LeaveEncash, Arreares, Incentive, VariableAdjustment, PerformancePay, PP_Inc as Performance_Incentive, CCA, RA, VarRemburmnt, Car_Allowance, Car_Allowance_Arr as Arr_CarAllow, Arr_Basic, Arr_Hra, Arr_Spl, Arr_Conv, Arr_Bonus, Bonus_Adjustment, Arr_LTARemb, Arr_RA, Arr_PP, Arr_LvEnCash, YCea, YMr, YLta FROM ".$pTbl." WHERE EmployeeID=".$ei." AND Month=".$m." AND Year=".$y.""); 
   $resEr=mysqli_fetch_assoc($sqlEr); $ErArry=array(); $ErArry[]=$resEr;
   
   $sqlDd=mysqli_query($con, "SELECT EPF_Employee as PF, TDS, ESCI_Employee as ESIC, NPS_Value as NPS, Arr_Pf, Arr_Esic, VolContrib, DeductAdjmt, RecConAllow, RA_Recover FROM ".$pTbl." WHERE EmployeeID=".$ei." AND Month=".$m." AND Year=".$y.""); 

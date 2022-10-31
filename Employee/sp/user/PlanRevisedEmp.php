@@ -119,10 +119,10 @@ $resHq=mysql_fetch_assoc($Hq);
 <tr>
  <td class="font2" align="center"><?php echo $SNo; ?></td> 
  <td class="font2" align="center"><?php echo $EC; ?></td>
- <td class="font2">&nbsp;<?php echo strtoupper($res['Fname'].''.$res['Sname'].''.$res['Lname']); ?></td> 
- <td class="font2">&nbsp;<?php echo strtoupper($resDe['DesigName']);  ?></td>
- <td class="font2">&nbsp;<?php echo strtoupper($resHq['HqName']);  ?></td>
- <td class="font2">&nbsp;<?php echo strtoupper($resHq['StateName']);  ?></td>
+ <td class="font2">&nbsp;<?php echo ucwords(strtolower($res['Fname'].''.$res['Sname'].''.$res['Lname'])); ?></td> 
+ <td class="font2">&nbsp;<?php echo ucwords(strtolower($resDe['DesigName']));  ?></td>
+ <td class="font2">&nbsp;<?php echo ucwords(strtolower($resHq['HqName']));  ?></td>
+ <td class="font2">&nbsp;<?php echo ucwords(strtolower($resHq['StateName']));  ?></td>
 <?php $sqlCheck=mysql_query("select * from hrm_sales_revised_employee where EmployeeID=".$res['EmployeeID']." AND Year=".$resymq['Year']." AND Month=".$resymq['Month']." AND Quarter=".$resymq['Quarter']." AND Status='A'",$con); $rowCheck=mysql_num_rows($sqlCheck); ?> 
  <td align="center" style="background-color:<?php if($rowCheck>0){echo '#80FF00';} ?>;" valign="middle" id="TDCheckEmp_<?php echo $SNo; ?>"><input type="checkbox" id="CheckEmp_<?php echo $SNo; ?>" onClick="FunClickCheck(<?php echo $SNo.','.$res['EmployeeID'].','.$resymq['Year'].','.$resymq['Month'].','.$resymq['Quarter']; ?>)" <?php if($rowCheck>0){ echo 'checked';} ?> /></td>
 </tr>

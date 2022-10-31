@@ -205,6 +205,7 @@ if($resAc2['EmployeeID']==$EmployeeId OR $resAc2['EmployeeID2']==$EmployeeId OR 
   <?php if($EmployeeId==29 OR $EmployeeId==352 OR $EmployeeId==169 OR $EmployeeId==142){?>
   <li style="text-align:center;"><b>Emp Eligibility</b></li>
   <li><a href="EmpElig.php?act=true&mm=sas&ask=false&ww=rightProtect&we=12345&mm=er4e&r=t5t%t5s&yy=eloi&gosto=false&rigt=checkessue&mailto=promt&wew=e%e@er%rdd=012&value=0&page=1">Click</a></li>
+  <li><a href="EmpTrvRunKM.php?act=true&mm=sas&ask=false&ww=rightProtect&we=12345&mm=er4e&r=t5t%t5s&yy=eloi&gosto=false&rigt=checkessue&mailto=promt&wew=e%e@er%rdd=012&value=0&page=1">Running KM</a></li>
   <?php } ?>
   </ul>
  </li>
@@ -309,7 +310,11 @@ if($CompanyId!=1 OR $EmployeeId==461 OR $EmployeeId==223 OR $EmployeeId==224 OR 
 <?php /***Attendance application open **/ ?>
 <?php $cFDate=date("Y").'-'.date("m").'-01'; $cTDate=date("Y").'-'.date("m").'-31';
   $sAttR=mysql_query("select * from hrm_employee_attendance_req where AttDate>='".date("Y-m-01")."' AND AttDate<='".date("Y-12-31")."' AND RId=".$EmployeeId." AND Status=0",$con); $rowAttR=mysql_num_rows($sAttR);  ?>
-<?php if($rowApp>0 OR $rowHod>0){ ?><li><a href="AttApplRep.php?m=<?php echo date("m"); ?>&Y=<?php echo date("Y"); ?>&e=4e&w=234&tt=10234&aa=f&e=4e2&e=4e&w=234&tt=110022344&retd=ee&wwrew=t%T@sed818&d=101&a=1">Attend. Authorisation <?php if($rowApp>0){?><font style="font-weight:bold;color:#FF860D; font-size:12px;">(<?php echo $rowAttR; ?>)</font><?php } ?></a></li><?php } ?>
+<?php if($rowApp>0 OR $rowHod>0){ ?><li><a href="AttApplRep.php?m=<?php echo date("m"); ?>&Y=<?php echo date("Y"); ?>&e=4e&w=234&tt=10234&aa=f&e=4e2&e=4e&w=234&tt=110022344&retd=ee&wwrew=t%T@sed818&d=101&a=1">Attend. Authorisation <?php if($rowApp>0){?><font style="font-weight:bold;color:#FF860D; font-size:12px;">(<?php echo $rowAttR; ?>)</font><?php } ?></a></li>
+
+<li><li><a href="Apps_Loction.php?act=search&DpId=&s=A&e=">Location Tracking</a></li>
+
+<?php } ?>
 <?php /***Attendance application close **/ ?>  
 
 <?php if($rowApp>0 AND $rowHod>0) { ?> <li><a href="AttMyTeam.php?m=<?php echo date("m"); ?>&Y=<?php echo date("Y"); ?>&e=4e&w=234&tt=10234&a=f&e=4e2&e=4e&w=234&tt=110022344&retd=ee&wwrew=t%T@sed818&d=101">Attendance Reports</a></li><?php } ?>
@@ -395,7 +400,7 @@ if($CompanyId!=1 OR $EmployeeId==461 OR $EmployeeId==223 OR $EmployeeId==224 OR 
 <?php } ?>						
 <?php $sqlNoc=mysql_query("select DepartmentId from hrm_employee_separation_nocdept_emp where EmployeeID=".$EmployeeId." AND Status='A'", $con); $rowNoc=mysql_num_rows($sqlNoc); 
       if($rowNoc>0){ $resNoc=mysql_fetch_assoc($sqlNoc); ?>			
-  <li><a href="EmpDeptNOC.php?e=4e&w=234&d=<?php echo $resNoc['DepartmentId']; ?>&y=10234&e=4e2&e=4e&w=234&y=110022344&retd=ee&rr=09drfGe&S=eewwqq&wwrew=t%T@sed818&ede=101">Department Clearance</a></li>
+  <li><a href="EmpDeptNOC.php?e=4e&w=234&d=<?php echo $resNoc['DepartmentId']; ?>&y=10234&e=4e2&e=4e&w=234&y=110022344&retd=ee&rr=09drfGe&S=eewwqq&wwrew=t%T@sed818&ede=101&chkvv=N">Department Clearance</a></li>
 <?php } ?>		
   </ul>
  </li>
@@ -408,8 +413,8 @@ if($CompanyId!=1 OR $EmployeeId==461 OR $EmployeeId==223 OR $EmployeeId==224 OR 
 <?php } } ?>
  
 <?php if($rowResig==0){ /******************** Check Resignation Open 22 **********************/ ?>
-<?php if($resCer['ProfileCertify']=='Y' OR $EmployeeId==223 OR $EmployeeId==461 OR $EmployeeId==224 OR $EmployeeId==233 OR $EmployeeId==234 OR $EmployeeId==235 OR $EmployeeId==259 OR $EmployeeId==260 OR $EmployeeId==6 OR $EmployeeId==7 OR $EmployeeId==52 OR $EmployeeId==51 OR $EmployeeId==89 OR $EmployeeId==1123 OR $EmployeeId==169) {  //********* Check Certify 22 OPEN *********/ ?>
-<?php if(($resps2['Open']=='Y' AND $respse['ProfileCertify']=='Y') OR $resps2['Open']=='N' OR $EmployeeId==223 OR $EmployeeId==461 OR $EmployeeId==224 OR $EmployeeId==233 OR $EmployeeId==234 OR $EmployeeId==235 OR $EmployeeId==259 OR $EmployeeId==260 OR $EmployeeId==6 OR $EmployeeId==7 OR $EmployeeId==52 OR $EmployeeId==51 OR $EmployeeId==89 OR $EmployeeId==1123 OR $EmployeeId==169) {  //********* Check Profile Certify-BB 22 OPEN *********/ ?>
+<?php if($resCer['ProfileCertify']=='Y' OR $EmployeeId==223 OR $EmployeeId==461 OR $EmployeeId==224 OR $EmployeeId==233 OR $EmployeeId==234 OR $EmployeeId==235 OR $EmployeeId==259 OR $EmployeeId==260 OR $EmployeeId==6 OR $EmployeeId==7 OR $EmployeeId==52 OR $EmployeeId==51 OR $EmployeeId==89 OR $EmployeeId==1123 OR $EmployeeId==169 OR $EmployeeId==1084) {  //********* Check Certify 22 OPEN *********/ ?>
+<?php if(($resps2['Open']=='Y' AND $respse['ProfileCertify']=='Y') OR $resps2['Open']=='N' OR $EmployeeId==223 OR $EmployeeId==461 OR $EmployeeId==224 OR $EmployeeId==233 OR $EmployeeId==234 OR $EmployeeId==235 OR $EmployeeId==259 OR $EmployeeId==260 OR $EmployeeId==6 OR $EmployeeId==7 OR $EmployeeId==52 OR $EmployeeId==51 OR $EmployeeId==89 OR $EmployeeId==1123 OR $EmployeeId==169 OR $EmployeeId==1084) {  //********* Check Profile Certify-BB 22 OPEN *********/ ?>
 <?php //if(($resContt['Emg_Contact1']!='' AND $resContt['Emg_Contact1']!=0) OR ($EmployeeId==6 OR $EmployeeId==7 OR $EmployeeId==51 OR $EmployeeId==223 OR $EmployeeId==461 OR $EmployeeId==224 OR $EmployeeId==233 OR $EmployeeId==234 OR $EmployeeId==235 OR $EmployeeId==259 OR $EmployeeId==260 OR $EmployeeId==1123)){ //********* Check Update Emegency Contact Open 22 **********// ?>
 
 
@@ -425,17 +430,17 @@ function OpenSUserPlan(ei)
 <?php $sdept=mysql_query("select DepartmentId from hrm_employee_general where EmployeeID=".$EmployeeId, $con); $rdept=mysql_fetch_assoc($sdept);
       $Lch=mysql_query("select * from hrm_sales_useremp where UserEmpId=".$EmployeeId." AND Status='A'", $con); $rowLch=mysql_num_rows($Lch); ?>
 <?php if(($rdept['DepartmentId']==5 OR $rdept['DepartmentId']==7 OR $rdept['DepartmentId']==11 OR $rdept['DepartmentId']==12) AND $rowLch>0){ ?>
- <li class="top"><a href="#" onclick="OpenSUserPlan(<?php echo $EmployeeId; ?>)" class="top_link">Sales Plan</a></li>
+ <li class="top"><a href="#" onclick="OpenSUserPlan(<?php echo $EmployeeId; ?>)" class="top_link">Sales Module</a></li>
  <?php } elseif($rdept['DepartmentId']==6 AND $EmployeeId!=51 AND $EmployeeId!=84){ ?>
- <li class="top"><a href="#" onclick="OpenSEmpPlan(<?php echo $EmployeeId; ?>)" class="top_link">Sales Plan</a></li> 
+ <li class="top"><a href="#" onclick="OpenSEmpPlan(<?php echo $EmployeeId; ?>)" class="top_link">Sales Module</a></li> 
  <?php } elseif($rdept['DepartmentId']==6 AND ($EmployeeId==51 OR $EmployeeId==84) AND $rowLch>0){ ?> 
- <li class="top"><a href="#nogo22" class="top_link"><span class="down">Sales Plan</span></a>
+ <li class="top"><a href="#nogo22" class="top_link"><span class="down">Sales Module</span></a>
   <ul class="sub">
    <li><a href="#" onclick="OpenSUserPlan(<?php echo $EmployeeId; ?>)">User</a></li>
    <li><a href="#" onclick="OpenSEmpPlan(<?php echo $EmployeeId; ?>)">Employee</a></li>
   </ul>
  </li>
-<?php } elseif(($EmployeeId==223 OR $EmployeeId==461 OR $EmployeeId==224 OR $EmployeeId==169 OR $EmployeeId==53 OR $EmployeeId==142 OR $EmployeeId==97) AND $rowLch>0) { ?>
+<?php } elseif(($EmployeeId==223 OR $EmployeeId==461 OR $EmployeeId==224 OR $EmployeeId==169 OR $EmployeeId==1084 OR $EmployeeId==53 OR $EmployeeId==142 OR $EmployeeId==97) AND $rowLch>0) { ?>
  <li class="top"><a href="#" onclick="OpenSUserPlan(<?php echo $EmployeeId; ?>)" class="top_link">SP</a></li> 
 <?php } ?>
 <?php /* CLOSE SALESPLAN CLOSE SALESPLAN CLOSE SALESPLAN CLOSE SALESPLAN CLOSE SALESPLAN CLOSE SALESPLAN CLOSE SALESPLAN CLOSE SALESPLAN **************/ ?>

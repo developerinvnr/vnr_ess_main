@@ -237,9 +237,9 @@ function show_AddMonth(originalRequest)   //TotP13d_  M12_CeT TotM_AeT
 	   <td style="font-size:11px;height:18px;width:80px;color:#E6E6E6;" align="right"><b>Crop :</b></td>
 	    <td>
 		 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="CropGrp" id="CropGrp" onChange="ClickGrp(this.value)">
-<?php if($_REQUEST['grp']==1){ ?><option value="1" selected>VEGETABLE CROP</option><option value="2">FIELD CROP</option><option value="3">All CROP</option>
-<?php }elseif($_REQUEST['grp']==2){ ?><option value="2" selected>FIELD CROP</option><option value="1">VEGETABLE CROP</option><option value="3">All CROP</option>
-<?php }elseif($_REQUEST['grp']==3){ ?><option value="3" selected>All CROP</option><option value="1">VEGETABLE CROP</option><option value="2">FIELD CROP</option><?php } ?>	
+<?php if($_REQUEST['grp']==1){ ?><option value="1" selected>Vegetable Crop</option><option value="2">Field Crop</option><option value="3">All Crop</option>
+<?php }elseif($_REQUEST['grp']==2){ ?><option value="2" selected>Field Crop</option><option value="1">Vegetable Crop</option><option value="3">All Crop</option>
+<?php }elseif($_REQUEST['grp']==3){ ?><option value="3" selected>All Crop</option><option value="1">Vegetable Crop</option><option value="2">Field Crop</option><?php } ?>	
         </select>
 		</td>
 		<td>&nbsp;</td>
@@ -247,8 +247,8 @@ function show_AddMonth(originalRequest)   //TotP13d_  M12_CeT TotM_AeT
 	     <td>
 		 <select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="ItemV" id="ItemV" onChange="ChangeII(this.value)">
 <?php if($_REQUEST['ii']>0){ $sqlI=mysql_query("select ItemName from hrm_sales_seedsitem where ItemId=".$_REQUEST['ii'], $con); $resI=mysql_fetch_assoc($sqlI); ?>	
-         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo strtoupper($resI['ItemName']); ?></option>
-		 <?php }else{ ?><option value="0" selected>SELECT</option><?php } ?>
+         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo ucwords(strtolower($resI['ItemName'])); ?></option>
+		 <?php }else{ ?><option value="0" selected>Select</option><?php } ?>
 <?php if($_REQUEST['grp']==1){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=1 order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==2){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=2 order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==3){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where (GroupId=1 OR GroupId=2) order by GroupId ASC,ItemName ASC", $con);}
@@ -259,11 +259,11 @@ function show_AddMonth(originalRequest)   //TotP13d_  M12_CeT TotM_AeT
 		<td style="font-size:11px; height:18px;width:100px;color:#E6E6E6;" align="right"><b>Quarter :</b></td>
 	     <td>
 		 <select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="QtrV" id="QtrV" onChange="ChangeQtr(this.value)">
-         <option value="<?php echo $_REQUEST['q']; ?>" selected><?php echo 'QUARTER-0'.$_REQUEST['q']; ?></option> 
-<?php if($_REQUEST['q']==1){ ?>	<option value="2">QUARTER-02</option><option value="3">QUARTER-03</option><option value="4">QUARTER-04</option>
-<?php } elseif($_REQUEST['q']==2){ ?><option value="3">QUARTER-03</option><option value="4">QUARTER-04</option><option value="1">QUARTER-01</option>
-<?php } elseif($_REQUEST['q']==3){ ?><option value="4">QUARTER-04</option><option value="1">QUARTER-01</option><option value="2">QUARTER-02</option>
-<?php } elseif($_REQUEST['q']==4){ ?><option value="1">QUARTER-01</option><option value="2">QUARTER-02</option><option value="3">QUARTER-03</option><?php } ?></select>
+         <option value="<?php echo $_REQUEST['q']; ?>" selected><?php echo 'Quarter-0'.$_REQUEST['q']; ?></option> 
+<?php if($_REQUEST['q']==1){ ?>	<option value="2">Quarter-02</option><option value="3">Quarter-03</option><option value="4">Quarter-04</option>
+<?php } elseif($_REQUEST['q']==2){ ?><option value="3">Quarter-03</option><option value="4">Quarter-04</option><option value="1">Quarter-01</option>
+<?php } elseif($_REQUEST['q']==3){ ?><option value="4">Quarter-04</option><option value="1">Quarter-01</option><option value="2">Quarter-02</option>
+<?php } elseif($_REQUEST['q']==4){ ?><option value="1">Quarter-01</option><option value="2">Quarter-02</option><option value="3">Quarter-03</option><?php } ?></select>
 		 </td>
 	  </tr>
 	  <tr>
@@ -272,19 +272,19 @@ function show_AddMonth(originalRequest)   //TotP13d_  M12_CeT TotM_AeT
 	    <td>
 <select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="Coutry" id="Coutry" onChange="ClickCoutry(this.value,<?php echo $EmployeeId.', '.$resDept['DepartmentId']; ?>)"> 
 <?php if($_REQUEST['c']>0){ $sqlC=mysql_query("SELECT CountryName FROM hrm_country where CountryId=".$_REQUEST['c'], $con); $resC=mysql_fetch_array($sqlC); ?>
-<option value="<?php echo $_REQUEST['c']; ?>"><?php echo strtoupper($resC['CountryName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>		
+<option value="<?php echo $_REQUEST['c']; ?>"><?php echo ucwords(strtolower($resC['CountryName'])); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>		
 <?php $SqlCountry=mysql_query("SELECT * FROM hrm_country order by CountryName ASC", $con); while($ResCountry=mysql_fetch_array($SqlCountry)) { ?>
-<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo strtoupper($ResCountry['CountryName']); ?></option><?php } ?></select>
+<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo ucwords(strtolower($ResCountry['CountryName'])); ?></option><?php } ?></select>
        </td>
 	   <td>&nbsp;</td>
 	   <td style="font-size:11px;height:18px;width:80px;color:#E6E6E6;" align="right"><b>State :</b></td>
 	    <td>
 		 <span id="StateSpan">
 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="State" id="State" onChange="ClickState(this.value,<?php echo $EmployeeId; ?>)">
-<?php if($_REQUEST['s']>0){  $sqlS=mysql_query("SELECT StateName FROM hrm_state where StateId=".$_REQUEST['s'], $con); $resS=mysql_fetch_array($sqlS); ?><option value="<?php echo $_REQUEST['s']; ?>"><?php echo strtoupper($resS['StateName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>
+<?php if($_REQUEST['s']>0){  $sqlS=mysql_query("SELECT StateName FROM hrm_state where StateId=".$_REQUEST['s'], $con); $resS=mysql_fetch_array($sqlS); ?><option value="<?php echo $_REQUEST['s']; ?>"><?php echo ucwords(strtolower($resS['StateName'])); ?></option><?php }else{ ?><option value="">Select</option><?php } ?>
 <?php if($resDept['DepartmentId']==7){ $sqlSt=mysql_query("select hrm_sales_ebillstate.StateId,StateName from hrm_sales_ebillstate INNER JOIN hrm_state ON hrm_sales_ebillstate.StateId=hrm_state.StateId where (EmployeeID=".$EmployeeId." OR EmployeeID2=".$EmployeeId." OR EmployeeID3=".$EmployeeId." OR EmployeeID4=".$EmployeeId.") order by StateName ASC", $con); }
 	  elseif($EmployeeId==169 OR $EmployeeId==223){ $sqlSt=mysql_query("SELECT * FROM hrm_state order by StateName ASC", $con); } 
-	  while($resSt=mysql_fetch_array($sqlSt)){ ?><option value="<?php echo $resSt['StateId']; ?>"><?php echo strtoupper($resSt['StateName']); ?></option><?php } ?>
+	  while($resSt=mysql_fetch_array($sqlSt)){ ?><option value="<?php echo $resSt['StateId']; ?>"><?php echo ucwords(strtolower($resSt['StateName'])); ?></option><?php } ?>
 	  <?php if($EmployeeId==116){?><option value="16">MAHARASHTRA</option><?php } ?>
 </select>
 </span>
@@ -295,10 +295,10 @@ function show_AddMonth(originalRequest)   //TotP13d_  M12_CeT TotM_AeT
 		 <span id="HqSpan">
 <select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="Hq" id="Hq" onChange="ClickHq(this.value)">
 <?php if($_REQUEST['hq']>0){ $sqlhq=mysql_query("SELECT HqName FROM hrm_headquater where HqId=".$_REQUEST['hq'], $con); $reshq=mysql_fetch_array($sqlhq); ?>
-<option value="<?php echo $_REQUEST['hq']; ?>"><?php echo strtoupper($reshq['HqName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>
+<option value="<?php echo $_REQUEST['hq']; ?>"><?php echo ucwords(strtolower($reshq['HqName'])); ?></option><?php }else{ ?><option value="">Select</option><?php } ?>
 <?php if($resDept['DepartmentId']==7){ $sqlHq=mysql_query("select HqId,HqName from hrm_headquater INNER JOIN hrm_sales_ebillstate ON hrm_headquater.StateId=hrm_sales_ebillstate.StateId where (hrm_sales_ebillstate.EmployeeID=".$EmployeeId." OR hrm_sales_ebillstate.EmployeeID2=".$EmployeeId." OR hrm_sales_ebillstate.EmployeeID3=".$EmployeeId." OR hrm_sales_ebillstate.EmployeeID4=".$EmployeeId.") order by HqName ASC", $con);}
 	  elseif($EmployeeId==169 OR $EmployeeId==223){$sqlHq = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' order by HqName ASC", $con);}
-	  while($resHq = mysql_fetch_array($sqlHq)){ ?><option value="<?php echo $resHq['HqId']; ?>"><?php echo strtoupper($resHq['HqName']); ?></option><?php } ?>
+	  while($resHq = mysql_fetch_array($sqlHq)){ ?><option value="<?php echo $resHq['HqId']; ?>"><?php echo ucwords(strtolower($resHq['HqName'])); ?></option><?php } ?>
 </select>
 		 </span>
 		 </td>
@@ -307,11 +307,11 @@ function show_AddMonth(originalRequest)   //TotP13d_  M12_CeT TotM_AeT
 		 <td><input type="hidden" id="DealerId" value="" /><input type="hidden" id="TotAValueM" value="" /><input type="hidden" id="Sno" value="" />
 		     <input type="hidden" name="q" id="q" value="<?php echo $_REQUEST['q']; ?>" /><input type="hidden" id="ii" value="<?php echo $_REQUEST['ii']; ?>" />
 		  <span id="TabResult">
-<select style="font-size:12px;width:250px;height:20px;background-color:#DDFFBB;" name="DealerD" id="DealerD" onChange="ClickDealer(this.value)" <?php if($_REQUEST['dil']==0){echo '';} ?>><?php if($_REQUEST['dil']>0){ $sqldil=mysql_query("SELECT DealerName,DealerCity FROM hrm_sales_dealer where DealerId=".$_REQUEST['dil'], $con); $resdil=mysql_fetch_array($sqldil); ?><option value="<?php echo $_REQUEST['dil']; ?>"><?php echo strtoupper($resdil['DealerName'].'-'.$resdil['DealerCity']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>
+<select style="font-size:12px;width:250px;height:20px;background-color:#DDFFBB;" name="DealerD" id="DealerD" onChange="ClickDealer(this.value)" <?php if($_REQUEST['dil']==0){echo '';} ?>><?php if($_REQUEST['dil']>0){ $sqldil=mysql_query("SELECT DealerName,DealerCity FROM hrm_sales_dealer where DealerId=".$_REQUEST['dil'], $con); $resdil=mysql_fetch_array($sqldil); ?><option value="<?php echo $_REQUEST['dil']; ?>"><?php echo ucwords(strtolower($resdil['DealerName'].'-'.$resdil['DealerCity'])); ?></option><?php }else{ ?><option value="">Select</option><?php } ?>
 <?php if($resDept['DepartmentId']==7){$sqlDe = mysql_query("SELECT DealerId,DealerName FROM hrm_sales_dealer INNER JOIN hrm_headquater ON hrm_sales_dealer.HqId=hrm_headquater.HqId INNER JOIN hrm_employee_state ON hrm_headquater.StateId=hrm_employee_state.StateId where hrm_employee_state.LOGISTICS_EId=".$EmployeeId." order by DealerName ASC", $con);}
       elseif($EmployeeId==169 OR $EmployeeId==223){$sqlDe = mysql_query("SELECT * FROM hrm_sales_dealer order by DealerName ASC", $con);} 
 	  while($resDe = mysql_fetch_array($sqlDe)){ ?>
-     <option value="<?php echo $resDe['DealerId']; ?>"><?php echo $resDe['DealerName'].'-'.strtoupper($res['DealerCity']); ?></option><?php } ?></select>
+     <option value="<?php echo $resDe['DealerId']; ?>"><?php echo ucwords(strtolower($resDe['DealerName'])).'-'.ucwords(strtolower($res['DealerCity'])); ?></option><?php } ?></select>
 	      </span>
 		 </td>
 	  </tr> 

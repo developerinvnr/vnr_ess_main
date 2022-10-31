@@ -546,26 +546,26 @@ function FunEdit()
 	    <td style="font-size:12px;width:83px;" align="right"><b>Country:</b>&nbsp;</td>
 	    <td style="width:142px;">
 		<select style="font-size:12px;width:141px;height:20px;background-color:#DDFFBB;" name="Coutry" id="Coutry" onChange="ClickCoutry(this.value)"> 
-	    <option value="">SELECT COUNTRY</option>
+	    <option value="">Select Country</option>
 <?php $SqlCountry=mysql_query("SELECT * FROM hrm_country order by CountryName ASC", $con); while($ResCountry=mysql_fetch_array($SqlCountry)) { ?>
-<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo strtoupper($ResCountry['CountryName']); ?></option><?php } ?></select>
+<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo ucwords(strtolower($ResCountry['CountryName'])); ?></option><?php } ?></select>
         </td>
 	   <td style="font-size:12px;width:70px;" align="right"><b>State:</b>&nbsp;</td>
 	    <td>
 	    <span id="StateSpan">
 	    <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="State" id="State" onChange="ClickState(this.value)">
-	    <option value="" selected>SELECT STATE</option>	
+	    <option value="" selected>Select State</option>	
 	    <?php $sql = mysql_query("SELECT * FROM hrm_state order by StateName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-	    <option value="<?php echo $res['StateId']; ?>"><?php echo strtoupper($res['StateName']); ?></option><?php } ?></select>
+	    <option value="<?php echo $res['StateId']; ?>"><?php echo ucwords(strtolower($res['StateName'])); ?></option><?php } ?></select>
 	    </span>
 	    </td>
 		<td style="font-size:12px;width:50px;" align="right"><b>Hq:</b>&nbsp;</td>
         <td>
 		<span id="HqSpan">
 		<select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="Hq" id="Hq" onChange="ClickHq(this.value)">
-        <option value="" selected>SELECT HEAD QUARTER</option>
+        <option value="" selected>Select HQ</option>
 <?php $sql = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' order by HqName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-        <option value="<?php echo $res['HqId']; ?>"><?php echo strtoupper($res['HqName']); ?></option><?php } ?></select>
+        <option value="<?php echo $res['HqId']; ?>"><?php echo ucwords(strtolower($res['HqName'])); ?></option><?php } ?></select>
 		</span>
 		</td>	
 		<td style="width:80px;font-size:12px;" align="right"><b><a href="#" onClick="FunTxls('xls')">Formate</a></b>&nbsp;</td>
@@ -578,9 +578,9 @@ function FunEdit()
 			<td>
 			<span id="DealSpan">
 			<select style="font-size:12px;width:310px;height:20px;background-color:#DDFFBB;" name="Dealer" id="Dealer" onChange="ClickDealer(this.value)">
-            <option value="" selected>SELECT DEALER NAME</option>
+            <option value="" selected>Select Dealer Name</option>
 <?php $sqlDeal = mysql_query("SELECT * FROM hrm_sales_dealer order by DealerName ASC", $con); while($resDeal = mysql_fetch_array($sqlDeal)){ ?>
-            <option value="<?php echo $resDeal['DealerId']; ?>"><?php echo strtoupper($resDeal['DealerName']); ?></option><?php } ?></select>
+            <option value="<?php echo $resDeal['DealerId']; ?>"><?php echo ucwords(strtolower($resDeal['DealerName'])); ?></option><?php } ?></select>
 			</span>
 			</td>
 		   </tr>
@@ -622,26 +622,26 @@ function FunEdit()
 	    <td style="font-size:12px;width:83px;" align="right"><b>Country:</b>&nbsp;</td>
 	    <td style="width:142px;">
 		<select style="font-size:12px;width:141px;height:20px;background-color:#DDFFBB;" name="Coutry2" id="Coutry2" onChange="ClickCoutry2(this.value)"> 
-	    <option value="">SELECT COUNTRY</option>
+	    <option value="">Select Country</option>
 <?php $SqlCountry=mysql_query("SELECT * FROM hrm_country order by CountryName ASC", $con); while($ResCountry=mysql_fetch_array($SqlCountry)) { ?>
-<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo strtoupper($ResCountry['CountryName']); ?></option><?php } ?></select>
+<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo ucwords(strtolower($ResCountry['CountryName'])); ?></option><?php } ?></select>
         </td>
 	   <td style="font-size:12px;width:70px;" align="right"><b>State:</b>&nbsp;</td>
 	    <td>
 	    <span id="StateSpan2">
 	    <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="State2" id="State2" onChange="ClickState2(this.value)">
-	    <option value="" selected>SELECT STATE</option>	
+	    <option value="" selected>Select State</option>	
 	    <?php $sql = mysql_query("SELECT * FROM hrm_state order by StateName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-	    <option value="<?php echo $res['StateId']; ?>"><?php echo strtoupper($res['StateName']); ?></option><?php } ?></select>
+	    <option value="<?php echo $res['StateId']; ?>"><?php echo ucwords(strtolower($res['StateName'])); ?></option><?php } ?></select>
 	    </span>
 	    </td>
 		<td style="font-size:12px;width:50px;" align="right"><b>Hq:</b>&nbsp;</td>
         <td>
 		<span id="HqSpan2">
 		<select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="Hq2" id="Hq2" onChange="ClickHq2(this.value)">
-        <option value="" selected>SELECT HEAD QUARTER</option>
+        <option value="" selected>Select HQ</option>
 <?php $sql = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' order by HqName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-        <option value="<?php echo $res['HqId']; ?>"><?php echo strtoupper($res['HqName']); ?></option><?php } ?></select>
+        <option value="<?php echo $res['HqId']; ?>"><?php echo ucwords(strtolower($res['HqName'])); ?></option><?php } ?></select>
 		</span>
 		</td>
 		<td style="width:80px;font-size:12px;" align="right"><b><a href="#" onClick="FunTxls('xls')">Formate</a></b>&nbsp;</td>
@@ -654,9 +654,9 @@ function FunEdit()
 			<td>
 			<span id="DealSpan2">
 			<select style="font-size:12px;width:310px;height:20px;background-color:#DDFFBB;" name="Dealer2" id="Dealer2" onChange="ClickDealer2(this.value)">
-            <option value="" selected>SELECT DEALER NAME</option>
+            <option value="" selected>Selct Dealer Name</option>
 <?php $sqlDeal = mysql_query("SELECT * FROM hrm_sales_dealer order by DealerName ASC", $con); while($resDeal = mysql_fetch_array($sqlDeal)){ ?>
-            <option value="<?php echo $resDeal['DealerId']; ?>"><?php echo strtoupper($resDeal['DealerName']); ?></option><?php } ?></select>
+            <option value="<?php echo $resDeal['DealerId']; ?>"><?php echo ucwords(strtolower($resDeal['DealerName'])); ?></option><?php } ?></select>
 			</span>
 			</td>
 		   </tr>
@@ -702,26 +702,26 @@ function FunEdit()
 	    <td style="font-size:12px;width:83px;" align="right"><b>Country:</b>&nbsp;</td>
 	    <td style="width:142px;">
 		<select style="font-size:12px;width:141px;height:20px;background-color:#DDFFBB;" name="Coutry3" id="Coutry3" onChange="ClickCoutry3(this.value)"> 
-	    <option value="">SELECT COUNTRY</option>
+	    <option value="">Select Country</option>
 <?php $SqlCountry=mysql_query("SELECT * FROM hrm_country order by CountryName ASC", $con); while($ResCountry=mysql_fetch_array($SqlCountry)) { ?>
-<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo strtoupper($ResCountry['CountryName']); ?></option><?php } ?></select>
+<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo ucwords(strtolower($ResCountry['CountryName'])); ?></option><?php } ?></select>
         </td>
 	   <td style="font-size:12px;width:70px;" align="right"><b>State:</b>&nbsp;</td>
 	    <td>
 	    <span id="StateSpan3">
 	    <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="State3" id="State3" onChange="ClickState3(this.value)">
-	    <option value="" selected>SELECT STATE</option>	
+	    <option value="" selected>Select State</option>	
 	    <?php $sql = mysql_query("SELECT * FROM hrm_state order by StateName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-	    <option value="<?php echo $res['StateId']; ?>"><?php echo strtoupper($res['StateName']); ?></option><?php } ?></select>
+	    <option value="<?php echo $res['StateId']; ?>"><?php echo ucwords(strtolower($res['StateName'])); ?></option><?php } ?></select>
 	    </span>
 	    </td>
 		<td style="font-size:12px;width:50px;" align="right"><b>Hq:</b>&nbsp;</td>
         <td>
 		<span id="HqSpan3">
 		<select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="Hq3" id="Hq3" onChange="ClickHq3(this.value)">
-        <option value="" selected>SELECT HEAD QUARTER</option>
+        <option value="" selected>Select HQ</option>
 <?php $sql = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' order by HqName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-        <option value="<?php echo $res['HqId']; ?>"><?php echo strtoupper($res['HqName']); ?></option><?php } ?></select>
+        <option value="<?php echo $res['HqId']; ?>"><?php echo ucwords(strtolower($res['HqName'])); ?></option><?php } ?></select>
 		</span>
 		</td>
 		<td style="width:80px;font-size:12px;" align="right"><b><a href="#" onClick="FunAchTgtTxls('xls')">Formate</a></b>&nbsp;</td>
@@ -734,9 +734,9 @@ function FunEdit()
 			<td>
 			<span id="DealSpan3">
 			<select style="font-size:12px;width:310px;height:20px;background-color:#DDFFBB;" name="Dealer3" id="Dealer3" onChange="ClickDealer3(this.value)">
-            <option value="" selected>SELECT DEALER NAME</option>
+            <option value="" selected>Select Dealer Name</option>
 <?php $sqlDeal = mysql_query("SELECT * FROM hrm_sales_dealer order by DealerName ASC", $con); while($resDeal = mysql_fetch_array($sqlDeal)){ ?>
-            <option value="<?php echo $resDeal['DealerId']; ?>"><?php echo strtoupper($resDeal['DealerName'].'-'.$resDeal['DealerCity']); ?></option><?php } ?></select>
+            <option value="<?php echo $resDeal['DealerId']; ?>"><?php echo ucwords(strtolower($resDeal['DealerName'].'-'.$resDeal['DealerCity'])); ?></option><?php } ?></select>
 			</span>
 			</td>
 		   </tr>

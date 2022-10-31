@@ -90,6 +90,7 @@ $(document).ready(function () { $("#table1").freezeHeader({ 'height': '480px' })
   <option value="08:30:00" <?php if($resCh['InTime']=='08:30:00'){echo 'selected';}?>>08:30 AM</option>
   <option value="09:00:00" <?php if($resCh['InTime']=='09:00:00'){echo 'selected';}?>>09:00 AM</option>
   <option value="09:30:00" <?php if($resCh['InTime']=='09:30:00'){echo 'selected';}?>>09:30 AM</option>
+  <option value="09:30:59" <?php if($resCh['InTime']=='09:30:59'){echo 'selected';}?>>09:30:59 AM</option>
   <option value="10:00:00" <?php if($resCh['InTime']=='10:00:00'){echo 'selected';}?>>10:00 AM</option>
   <option value="10:30:00" <?php if($resCh['InTime']=='10:30:00'){echo 'selected';}?>>10:30 AM</option>
   <option value="11:00:00" <?php if($resCh['InTime']=='11:00:00'){echo 'selected';}?>>11:00 AM</option>

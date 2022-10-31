@@ -5,8 +5,8 @@ include('codeEncDec.php');
 if(check_user()==false){header('Location:../../../index.php');}
 if($_SESSION['login'] = true){require_once('UserMenuSession.php');}
 //**********************************************************************************************************************
-if(isset($_POST['SaveNew'])){ $SqlInseart = mysql_query("INSERT INTO hrm_sales_seedsitem(ItemName,GroupId) VALUES('".$_POST['ItemName']."',".$_POST['GroupV'].")", $con); }
-if(isset($_POST['SaveEdit'])){ $SqlUpdate = mysql_query("UPDATE hrm_sales_seedsitem SET ItemName='".$_POST['ItemName']."', GroupId=".$_POST['GroupV']." WHERE ItemId=".$_POST['ItemId'], $con); }
+if(isset($_POST['SaveNew'])){ $SqlInseart = mysql_query("INSERT INTO hrm_sales_seedsitem(ItemName,GroupId) VALUES('".ucwords($_POST['ItemName'])."',".$_POST['GroupV'].")", $con); }
+if(isset($_POST['SaveEdit'])){ $SqlUpdate = mysql_query("UPDATE hrm_sales_seedsitem SET ItemName='".ucwords($_POST['ItemName'])."', GroupId=".$_POST['GroupV']." WHERE ItemId=".$_POST['ItemId'], $con); }
 
 //if(isset($_REQUEST['action']) && $_REQUEST['action']=="delete")
 //{ $SqlDelete=mysql_query("delete from hrm_sales_seedsitem WHERE ItemId=".$_REQUEST['did'], $con) or die(mysql_error()); }
@@ -68,12 +68,12 @@ if(isset($_REQUEST['action']) && $_REQUEST['action']=="edit" && $_REQUEST['eid']
  <td align="center" style="font:Georgia;font-size:12px;" valign="top"><?php echo $SNo; ?></td>
  <td class="font" valign="top"><input name="ItemName" class="EditInput" value="<?php echo $res['ItemName']; ?>" style="width:195px;"/></td>
  <td><select style="font-size:12px;width:148px;" id="GroupV" name="GroupV" onChange="ChangeGroup(this.value)">
-<?php if($res['GroupId']==0){$GroupN='SELECT GROUP';}elseif($res['GroupId']==1){$GroupN='VEGETABLE GROUP';}elseif($res['GroupId']==2){$GroupN='CEREAL GROUP';} ?>
+<?php if($res['GroupId']==0){$GroupN='Select Group';}elseif($res['GroupId']==1){$GroupN='Vegetable Group';}elseif($res['GroupId']==2){$GroupN='Cereal Group';} ?>
  <option value="<?php echo $res['GroupId']; ?>" selected>&nbsp;<?php echo $GroupN; ?></option>
- <?php if($res['GroupId']==0){?><option value="<?php echo 1; ?>">&nbsp;<?php echo 'VEGETABLE GROUP'; ?></option>
- <option value="<?php echo 2; ?>">&nbsp;<?php echo 'CEREAL GROUP'; ?></option>
- <?php } if($res['GroupId']==1){?><option value="<?php echo 2; ?>">&nbsp;<?php echo 'CEREAL GROUP'; ?></option>
- <?php } if($res['GroupId']==2){?><option value="<?php echo 1; ?>">&nbsp;<?php echo 'VEGETABLE GROUP'; ?></option>
+ <?php if($res['GroupId']==0){?><option value="<?php echo 1; ?>">&nbsp;<?php echo 'Vegetable Group'; ?></option>
+ <option value="<?php echo 2; ?>">&nbsp;<?php echo 'Cereal Group'; ?></option>
+ <?php } if($res['GroupId']==1){?><option value="<?php echo 2; ?>">&nbsp;<?php echo 'Cereal Group'; ?></option>
+ <?php } if($res['GroupId']==2){?><option value="<?php echo 1; ?>">&nbsp;<?php echo 'Vegetable Group'; ?></option>
  <?php } ?> </select>
  </td>
  <td align="center" valign="middle" style="font:Georgia; font-size:11px;width:100px;" valign="top">
@@ -84,7 +84,7 @@ if(isset($_REQUEST['action']) && $_REQUEST['action']=="edit" && $_REQUEST['eid']
 <tr>
  <td align="center" style="font:Times New Roman; font-size:12px;"><?php echo $SNo; ?></td>	   
  <td class="font2">&nbsp;<?php echo $res['ItemName']; ?></td>
-<?php if($res['GroupId']==0){$GroupN='';}elseif($res['GroupId']==1){$GroupN='VEGETABLE GROUP';}elseif($res['GroupId']==2){$GroupN='CEREAL GROUP';} ?> 
+<?php if($res['GroupId']==0){$GroupN='';}elseif($res['GroupId']==1){$GroupN='Vegetable Group';}elseif($res['GroupId']==2){$GroupN='Cereal Group';} ?> 
  <td class="font2" align="">&nbsp;<?php echo $GroupN; ?></td>
  <td align="center" valign="middle" style="font:Georgia; font-size:12px;"><a href="#"><img src="images/edit.png" border="0" alt="Edit" onClick="edit(<?php echo $res['ItemId']; ?>)"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><img src="images/delete.png" alt="Delete" border="0" onClick="del(<?php echo $res['ItemId']; ?>)"></a></td>
 </tr>
@@ -96,9 +96,9 @@ if(isset($_REQUEST['action']) && $_REQUEST['action']=="edit" && $_REQUEST['eid']
  <td align="center" style="font:Times New Roman; font-size:11px;"><?php echo $SNo; ?></td>
  <td class="font1"><input name="ItemName" class="EditInput" value="" style="width:195px;" /></td>
  <td><select style="font-size:12px;width:148px;" id="GroupV" name="GroupV">
- <option value="<?php echo 0; ?>">&nbsp;<?php echo 'SELECT GROUP'; ?></option>
- <option value="<?php echo 1; ?>">&nbsp;<?php echo 'VEGETABLE GROUP'; ?></option>
- <option value="<?php echo 2; ?>">&nbsp;<?php echo 'CEREAL GROUP'; ?></option>
+ <option value="<?php echo 0; ?>">&nbsp;<?php echo 'Select Group'; ?></option>
+ <option value="<?php echo 1; ?>">&nbsp;<?php echo 'Vegetable Group'; ?></option>
+ <option value="<?php echo 2; ?>">&nbsp;<?php echo 'Cereal Group'; ?></option>
  </select>
  </td>
  <td align="center" valign="middle" style="font:Georgia; font-size:11px;"><input type="submit" name="SaveNew"  value="" class="SaveButton"></td>

@@ -7,7 +7,7 @@ if($LEC==1){$EC='000'.$res['EmpCode'];} if($LEC==2){$EC='00'.$res['EmpCode'];} i
 <tr>
   <td align="Left" valign="top" style="font-family:Times New Roman;color:#C4E1FF; font-size:15px; width:1200px; ">
   <i><b>Welcome :&nbsp;</b></i>
-  <font style='font-family:Times New Roman;font-size:14px;color:#FFFFAE;'><b><?php echo $NameE;?></b></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <font style='font-family:Times New Roman;font-size:14px;color:#FFFFAE;'><b><?php echo ucwords(strtolower($NameE));?></b></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <i><b>EmpCode :&nbsp;</b></i>
   <font style='font-family:Times New Roman;font-size:14px;color:#FFFFAE;'><b><?php echo $EC; ?></b></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <i><b>Year :&nbsp;</b></i>

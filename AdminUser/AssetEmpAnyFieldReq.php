@@ -61,9 +61,10 @@ $AmtPerMonth=$_POST['ApprovalAmt']/$_POST['ReqAmtExpiryNOM']; $AmtExpiryDate=dat
 else{ $AmtPerMonth=0; $AmtExpiryDate='0000-00-00';}
 if(TApproval==2){$AppStatus=2;}else{$AppStatus=1;}
 
-$SqlUpdate = mysql_query("UPDATE hrm_asset_employee_request SET AssetNId='".$_POST['AssetNId']."', ReqAmt='".$_POST['ReqAmt']."', ApprovalAmt='".$_POST['ApprovalAmt']."', ReqDate='".date("Y-m-d",strtotime($_POST['ReqDate']))."', ComName='".$_POST['ComName']."', Srn='".$_POST['Srn']."', ModelNo='".$_POST['ModelNo']."', ModelName='".$_POST['ModelName']."', PurDate='".date("Y-m-d",strtotime($_POST['PurDate']))."', BillNo='".$_POST['BillNo']."', Price='".$_POST['Price']."', Quantity='".$_POST['Quantity']."', EmiNo='".$_POST['EmiNo']."', ExpiryDate='".date("Y-m-d",strtotime($_POST['ExpiryDate']))."', IdentityRemark='".$_POST['IdentityRemark']."', ApprovalStatus='".$AppStatus."', ApprovalDate='".date("Y-m-d",strtotime($_POST['ApprovalDate']))."', DealeName='".$_POST['DealeName']."', DealerContNo='".$_POST['DealerContNo']."', DealerAdd='".$_POST['DealerAdd']."', DealerEmail='".$_POST['DealerEmail']."', BatteryCom='".$_POST['BatteryCom']."', BatteryModel='".$_POST['BatteryModel']."', BatteryExpiry='".date("Y-m-d",strtotime($_POST['BatteryExpiry']))."', AnyOtherRemark='".$_POST['AnyOtherRemark']."', ReqAmtExpiryNOM='".$_POST['ReqAmtExpiryNOM']."', ReqAmtExpiryDate='".$AmtExpiryDate."', ReqAmtPerMonth='".$AmtPerMonth."', MaxLimitAmt='".$_POST['MaxLimitAmt']."', HODApprovalStatus='".$_POST['FApproval']."', ITApprovalStatus='".$_POST['SApproval']."', AccPayStatus='".$_POST['TApproval']."' WHERE AssetEmpReqId=".$_POST['AssetEmpReqId'], $con); 
+$SqlUpdate = mysql_query("UPDATE hrm_asset_employee_request SET AssetNId='".$_POST['AssetNId']."', ReqAmt='".$_POST['ReqAmt']."', ApprovalAmt='".$_POST['ApprovalAmt']."', ReqDate='".date("Y-m-d",strtotime($_POST['ReqDate']))."', ComName='".$_POST['ComName']."', Srn='".$_POST['Srn']."', ModelNo='".$_POST['ModelNo']."', ModelName='".$_POST['ModelName']."', PurDate='".date("Y-m-d",strtotime($_POST['PurDate']))."', BillNo='".$_POST['BillNo']."', Price='".$_POST['Price']."', Quantity='".$_POST['Quantity']."', EmiNo='".$_POST['EmiNo']."', ExpiryDate='".date("Y-m-d",strtotime($_POST['ExpiryDate']))."', IdentityRemark='".$_POST['IdentityRemark']."', ApprovalStatus='".$AppStatus."', ApprovalDate='".date("Y-m-d",strtotime($_POST['ApprovalDate']))."', DealeName='".$_POST['DealeName']."', DealerContNo='".$_POST['DealerContNo']."', DealerAdd='".$_POST['DealerAdd']."', DealerEmail='".$_POST['DealerEmail']."', BatteryCom='".$_POST['BatteryCom']."', BatteryModel='".$_POST['BatteryModel']."', BatteryExpiry='".date("Y-m-d",strtotime($_POST['BatteryExpiry']))."', AnyOtherRemark='".$_POST['AnyOtherRemark']."', ReqAmtExpiryNOM='".$_POST['ReqAmtExpiryNOM']."', ReqAmtExpiryDate='".$AmtExpiryDate."', ReqAmtPerMonth='".$AmtPerMonth."', MaxLimitAmt='".$_POST['MaxLimitAmt']."', HODApprovalStatus='".$_POST['FApproval']."', ITApprovalStatus='".$_POST['SApproval']."', AccPayStatus='".$_POST['TApproval']."', HodId='".$_POST['HodId']."', ReportingId='".$_POST['ReportingId']."' WHERE AssetEmpReqId=".$_POST['AssetEmpReqId'], $con); 
 if($SqlUpdate){$msg='Record updated successfully...';}
 }
+
 
 ?> 
 <html>
@@ -288,6 +289,45 @@ $Ename = $ResEmp['Fname'].'&nbsp;'.$ResEmp['Sname'].'&nbsp;'.$ResEmp['Lname']; $
 <tr>
  <td valign="top">Asset Copy</td><td valign="top"><input type="file" size="" name="uAssImg" id="uAssImg" style="width:150px;height:22px;font-family:Times New Roman;font-size:12px;"></td>
  <td>Amount Valid</td><td><input name="ReqAmtExpiryNOM" id="ReqAmtExpiryNOM" style="height:22px;font-family:Times New Roman;font-size:12px;width:50px;text-align:center;" style="text-align:center;" value="<?php echo $res['ReqAmtExpiryNOM']; ?>" />&nbsp;Month</td>
+</tr>
+<tr>
+    <td valign="top">Reporting</td>
+    <td><select name="ReportingId" id="ReportingId" style="width:160px;height:22px;font-family:Times New Roman;font-size:12px;">
+            <?php 
+                $sqlRep = mysql_query("SELECT EmployeeID,EmpCode,Fname,Lname FROM hrm_employee WHERE EmpStatus='A' ORDER BY Fname ASC",$con);
+                while($resRep = mysql_fetch_array($sqlRep)){
+                    if($resRep['EmployeeID']==$res['ReportingId']){ ?>
+                    
+                    <option value="<?= $resRep['EmployeeID']?>" selected><?=$resRep['Fname'].' '.$resRep['Lname'].' - '.$resRep['EmpCode']?></option>
+                        
+                  <?php   }else{ ?>
+                      
+                      <option value="<?= $resRep['EmployeeID']?>"><?=$resRep['Fname'].' '.$resRep['Lname'].' - '.$resRep['EmpCode']?></option>
+                 <?php }
+                }
+
+            ?>
+        </select>
+    </td>
+    
+    <td valign="top">HOD</td>
+       <td><select name="HodId" id="HodId" style="width:160px;height:22px;font-family:Times New Roman;font-size:12px;">
+            <?php 
+                $sqlHod = mysql_query("SELECT EmployeeID,EmpCode,Fname,Lname FROM hrm_employee WHERE EmpStatus='A' ORDER BY Fname ASC",$con);
+                while($resHod = mysql_fetch_array($sqlHod)){
+                    if($resHod['EmployeeID']==$res['HodId']){ ?>
+                    
+                    <option value="<?= $resHod['EmployeeID']?>" selected><?=$resHod['Fname'].' '.$resHod['Lname'].' - '.$resHod['EmpCode']?></option>
+                        
+                  <?php   }else{ ?>
+                      
+                      <option value="<?= $resHod['EmployeeID']?>"><?=$resHod['Fname'].' '.$resHod['Lname'].' - '.$resHod['EmpCode']?></option>
+                 <?php }
+                }
+
+            ?>
+        </select>
+    </td>
 </tr>
 <tr>
 <td valign="top">Any Remark</td>

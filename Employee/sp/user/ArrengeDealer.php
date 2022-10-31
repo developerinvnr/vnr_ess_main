@@ -126,28 +126,28 @@ function show_UpMsg(originalRequest)
 	    <td style="font-size:11px;height:18px;width:90px;color:#E6E6E6;" align="right"><b>Country :</b></td>
 	    <td><select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="Coutry" id="Coutry" onChange="ClickCoutry(this.value)"> 
 <?php if($_REQUEST['c']>0){ $sqlC=mysql_query("SELECT CountryName FROM hrm_country where CountryId=".$_REQUEST['c'], $con); $resC=mysql_fetch_array($sqlC); ?>
-<option value="<?php echo $_REQUEST['c']; ?>"><?php echo strtoupper($resC['CountryName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>		
+<option value="<?php echo $_REQUEST['c']; ?>"><?php echo $resC['CountryName']; ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>		
 <?php $SqlCountry=mysql_query("SELECT * FROM hrm_country order by CountryName ASC", $con); while($ResCountry=mysql_fetch_array($SqlCountry)) { ?>
-<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo strtoupper($ResCountry['CountryName']); ?></option><?php } ?></select>
+<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo $ResCountry['CountryName']; ?></option><?php } ?></select>
        </td>
 	   <td>&nbsp;</td>
 	   <td style="font-size:11px;height:18px;width:80px;color:#E6E6E6;" align="right"><b>State :</b></td>
 	    <td>
 		 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="State" id="State" onChange="ClickState(this.value)">
 <?php if($_REQUEST['s']>0){ $sqlS=mysql_query("SELECT StateName FROM hrm_state where StateId=".$_REQUEST['s'], $con); $resS=mysql_fetch_array($sqlS); ?>
-<option value="<?php echo $_REQUEST['s']; ?>"><?php echo strtoupper($resS['StateName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>
-<?php if($_REQUEST['c']>0){ $sqlS2 = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); while($resS2 = mysql_fetch_array($sqlS2)){ ?><option value="<?php echo $resS2['StateId']; ?>"><?php echo strtoupper($resS2['StateName']); ?></option><?php } ?>	
+<option value="<?php echo $_REQUEST['s']; ?>"><?php echo $resS['StateName']; ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>
+<?php if($_REQUEST['c']>0){ $sqlS2 = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); while($resS2 = mysql_fetch_array($sqlS2)){ ?><option value="<?php echo $resS2['StateId']; ?>"><?php echo $resS2['StateName']; ?></option><?php } ?>	
 <?php } else{$sql = mysql_query("SELECT * FROM hrm_state order by StateName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-        <option value="<?php echo $res['StateId']; ?>"><?php echo strtoupper($res['StateName']); ?></option><?php } } ?></select>
+        <option value="<?php echo $res['StateId']; ?>"><?php echo $res['StateName']; ?></option><?php } } ?></select>
 		</td>
 		<td>&nbsp;</td>
 		<td style="font-size:11px; height:18px;width:80px;color:#E6E6E6;" align="right"><b>HQ :</b></td>
 	     <td>
 		 <select style="font-size:12px;width:150px;height:20px;background-color:#DDFFBB;" name="Hq" id="Hq" onChange="ClickHq(this.value)">
 <?php if($_REQUEST['hq']>0){ $sqlhq=mysql_query("SELECT HqName FROM hrm_headquater where HqId=".$_REQUEST['hq']." AND CompanyId=1", $con); $reshq=mysql_fetch_array($sqlhq); ?>
-<option value="<?php echo $_REQUEST['hq']; ?>"><?php echo strtoupper($reshq['HqName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>
-<?php if($_REQUEST['s']>0){ $sqlhq2 = mysql_query("SELECT * FROM hrm_headquater where StateId=".$_REQUEST['s']." AND CompanyId=1 AND HQStatus='A' order by HqName ASC", $con); while($reshq2 = mysql_fetch_array($sqlhq2)){ ?><option value="<?php echo $reshq2['HqId']; ?>"><?php echo strtoupper($reshq2['HqName']); ?></option><?php } ?>
-<?php }else { $sql = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' order by HqName ASC", $con); while($res = mysql_fetch_array($sql)){ ?><option value="<?php echo $res['HqId']; ?>"><?php echo strtoupper($res['HqName']); ?></option><?php } } ?></select>
+<option value="<?php echo $_REQUEST['hq']; ?>"><?php echo $reshq['HqName']; ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>
+<?php if($_REQUEST['s']>0){ $sqlhq2 = mysql_query("SELECT * FROM hrm_headquater where StateId=".$_REQUEST['s']." AND CompanyId=1 AND HQStatus='A' order by HqName ASC", $con); while($reshq2 = mysql_fetch_array($sqlhq2)){ ?><option value="<?php echo $reshq2['HqId']; ?>"><?php echo $reshq2['HqName']; ?></option><?php } ?>
+<?php }else { $sql = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' order by HqName ASC", $con); while($res = mysql_fetch_array($sql)){ ?><option value="<?php echo $res['HqId']; ?>"><?php echo $res['HqName']; ?></option><?php } } ?></select>
 		 </td>
 		 <td>&nbsp;</td>
 	  </tr>
@@ -162,13 +162,13 @@ function show_UpMsg(originalRequest)
 <table border="1" cellpadding="0" cellspacing="0" style="font-family:Times New Roman;font-size:14px;width:<?php if(($_REQUEST['c']>0 AND $_REQUEST['s']>0 AND $_REQUEST['hq']>0) OR ($_REQUEST['hq']>0)){echo '850';} /*elseif($_REQUEST['c']>0 AND $_REQUEST['s']>0){echo '1000';}elseif($_REQUEST['c']>0){echo '1200'; } */ ?>px; vertical-align:top;">	
    
    <tr style="background-color:#D9F28C;color:#000000;"> 
-   <?php if($_REQUEST['hq']>0){ $sqlhq=mysql_query("SELECT HqName FROM hrm_headquater where HqId=".$_REQUEST['hq'], $con); $reshq=mysql_fetch_array($sqlhq); ?> <td colspan="2">&nbsp;&nbsp;<b>HeadQuarter:&nbsp;<?php echo strtoupper($reshq['HqName']); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $msgImp; ?></td>
+   <?php if($_REQUEST['hq']>0){ $sqlhq=mysql_query("SELECT HqName FROM hrm_headquater where HqId=".$_REQUEST['hq'], $con); $reshq=mysql_fetch_array($sqlhq); ?> <td colspan="2">&nbsp;&nbsp;<b>HeadQuarter:&nbsp;<?php echo $reshq['HqName']; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $msgImp; ?></td>
    <td colspan="2" align="center" style="width:350px;"><b>MOVE</b></td><td></td>
    </tr>
-   <?php } /* elseif($_REQUEST['s']>0){ $sqlS=mysql_query("SELECT StateName FROM hrm_state where StateId=".$_REQUEST['s'], $con); $resS=mysql_fetch_array($sqlS);?><td colspan="3">&nbsp;&nbsp;<b>State:&nbsp;<?php echo strtoupper($resS['StateName']); ?></b>&nbsp;&nbsp;<?php echo $msgImp; ?></td>
+   <?php } /* elseif($_REQUEST['s']>0){ $sqlS=mysql_query("SELECT StateName FROM hrm_state where StateId=".$_REQUEST['s'], $con); $resS=mysql_fetch_array($sqlS);?><td colspan="3">&nbsp;&nbsp;<b>State:&nbsp;<?php echo $resS['StateName']; ?></b>&nbsp;&nbsp;<?php echo $msgImp; ?></td>
    <td colspan="2" align="center" style="width:350px;"><b>MOVE</b></td><td></td>
    <?php } elseif($_REQUEST['c']>0){ $sqlC=mysql_query("SELECT CountryName FROM hrm_country where CountryId=".$_REQUEST['c'], $con); $resC=mysql_fetch_array($sqlC); ?> 
-    <td colspan="4">&nbsp;&nbsp;<b>Country:&nbsp;<?php echo strtoupper($resC['CountryName']); ?></b>&nbsp;&nbsp;<?php echo $msgImp; ?></td>
+    <td colspan="4">&nbsp;&nbsp;<b>Country:&nbsp;<?php echo $resC['CountryName']; ?></b>&nbsp;&nbsp;<?php echo $msgImp; ?></td>
 	<td colspan="2" align="center" style="width:350px;"><b>MOVE</b></td><td></td>
    <?php } */ ?>			
   </tr>	
@@ -213,11 +213,11 @@ function show_UpMsg(originalRequest)
 	 <td align="center">
 	 <select style="font-size:12px;width:170px;height:20px;background-color:#DDFFBB;" name="State" id="State" onChange="Click2State(this.value,<?php echo $sn; ?>)">
          <option value="" selected>SELECT</option><?php $sql = mysql_query("SELECT * FROM hrm_state order by StateName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-         <option value="<?php echo $res['StateId']; ?>"><?php echo strtoupper($res['StateName']); ?></option><?php } ?></select></td>
+         <option value="<?php echo $res['StateId']; ?>"><?php echo $res['StateName']; ?></option><?php } ?></select></td>
 	 <td align="center">
 	 <span id="HqSpan_<?php echo $sn; ?>">
 	 <select style="font-size:12px;width:170px;height:20px;background-color:#DDFFBB;" id="Hq2_<?php echo $sn; ?>" onchange="Fun2Hq(<?php echo $sn; ?>)" disabled>
-         <option value="" selected>SELECT</option><?php $sql = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' order by HqName ASC", $con); while($res = mysql_fetch_array($sql)){ ?><option value="<?php echo $res['HqId']; ?>"><?php echo strtoupper($res['HqName']); ?></option><?php } ?></select></span></td>
+         <option value="" selected>SELECT</option><?php $sql = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' order by HqName ASC", $con); while($res = mysql_fetch_array($sql)){ ?><option value="<?php echo $res['HqId']; ?>"><?php echo $res['HqName']; ?></option><?php } ?></select></span></td>
 	 <td align="center"><input type="button" style="width:55px;" id="MoveHqSave_<?php echo $sn; ?>" value="save" onclick="FunClickMove(<?php echo $resDeal['DealerId'].','.$sn; ?>)" disabled/></td>
 </form>	 
  </tr>
@@ -239,11 +239,11 @@ function show_UpMsg(originalRequest)
 	 <td align="center">
 	 <select style="font-size:12px;width:170px;height:20px;background-color:#DDFFBB;" name="State" id="State" onChange="Click2State(this.value,<?php echo $sn; ?>)">
          <option value="" selected>SELECT</option><?php $sql = mysql_query("SELECT * FROM hrm_state order by StateName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-         <option value="<?php echo $res['StateId']; ?>"><?php echo strtoupper($res['StateName']); ?></option><?php } ?></select></td>
+         <option value="<?php echo $res['StateId']; ?>"><?php echo $res['StateName']; ?></option><?php } ?></select></td>
 	 <td align="center">
 	  <span id="HqSpan_<?php echo $sn; ?>">
 	 <select style="font-size:12px;width:170px;height:20px;background-color:#DDFFBB;" id="Hq2_<?php echo $sn; ?>" onchange="Fun2Hq(<?php echo $sn; ?>)" disabled>
-         <option value="" selected>SELECT</option><?php $sql = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' order by HqName ASC", $con); while($res = mysql_fetch_array($sql)){ ?><option value="<?php echo $res['HqId']; ?>"><?php echo strtoupper($res['HqName']); ?></option><?php } ?></select></span></td>
+         <option value="" selected>SELECT</option><?php $sql = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' order by HqName ASC", $con); while($res = mysql_fetch_array($sql)){ ?><option value="<?php echo $res['HqId']; ?>"><?php echo $res['HqName']; ?></option><?php } ?></select></span></td>
 	 <td align="center"><input type="button" style="width:55px;" id="MoveHqSave_<?php echo $sn; ?>" value="save" onclick="FunClickMove(<?php echo $resDeal['DealerId'].','.$sn; ?>)" disabled/></td>
 </form>	 
  </tr>
@@ -267,11 +267,11 @@ $di=$resDeal['DealerId']; ?>
 	 <td align="center">
 	 <select style="font-size:12px;width:170px;height:20px;background-color:#DDFFBB;" name="State" id="State" onChange="Click2State(this.value,<?php echo $sn; ?>)">
          <option value="" selected>SELECT</option><?php $sql = mysql_query("SELECT * FROM hrm_state order by StateName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-         <option value="<?php echo $res['StateId']; ?>"><?php echo strtoupper($res['StateName']); ?></option><?php } ?></select></td>
+         <option value="<?php echo $res['StateId']; ?>"><?php echo $res['StateName']; ?></option><?php } ?></select></td>
 	 <td align="center">
 	 <span id="HqSpan_<?php echo $sn; ?>">
 	 <select style="font-size:12px;width:170px;height:20px;background-color:#DDFFBB;" id="Hq2_<?php echo $sn; ?>" onchange="Fun2Hq(<?php echo $sn; ?>)" disabled>
-         <option value="" selected>SELECT</option><?php $sql = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' order by HqName ASC", $con); while($res = mysql_fetch_array($sql)){ ?><option value="<?php echo $res['HqId']; ?>"><?php echo strtoupper($res['HqName']); ?></option><?php } ?></select></span></td>
+         <option value="" selected>SELECT</option><?php $sql = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' order by HqName ASC", $con); while($res = mysql_fetch_array($sql)){ ?><option value="<?php echo $res['HqId']; ?>"><?php echo $res['HqName']; ?></option><?php } ?></select></span></td>
 	 <td align="center"><input type="button" style="width:55px;" id="MoveHqSave_<?php echo $sn; ?>" value="save" onclick="FunClickMove(<?php echo $resDeal['DealerId'].','.$sn; ?>)" disabled/></td>
 </form>	 
  </tr>

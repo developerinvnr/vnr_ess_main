@@ -17,12 +17,12 @@
       $sqlT=mysql_query("select TypeName from hrm_sales_seedtype where TypeId=".$res['TypeId'], $con); $resT=mysql_fetch_assoc($sqlT); ?>    
   <tr bgcolor="#FFFFF" id="<?php echo 'TR'.$res['ProductId']; ?>">
    <td align="center" style="color:#FFFFFF;font-size:14px;font-family:Times New Roman;"><input type="checkbox" id="Check_<?php echo $res['ProductId']; ?>" onClick="ClickProduct(<?php echo $res['ProductId']; ?>,'<?php echo strtoupper($res['ProductName']); ?>',<?php echo $res['TypeId']; ?>,<?php echo $NRV; ?>,'<?php echo $res['ProductSts']; ?>')"/></td>
-   <td style="font-size:14px;font-family:Times New Roman;"><?php echo strtoupper($res['ProductName']); ?></td>
+   <td style="font-size:14px;font-family:Times New Roman;"><?php echo $res['ProductName']; ?></td>
    <td style="font-size:14px;font-family:Times New Roman;"><?php echo strtoupper($resT['TypeName']); ?></td>
    <td align="right" style="font-size:14px;font-family:Times New Roman;"><?php echo $resN['NRV']; ?></td>  
    <td align="center" style="font-size:14px;font-family:Times New Roman;"><?php echo $res['ProductId']; ?></td>
    <td align="center" style="font-size:14px;font-family:Times New Roman;background-color:<?php if($res['ProductSts']=='D'){echo '#F7C54F';}else{echo '#FFFFFF';}?>;"><?php echo $res['ProductSts']; ?></td>
-   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelProduct(<?php echo $res['ProductId']; ?>,'<?php echo strtoupper($res['ProductName']); ?>')" /></td>
+   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelProduct(<?php echo $res['ProductId']; ?>,'<?php echo $res['ProductName']; ?>')" /></td>
   </tr>
 <?php } ?>    
 </table>
@@ -48,12 +48,12 @@ $resS=mysql_fetch_assoc($sqlS); $sql2 = mysql_query("insert into hrm_sales_produ
       $sqlT=mysql_query("select TypeName from hrm_sales_seedtype where TypeId=".$res['TypeId'], $con); $resT=mysql_fetch_assoc($sqlT); ?>    
   <tr bgcolor="#FFFFF" id="<?php echo 'TR'.$res['ProductId']; ?>">
    <td align="center" style="color:#FFFFFF;font-size:14px;font-family:Times New Roman;"><input type="checkbox" id="Check_<?php echo $res['ProductId']; ?>" onClick="ClickProduct(<?php echo $res['ProductId']; ?>,'<?php echo strtoupper($res['ProductName']); ?>',<?php echo $res['TypeId']; ?>,<?php echo $NRV; ?>,'<?php echo $res['ProductSts']; ?>')"/></td>
-   <td style="font-size:14px;font-family:Times New Roman;"><?php echo strtoupper($res['ProductName']); ?></td>   
+   <td style="font-size:14px;font-family:Times New Roman;"><?php echo $res['ProductName']; ?></td>   
    <td style="font-size:14px;font-family:Times New Roman;"><?php echo strtoupper($resT['TypeName']); ?></td> 
    <td align="right" style="font-size:14px;font-family:Times New Roman;"><?php echo $resN['NRV']; ?></td>    
    <td align="center" style="font-size:14px;font-family:Times New Roman;"><?php echo $res['ProductId']; ?></td>
    <td align="center" style="font-size:14px;font-family:Times New Roman;background-color:<?php if($res['ProductSts']=='D'){echo '#F7C54F';}else{echo '#FFFFFF';}?>;"><?php echo $res['ProductSts']; ?></td>
-   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelProduct(<?php echo $res['ProductId']; ?>,'<?php echo strtoupper($res['ProductName']); ?>')" /></td>
+   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelProduct(<?php echo $res['ProductId']; ?>,'<?php echo $res['ProductName']; ?>')" /></td>
   </tr>
 <?php } ?>    
 </table>
@@ -97,12 +97,12 @@ if($rowS==0)
 ?>    
   <tr bgcolor="#FFFFF" id="<?php echo 'TR'.$res['ProductId']; ?>">
    <td align="center" style="color:#FFFFFF;font-size:14px;font-family:Times New Roman;"><input type="checkbox" id="Check_<?php echo $res['ProductId']; ?>" onClick="ClickProduct(<?php echo $res['ProductId']; ?>,'<?php echo strtoupper($res['ProductName']); ?>',<?php echo $res['TypeId']; ?>,<?php echo $NRV; ?>,'<?php echo $res['ProductSts']; ?>')"/></td>
-   <td style="font-size:14px;font-family:Times New Roman;"><?php echo strtoupper($res['ProductName']); ?></td>
+   <td style="font-size:14px;font-family:Times New Roman;"><?php echo $res['ProductName']; ?></td>
    <td style="font-size:14px;font-family:Times New Roman;"><?php echo strtoupper($resT['TypeName']); ?></td>   
    <td align="right" style="font-size:14px;font-family:Times New Roman;"><?php echo $resN['NRV']; ?></td>  
    <td align="center" style="font-size:14px;font-family:Times New Roman;"><?php echo $res['ProductId']; ?></td>
    <td align="center" style="font-size:14px;font-family:Times New Roman;background-color:<?php if($res['ProductSts']=='D'){echo '#F7C54F';}else{echo '#FFFFFF';}?>;"><?php echo $res['ProductSts']; ?></td>
-   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelProduct(<?php echo $res['ProductId']; ?>,'<?php echo strtoupper($res['ProductName']); ?>')" /></td>
+   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelProduct(<?php echo $res['ProductId']; ?>,'<?php echo $res['ProductName']; ?>')" /></td>
   </tr>
 <?php } ?>    
 </table>
@@ -129,12 +129,12 @@ if($rowS==0)
 ?>    
   <tr bgcolor="#FFFFF" id="<?php echo 'TR'.$res['ProductId']; ?>">
    <td align="center" style="color:#FFFFFF;font-size:14px;font-family:Times New Roman;"><input type="checkbox" id="Check_<?php echo $res['ProductId']; ?>" onClick="ClickProduct(<?php echo $res['ProductId']; ?>,'<?php echo strtoupper($res['ProductName']); ?>',<?php echo $res['TypeId']; ?>,<?php echo $NRV; ?>,'<?php echo $res['ProductSts']; ?>')"/></td>
-   <td style="font-size:14px;font-family:Times New Roman;"><?php echo strtoupper($res['ProductName']); ?></td>
+   <td style="font-size:14px;font-family:Times New Roman;"><?php echo $res['ProductName']; ?></td>
    <td style="font-size:14px;font-family:Times New Roman;"><?php echo strtoupper($resT['TypeName']); ?></td>  
    <td align="right" style="font-size:14px;font-family:Times New Roman;"><?php echo $resN['NRV']; ?></td> 
    <td align="center" style="font-size:14px;font-family:Times New Roman;"><?php echo $res['ProductId']; ?></td>
    <td align="center" style="font-size:14px;font-family:Times New Roman;background-color:<?php if($res['ProductSts']=='D'){echo '#F7C54F';}else{echo '#FFFFFF';}?>;"><?php echo $res['ProductSts']; ?></td>
-   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelProduct(<?php echo $res['ProductId']; ?>,'<?php echo strtoupper($res['ProductName']); ?>')" /></td>
+   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelProduct(<?php echo $res['ProductId']; ?>,'<?php echo $res['ProductName']; ?>')" /></td>
   </tr>
 <?php } ?>    
 </table>

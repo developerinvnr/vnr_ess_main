@@ -161,9 +161,9 @@ function ExportZonePlan(y,g,i,z)
 	   <td style="font-size:11px;height:18px;width:80px;color:#E6E6E6;" align="right"><b>Crop :</b></td>
 	    <td>
 		 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="CropGrp" id="CropGrp" onChange="ClickGrp(this.value)">
-         <option value="1" <?php if($_REQUEST['grp']==1){echo 'selected';}?>>VEGETABLE CROP</option>
-		 <option value="2" <?php if($_REQUEST['grp']==2){echo 'selected';}?>>FIELD CROP</option>
-		 <?php /*?><option value="3" <?php if($_REQUEST['grp']==3){echo 'selected';}?>>All CROP</option><?php */?>
+         <option value="1" <?php if($_REQUEST['grp']==1){echo 'selected';}?>>Vegitable Crop</option>
+		 <option value="2" <?php if($_REQUEST['grp']==2){echo 'selected';}?>>Field Crop</option>
+		 <?php /*?><option value="3" <?php if($_REQUEST['grp']==3){echo 'selected';}?>>All Crop</option><?php */?>
         </select>
 		</td>
 		
@@ -171,8 +171,8 @@ function ExportZonePlan(y,g,i,z)
 	     <td>
 		 <select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="ItemV" id="ItemV" onChange="ChangeII(this.value)">
 <?php if($_REQUEST['ii']>0){ $sqlI=mysql_query("select ItemName from hrm_sales_seedsitem where ItemId=".$_REQUEST['ii'], $con); $resI=mysql_fetch_assoc($sqlI); ?>	
-         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo strtoupper($resI['ItemName']); ?></option>
-		 <?php }else{ ?><option value="0" selected>SELECT</option><?php } ?>
+         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo ucwords(strtolower($resI['ItemName'])); ?></option>
+		 <?php }else{ ?><option value="0" selected>Select</option><?php } ?>
 <?php if($_REQUEST['grp']==1){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=1 order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==2){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=2 order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==3){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where (GroupId=1 OR GroupId=2) order by GroupId ASC,ItemName ASC", $con);}
@@ -182,9 +182,9 @@ function ExportZonePlan(y,g,i,z)
 		 
 		 <td style="font-size:11px;height:18px;width:200px;color:#E6E6E6; text-align:center;">
 		 <select style="font-size:12px;width:150px;height:20px;background-color:#DDFFBB;" name="BPrtyCheck" id="BPrtyCheck">
-          <option value="0" <?php if($_REQUEST['bp']=='0'){echo 'selected';}?>>ALL DEALER</option>
-		  <option value="1" <?php if($_REQUEST['bp']=='1'){echo 'selected';}?>>BULK DEALER</option>
-		  <option value="2" <?php if($_REQUEST['bp']=='2'){echo 'selected';}?>>WITHOUT BULK DEALER</option>
+           <option value="0" <?php if($_REQUEST['bp']=='0'){echo 'selected';}?>>All Dealer</option>
+		  <option value="1" <?php if($_REQUEST['bp']=='1'){echo 'selected';}?>>Bulk Dealer</option>
+		  <option value="2" <?php if($_REQUEST['bp']=='2'){echo 'selected';}?>>Without Bulk Dealer</option>
 	     </select>
 	     </td>
 		 
@@ -192,9 +192,9 @@ function ExportZonePlan(y,g,i,z)
 	    <td>
 		 <select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="Zone" id="Zone" onChange="ClickZone(this.value)">
 <?php if($_REQUEST['z']>0){ $sqlZ=mysql_query("SELECT ZoneName FROM hrm_sales_zone where ZoneId=".$_REQUEST['z'], $con); $resZ=mysql_fetch_array($sqlZ); ?>
-<option value="<?php echo $_REQUEST['z']; ?>"><?php echo strtoupper($resZ['ZoneName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>		
+<option value="<?php echo $_REQUEST['z']; ?>"><?php echo ucwords(strtolower($resZ['ZoneName'])); ?></option><?php }else{ ?><option value="">Select</option><?php } ?>		
 <?php $sql = mysql_query("SELECT * FROM hrm_sales_zone order by ZoneName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-        <option value="<?php echo $res['ZoneId']; ?>"><?php echo strtoupper($res['ZoneName']); ?></option><?php } ?></select>
+        <option value="<?php echo $res['ZoneId']; ?>"><?php echo ucwords(strtolower($res['ZoneName'])); ?></option><?php } ?></select>
 		</td>
 	   
 	  </tr>
@@ -371,7 +371,7 @@ $sqlP5d=mysql_query("select SUM(M1_Ach) as sM1,SUM(M2_Ach) as sM2,SUM(M3_Ach) as
 <?php ////////////////////////////////////////////////////////// ?>
 
   <tr style="background-color:#D5F1D1;color:#000000;">
-    <td colspan="5" style="font-size:12px;color:#FFFF00;background-color:#183E83;">&nbsp;<b><?php echo 'Zone - '.strtoupper($resZ['ZoneName']); ?></b></td>
+    <td colspan="5" style="font-size:12px;color:#FFFF00;background-color:#183E83;">&nbsp;<b><?php echo 'Zone - '.ucwords(strtolower($resZ['ZoneName'])); ?></b></td>
        <td class="Th60" rowspan="2">APR</td><td class="Th60" rowspan="2">MAY</td><td class="Th60" rowspan="2">JUN</td><td class="Th60" bgcolor="#FAD25A" rowspan="2">Q1</td>
   <td class="Th60" rowspan="2">JUL</td><td class="Th60" rowspan="2">AUG</td><td class="Th60" rowspan="2">SEP</td><td class="Th60" bgcolor="#FAD25A" rowspan="2">Q2</td>
   <td class="Th60" rowspan="2">OCT</td><td class="Th60" rowspan="2">NOV</td><td class="Th60" rowspan="2">DEC</td><td class="Th60" bgcolor="#FAD25A" rowspan="2">Q3</td>

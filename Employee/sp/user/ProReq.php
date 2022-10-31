@@ -95,19 +95,19 @@ function PrintProReq()
 	   <td style="font-size:11px;height:18px;width:80px;color:#E6E6E6;" align="right"><b>Crop :</b></td>
 	    <td>
 		 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="CropGrp" id="CropGrp" onChange="ClickGrp(this.value)">
-<?php if($_REQUEST['grp']==0){ ?><option value="0" selected>SELECT CROP</option><option value="1">VEGETABLE CROP</option>
-                                 <option value="2">FIELD CROP</option><option value="3">All CROP</option>		 
-<?php }elseif($_REQUEST['grp']==1){ ?><option value="1" selected>VEGETABLE CROP</option><option value="2">FIELD CROP</option><option value="3">All CROP</option>
-<?php }elseif($_REQUEST['grp']==2){ ?><option value="2" selected>FIELD CROP</option><option value="1">VEGETABLE CROP</option><option value="3">All CROP</option>
-<?php }elseif($_REQUEST['grp']==3){ ?><option value="3" selected>All CROP</option><option value="1">VEGETABLE CROP</option><option value="2">FIELD CROP</option><?php } ?>
+<?php if($_REQUEST['grp']==0){ ?><option value="0" selected>Select Crop</option><option value="1">Vegetable Crop</option>
+                                 <option value="2">Field Crop</option><option value="3">All Crop</option>		 
+<?php }elseif($_REQUEST['grp']==1){ ?><option value="1" selected>Vegetable Crop</option><option value="2">Field Crop</option><option value="3">All Crop</option>
+<?php }elseif($_REQUEST['grp']==2){ ?><option value="2" selected>Field Crop</option><option value="1">Vegetable Crop</option><option value="3">All Crop</option>
+<?php }elseif($_REQUEST['grp']==3){ ?><option value="3" selected>All Crop</option><option value="1">Vegetable Crop</option><option value="2">Field Crop</option><?php } ?>
         </select>
 		</td>
 		<td>&nbsp;</td>
 		<td style="font-size:11px; height:18px;width:80px;color:#E6E6E6;" align="right"><b>Name :</b></td>
 		<td><select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="ItemV" id="ItemV" onChange="ChangeII(this.value)">
 <?php if($_REQUEST['ii']>0){ $sqlI=mysql_query("select ItemName from hrm_sales_seedsitem where ItemId=".$_REQUEST['ii'], $con); $resI=mysql_fetch_assoc($sqlI); ?>	
-         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo strtoupper($resI['ItemName']); ?></option>
-		 <?php }else{ ?><option value="0" selected>SELECT</option><?php } ?>
+         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo ucwords(strtolower($resI['ItemName'])); ?></option>
+		 <?php }else{ ?><option value="0" selected>Select</option><?php } ?>
 <?php if($_REQUEST['grp']==0){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==1){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=1 order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==2){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=2 order by ItemName ASC", $con);}
@@ -132,10 +132,10 @@ $my1='<font color="#A60053">'.date("y",strtotime($resY3['FromDate'])).'</font>';
 ?>  
 <table border="1" cellpadding="0" cellspacing="0" style="font-family:Times New Roman;font-size:14px;width:1300px; vertical-align:top;">	
    <tr style="background-color:#D5F1D1;color:#000000;">  
-    <td align="center" style="width:120px;"><b>CROP</b></td>
-	<td align="center" style="width:200px;"><b>VARIETY</b></td>
-	<td align="center" style="width:50px;"><b>&nbsp;TYPE&nbsp;</b></td>
-	<td align="center" width="80"><b>APR-<?php echo $my1;?></b></td><td align="center" width="80"><b>MAY-<?php echo $my1;?></b></td><td align="center" width="80"><b>JUN-<?php echo $my1;?></b></td><td align="center" width="80"><b>JUL-<?php echo $my1;?></b></td><td align="center" width="80"><b>AUG-<?php echo $my1;?></b></td><td align="center" width="80"><b>SEP-<?php echo $my1;?></b></td><td align="center" width="80"><b>OCT-<?php echo $my1;?></b></td><td align="center" width="80"><b>NOV-<?php echo $my1;?></b></td><td align="center" width="80"><b>DEC-<?php echo $my1;?></b></td><td align="center" width="80"><b>JAN-<?php echo $my2;?></b></td><td align="center" width="80"><b>FEB-<?php echo $my2;?></b></td><td align="center" width="80"><b>MAR-<?php echo $my2;?></b></td>
+    <td align="center" style="width:120px;"><b>Crop</b></td>
+	<td align="center" style="width:200px;"><b>Variety</b></td>
+	<td align="center" style="width:50px;"><b>&nbsp;Type&nbsp;</b></td>
+	<td align="center" width="80"><b>APR-<?php echo $my1;?></b></td><td align="center" width="80"><b>May-<?php echo $my1;?></b></td><td align="center" width="80"><b>Jun-<?php echo $my1;?></b></td><td align="center" width="80"><b>Jul-<?php echo $my1;?></b></td><td align="center" width="80"><b>Aug-<?php echo $my1;?></b></td><td align="center" width="80"><b>Sep-<?php echo $my1;?></b></td><td align="center" width="80"><b>Oct-<?php echo $my1;?></b></td><td align="center" width="80"><b>Nov-<?php echo $my1;?></b></td><td align="center" width="80"><b>Dec-<?php echo $my1;?></b></td><td align="center" width="80"><b>Jan-<?php echo $my2;?></b></td><td align="center" width="80"><b>Feb-<?php echo $my2;?></b></td><td align="center" width="80"><b>Mar-<?php echo $my2;?></b></td>
 	<td align="center" width="100"><b>Total<br><font color="#E67300">(Kg)</font></b></td>
 	
 	<?php /*

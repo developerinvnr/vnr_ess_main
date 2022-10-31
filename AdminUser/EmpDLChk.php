@@ -258,4 +258,56 @@ elseif($_POST['For']=='ChkMoveRep' && $_POST['Eid']!='' && $_POST['vv']!='')
   
 }
 
+
+//Extra Extra
+if($_REQUEST['For']=='MoveAllEmp')
+{ 
+    	
+    $sql=mysql_query("select g.EmployeeID,DesigId,HqId,EmpVertical,DepartmentId from hrm_employee_general g left join hrm_employee e on e.EmployeeID=g.EmployeeID where e.MoveRep='Y'",$con);
+    
+	while($res=mysql_fetch_assoc($sql))
+	{
+	 
+	 $sDesig=mysql_query("select DesigName from hrm_designation where DesigId=".$res['DesigId'], $con); $rDesig=mysql_fetch_assoc($sDesig);
+	 $sHq=mysql_query("select HqName from hrm_headquater where HqId=".$res['HqId'], $con); $rHq=mysql_fetch_assoc($sHq);
+	 $sVer=mysql_query("select VerticalName from hrm_department_vertical where VerticalId=".$res['EmpVertical'], $con); $rVer=mysql_fetch_assoc($sVer);
+	 $sRId=mysql_query("select RegionId from hrm_sales_verhq where HqId=".$res['HqId']." AND Vertical=".$res['EmpVertical']." AND DeptId=".$res['DepartmentId'], $con); $rRId=mysql_fetch_assoc($sRId);
+	 $sRR=mysql_query("select RegionName,ZoneId from hrm_sales_region where RegionId=".$rRId['RegionId'], $con); $rRR=mysql_fetch_assoc($sRR);
+     $sZZ=mysql_query("select ZoneName from hrm_sales_zone where ZoneId=".$rRR['ZoneId'], $con); $rZZ=mysql_fetch_assoc($sZZ);
+	 
+	 $earr = array();
+	 $arr = array(
+	 'Action'=> 'AllEmpDataMoveToVess',
+	 'vv'=> 'Y',
+	 'EmployeeID'=> $res['EmployeeID'], 
+	 'Designation'=> $rDesig['DesigName'],
+	 'Vertical'=> $rVer['VerticalName'],
+	 'HQ'=> $rHq['HqName'],
+	 'Region'=> $rRR['RegionName'],
+	 'Zone'=> $rZZ['ZoneName'],
+	 
+	 
+	  );
+      array_push($earr,$arr);
+      $data['emp_personal_detail'] = $earr;
+      $json_response = json_encode($data);
+     
+      $url = 'https://www.vnress.in/AdminUser/api/MoveExt.php';
+      $ch = curl_init($url);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $json_response);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      $result = curl_exec($ch);
+      curl_close($ch);
+      $rdata = json_decode($result);
+      $sts = $rdata->Status;
+	  
+	  if($sts == 'Moved'){ echo 'Success'; } 
+	  else{ echo 'Failed'; } 
+	
+	 
+	} //while
+	
+}
+
 ?>

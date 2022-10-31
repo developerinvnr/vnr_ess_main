@@ -53,44 +53,44 @@ if($_SESSION['EmpStatus']=='A' AND $_SESSION['DepartmentId']==6){  ?>
 
 <ul id="nav">
  <li class="top">&nbsp;&nbsp;</li>
- <li class="top"><a href="Index.php?EI=<?php echo $EmployeeId; ?>&Event=Edit&oo=we&p=g&ok=true&rslt=y&pp=qw_res##ius&ere=wer&yet=werwer&act=truedflase&we=1232123&rer%sas%" class="top_link"><span>HOME</span></a></li>
+ <li class="top"><a href="Index.php?EI=<?php echo $EmployeeId; ?>&Event=Edit&oo=we&p=g&ok=true&rslt=y&pp=qw_res##ius&ere=wer&yet=werwer&act=truedflase&we=1232123&rer%sas%" class="top_link"><span>Home</span></a></li>
     
 <?php if($_SESSION['DepartmentId']==6 AND ($_SESSION['GradeId']==61 OR $_SESSION['GradeId']==62 OR $_SESSION['GradeId']==63 OR $_SESSION['GradeId']==64 OR $_SESSION['GradeId']==65 OR $_SESSION['GradeId']==66 OR $_SESSION['GradeId']==67)){ ?>
 
- <li class="top"><a href="<?php echo $pageVlu;?>?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&act=<?php echo $rpt; ?>&hq=0&y=<?php echo $_SESSION['YearId']; ?>&q=<?php echo $qtr; ?>&ii=0&vc=1&fc=0&cc=0&di=<?php echo $_SESSION['DepartmentId']; ?>&gi=<?php echo $_SESSION['GradeId']; ?>&EHq=<?php echo $EmployeeId; ?>&myh=0&myt=0" class="top_link">SALES PLAN <font color="#FFFFFF">(ENTRY)</font></a></li>
- <li class="top"><a href="SalesDetails.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0" class="top_link">SALES PLAN <font color="#FFFFFF">(OVERALL)</font></a></li>
- <li class="top"><a href="SalesTReports.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&yi=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&qtr=<?php echo $qtr; ?>&ii=0&Qq1=1&Qq2=1&Qq3=1&Qq4=1&HqWise=1&DisWise=0&SelHq=0&SelDis=0&rpt=<?php echo $rpt; ?>&crp=0&Bclick=0" class="top_link">REPORTS <font color="#FFFFFF">(DETAILS)</font></a></li>
-  <?php if($_SESSION['rowERev']>0){ ?><li class="top"><a href="SalesRevise.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0" class="top_link">SALES PLAN <font color="#FFFFFF">(REVISED)</font></a></li><?php } ?>
+ <li class="top"><a href="<?php echo $pageVlu;?>?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&act=<?php echo $rpt; ?>&hq=0&y=<?php echo $_SESSION['YearId']; ?>&q=<?php echo $qtr; ?>&ii=0&vc=1&fc=0&cc=0&di=<?php echo $_SESSION['DepartmentId']; ?>&gi=<?php echo $_SESSION['GradeId']; ?>&EHq=<?php echo $EmployeeId; ?>&myh=0&myt=0" class="top_link">Sales Plan <font color="#FFFFFF">(Entry)</font></a></li>
+ <li class="top"><a href="SalesDetails.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0" class="top_link">Sales Plan  <font color="#FFFFFF">(Overall)</font></a></li>
+ <li class="top"><a href="SalesTReports.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&yi=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&qtr=<?php echo $qtr; ?>&ii=0&Qq1=1&Qq2=1&Qq3=1&Qq4=1&HqWise=1&DisWise=0&SelHq=0&SelDis=0&rpt=<?php echo $rpt; ?>&crp=0&Bclick=0" class="top_link">Reports <font color="#FFFFFF">(Details)</font></a></li>
+  <?php if($_SESSION['rowERev']>0){ ?><li class="top"><a href="SalesRevise.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0" class="top_link">SSales Plan  <font color="#FFFFFF">(Revised)</font></a></li><?php } ?>
 	
 <?php } elseif($_SESSION['DepartmentId']==6 AND ($_SESSION['GradeId']==68 OR $_SESSION['GradeId']==69 OR $_SESSION['GradeId']==70 OR $_SESSION['GradeId']==71)){ ?>
 
- <li class="top"><a href="SalesaEntry.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&act=<?php echo $rpt; ?>&hq=0&y=<?php echo $_SESSION['YearId']; ?>&q=<?php echo $qtr; ?>&ii=0&vc=1&fc=0&cc=0&di=<?php echo $_SESSION['DepartmentId']; ?>&gi=<?php echo $_SESSION['GradeId']; ?>&EHq=<?php echo $EmployeeId; ?>&SelTerr=0&myh=0&myt=0" class="top_link">SALES PLAN <font color="#FFFFFF">(ENTRY)</font></a></li>
- <li class="top"><a href="SalesaDetails.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0" class="top_link">SALES PLAN <font color="#FFFFFF">(OVERALL)</font></a></li>
- <li class="top"><a href="SalesTaReports.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&yi=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&qtr=<?php echo $qtr; ?>&ii=0&Qq1=1&Qq2=1&Qq3=1&Qq4=1&HqWise=0&DisWise=0&SelHq=0&SelDis=0&rpt=<?php echo $rpt; ?>&crp=0&Bclick=0&SelName=0&NameWise=1" class="top_link">REPORTS <font color="#FFFFFF">(DETAILS)</font></a></li>
- <?php if($_SESSION['rowERev']>0){ ?><li class="top"><a href="SalesaRevise.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0" class="top_link">SALES PLAN <font color="#FFFFFF">(REVISED)</font></a></li><?php } ?>
+ <li class="top"><a href="SalesaEntry.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&act=<?php echo $rpt; ?>&hq=0&y=<?php echo $_SESSION['YearId']; ?>&q=<?php echo $qtr; ?>&ii=0&vc=1&fc=0&cc=0&di=<?php echo $_SESSION['DepartmentId']; ?>&gi=<?php echo $_SESSION['GradeId']; ?>&EHq=<?php echo $EmployeeId; ?>&SelTerr=0&myh=0&myt=0" class="top_link">Sales Plan <font color="#FFFFFF">(Entry)</font></a></li>
+ <li class="top"><a href="SalesaDetails.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0" class="top_link">Sales Plan  <font color="#FFFFFF">(Overall)</font></a></li>
+ <li class="top"><a href="SalesTaReports.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&yi=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&qtr=<?php echo $qtr; ?>&ii=0&Qq1=1&Qq2=1&Qq3=1&Qq4=1&HqWise=0&DisWise=0&SelHq=0&SelDis=0&rpt=<?php echo $rpt; ?>&crp=0&Bclick=0&SelName=0&NameWise=1" class="top_link">Reports <font color="#FFFFFF">(Details)</font></a></li>
+ <?php if($_SESSION['rowERev']>0){ ?><li class="top"><a href="SalesaRevise.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0" class="top_link">Sales Plan <font color="#FFFFFF">(Revised)</font></a></li><?php } ?>
 	
 <?php } elseif($_SESSION['DepartmentId']==6 AND ($_SESSION['GradeId']==72 OR $_SESSION['GradeId']==73 OR $_SESSION['GradeId']==74 OR $_SESSION['GradeId']==75)){ ?> 
 
- <li class="top"><a href="SalesrEntry.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&act=<?php echo $rpt; ?>&hq=0&y=<?php echo $_SESSION['YearId']; ?>&q=<?php echo $qtr; ?>&ii=0&vc=1&fc=0&cc=0&di=<?php echo $_SESSION['DepartmentId']; ?>&gi=<?php echo $_SESSION['GradeId']; ?>&EHq=<?php echo $EmployeeId; ?>&SelTerr=0&myh=0&myt=0" class="top_link">SALES PLAN <font color="#FFFFFF">(ENTRY)</font></a></li> 
- <li class="top"><a href="SalesrDetails.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0" class="top_link">SALES PLAN <font color="#FFFFFF">(OVERALL)</font></a></li>
- <li class="top"><a href="SalesTrReports.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&yi=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&qtr=<?php echo $qtr; ?>&ii=0&Qq1=1&Qq2=1&Qq3=1&Qq4=1&HqWise=0&DisWise=0&SelHq=0&SelDis=0&rpt=<?php echo $rpt; ?>&crp=0&Bclick=0&SelName=0&NameWise=0&SelZone=0&ZoneWise=1" class="top_link">REPORTS <font color="#FFFFFF">(DETAILS)</font></a></li>
- <?php if($_SESSION['rowERev']>0){ ?><li class="top"><a href="SalesrRevise.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0" class="top_link">SALES PLAN <font color="#FFFFFF">(REVISED)</font></a></li><?php } ?>
+ <li class="top"><a href="SalesrEntry.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&act=<?php echo $rpt; ?>&hq=0&y=<?php echo $_SESSION['YearId']; ?>&q=<?php echo $qtr; ?>&ii=0&vc=1&fc=0&cc=0&di=<?php echo $_SESSION['DepartmentId']; ?>&gi=<?php echo $_SESSION['GradeId']; ?>&EHq=<?php echo $EmployeeId; ?>&SelTerr=0&myh=0&myt=0" class="top_link">Sales Plan  <font color="#FFFFFF">(Entry)</font></a></li> 
+ <li class="top"><a href="SalesrDetails.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0" class="top_link">Sales Plan  <font color="#FFFFFF">(Overall)</font></a></li>
+ <li class="top"><a href="SalesTrReports.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&yi=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&qtr=<?php echo $qtr; ?>&ii=0&Qq1=1&Qq2=1&Qq3=1&Qq4=1&HqWise=0&DisWise=0&SelHq=0&SelDis=0&rpt=<?php echo $rpt; ?>&crp=0&Bclick=0&SelName=0&NameWise=0&SelZone=0&ZoneWise=1" class="top_link">Reports <font color="#FFFFFF">(Details)</font></a></li>
+ <?php if($_SESSION['rowERev']>0){ ?><li class="top"><a href="SalesrRevise.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0" class="top_link">Sales Plan  <font color="#FFFFFF">(Revised)</font></a></li><?php } ?>
 	
 <?php } elseif($_SESSION['DepartmentId']==6 AND ($_SESSION['GradeId']==76 OR $_SESSION['GradeId']==77)){ ?> 
     
- <li class="top"><a href="SaleshEntry.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&act=<?php echo $rpt; ?>&hq=0&y=<?php echo $_SESSION['YearId']; ?>&q=<?php echo $qtr; ?>&ii=0&vc=1&fc=0&cc=0&di=<?php echo $_SESSION['DepartmentId']; ?>&gi=<?php echo $_SESSION['GradeId']; ?>&EHq=<?php echo $EmployeeId; ?>&SelTerr=0&myh=0&myt=0" class="top_link">SALES PLAN <font color="#FFFFFF">(ENTRY)</font></a></li>
- <li class="top"><a href="SalesThReports.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&yi=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&qtr=<?php echo $qtr; ?>&ii=0&Qq1=1&Qq2=1&Qq3=1&Qq4=1&HqWise=0&DisWise=0&SelHq=0&SelDis=0&rpt=<?php echo $rpt; ?>&crp=0&Bclick=0&SelName=0&NameWise=0&SelZone=0&ZoneWise=0&SelCon=0&ConWise=1" class="top_link">REPORTS <font color="#FFFFFF">(DETAILS)</font></a></li>
+ <li class="top"><a href="SaleshEntry.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&act=<?php echo $rpt; ?>&hq=0&y=<?php echo $_SESSION['YearId']; ?>&q=<?php echo $qtr; ?>&ii=0&vc=1&fc=0&cc=0&di=<?php echo $_SESSION['DepartmentId']; ?>&gi=<?php echo $_SESSION['GradeId']; ?>&EHq=<?php echo $EmployeeId; ?>&SelTerr=0&myh=0&myt=0" class="top_link">Sales Plan  <font color="#FFFFFF">(Entry)</font></a></li>
+ <li class="top"><a href="SalesThReports.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&yi=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&qtr=<?php echo $qtr; ?>&ii=0&Qq1=1&Qq2=1&Qq3=1&Qq4=1&HqWise=0&DisWise=0&SelHq=0&SelDis=0&rpt=<?php echo $rpt; ?>&crp=0&Bclick=0&SelName=0&NameWise=0&SelZone=0&ZoneWise=0&SelCon=0&ConWise=1" class="top_link">Reports <font color="#FFFFFF">(Details)</font></a></li>
 
 <?php } ?>	
 
 
- <li class="top"><a href="Combsplan.php?SelY=Y&ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0&c1=1&c2=1&c3=1&c4=1&c5=1&ctot=5&eei=<?php echo $EmployeeId; ?>" class="top_link">EXPORT<font color="#FFFFFF"> (<u>TARGET/ SALES/ COLLECTION</u>)</font> </a></li>
+ <li class="top"><a href="Combsplan.php?SelY=Y&ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $_SESSION['YearId']; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0&c1=1&c2=1&c3=1&c4=1&c5=1&ctot=5&eei=<?php echo $EmployeeId; ?>" class="top_link">Export </a></li>
 
 
 <?php /******************** FA OPEN FA OPEN FA OPEN FA OPEN FA OPEN ******************************/?>
 <?php /******************** FA OPEN FA OPEN FA OPEN FA OPEN FA OPEN ******************************/?>
 
-<li class="top"><a href="#" id="privacy" class="top_link"><span class="down">FIELD ASSISTANT<font color="#FFFFFF">(FA)</font></span></a>
+<li class="top"><a href="#" id="privacy" class="top_link"><span class="down">Field Assistant<font color="#FFFFFF">(FA)</font></span></a>
  <ul class="sub">
  <?php if($_SESSION['rowEq']>0){ ?>  
   <li style="text-align:center;font-family:Times New Roman;"><b style="color:#8000FF;font-size:14px;">Process</b></li>
@@ -123,7 +123,18 @@ if($_SESSION['EmpStatus']=='A' AND $_SESSION['DepartmentId']==6){  ?>
  
  </ul>
 </li>
-	
+ <!--<li class="top"><a href="sales_policy/vnr_sales_and_distribution_policy.pdf" download class="top_link">Sales Policy </a> </li>-->
+ <!--<li class="top"><a href="#" id="privacy" class="top_link"><span class="down">Downloads</a>-->
+ <!--<ul class="sub">-->
+ <!--    <li><a href="downloads/Distributor Proposal Format-FC.xlsx" download>Customer Proposal-FC</a></li>-->
+ <!--    <li><a href="downloads/Distributor Proposal Format-VC.xlsx" download>Customer Proposal-VC</a></li>-->
+ <!--    <li><a href="downloads/FC-Distributorship Appointment Form.pdf" download>Appointment Kit-FC</a></li>-->
+ <!--    <li><a href="downloads/VC-Distributorship Appointment Form.pdf" download>Appointment Kit-VC</a></li>-->
+ <!--    <li><a href="downloads/Gift Acknowledgement Copy.pdf" download>Gift Receiving</a></li>-->
+ <!--    <li><a href="downloads/Product Complaint-Form-C.pdf" download>Form-C</a></li>-->
+ <!--    <li><a href="downloads/Utkarsh 2022-23 (English).pdf" download>Utkarsh Scheme</a></li>-->
+ <!--</ul>-->
+ <!--</li>-->
 <?php /******************** FA CLOSE FA CLOSE FA CLOSE FA CLOSE ******************************/	?>
 <?php /******************** FA CLOSE FA CLOSE FA CLOSE FA CLOSE ******************************/	?>
 

@@ -25,7 +25,7 @@ if(isset($_POST['FormSave']))
 
 if(isset($_POST['FormSubmit'])) 
 { 
- $sqlUp=mysql_query("update hrm_employee_confletter set ConfDate='".date("Y-m-d", strtotime($_POST['DOCValue']))."', Communi='".$_POST['CO']."',  JobKnowl='".$_POST['JK']."', OutPut='".$_POST['OP']."', Initiative='".$_POST['INI']."', InterSkill='".$_POST['IS']."', ProblemSolve='".$_POST['PS']."', Attitude='".$_POST['AT']."', Attendance='".$_POST['ATT']."', EmpStrenght='".$_POST['ES']."', AreaImprovement='".$_POST['AI']."', Rating='".$_POST['RAT']."', Recommendation='".$_POST['REC']."', Reason='".$_POST['REA']."', GradeId=".$_POST['GradeId'].", DesigId=".$_POST['DesigId'].", SubmitStatus='Y', CreatedDate='".date("Y-m-d")."', YearId=".$YearId." where Status='A' AND EmployeeID=".$_POST['EI'], $con);
+ $sqlUp=mysql_query("update hrm_employee_confletter set ConfDate='".date("Y-m-d", strtotime($_POST['DOCValue']))."', Communi='".$_POST['CO']."',  JobKnowl='".$_POST['JK']."', OutPut='".$_POST['OP']."', Initiative='".$_POST['INI']."', InterSkill='".$_POST['IS']."', ProblemSolve='".$_POST['PS']."', Attitude='".$_POST['AT']."', Attendance='".$_POST['ATT']."', EmpStrenght='".$_POST['ES']."', AreaImprovement='".$_POST['AI']."', Rating='".$_POST['RAT']."', Recommendation='".$_POST['REC']."', Reason='".$_POST['REA']."', GradeId=".$_POST['GradeId'].", DesigId=".$_POST['DesigId'].", SubmitStatus='Y', Rep_Fill_Date='".date("Y-m-d")."', CreatedDate='".date("Y-m-d")."', YearId=".$YearId." where Status='A' AND EmployeeID=".$_POST['EI'], $con);
 
  if($_POST['REC']==1) 
  { 

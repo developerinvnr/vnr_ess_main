@@ -127,6 +127,7 @@ if($_REQUEST['d']>0){ $sqlD=mysql_query("select DepartmentName from hrm_departme
    <td align="center" class="font" style="width:50px;">DA</td>
    <td align="center" class="font" style="width:50px;">INCENT</td>
    <td align="center" class="font" style="width:50px;">PP</td>
+   <td align="center" class="font" style="width:50px;">PERFORMANCE INCENTIVE</td>
    <td align="center" class="font" style="width:50px;">LEAVE ENCASH</td>
    <td align="center" class="font" style="width:50px;">VAR ADJUST</td>
    <td align="center" class="font" style="width:50px;">CCA</td>
@@ -175,7 +176,7 @@ if($_REQUEST['d']>0){ $sqlD=mysql_query("select DepartmentName from hrm_departme
   $sn=1; while($res=mysql_fetch_assoc($sql)){ 
   $sqlD=mysql_query("select DepartmentCode from hrm_department where DepartmentId=".$res['DepartmentId'], $con); $resD=mysql_fetch_assoc($sqlD);
   
-if($res['Basic']!=0 OR $res['Hra']!=0 OR $res['Convance']!=0 OR $res['Special']!=0 OR $res['DA']!=0 OR $res['Incentive']!=0 OR $res['PerformancePay']!=0 OR $res['LeaveEncash']!=0 OR $res['VariableAdjustment']!=0 OR $res['CCA']!=0 OR $res['RA']!=0 OR $res['Bonus']!=0 OR $res['YCea']!=0 OR $res['YMr']!=0 OR $res['YLta']!=0 OR $res['Arr_Basic']!=0 OR $res['Arr_Hra']!=0 OR $res['Arr_Conv']!=0 OR $res['Arr_Spl']!=0 OR $res['Tot_Pf_Employee']!=0 OR $res['Arr_Pf']!=0 OR $res['ESCI_Employee']!=0 OR $res['Arr_Esic']!=0 OR $res['TDS']!=0 OR $res['CEA_Ded']!=0 OR $res['MA_Ded']!=0 OR $res['LTA_Ded']!=0 OR $res['VolContrib']!=0 OR $res['DeductAdjmt']!=0 OR $res['Bonus_Adjustment']!=0 OR $res['Bonus_Month']!=0){ 
+if($res['Basic']!=0 OR $res['Hra']!=0 OR $res['Convance']!=0 OR $res['Special']!=0 OR $res['DA']!=0 OR $res['Incentive']!=0 OR $res['PerformancePay']!=0 OR $res['LeaveEncash']!=0 OR $res['VariableAdjustment']!=0 OR $res['CCA']!=0 OR $res['RA']!=0 OR $res['Bonus']!=0 OR $res['YCea']!=0 OR $res['YMr']!=0 OR $res['YLta']!=0 OR $res['Arr_Basic']!=0 OR $res['Arr_Hra']!=0 OR $res['Arr_Conv']!=0 OR $res['Arr_Spl']!=0 OR $res['Tot_Pf_Employee']!=0 OR $res['Arr_Pf']!=0 OR $res['ESCI_Employee']!=0 OR $res['Arr_Esic']!=0 OR $res['TDS']!=0 OR $res['CEA_Ded']!=0 OR $res['MA_Ded']!=0 OR $res['LTA_Ded']!=0 OR $res['VolContrib']!=0 OR $res['DeductAdjmt']!=0 OR $res['Bonus_Adjustment']!=0 OR $res['Bonus_Month']!=0 OR $res['PP_Inc']!=0){ 
   ?>  
 <tr id="TR<?php echo $sn; ?>">
    <td align="center"class="font1">&nbsp;<?php echo $sn; ?>&nbsp;</td>
@@ -190,6 +191,7 @@ if($res['Basic']!=0 OR $res['Hra']!=0 OR $res['Convance']!=0 OR $res['Special']!
    <td align="right" class="font1"><?php echo floatval($res['DA']); ?>&nbsp;</td>
    <td align="right" class="font1"><?php echo floatval($res['Incentive']); ?>&nbsp;</td>
    <td align="right" class="font1"><?php echo floatval($res['PerformancePay']); ?>&nbsp;</td>
+   <td align="right" class="font1"><?php echo floatval($res['PP_Inc']); ?>&nbsp;</td>
    <td align="right" class="font1"><?php echo floatval($res['LeaveEncash']); ?>&nbsp;</td>
    <td align="right" class="font1"><?php echo floatval($res['VariableAdjustment']); ?>&nbsp;</td>
    <td align="right" class="font1"><?php echo floatval($res['CCA']); ?>&nbsp;</td>
@@ -203,7 +205,7 @@ if($res['Basic']!=0 OR $res['Hra']!=0 OR $res['Convance']!=0 OR $res['Special']!
    <td align="right" class="font1"><?php echo floatval($res['Arr_Conv']); ?>&nbsp;</td>
    <td align="right" class="font1"><?php echo floatval($res['Arr_Spl']); ?>&nbsp;</td>
    <td align="right" class="font1"><?php echo floatval($res['Bonus_Adjustment']); ?>&nbsp;</td>
-<?php $Gross=$res['Basic']+$res['Hra']+$res['Convance']+$res['Bonus_Month']+$res['Special']+$res['DA']+$res['Incentive']+$res['PerformancePay']+$res['LeaveEncash']+$res['VariableAdjustment']+$res['CCA']+$res['RA']+$res['Bonus']+$res['YCea']+$res['YMr']+$res['YLta']+$res['Arr_Basic']+$res['Arr_Hra']+$res['Arr_Conv']+$res['Arr_Spl']+$res['Bonus_Adjustment']; ?>   
+<?php $Gross=$res['Basic']+$res['Hra']+$res['Convance']+$res['Bonus_Month']+$res['Special']+$res['DA']+$res['Incentive']+$res['PerformancePay']+$res['LeaveEncash']+$res['VariableAdjustment']+$res['CCA']+$res['RA']+$res['Bonus']+$res['YCea']+$res['YMr']+$res['YLta']+$res['Arr_Basic']+$res['Arr_Hra']+$res['Arr_Conv']+$res['Arr_Spl']+$res['Bonus_Adjustment']+$res['PP_Inc']; ?>   
    <td align="right" class="font1" bgcolor="#FFD9FF"><?php echo floatval($Gross); ?>&nbsp;</td>
    
    <td align="right" class="font1"><?php echo floatval($res['Tot_Pf_Employee']); ?>&nbsp;</td>

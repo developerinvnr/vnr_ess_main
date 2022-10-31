@@ -127,7 +127,9 @@ $email_message3 .="HR\n\n";
       require 'vendor/mail_admin.php';
       
 } 
-         
+      
+      $sqlStatusChange =mysql_query("UPDATE hrm_employee SET EmpStatus='D' WHERE EmployeeID='".$EmployeeId."'",$con);
+
    $msg="your resignation request sent successfully.";
   
   }
@@ -489,9 +491,9 @@ window.onload = startBlink;
   
   <?php
   $sqlEmp=mysql_query("select EmpCode,DepartmentId,DateConfirmationYN,ConfirmHR from hrm_employee_general g INNER JOIN hrm_employee e ON g.EmployeeID=e.EmployeeID where g.EmployeeID=".$EmployeeId, $con); $resEmp=mysql_fetch_assoc($sqlEmp); 
-  echo $After15Day=date("Y-m-d",strtotime('+15 day'));
-  echo $After30Day=date("Y-m-d",strtotime('+30 day'));
-  echo $After90Day=date("Y-m-d",strtotime('+90 day'));
+  $After15Day=date("Y-m-d",strtotime('+15 day'));
+  $After30Day=date("Y-m-d",strtotime('+30 day'));
+  $After90Day=date("Y-m-d",strtotime('+90 day'));
   
   if($resEmp['DateConfirmationYN']=='N' && $resEmp['ConfirmHR']=='N')
   {

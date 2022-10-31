@@ -149,9 +149,9 @@ function show_DeleteProduct(originalRequest)
       <tr>
 	    <td style="font-size:14px;height:18px;color:#FFFFFF;font-weight:bold;font-family:Times New Roman;">Crop Name :</td>
 	    <td><select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="Item" id="Item" onChange="ClickItem(this.value)"> 
-		     <option value="">SELECT</option>
+		     <option value="">Select</option>
 <?php $sql=mysql_query("SELECT * FROM hrm_sales_seedsitem order by ItemName ASC", $con); while($res=mysql_fetch_array($sql)) { ?>
-<option value="<?php echo $res['ItemId']; ?>"><?php echo strtoupper($res['ItemName']); ?></option><?php } ?></select>
+<option value="<?php echo $res['ItemId']; ?>"><?php echo ucwords($res['ItemName']); ?></option><?php } ?></select>
        </td>
 	  </tr>
 	   <tr>

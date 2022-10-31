@@ -15,6 +15,7 @@ if($_REQUEST['inc']>0){echo "\tIncentive";}
 if($_REQUEST['arr']>0){echo "\tArrear";}
 if($_REQUEST['va']>0){echo "\tVariable Adjust";}	
 if($_REQUEST['pp']>0){echo "\tPerform Pay";}
+if($_REQUEST['PP_Inc']>0){echo "\tPerformance Incentive";}
 if($_REQUEST['cca']>0){echo "\tCCA";}	
 if($_REQUEST['ra']>0){echo "\tRA";}
 if($_REQUEST['vr']>0){echo "\tVariable Reim.";}
@@ -85,6 +86,7 @@ if($_REQUEST['inc']>0){ $schema_insert .= floatval($resSlip['Incentive']).$sep; 
 if($_REQUEST['arr']>0){ $schema_insert .= floatval($resSlip['Arreares']).$sep; }
 if($_REQUEST['va']>0){ $schema_insert .= floatval($resSlip['VariableAdjustment']).$sep; }	
 if($_REQUEST['pp']>0){ $schema_insert .= floatval($resSlip['PerformancePay']).$sep; }
+if($_REQUEST['PP_Inc']>0){ $schema_insert .= floatval($resSlip['PP_Inc']).$sep; }
 if($_REQUEST['cca']>0){ $schema_insert .= floatval($resSlip['CCA']).$sep; }	
 if($_REQUEST['ra']>0){ $schema_insert .= floatval($resSlip['RA']).$sep; }
 if($_REQUEST['vr']>0){ $schema_insert .= floatval($resSlip['VarRemburmnt']).$sep; }
@@ -114,7 +116,7 @@ if($_REQUEST['taxcea']>0){ $schema_insert .= floatval($resSlip['YCea']).$sep; }
 if($_REQUEST['taxmr']>0){ $schema_insert .= floatval($resSlip['YMr']).$sep; }
 if($_REQUEST['taxlta']>0){ $schema_insert .= floatval($resSlip['YLta']).$sep; }
  
-$TotGross=$resSlip['Tot_Gross']+$resSlip['Bonus']+$resSlip['DA']+$resSlip['Arreares']+$resSlip['LeaveEncash']+$resSlip['Incentive']+$resSlip['VariableAdjustment']+$resSlip['PerformancePay']+$resSlip['CCA']+$resSlip['RA']+$resSlip['Arr_Basic']+$resSlip['Arr_Hra']+$resSlip['Arr_Spl']+$resSlip['Arr_Conv']+$resSlip['Arr_Bonus']+$resSlip['Bonus_Adjustment']+$resSlip['Arr_LTARemb']+$resSlip['Arr_RA']+$resSlip['Arr_PP']+$resSlip['YCea']+$resSlip['YMr']+$resSlip['YLta']+$resSlip['Car_Allowance']+$resSlip['Car_Allowance_Arr']+$resSlip['VarRemburmnt']+$resSlip['TA']+$resSlip['Arr_LvEnCash'];
+$TotGross=$resSlip['Tot_Gross']+$resSlip['Bonus']+$resSlip['DA']+$resSlip['Arreares']+$resSlip['LeaveEncash']+$resSlip['Incentive']+$resSlip['VariableAdjustment']+$resSlip['PerformancePay']+$resSlip['CCA']+$resSlip['RA']+$resSlip['Arr_Basic']+$resSlip['Arr_Hra']+$resSlip['Arr_Spl']+$resSlip['Arr_Conv']+$resSlip['Arr_Bonus']+$resSlip['Bonus_Adjustment']+$resSlip['Arr_LTARemb']+$resSlip['Arr_RA']+$resSlip['Arr_PP']+$resSlip['YCea']+$resSlip['YMr']+$resSlip['YLta']+$resSlip['Car_Allowance']+$resSlip['Car_Allowance_Arr']+$resSlip['VarRemburmnt']+$resSlip['TA']+$resSlip['Arr_LvEnCash']+$resSlip['PP_Inc'];
 $TotDeduct=$resSlip['TDS']+$resSlip['Tot_Deduct']+$resSlip['Arr_Pf']+$resSlip['VolContrib']+$resSlip['Arr_Esic']+$resSlip['DeductAdjmt']+$resSlip['RecConAllow']; $TotNetAmount=$TotGross-$TotDeduct;
   $schema_insert .= floatval($TotGross).$sep;
   $schema_insert .= floatval($resSlip['EPF_Employee']).$sep;

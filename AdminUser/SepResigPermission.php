@@ -11,7 +11,7 @@ if($_REQUEST['action']=='Peryn')
 
 if(isset($_POST['SaveEdit']))
 {    
-	 $SqlUp = mysql_query("UPDATE hrm_employee_separation SET Rep_Approved='".$_POST['Rep_Approved']."', Hod_Approved='".$_POST['Hod_Approved']."', HR_Approved='".$_POST['HR_Approved']."', Emp_ExitInt='".$_POST['Emp_ExitInt']."', IT_NOC='".$_POST['IT_NOC']."', Rep_NOC='".$_POST['Rep_NOC']."', Log_NOC='".$_POST['Log_NOC']."', HR_NOC='".$_POST['HR_NOC']."', Acc_NOC='".$_POST['Acc_NOC']."', HR_FullFinal_Submit='".$_POST['HR_FullFinal_Submit']."' WHERE EmpSepId=".$_POST['EmpSepId'], $con);
+	 $SqlUp = mysql_query("UPDATE hrm_employee_separation SET Rep_Approved='".$_POST['Rep_Approved']."', Hod_Approved='".$_POST['Hod_Approved']."', HR_Approved='".$_POST['HR_Approved']."', Emp_ExitInt='".$_POST['Emp_ExitInt']."', IT_NOC='".$_POST['IT_NOC']."', Rep_NOC='".$_POST['Rep_NOC']."', Log_NOC='".$_POST['Log_NOC']."', HR_NOC='".$_POST['HR_NOC']."', Acc_NOC='".$_POST['Acc_NOC']."', HR_FullFinal_Submit='".$_POST['HR_FullFinal_Submit']."', Rep_EmployeeID='".$_POST['Rep_EmployeeID']."', Hod_EmployeeID='".$_POST['Hod_EmployeeID']."', LastUpdate='".date("Y-m-d H:i:s")."' WHERE EmpSepId=".$_POST['EmpSepId'], $con);
      if($SqlUp){ $msgSep = "Data has been updeted successfully...";}   
 }
 ?>
@@ -155,6 +155,10 @@ $(document).ready(function () { $("#table1").freezeHeader({ 'height': '450px' })
 		   <td rowspan="2" class="th" style="width:60px;"><b>Exit-Int Form</b></td>
 		   <td colspan="5" class="th"><b>Clearance Form</b></td>
 		   <td rowspan="2" class="th" style="width:60px;"><b>F&F Settl. </b></td>
+		   <?php /*
+		   <td rowspan="2" class="th" style="width:60px;"><b>Reporting </b></td>
+		   <td rowspan="2" class="th" style="width:60px;"><b>HOD </b></td>
+		   */ ?>
 		   <td rowspan="2" class="th" style="width:60px;"><b>Action</b></td>
 		  </tr>
 		  <tr bgcolor="#7a6189">
@@ -176,7 +180,7 @@ $(document).ready(function () { $("#table1").freezeHeader({ 'height': '450px' })
 		  </tr>
 		  </thead>
 		  </div>
-<?php $sql=mysql_query("select * from hrm_employee_separation INNER JOIN hrm_employee ON hrm_employee.EmployeeID=hrm_employee_separation.EmployeeID where hrm_employee.CompanyId=".$CompanyId." order by Emp_ResignationDate DESC", $con);  $row=mysql_num_rows($sql); if($row>0) { $Sno=1; while($res=mysql_fetch_array($sql)) { $sqlE=mysql_query("select EmpCode,Fname,Sname,Lname,g.DepartmentId,DepartmentCode from hrm_employee e INNER JOIN hrm_employee_general g ON e.EmployeeID=g.EmployeeID INNER JOIN hrm_department d ON g.DepartmentId=d.DepartmentId where e.EmployeeID=".$res['EmployeeID'], $con); $resE=mysql_fetch_assoc($sqlE);
+<?php $sql=mysql_query("select * from hrm_employee_separation INNER JOIN hrm_employee ON hrm_employee.EmployeeID=hrm_employee_separation.EmployeeID where hrm_employee.CompanyId=".$CompanyId." order by Emp_ResignationDate DESC", $con);  $row=mysql_num_rows($sql); if($row>0) { $Sno=1; while($res=mysql_fetch_array($sql)) { $sqlE=mysql_query("select e.EmpCode,e.Fname,e.Sname,e.Lname,g.DepartmentId,d.DepartmentCode,s.Rep_EmployeeID,CONCAT(rep.Fname,' ',rep.Lname) as reporting,s.Hod_EmployeeID,CONCAT(hod.Fname,' ',hod.Lname) as hod_name from hrm_employee e INNER JOIN hrm_employee_general g ON e.EmployeeID=g.EmployeeID INNER JOIN hrm_department d ON g.DepartmentId=d.DepartmentId INNER JOIN hrm_employee_separation s ON s.EmployeeID = e.EmployeeID LEFT JOIN hrm_employee rep ON rep.EmployeeID = s.Rep_EmployeeID LEFT JOIN hrm_employee hod ON hod.EmployeeID = s.Hod_EmployeeID where e.EmployeeID=".$res['EmployeeID'], $con); $resE=mysql_fetch_assoc($sqlE);
 if(isset($_REQUEST['action']) && $_REQUEST['action']=="edit" && $_REQUEST['eid']==$res['EmpSepId']){ ?>	
 <form name="formEdit" method="post" onSubmit="return validateMK(this)">	
          <div class="tbody">
@@ -229,6 +233,39 @@ if(isset($_REQUEST['action']) && $_REQUEST['action']=="edit" && $_REQUEST['eid']
 		   <option value="<?php echo $res['HR_FullFinal_Submit']; ?>"><?php if($res['HR_FullFinal_Submit']=='Y')echo 'YES'; else echo 'NO'; ?></option>
 		   <option value="<?php if($res['HR_FullFinal_Submit']=='Y') echo 'N'; else echo 'Y'; ?>"><?php if($res['HR_FullFinal_Submit']=='Y')echo 'NO'; else echo 'YES'; ?></option>
 		   </select><input type="hidden" name="EmpSepId" id="EmpSepId" value="<?php echo $_REQUEST['eid']; ?>"/></td>
+		   <?php /*
+		    <td style="width:60px;" align="center">
+            <select name="Rep_EmployeeID"
+                style="font-family:Times New Roman; font-size:11px; width:150px; height:20px;">
+                <?php 
+                    $sqlEmp = mysql_query("SELECT EmpCode,EmployeeID,Fname,Lname FROM hrm_employee WHERE CompanyID=1 AND EmpStatus='A' ORDER BY Fname ASC",$con);
+                        while( $resEmp = mysql_fetch_array($sqlEmp)){ if($resEmp['EmployeeID']==$resE['Rep_EmployeeID']){ ?>
+                <option value="<?=$resEmp['EmployeeID']?>" selected>
+                    <?= $resEmp['Fname'].' '.$resEmp['Lname'].' - '.$resEmp['EmpCode']?>
+                </option>
+                <?php } else{ ?>
+                <option value="<?=$resEmp['EmployeeID']?>">
+                    <?= $resEmp['Fname'].' '.$resEmp['Lname'].' - '.$resEmp['EmpCode']?>
+                </option>
+                <?php } }?>
+            </select></td>
+        <td style="width:60px;" align="center">
+            <select name="Hod_EmployeeID"
+                style="font-family:Times New Roman; font-size:11px; width:150px; height:20px;">
+                <?php 
+                    $sqlEmp = mysql_query("SELECT EmpCode,EmployeeID,Fname,Lname FROM hrm_employee WHERE CompanyID=1 AND EmpStatus='A' ORDER BY Fname ASC",$con);
+                        while( $resEmp = mysql_fetch_array($sqlEmp)){ if($resEmp['EmployeeID']==$resE['Hod_EmployeeID']){ ?>
+                <option value="<?=$resEmp['EmployeeID']?>" selected>
+                    <?= $resEmp['Fname'].' '.$resEmp['Lname'].' - '.$resEmp['EmpCode']?>
+                </option>
+                <?php } else{ ?>
+                <option value="<?=$resEmp['EmployeeID']?>">
+                    <?= $resEmp['Fname'].' '.$resEmp['Lname'].' - '.$resEmp['EmpCode']?>
+                </option>
+                <?php } }?>
+            </select>
+        </td>
+        */ ?>
 		   <td align="center" valign="middle" style="font:Georgia; font-size:11px; width:50px;">
 <?php if($_SESSION['User_Permission']=='Edit'){ ?>
 			 &nbsp;<input type="submit" name="SaveEdit"  value="" class="SaveButton">&nbsp;
@@ -257,10 +294,14 @@ if(isset($_REQUEST['action']) && $_REQUEST['action']=="edit" && $_REQUEST['eid']
 		  <td style="font-family:Georgia;font-size:11px;width:60px;background-color:<?php if($res['HR_NOC']=='Y')echo '#7DFF7D'; ?>;" valign="top" align="center"><?php if($res['HR_NOC']=='Y')echo 'YES'; else echo 'NO'; ?></td>
 		  <td style="font-family:Georgia;font-size:11px;width:60px;background-color:<?php if($res['Acc_NOC']=='Y')echo '#7DFF7D'; ?>;" valign="top" align="center"><?php if($res['Acc_NOC']=='Y')echo 'YES'; else echo 'NO'; ?></td>
 		  <td style="font-family:Georgia;font-size:11px;width:60px;background-color:<?php if($res['HR_FullFinal_Submit']=='Y')echo '#7DFF7D'; ?>;" valign="top" align="center"><?php if($res['HR_FullFinal_Submit']=='Y')echo 'YES'; else echo 'NO'; ?></td>
+		  <?php /*
+		  <td align="center" class="All_50" valign="top"><?= $resE['reporting'];?></td>
+          <td align="center" class="All_50" valign="top"><?= $resE['hod_name'];?></td>
+          */?>
 		  <td align="center" valign="middle" style="font:Georgia; font-size:11px; width:50px;">
-<?php if($_SESSION['User_Permission']=='Edit'){ ?>
-			 <a href="#"><img src="images/edit.png" border="0" alt="Edit" onClick="SepEdit(<?php echo $res['EmpSepId']; ?>)"></a>
-<?php } ?>
+            <?php if($_SESSION['User_Permission']=='Edit'){ ?>
+            			 <a href="#"><img src="images/edit.png" border="0" alt="Edit" onClick="SepEdit(<?php echo $res['EmpSepId']; ?>)"></a>
+            <?php } ?>
 		   </td>
 		 </tr>
 		 </tbody>

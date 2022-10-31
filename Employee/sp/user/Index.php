@@ -54,7 +54,7 @@ window.onload = startBlink;
 	  <table border="0">
 		<tr><td style="height:60px;width:260px;">&nbsp;</td></tr>
 		<tr><td style="height:30px;width:300px;">&nbsp;</td>
-			<td style="font-family:Times New Roman;font-size:28px;font-weight:bold;color:#FFFFFF;">Sales Plan</td>
+			<td style="font-family:Times New Roman;font-size:28px;font-weight:bold;color:#FFFFFF;">Sales Module</td>
 		</tr>
 		<tr><td style="height:150px;">&nbsp;</td></tr>
 	  </table>

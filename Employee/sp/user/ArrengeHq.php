@@ -32,7 +32,7 @@ if($_REQUEST['act']=='MoveHQState'){ $sqlUp=mysql_query("update hrm_headquater s
 function ClickCoutry(v)
 { 
   var State=0; var Hq=0; var y=document.getElementById("YearV").value; var CId=document.getElementById('ComId').value;
-  window.location="Arrengehq.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&c="+v+"&s="+State+"&hq="+Hq+"&y="+y+"&ci="+CId; 
+  window.location="ArrengeHq.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&c="+v+"&s="+State+"&hq="+Hq+"&y="+y+"&ci="+CId; 
 }
 
 
@@ -93,19 +93,19 @@ function FunClickMove(hqi,sn)
 	    <td style="font-size:11px;height:18px;width:90px;color:#E6E6E6;" align="right"><b>Country :</b></td>
 	    <td><select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="Coutry" id="Coutry" onChange="ClickCoutry(this.value)"> 
 <?php if($_REQUEST['c']>0){ $sqlC=mysql_query("SELECT CountryName FROM hrm_country where CountryId=".$_REQUEST['c'], $con); $resC=mysql_fetch_array($sqlC); ?>
-<option value="<?php echo $_REQUEST['c']; ?>"><?php echo strtoupper($resC['CountryName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>		
+<option value="<?php echo $_REQUEST['c']; ?>"><?php echo $resC['CountryName']; ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>		
 <?php $SqlCountry=mysql_query("SELECT * FROM hrm_country order by CountryName ASC", $con); while($ResCountry=mysql_fetch_array($SqlCountry)) { ?>
-<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo strtoupper($ResCountry['CountryName']); ?></option><?php } ?></select>
+<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo $ResCountry['CountryName']; ?></option><?php } ?></select>
        </td>
 	   <td>&nbsp;</td>
 	   <td style="font-size:11px;height:18px;width:80px;color:#E6E6E6;" align="right"><b>State :</b></td>
 	    <td>
 		 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="StateSel" id="StateSel" onChange="ClickState(this.value)">
 <?php if($_REQUEST['s']>0){ $sqlS=mysql_query("SELECT StateName FROM hrm_state where StateId=".$_REQUEST['s'], $con); $resS=mysql_fetch_array($sqlS); ?>
-<option value="<?php echo $_REQUEST['s']; ?>"><?php echo strtoupper($resS['StateName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>
-<?php if($_REQUEST['c']>0){ $sqlS2 = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); while($resS2 = mysql_fetch_array($sqlS2)){ ?><option value="<?php echo $resS2['StateId']; ?>"><?php echo strtoupper($resS2['StateName']); ?></option><?php } ?>	
+<option value="<?php echo $_REQUEST['s']; ?>"><?php echo $resS['StateName']; ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>
+<?php if($_REQUEST['c']>0){ $sqlS2 = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); while($resS2 = mysql_fetch_array($sqlS2)){ ?><option value="<?php echo $resS2['StateId']; ?>"><?php echo $resS2['StateName']; ?></option><?php } ?>	
 <?php } else{$sql = mysql_query("SELECT * FROM hrm_state order by StateName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-        <option value="<?php echo $res['StateId']; ?>"><?php echo strtoupper($res['StateName']); ?></option><?php } } ?></select>
+        <option value="<?php echo $res['StateId']; ?>"><?php echo $res['StateName']; ?></option><?php } } ?></select>
 		</td>
 		 <td>&nbsp;</td>
 	  </tr>
@@ -120,7 +120,7 @@ function FunClickMove(hqi,sn)
 <table border="1" cellpadding="0" cellspacing="0" style="font-family:Times New Roman;font-size:14px;width:<?php if(($_REQUEST['c']>0 AND $_REQUEST['s']>0) OR ($_REQUEST['s']>0)){echo '500';} /*elseif($_REQUEST['c']>0 AND $_REQUEST['s']>0){echo '1000';}elseif($_REQUEST['c']>0){echo '1200'; } */ ?>px; vertical-align:top;">	
    
    <tr style="background-color:#D9F28C;color:#000000;"> 
-   <?php if($_REQUEST['s']>0){ $sqlS=mysql_query("SELECT StateName FROM hrm_state where StateId=".$_REQUEST['s'], $con); $resS=mysql_fetch_array($sqlS); ?> <td colspan="4">&nbsp;&nbsp;<b>State:&nbsp;<?php echo strtoupper($resS['StateName']); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $msgImp; ?></td><?php } ?>
+   <?php if($_REQUEST['s']>0){ $sqlS=mysql_query("SELECT StateName FROM hrm_state where StateId=".$_REQUEST['s'], $con); $resS=mysql_fetch_array($sqlS); ?> <td colspan="4">&nbsp;&nbsp;<b>State:&nbsp;<?php echo $resS['StateName']; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $msgImp; ?></td><?php } ?>
    </tr>		
   </tr>	
   
@@ -148,7 +148,7 @@ function FunClickMove(hqi,sn)
 	 <td align="center">
 	 <select style="font-size:12px;width:170px;height:20px;background-color:#DDFFBB;" id="StateMain_<?php echo $sn; ?>" onChange="Click2State(this.value,<?php echo $sn; ?>)">
      <option value="" selected>SELECT</option><?php $sql = mysql_query("SELECT * FROM hrm_state order by StateName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-     <option value="<?php echo $res['StateId']; ?>"><?php echo strtoupper($res['StateName']); ?></option><?php } ?></select></td>
+     <option value="<?php echo $res['StateId']; ?>"><?php echo $res['StateName']; ?></option><?php } ?></select></td>
 	 <td align="center">
 	 <input type="button" style="width:55px;" id="MoveStateSave_<?php echo $sn; ?>" value="save" onClick="FunClickMove(<?php echo $resHq['HqId'].','.$sn; ?>)" disabled/></td>
 </form>	 

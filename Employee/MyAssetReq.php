@@ -100,15 +100,33 @@ if(isset($_POST['SendRequest']))
      else { $msgUp = "Error: Insurance copy only jpg, jpeg, png files is allowed"; }  
     }
 	
+	
+	$Beg_OdoPhoto=''; 
+	if((!empty($_FILES["Beg_OdoPhoto"])) && ($_FILES['Beg_OdoPhoto']['error'] == 0))
+    {
+     $file4 = strtolower(basename($_FILES['Beg_OdoPhoto']['name']));
+     $file4Size =$_FILES['Beg_OdoPhoto']['size'];
+     $ext4 = substr($file4, strrpos($file4, '.') + 1);
+     $newfile4='OdoMeter_'.$FileN.'_'.date("dmyHis").'.'.$ext4;
+     if(($ext4=='jpg' || $ext4 =='jpeg' || $ext4=='png' || $ext4=='pdf'))
+     { 
+      $OdoImg= dirname(__FILE__).'/AssetReqUploadFile/'.$newfile4;
+      if(move_uploaded_file($_FILES['Beg_OdoPhoto']['tmp_name'],$OdoImg)){ $Beg_OdoPhoto=$newfile4; }
+     }
+     else { $msgUp = "Error: Insurance copy only jpg, jpeg, png files is allowed"; }  
+    }
+	
+	
 	$RCNo=$_POST['RCNo']; $DLNo=$_POST['DLNo']; $InsuNo=$_POST['InsuNo']; $VehiNo=$_POST['VehiNo']; 
 	$DLExpTo=$_POST['DLExpTo']; $ChasNo=$_POST['ChasNo']; $EngNo=$_POST['EngNo']; $RegNo=$_POST['RegNo']; 
 	$RegDate=date("Y-m-d",strtotime($_POST['RegDate']));
+	$Beg_OdoRead=$_POST['Beg_OdoRead']; $Owenship=$_POST['Owenship'];
 	
   } //if($_POST['AssetNId']==1)
   else
   {
     $RCImg_File=''; $DLImg_File=''; $InsuImg_File=''; $RCNo=''; $DLNo=''; $InsuNo=''; $VehiNo=''; $DLExpTo='0000-00-00';
-	$ChasNo=''; $EngNo=''; $RegNo=''; $RegDate='';
+	$ChasNo=''; $EngNo=''; $RegNo=''; $RegDate=''; $Beg_OdoPhoto=''; $Beg_OdoRead=''; $Owenship='';
   }
 /***************************************************/  
 /***************************************************/   
@@ -119,7 +137,7 @@ if(isset($_POST['SendRequest']))
  else
  { 
    if($_POST['AssetNId']==11 OR $_POST['AssetNId']==12 OR $_POST['AssetNId']==18){ $sqlIns=mysql_query("insert into hrm_asset_employee_request(EmployeeID, AssetNId, ReqAmt, ReqDate, ReqAmtExpiryNOM, ReqAmtExpiryDate, ComName, Srn, ModelNo, ModelName, WarrantyNOY, WarrantyExpiry, PurDate, BillNo, Price, EmiNo, ReportingId, HodId, HODApprovalStatus, ITId, MaxLimitAmt, ReqAssestImgExtName, ReqAssestImgExt, ReqBillImgExtName, ReqBillImgExt, DealeName, DealerContNo, BatteryCom, BatteryModel, AnyOtherRemark, ApprovalStatus) values(".$EmployeeId.", ".$_POST['AssetNId'].", '".$_POST['ReqAmt']."', '".date("Y-m-d")."', 36, '".$ExpMDate."', '".$_POST['ComName']."', '".$_POST['Srn']."', '".$_POST['ModelNo']."', '".$_POST['ModelName']."', '".$_POST['WarrantyNOY']."', '".date("Y-m-d",strtotime($_POST['WarrantyExpiry']))."', '".date("Y-m-d",strtotime($_POST['PurDate']))."', '".$_POST['BillNo']."', '".$_POST['Price']."', '".$_POST['EmiNo']."', '".$_POST['RID']."', '".$_POST['HID']."', 2, '".$_POST['ITID']."', '".$_POST['MaxLimitAmt']."', '".$newfilenameAsset."', '".$extAsset."', '".$newfilenameBill."', '".$extBill."', '".$_POST['DealeName']."', '".$_POST['DealerContNo']."', '".$_POST['BatteryCom']."', '".$_POST['BatteryModel']."', '".$_POST['Remark']."', 1)", $con); }
-   else{ $sqlIns=mysql_query("insert into hrm_asset_employee_request(EmployeeID, AssetNId, ReqAmt, ReqDate, ReqAmtExpiryNOM, ReqAmtExpiryDate, ComName, Srn, ModelNo, ModelName, WarrantyNOY, WarrantyExpiry, PurDate, BillNo, Price, EmiNo, ReportingId, HodId, ITId, MaxLimitAmt, ReqAssestImgExtName, ReqAssestImgExt, ReqBillImgExtName, ReqBillImgExt, DealeName, DealerContNo, BatteryCom, BatteryModel, AnyOtherRemark, RCNo, RCNo_File, DLNo, DLNo_File, InsuNo, InsuNo_File, VehiNo, DLExpTo, ChasNo, EngNo, RegNo, RegDate) values(".$EmployeeId.", ".$_POST['AssetNId'].", '".$_POST['ReqAmt']."', '".date("Y-m-d")."', 36, '".$ExpMDate."', '".$_POST['ComName']."', '".$_POST['Srn']."', '".$_POST['ModelNo']."', '".$_POST['ModelName']."', '".$_POST['WarrantyNOY']."', '".date("Y-m-d",strtotime($_POST['WarrantyExpiry']))."', '".date("Y-m-d",strtotime($_POST['PurDate']))."', '".$_POST['BillNo']."', '".$_POST['Price']."', '".$_POST['EmiNo']."', '".$_POST['RID']."', '".$_POST['HID']."', '".$_POST['ITID']."', '".$_POST['MaxLimitAmt']."', '".$newfilenameAsset."', '".$extAsset."', '".$newfilenameBill."', '".$extBill."', '".$_POST['DealeName']."', '".$_POST['DealerContNo']."', '".$_POST['BatteryCom']."', '".$_POST['BatteryModel']."', '".$_POST['Remark']."', '".$RCNo."', '".$RCImg_File."', '".$DLNo."', '".$DLImg_File."', '".$InsuNo."', '".$InsuImg_File."', '".$VehiNo."', '".date("Y-m-d",strtotime($DLExpTo))."', '".addslashes($ChasNo)."', '".addslashes($EngNo)."', '".addslashes($RegNo)."', '".$RegDate."')", $con); }
+   else{ $sqlIns=mysql_query("insert into hrm_asset_employee_request(EmployeeID, AssetNId, ReqAmt, ReqDate, ReqAmtExpiryNOM, ReqAmtExpiryDate, ComName, Srn, ModelNo, ModelName, WarrantyNOY, WarrantyExpiry, PurDate, BillNo, Price, EmiNo, ReportingId, HodId, ITId, MaxLimitAmt, ReqAssestImgExtName, ReqAssestImgExt, ReqBillImgExtName, ReqBillImgExt, DealeName, DealerContNo, BatteryCom, BatteryModel, AnyOtherRemark, RCNo, RCNo_File, DLNo, DLNo_File, InsuNo, InsuNo_File, VehiNo, DLExpTo, ChasNo, EngNo, RegNo, RegDate, Beg_OdoPhoto, Beg_OdoRead, Owenship) values(".$EmployeeId.", ".$_POST['AssetNId'].", '".$_POST['ReqAmt']."', '".date("Y-m-d")."', 36, '".$ExpMDate."', '".$_POST['ComName']."', '".$_POST['Srn']."', '".$_POST['ModelNo']."', '".$_POST['ModelName']."', '".$_POST['WarrantyNOY']."', '".date("Y-m-d",strtotime($_POST['WarrantyExpiry']))."', '".date("Y-m-d",strtotime($_POST['PurDate']))."', '".$_POST['BillNo']."', '".$_POST['Price']."', '".$_POST['EmiNo']."', '".$_POST['RID']."', '".$_POST['HID']."', '".$_POST['ITID']."', '".$_POST['MaxLimitAmt']."', '".$newfilenameAsset."', '".$extAsset."', '".$newfilenameBill."', '".$extBill."', '".$_POST['DealeName']."', '".$_POST['DealerContNo']."', '".$_POST['BatteryCom']."', '".$_POST['BatteryModel']."', '".$_POST['Remark']."', '".$RCNo."', '".$RCImg_File."', '".$DLNo."', '".$DLImg_File."', '".$InsuNo."', '".$InsuImg_File."', '".$VehiNo."', '".date("Y-m-d",strtotime($DLExpTo))."', '".addslashes($ChasNo)."', '".addslashes($EngNo)."', '".addslashes($RegNo)."', '".$RegDate."', '".$Beg_OdoPhoto."', '".$Beg_OdoRead."', '".$Owenship."')", $con); }
  }
   
   if($sqlIns)
@@ -276,8 +294,9 @@ function ClickEdit()
   document.getElementById("BatteryCom").readOnly=false; document.getElementById("BatteryModel").readOnly=false; 
   //document.getElementById("PurDate").readOnly=false;
   document.getElementById("PurDateBtn").disabled=false; document.getElementById("uAssImg").disabled=false; 
-  document.getElementById("WarrantyExpiryBtn").disabled=false; document.getElementById("uBill").disabled=false; 
+  document.getElementById("uBill").disabled=false; 
   //document.getElementById("PurDate").readOnly=false; document.getElementById("WarrantyExpiry").readOnly=false;
+  //document.getElementById("WarrantyExpiryBtn").disabled=false;
   
   document.getElementById("ChasNo").readOnly=false; document.getElementById("EngNo").readOnly=false; 
   document.getElementById("RegNo").readOnly=false; document.getElementById("RegDateBtn").disabled=false;
@@ -511,15 +530,10 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
     <tr height="20">
      <td class="th">&nbsp;Model_Name<font color="#FF0000">*</font> :</td>
      <td><input name="ModelName" id="ModelName" class="inp5" value="" readonly required/></td>
-     <td class="th">Request_Amount<font color="#FF0000">*</font> :</td>
-     <td><input name="ReqAmt" id="ReqAmt" class="inpr" readonly required/></td>
+     <td class="th">Model No<font color="#FF0000">*</font> :</td>
+     <td><input name="ModelNo" id="ModelNo" class="inpr" readonly required/></td>
     </tr>
-    <tr height="20">
-     <td class="th">&nbsp;Model No<font color="#FF0000">*</font> :</td>
-     <td><input name="ModelNo" id="ModelNo" class="inp5" value="" readonly required/></td>
-     <td class="th">Price<font color="#FF0000">*</font> :</td>
-     <td><input name="Price" id="Price" class="inpr" readonly required/></td>
-    </tr>
+    
     <tr height="20">
      <td class="th">&nbsp;Company_Name<font color="#FF0000">*</font> :</td>
      <td><input name="ComName" id="ComName" class="inp5" value="" readonly required/></td>
@@ -534,19 +548,37 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
      <td><input name="DealerContNo" id="DealerContNo" class="inp" readonly maxlength="10"/></td>
     </tr>
 	
+	<tr height="20">
+     <td class="thh">&nbsp;Price</td>
+     <td class="th2"><input name="Price" id="Price" class="inp5" value="" readonly required/></td>
+     <td class="thh2">Bill No<font color="#FF0000">*</font> :</td>
+     <td><input name="BillNo" id="BillNo" class="inp" readonly required/></td>
+    </tr>
     <tr height="20">
+     <td class="th">&nbsp;Bill_Copy(Img)<font color="#FF0000">*</font> :</td>
+     <td><input type="file" size="" name="uBill" id="uBill" style="width:150px;" disabled required></td>
+     <td class="th">Asset_Copy(Img) :</td>
+     <td><input type="file" size="" name="uAssImg" id="uAssImg" style="width:120px;" disabled required></td>
+    </tr>
+	
+    <tr>
      <td colspan="4">
 	 <div id="ForNCar" style="display:block;">
-     <table>
-    <tr height="20">
-     <td class="thh">&nbsp;IEMI No :</td>
-     <td class="th2"><input name="EmiNo" id="EmiNo" class="inp5" value="" readonly/></td>
-     <td class="thh2">Warranty Expiry :<input type="hidden" name="WarrantyNOY" id="WarrantyNOY" class="inp5" readonly/></td>
-     <td>&nbsp;<input name="WarrantyExpiry" id="WarrantyExpiry" class="inpc" readonly/><button id="WarrantyExpiryBtn" class="CalenderButton" disabled></button><script type="text/javascript">  var cal = Calendar.setup({ onSelect:  function(cal) { cal.hide()}, showTime: true }); cal.manageFields("PurDateBtn", "PurDate", "%d-%m-%Y"); cal.manageFields("WarrantyExpiryBtn", "WarrantyExpiry", "%d-%m-%Y");</script></td>
-    </tr>
+    <table border="0">
+	<tr>
+     <td class="thh">Request_Amount :</td>
+     <td class="th2" style="width:170px;"><input name="ReqAmt" id="ReqAmt" class="inp5" style="width:147px;" value="0" readonly/></td>
+     <td class="thh2">IEMI No :</td>
+     <td><input name="EmiNo" id="EmiNo" class="inp"  value="" readonly/>
+	     <input type="hidden" name="WarrantyNOY" id="WarrantyNOY" class="inp5" readonly/>
+		 <input type="hidden" name="WarrantyExpiry" id="WarrantyExpiry" class="inpc" readonly/>
+		 <script type="text/javascript">  var cal = Calendar.setup({ onSelect:  function(cal) { cal.hide()}, showTime: true }); cal.manageFields("PurDateBtn", "PurDate", "%d-%m-%Y"); cal.manageFields("WarrantyExpiryBtn", "WarrantyExpiry", "%d-%m-%Y");</script>
+	 </td>
+    </tr> 
 	</table>
 	 </div>
 	 <div id="ForN2Car" style="display:none;">
+	  <input type="hidden" name="ReqAmt" id="ReqAmt" class="inpr" value="0" readonly/>
 	  <input type="hidden" name="EmiNo" id="EmiNo" class="inp5" value="0" readonly/>
 	  <input type="hidden" name="WarrantyNOY" id="WarrantyNOY" class="inp5" value="0" readonly/>
 	  <input type="hidden" name="WarrantyExpiry" id="WarrantyExpiry" class="inpc" value="0000-00-00" readonly/>
@@ -567,18 +599,7 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
 	<input type="hidden" name="Srn" id="Srn" class="inp5" value="" readonly/>
 	
 	
-	<tr height="20">
-     <td class="thh"></td>
-     <td class="th2"></td>
-     <td class="thh2">Bill No<font color="#FF0000">*</font> :</td>
-     <td><input name="BillNo" id="BillNo" class="inp" readonly required/></td>
-    </tr>
-    <tr height="20">
-     <td class="th">&nbsp;Bill_Copy(Img)<font color="#FF0000">*</font> :</td>
-     <td><input type="file" size="" name="uBill" id="uBill" style="width:150px;" disabled required></td>
-     <td class="th">Asset_Copy(Img) :</td>
-     <td><input type="file" size="" name="uAssImg" id="uAssImg" style="width:120px;" disabled required></td>
-    </tr>
+	
 	
 	
     <?php /*************************** For Car *******/ ?>
@@ -589,7 +610,7 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
      <table>
 	 
 	<tr height="20">
-     <td class="thh">Chassis No.<font color="#FF0000">*</font> :</td>
+     <td class="thh" style="width:130px;">Chassis No.<font color="#FF0000">*</font> :</td>
      <td class="th2"><input type="text" name="ChasNo" id="ChasNo" class="inp5" readonly></td>
      <td class="thh2">Engine No.<font color="#FF0000">*</font> :</td>
      <td><input type="text" name="EngNo" id="EngNo" class="inp" readonly></td>
@@ -608,23 +629,31 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
      <td><input type="text" name="DLExpTo" id="DLExpTo" class="inp" readonly><button id="DLExpToBtn" class="CalenderButton" disabled></button></td>
     </tr>
 	<tr height="20">
-     <td class="thh">DL No<font color="#FF0000">*</font> :</td>
-     <td class="th2"><input type="text" name="DLNo" id="DLNo" class="inp5" readonly></td>
-     <td class="thh2">DL Copy<font color="#FF0000">*</font> :</td>
-     <td><input type="file" size="" name="DLImg" id="DLImg" style="width:120px;" disabled></td>
-    </tr>
-	<tr height="20">
-     <td class="thh">RC No<font color="#FF0000">*</font> :</td>
-     <td class="th2"><input type="text" name="RCNo" id="RCNo" class="inp5" readonly></td>
+     <td class="thh">DL Copy<font color="#FF0000">*</font> :</td>
+     <td class="th2"><input type="file" size="" name="DLImg" id="DLImg" style="width:120px;"></td>
      <td class="thh2">RC Copy<font color="#FF0000">*</font> :</td>
-     <td><input type="file" size="" name="RCImg" id="RCImg" style="width:120px;" disabled></td>
+     <td><input type="file" size="" name="RCImg" id="RCImg" style="width:120px;"></td>
     </tr>
 	<tr height="20">
-     <td class="thh">Insurance No.<font color="#FF0000">*</font> :</td>
-     <td class="th2"><input type="text" name="InsuNo" id="InsuNo" class="inp5" readonly></td>
-     <td class="thh2">Insurance Copy<font color="#FF0000">*</font> :</td>
-     <td><input type="file" size="" name="InsuImg" id="InsuImg" style="width:120px;" disabled></td>
+     <td class="thh">Insurance Copy<font color="#FF0000">*</font> :</td>
+     <td class="th2"><input type="file" size="" name="InsuImg" id="InsuImg" style="width:120px;"></td>
+     <td class="thh2">Odomoter_reading photograph:<font color="#FF0000">*</font</td>
+     <td><input type="file" size="" name="Beg_OdoPhoto" id="Beg_OdoPhoto" style="width:120px;"></td>
     </tr>
+	<tr height="20">
+     <td class="thh">Current_odomoter reading.<font color="#FF0000">*</font> :</td>
+     <td class="th2"><input type="text" name="Beg_OdoRead" id="Beg_OdoRead" class="inp5"></td>
+     <td class="thh2">Ownership<font color="#FF0000">*</font> :</td>
+     <td><select name="Owenship" id="Owenship" class="inp" >
+	      <option value="1">First</option>
+		  <option value="2">Second</option>
+		  <option value="3">Third</option>
+         </select></td>
+    </tr>
+	
+	<input type="hidden" name="DLNo" id="DLNo" class="inp5" value="0" readonly>
+	<input type="hidden" name="RCNo" id="RCNo" class="inp5" value="0" readonly>
+	<input type="hidden" name="InsuNo" id="InsuNo" class="inp5" value="0" readonly>
 	<script type="text/javascript">  
 	  var cal = Calendar.setup({ onSelect:  function(cal) { cal.hide()}, showTime: true }); 
 	  cal.manageFields("RegDateBtn", "RegDate", "%d-%m-%Y"); cal.manageFields("DLExpToBtn", "DLExpTo", "%d-%m-%Y"); 
@@ -638,7 +667,7 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
  
     <tr height="20">
      <td class="th">&nbsp;Comment :</td>
-     <td colspan="3" align=""><textarea name="Remark" id="Remark" cols="52" rows="1" disabled></textarea></td>
+     <td colspan="3"><textarea name="Remark" id="Remark" cols="52" rows="1"></textarea></td>
     </tr>
     <tr height="20">
      <td colspan="4" align="right" style="background-color:#7a6189;">

@@ -127,17 +127,17 @@ function show_UpData(originalRequest)
 <?php if($_REQUEST['di']>0){ ?>	
 <table border="1" cellpadding="0" cellspacing="0" style="font-family:Times New Roman;font-size:14px;">	
   <tr style="background-color:#D5F1D1;color:#000000;">
-    <td colspan="18" style="font-size:16px;color:#FFFF00;background-color:#183E83;">&nbsp;<b><?php echo strtoupper($resdil['DealerName']).' - <font color="#D7EBFF">'.$resdil['DealerCity'].'</font>&nbsp;('.$y2.')'; ?></b><input type="hidden" id="Sno" value="" /></td>
+    <td colspan="18" style="font-size:16px;color:#FFFF00;background-color:#183E83;">&nbsp;<b><?php echo ucwords(strtolower($resdil['DealerName'])).' - <font color="#D7EBFF">'.$resdil['DealerCity'].'</font>&nbsp;('.$y2.')'; ?></b><input type="hidden" id="Sno" value="" /></td>
   </tr>	
    <tr style="background-color:#D5F1D1;color:#000000;">  
-    <td align="center" style="width:150px;"><b>CROP</b></td>
-	<td align="center" style="width:250px;"><b>VARIETY</b></td>
-	<td align="center" style="width:50px;"><b>&nbsp;TYPE&nbsp;</b></td>
+    <td align="center" style="width:150px;"><b>Crop</b></td>
+	<td align="center" style="width:250px;"><b>Variety</b></td>
+	<td align="center" style="width:50px;"><b>&nbsp;Type&nbsp;</b></td>
 	<td align="center" style="width:50px;"><b>&nbsp;Edit&nbsp;</b></td>
-	<td align="center"><b>APR</b></td><td align="center"><b>MAY</b></td><td align="center"><b>JUN</b></td><td align="center"><b>JUL</b></td>
-    <td align="center"><b>AUG</b></td><td align="center"><b>SEP</b></td><td align="center"><b>OCT</b></td><td align="center"><b>NOV</b></td>
-    <td align="center"><b>DEC</b></td><td align="center"><b>JAN</b></td><td align="center"><b>FEB</b></td><td align="center"><b>MAR</b></td>
-	<td align="center" style="width:60px;"><b>TOTAL</b></td>
+	<td align="center"><b>Apr</b></td><td align="center"><b>May</b></td><td align="center"><b>Jun</b></td><td align="center"><b>Jul</b></td>
+    <td align="center"><b>Aug</b></td><td align="center"><b>Sep</b></td><td align="center"><b>Oct</b></td><td align="center"><b>Nov</b></td>
+    <td align="center"><b>Dec</b></td><td align="center"><b>Jan</b></td><td align="center"><b>Feb</b></td><td align="center"><b>Mar</b></td>
+	<td align="center" style="width:60px;"><b>Total</b></td>
 	<td rowspan="2" align="center" style="width:17px;"><b>&nbsp;</b></td>
   </tr>	
   <?php 
@@ -147,7 +147,7 @@ $chk2=mysql_query("select * from hrm_sales_achive_approved_hq INNER JOIN hrm_sal
 $chk3=mysql_query("select * from hrm_sales_achive_approved_state INNER JOIN hrm_headquater ON hrm_sales_achive_approved_state.StateId=hrm_headquater.StateId INNER JOIN hrm_sales_dealer ON hrm_headquater.HqId=hrm_sales_dealer.HqId where hrm_sales_dealer.DealerId=".$_REQUEST['di']." AND hrm_sales_achive_approved_state.YearId=".$_REQUEST['yi'], $con); $rowchk3=mysql_num_rows($chk3);
 ?>
    <tr style="font-size:14px;color:#000000;background-color:#FFFFA6;height:24px;">
-<td colspan="4" align="right" style="font-size:16px;"><b>TOTAL:&nbsp;</b></td>
+<td colspan="4" align="right" style="font-size:16px;"><b>Total:&nbsp;</b></td>
 <td><input class="TInput" id="TM1" value="<?php if($resTot['tsM1']!=0 && $resTot['tsM1']!=''){echo $resTot['tsM1'];} ?>" readonly/></td>
 <td><input class="TInput" id="TM2" value="<?php if($resTot['tsM2']!=0 && $resTot['tsM2']!=''){echo $resTot['tsM2'];} ?>" readonly/></td>
 <td><input class="TInput" id="TM3" value="<?php if($resTot['tsM3']!=0 && $resTot['tsM3']!=''){echo $resTot['tsM3'];} ?>" readonly/></td>

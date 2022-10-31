@@ -144,9 +144,9 @@ function ExportCoPlan(y,g,i,c)
 	   <td style="font-size:11px;height:18px;width:80px;color:#E6E6E6;" align="right"><b>Crop :</b></td>
 	    <td>
 		<select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="CropGrp" id="CropGrp" onChange="ClickGrp(this.value)">
-         <option value="1" <?php if($_REQUEST['grp']==1){echo 'selected';}?>>VEGETABLE CROP</option>
-		 <option value="2" <?php if($_REQUEST['grp']==2){echo 'selected';}?>>FIELD CROP</option>
-		 <?php /*?><option value="3" <?php if($_REQUEST['grp']==3){echo 'selected';}?>>All CROP</option><?php */?>
+         <option value="1" <?php if($_REQUEST['grp']==1){echo 'selected';}?>>Vegitable Crop</option>
+		 <option value="2" <?php if($_REQUEST['grp']==2){echo 'selected';}?>>Field Crop</option>
+		 <?php /*?><option value="3" <?php if($_REQUEST['grp']==3){echo 'selected';}?>>All Crop</option><?php */?>
         </select>
 		</td>
 		<td style="font-size:11px; height:18px;width:80px;color:#E6E6E6;" align="right"><b>Name :</b></td>
@@ -154,8 +154,8 @@ function ExportCoPlan(y,g,i,c)
 	    <td>
 		 <select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="ItemV" id="ItemV" onChange="ChangeII(this.value)">
 <?php if($_REQUEST['ii']>0){ $sqlI=mysql_query("select ItemName from hrm_sales_seedsitem where ItemId=".$_REQUEST['ii'], $con); $resI=mysql_fetch_assoc($sqlI); ?>	
-         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo strtoupper($resI['ItemName']); ?></option>
-		 <?php }else{ ?><option value="0" selected>SELECT</option><?php } ?>
+         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo ucwords(strtolower($resI['ItemName'])); ?></option>
+		 <?php }else{ ?><option value="0" selected>Select</option><?php } ?>
 <?php if($_REQUEST['grp']==1){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=1 order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==2){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=2 order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==3){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where (GroupId=1 OR GroupId=2) order by GroupId ASC,ItemName ASC", $con);}
@@ -165,9 +165,9 @@ function ExportCoPlan(y,g,i,c)
 		 
 		 <td style="font-size:11px;height:18px;width:200px;color:#E6E6E6; text-align:center;">
 		 <select style="font-size:12px;width:150px;height:20px;background-color:#DDFFBB;" name="BPrtyCheck" id="BPrtyCheck">
-          <option value="0" <?php if($_REQUEST['bp']=='0'){echo 'selected';}?>>ALL DEALER</option>
-		  <option value="1" <?php if($_REQUEST['bp']=='1'){echo 'selected';}?>>BULK DEALER</option>
-		  <option value="2" <?php if($_REQUEST['bp']=='2'){echo 'selected';}?>>WITHOUT BULK DEALER</option>
+          <option value="0" <?php if($_REQUEST['bp']=='0'){echo 'selected';}?>>All Dealer</option>
+		  <option value="1" <?php if($_REQUEST['bp']=='1'){echo 'selected';}?>>Bulk Dealer</option>
+		  <option value="2" <?php if($_REQUEST['bp']=='2'){echo 'selected';}?>>Without Bulk Dealer</option>
 	     </select>
 	     </td>
 		 
@@ -177,9 +177,9 @@ function ExportCoPlan(y,g,i,c)
 	    <td style="font-size:11px;height:18px;width:90px;color:#E6E6E6;" align="right"><b>Country :</b></td>
 	    <td><select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="Coutry" id="Coutry" onChange="ClickCoutry(this.value)"> 
 <?php if($_REQUEST['c']>0){ $sqlC=mysql_query("SELECT CountryName FROM hrm_country where CountryId=".$_REQUEST['c'], $con); $resC=mysql_fetch_array($sqlC); ?>
-<option value="<?php echo $_REQUEST['c']; ?>"><?php echo strtoupper($resC['CountryName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>		
+<option value="<?php echo $_REQUEST['c']; ?>"><?php echo ucwords(strtolower($resC['CountryName'])); ?></option><?php }else{ ?><option value="">Select</option><?php } ?>		
 <?php $SqlCountry=mysql_query("SELECT * FROM hrm_country order by CountryName ASC", $con); while($ResCountry=mysql_fetch_array($SqlCountry)) { ?>
-<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo strtoupper($ResCountry['CountryName']); ?></option><?php } ?></select>
+<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo ucwords(strtolower($ResCountry['CountryName'])); ?></option><?php } ?></select>
        </td>
 		 <td colspan="2" style="font-size:11px; height:18px;width:80px;color:#E6E6E6;width:200px;" align="right">
 		 <?php if($_REQUEST['c']>0){ ?>
@@ -356,19 +356,19 @@ $sqlP5d=mysql_query("select SUM(M1_Ach) as sM1,SUM(M2_Ach) as sM2,SUM(M3_Ach) as
 <?php ////////////////////////////////////////////////////////// ?>
 
  <tr style="background-color:#D5F1D1;color:#000000;">
-    <td colspan="5" style="font-size:12px;color:#FFFF00;background-color:#183E83;">&nbsp;<b><?php echo 'Country - '.strtoupper($resC['CountryName']); ?></b></td>
-      <td class="Th60" rowspan="2">APR</td><td class="Th60" rowspan="2">MAY</td><td class="Th60" rowspan="2">JUN</td><td class="Th60" bgcolor="#FAD25A" rowspan="2">Q1</td>
-  <td class="Th60" rowspan="2">JUL</td><td class="Th60" rowspan="2">AUG</td><td class="Th60" rowspan="2">SEP</td><td class="Th60" bgcolor="#FAD25A" rowspan="2">Q2</td>
-  <td class="Th60" rowspan="2">OCT</td><td class="Th60" rowspan="2">NOV</td><td class="Th60" rowspan="2">DEC</td><td class="Th60" bgcolor="#FAD25A" rowspan="2">Q3</td>
-  <td class="Th60" rowspan="2">JAN</td><td class="Th60" rowspan="2">FEB</td><td class="Th60" rowspan="2">MAR</td><td class="Th60" bgcolor="#FAD25A" rowspan="2">Q4</td>
-  <td class="Th60" rowspan="2"><b>TOTAL<br><font color="#E67300">Kg</font></b></td>
-  <td class="Th60" rowspan="2"><b>VALUE<br><font color="#E67300">Lakh</font></b></td>	  
+    <td colspan="5" style="font-size:12px;color:#FFFF00;background-color:#183E83;">&nbsp;<b><?php echo 'Country - '.ucwords(strtolower($resC['CountryName'])); ?></b></td>
+      <td class="Th60" rowspan="2">Apr</td><td class="Th60" rowspan="2">May</td><td class="Th60" rowspan="2">Jun</td><td class="Th60" bgcolor="#FAD25A" rowspan="2">Q1</td>
+  <td class="Th60" rowspan="2">Jul</td><td class="Th60" rowspan="2">Aug</td><td class="Th60" rowspan="2">Sep</td><td class="Th60" bgcolor="#FAD25A" rowspan="2">Q2</td>
+  <td class="Th60" rowspan="2">Oct</td><td class="Th60" rowspan="2">Nov</td><td class="Th60" rowspan="2">Dec</td><td class="Th60" bgcolor="#FAD25A" rowspan="2">Q3</td>
+  <td class="Th60" rowspan="2">Jan</td><td class="Th60" rowspan="2">Feb</td><td class="Th60" rowspan="2">Mar</td><td class="Th60" bgcolor="#FAD25A" rowspan="2">Q4</td>
+  <td class="Th60" rowspan="2"><b>Total<br><font color="#E67300">Kg</font></b></td>
+  <td class="Th60" rowspan="2"><b>Value<br><font color="#E67300">Lakh</font></b></td>	  
   </tr>	
    <tr style="background-color:#D5F1D1;color:#000000;">  
-   <td align="center" style="width:50px;font-size:11px;"><b>CROP</b></td>
-   <td align="center" style="width:100px;font-size:11px;"><b>VARIETY</b></td>
-   <td align="center" class="Th40"><b>TYPE</b></td>
-   <td colspan="2" align="center" style="width:80px;font-size:11px;"><b>YEAR</b></td>
+   <td align="center" style="width:50px;font-size:11px;"><b>Crop</b></td>
+   <td align="center" style="width:100px;font-size:11px;"><b>Variety</b></td>
+   <td align="center" class="Th40"><b>Type</b></td>
+   <td colspan="2" align="center" style="width:80px;font-size:11px;"><b>Year</b></td>
   </tr>	
   <tr>
   <td colspan="30">

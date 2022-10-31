@@ -76,21 +76,21 @@ function newsave()
 		 <td style="margin-top:0px;width:100%;" class="heading" class="heading"><b>&nbsp;Product Details</b>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 		 <td> 
 		 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="Item" id="Item" onChange="ChangeItem(this.value)"> 
-         <?php if($_REQUEST['ActItem']==''){?><option value="0">---SELECT CROP---</option>
+         <?php if($_REQUEST['ActItem']==''){?><option value="0">---Select Crop---</option>
 	     <?php } else{ $sqlI = mysql_query("SELECT ItemName FROM hrm_sales_seedsitem where ItemId=".$_REQUEST['ActItem'], $con); $resI = mysql_fetch_array($sqlI); ?>
-	    <option value="<?php echo $_REQUEST['ActItem']; ?>"><?php echo strtoupper($resI['ItemName']); ?></option><?php } ?>
+	    <option value="<?php echo $_REQUEST['ActItem']; ?>"><?php echo $resI['ItemName']; ?></option><?php } ?>
 	    <?php $sqlIv = mysql_query("SELECT * FROM hrm_sales_seedsitem order by ItemName ASC", $con); while($resIv = mysql_fetch_array($sqlIv)){ ?>
-	    <option value="<?php echo $resIv['ItemId']; ?>"><?php echo strtoupper($resIv['ItemName']); ?></option><?php } ?></select></td>
+	    <option value="<?php echo $resIv['ItemId']; ?>"><?php echo $resIv['ItemName']; ?></option><?php } ?></select></td>
 		 <td>
 		  <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="Prod" id="Prod" onChange="ChangeProd(this.value)" <?php if($_REQUEST['ActItem']==''){echo 'disabled';} ?>> 
-       <?php if($_REQUEST['ActItem']!='' AND $_REQUEST['ActProd']==0){?><option value="0">---SELECT PRODUCT---</option>
+       <?php if($_REQUEST['ActItem']!='' AND $_REQUEST['ActProd']==0){?><option value="0">---Select Product---</option>
 	   <?php $sqlI = mysql_query("SELECT * FROM hrm_sales_seedsproduct where ItemId=".$_REQUEST['ActItem']." order by ProductName ASC", $con); 
-	         while($resI = mysql_fetch_array($sqlI)){ ?><option value="<?php echo $resI['ProductId']; ?>"><?php echo strtoupper($resI['ProductName']); ?></option><?php } ?>
+	         while($resI = mysql_fetch_array($sqlI)){ ?><option value="<?php echo $resI['ProductId']; ?>"><?php echo $resI['ProductName']; ?></option><?php } ?>
 
 		<?php } elseif($_REQUEST['ActProd']!=0) { $sqlP = mysql_query("SELECT ProductName FROM hrm_sales_seedsproduct where ProductId=".$_REQUEST['ActProd'], $con); 
-		$resP=mysql_fetch_array($sqlP);?><option value="<?php echo $_REQUEST['ActProd']; ?>"><?php echo strtoupper($resP['ProductName']); ?></option>
+		$resP=mysql_fetch_array($sqlP);?><option value="<?php echo $_REQUEST['ActProd']; ?>"><?php echo $resP['ProductName']; ?></option>
 		<?php $sqlI = mysql_query("SELECT * FROM hrm_sales_seedsproduct where ItemId=".$_REQUEST['ActItem']." order by ProductName ASC", $con); 
-	         while($resI = mysql_fetch_array($sqlI)){ ?><option value="<?php echo $resI['ProductId']; ?>"><?php echo strtoupper($resI['ProductName']); ?></option><?php } ?>
+	         while($resI = mysql_fetch_array($sqlI)){ ?><option value="<?php echo $resI['ProductId']; ?>"><?php echo $resI['ProductName']; ?></option><?php } ?>
 	    <?php } ?>
 		 </td>
 		</tr>

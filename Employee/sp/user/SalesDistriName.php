@@ -240,44 +240,44 @@ if($_REQUEST['s']>0){$qh='StateId='.$_REQUEST['s'];}else{$qh='1=1';} ?>
 	  <td class="heading"><u>Distributor List</u>:-&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	  <!--<td class="tds" style="width:75px;">Country:&nbsp;</td>-->
 	  <td style="width:100px;"><select class="seli" name="CC" id="CC" onChange="ClickLoc('C',this.value)">
-	  <option value="0">COUNTRY</option><?php $sqlC=mysql_query("SELECT * FROM hrm_country order by CountryName ASC",$con); while($resC=mysql_fetch_array($sqlC)){ ?><option value="<?=$resC['CountryId'];?>" <?php if($_REQUEST['c']==$resC['CountryId']){echo 'selected';}?>><?=ucwords(strtoupper($resC['CountryName'])); ?></option><?php } ?></select></td>
+	  <option value="0">Country</option><?php $sqlC=mysql_query("SELECT * FROM hrm_country order by CountryName ASC",$con); while($resC=mysql_fetch_array($sqlC)){ ?><option value="<?=$resC['CountryId'];?>" <?php if($_REQUEST['c']==$resC['CountryId']){echo 'selected';}?>><?=$resC['CountryName']; ?></option><?php } ?></select></td>
 	  
 	   
        <!--<td class="tds" style="width:55px;">State:&nbsp;</td>-->
 	   <td style="width:100px;"><select class="seli" name="SS" id="SS" onChange="ClickLoc('S',this.value)">
-       <option value="0">STATE</option><?php $sqlS = mysql_query("SELECT * FROM hrm_state where ".$qs." order by StateName ASC",$con); while($resS = mysql_fetch_array($sqlS)){ ?><option value="<?=$resS['StateId'];?>" <?php if($_REQUEST['s']==$resS['StateId']){echo 'selected';}?>><?=ucwords(strtoupper($resS['StateName']));?><?php } ?></option>
+       <option value="0">State</option><?php $sqlS = mysql_query("SELECT * FROM hrm_state where ".$qs." order by StateName ASC",$con); while($resS = mysql_fetch_array($sqlS)){ ?><option value="<?=$resS['StateId'];?>" <?php if($_REQUEST['s']==$resS['StateId']){echo 'selected';}?>><?=$resS['StateName'];?><?php } ?></option>
 </select></td>
 	   
 	   <!--<td class="tds" style="width:40px;">HQ:&nbsp;</td>-->
 	   <td style="width:100px;text-align:center;" colspan="2"><select class="seli" name="HH" id="HH" onChange="ClickLoc('H',this.value)">
-       <option value="0">HQ</option><?php $sqlH = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' AND ".$qh." group by HqName order by HqName ASC",$con); while($resH = mysql_fetch_array($sqlH)){ ?><option value="<?=$resH['HqId'];?>" <?php if($_REQUEST['hq']==$resH['HqId']){echo 'selected';}?>><?=ucwords(strtoupper($resH['HqName']));?></option><?php } ?></select></td>
+       <option value="0">HQ</option><?php $sqlH = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' AND ".$qh." group by HqName order by HqName ASC",$con); while($resH = mysql_fetch_array($sqlH)){ ?><option value="<?=$resH['HqId'];?>" <?php if($_REQUEST['hq']==$resH['HqId']){echo 'selected';}?>><?=$resH['HqName'];?></option><?php } ?></select></td>
 	   
 	   <!--<td class="tds" style="width:40px;">Terr:&nbsp;</td>-->
 	   <input type="hidden" class="seli" name="StT" id="StT" value="0"/>
 	  <?php /*?> <td style="width:150px;text-align:center;" colspan="2"><select class="seli" name="StT" id="StT" onChange="ClickLoc('StT',this.value)">
-       <option value="0">TERITORRY</option><?php $sqlE = mysql_query("SELECT e.EmpCode,e.EmployeeID,Fname,Sname,Lname from hrm_sales_dealer d inner join hrm_headquater hq on (d.Hq_vc=hq.HqId OR d.Hq_fc=hq.HqId) inner join hrm_employee e on (d.Terr_vc=e.EmployeeID OR d.Terr_fc=e.EmployeeID) where ".$qh." AND e.CompanyId=".$CompanyId." AND e.EmpStatus='A' AND d.DealerSts='A' group by e.EmployeeID order by e.Fname ASC",$con); while($resE = mysql_fetch_array($sqlE)){ ?><option value="<?=$resE['EmployeeID'];?>" <?php if($_REQUEST['StT']==$resE['EmployeeID']){echo 'selected';}?>><?=ucwords(strtoupper($resE['Fname'].' '.$resE['Sname'].' '.$resE['Lname'])).'-'.$resE['EmpCode'];?></option><?php } ?></select></td><?php */?>
+       <option value="0">TERITORRY</option><?php $sqlE = mysql_query("SELECT e.EmpCode,e.EmployeeID,Fname,Sname,Lname from hrm_sales_dealer d inner join hrm_headquater hq on (d.Hq_vc=hq.HqId OR d.Hq_fc=hq.HqId) inner join hrm_employee e on (d.Terr_vc=e.EmployeeID OR d.Terr_fc=e.EmployeeID) where ".$qh." AND e.CompanyId=".$CompanyId." AND e.EmpStatus='A' AND d.DealerSts='A' group by e.EmployeeID order by e.Fname ASC",$con); while($resE = mysql_fetch_array($sqlE)){ ?><option value="<?=$resE['EmployeeID'];?>" <?php if($_REQUEST['StT']==$resE['EmployeeID']){echo 'selected';}?>><?=$resE['Fname'].' '.$resE['Sname'].' '.$resE['Lname'])).'-'.$resE['EmpCode'];?></option><?php } ?></select></td><?php */?>
 	   
 	   <td style="width:150px;text-align:center;" colspan="2"><select class="seli" name="TT" id="TT" onChange="ClickLoc('T',this.value)" style="width:200px;">
-       <option value="0">ALL TERITORRY</option><?php $sqlE = mysql_query("SELECT e.EmpCode,e.EmployeeID,Fname,Sname,Lname from hrm_sales_dealer d inner join hrm_employee e on (d.Terr_vc=e.EmployeeID OR d.Terr_fc=e.EmployeeID) where e.CompanyId=".$CompanyId." AND e.EmpStatus='A' AND d.DealerSts='A' group by e.EmployeeID order by e.Fname ASC",$con); while($resE = mysql_fetch_array($sqlE)){ ?><option value="<?=$resE['EmployeeID'];?>" <?php if($_REQUEST['t']==$resE['EmployeeID']){echo 'selected';}?>><?=ucwords(strtoupper($resE['Fname'].' '.$resE['Sname'].' '.$resE['Lname'])).'-'.$resE['EmpCode'];?></option><?php } ?></select></td>
+       <option value="0">All Teritorry</option><?php $sqlE = mysql_query("SELECT e.EmpCode,e.EmployeeID,Fname,Sname,Lname from hrm_sales_dealer d inner join hrm_employee e on (d.Terr_vc=e.EmployeeID OR d.Terr_fc=e.EmployeeID) where e.CompanyId=".$CompanyId." AND e.EmpStatus='A' AND d.DealerSts='A' group by e.EmployeeID order by e.Fname ASC",$con); while($resE = mysql_fetch_array($sqlE)){ ?><option value="<?=$resE['EmployeeID'];?>" <?php if($_REQUEST['t']==$resE['EmployeeID']){echo 'selected';}?>><?=ucwords(strtolower($resE['Fname'].' '.$resE['Sname'].' '.$resE['Lname'])).'-'.$resE['EmpCode'];?></option><?php } ?></select></td>
 	   
 	  </tr> 
 	  
 	  <tr>
 	   <td colspan="1"></td>
 	   <td style="width:100px;"><select class="seli" name="ZZ" id="ZZ" onChange="ClickLoc('Z',this.value)">
-	  <option value="0">ZONE</option><?php $sqlZ = mysql_query("SELECT * FROM hrm_sales_zone order by ZoneName ASC",$con); while($resZ=mysql_fetch_array($sqlZ)) { ?><option value="<?=$resZ['ZoneId'];?>" <?php if($_REQUEST['z']==$resZ['ZoneId']){echo 'selected';}?>><?=ucwords(strtoupper($resZ['ZoneName']));?></option><?php } ?></select>
+	  <option value="0">Zone</option><?php $sqlZ = mysql_query("SELECT * FROM hrm_sales_zone order by ZoneName ASC",$con); while($resZ=mysql_fetch_array($sqlZ)) { ?><option value="<?=$resZ['ZoneId'];?>" <?php if($_REQUEST['z']==$resZ['ZoneId']){echo 'selected';}?>><?=$resZ['ZoneName'];?></option><?php } ?></select>
 	   </td>
 	   <td colspan="1"></td>
 	   <td style="width:100px;"><select class="seli" name="VcH" id="VcH" onChange="ClickLoc('VcH',this.value)">
-       <option value="0">VC HQ</option><?php $sqlVcH = mysql_query("SELECT Hq_vc,HqName FROM hrm_sales_dealer d inner join hrm_headquater hq on d.Hq_vc=hq.HqId where ".$qh." group by d.Hq_vc order by hq.HqName ASC",$con); while($resVcH = mysql_fetch_array($sqlVcH)){ ?><option value="<?=$resVcH['Hq_vc'];?>" <?php if($_REQUEST['VcH']==$resVcH['Hq_vc']){echo 'selected';}?>><?=ucwords(strtoupper($resVcH['HqName']));?></option><?php } ?></select></td>
+       <option value="0">VC HQ</option><?php $sqlVcH = mysql_query("SELECT Hq_vc,HqName FROM hrm_sales_dealer d inner join hrm_headquater hq on d.Hq_vc=hq.HqId where ".$qh." group by d.Hq_vc order by hq.HqName ASC",$con); while($resVcH = mysql_fetch_array($sqlVcH)){ ?><option value="<?=$resVcH['Hq_vc'];?>" <?php if($_REQUEST['VcH']==$resVcH['Hq_vc']){echo 'selected';}?>><?=$resVcH['HqName'];?></option><?php } ?></select></td>
 	  
 	   <td style="width:100px;"><select class="seli" name="FcH" id="FcH" onChange="ClickLoc('FcH',this.value)">
-       <option value="0">FC HQ</option><?php $sqlFcH = mysql_query("SELECT Hq_fc,HqName FROM hrm_sales_dealer d inner join hrm_headquater hq on d.Hq_fc=hq.HqId where ".$qh." group by d.Hq_vc order by hq.HqName ASC",$con); while($resFcH = mysql_fetch_array($sqlFcH)){ ?><option value="<?=$resFcH['Hq_fc'];?>" <?php if($_REQUEST['FcH']==$resFcH['Hq_fc']){echo 'selected';}?>><?=ucwords(strtoupper($resFcH['HqName']));?></option><?php } ?></select></td>
+       <option value="0">FC HQ</option><?php $sqlFcH = mysql_query("SELECT Hq_fc,HqName FROM hrm_sales_dealer d inner join hrm_headquater hq on d.Hq_fc=hq.HqId where ".$qh." group by d.Hq_vc order by hq.HqName ASC",$con); while($resFcH = mysql_fetch_array($sqlFcH)){ ?><option value="<?=$resFcH['Hq_fc'];?>" <?php if($_REQUEST['FcH']==$resFcH['Hq_fc']){echo 'selected';}?>><?=$resFcH['HqName'];?></option><?php } ?></select></td>
 	   
 	    <td style="width:150px;"><select class="seli" name="VcT" id="VcT" onChange="ClickLoc('VcT',this.value)">
-       <option value="0">VC TERITORRY</option><?php $sqlVcE = mysql_query("SELECT e.EmpCode,e.EmployeeID,Fname,Sname,Lname from hrm_sales_dealer d inner join hrm_headquater hq on d.Hq_vc=hq.HqId inner join hrm_employee e on d.Terr_vc=e.EmployeeID where ".$qh." AND e.CompanyId=".$CompanyId." AND e.EmpStatus='A' AND d.DealerSts='A' group by e.EmployeeID order by e.Fname ASC",$con); while($resVcE = mysql_fetch_array($sqlVcE)){ ?><option value="<?=$resVcE['EmployeeID'];?>" <?php if($_REQUEST['VcT']==$resVcE['EmployeeID']){echo 'selected';}?>><?=ucwords(strtoupper($resVcE['Fname'].' '.$resVcE['Sname'].' '.$resVcE['Lname'])).'-'.$resVcE['EmpCode'];?></option><?php } ?></select></td>
+       <option value="0">VC Teritorry</option><?php $sqlVcE = mysql_query("SELECT e.EmpCode,e.EmployeeID,Fname,Sname,Lname from hrm_sales_dealer d inner join hrm_headquater hq on d.Hq_vc=hq.HqId inner join hrm_employee e on d.Terr_vc=e.EmployeeID where ".$qh." AND e.CompanyId=".$CompanyId." AND e.EmpStatus='A' AND d.DealerSts='A' group by e.EmployeeID order by e.Fname ASC",$con); while($resVcE = mysql_fetch_array($sqlVcE)){ ?><option value="<?=$resVcE['EmployeeID'];?>" <?php if($_REQUEST['VcT']==$resVcE['EmployeeID']){echo 'selected';}?>><?=ucwords(strtolower($resVcE['Fname'].' '.$resVcE['Sname'].' '.$resVcE['Lname'])).'-'.$resVcE['EmpCode'];?></option><?php } ?></select></td>
 	   <td style="width:150px;"><select class="seli" name="FcT" id="FcT" onChange="ClickLoc('FcT',this.value)">
-       <option value="0">FC TERITORRY</option><?php $sqlFcE = mysql_query("SELECT e.EmpCode,e.EmployeeID,Fname,Sname,Lname from hrm_sales_dealer d inner join hrm_headquater hq on d.Hq_fc=hq.HqId inner join hrm_employee e on d.Terr_fc=e.EmployeeID where ".$qh." AND e.CompanyId=".$CompanyId." AND e.EmpStatus='A' AND d.DealerSts='A' group by e.EmployeeID order by e.Fname ASC",$con); while($resFcE = mysql_fetch_array($sqlFcE)){ ?><option value="<?=$resFcE['EmployeeID'];?>" <?php if($_REQUEST['FcT']==$resFcE['EmployeeID']){echo 'selected';}?>><?=ucwords(strtoupper($resFcE['Fname'].' '.$resFcE['Sname'].' '.$resFcE['Lname'])).'-'.$resFcE['EmpCode'];?></option><?php } ?></select></td>
+       <option value="0">FC Teritorry</option><?php $sqlFcE = mysql_query("SELECT e.EmpCode,e.EmployeeID,Fname,Sname,Lname from hrm_sales_dealer d inner join hrm_headquater hq on d.Hq_fc=hq.HqId inner join hrm_employee e on d.Terr_fc=e.EmployeeID where ".$qh." AND e.CompanyId=".$CompanyId." AND e.EmpStatus='A' AND d.DealerSts='A' group by e.EmployeeID order by e.Fname ASC",$con); while($resFcE = mysql_fetch_array($sqlFcE)){ ?><option value="<?=$resFcE['EmployeeID'];?>" <?php if($_REQUEST['FcT']==$resFcE['EmployeeID']){echo 'selected';}?>><?=ucwords(strtolower($resFcE['Fname'].' '.$resFcE['Sname'].' '.$resFcE['Lname'])).'-'.$resFcE['EmpCode'];?></option><?php } ?></select></td>
 	   
 	   <td class="tds" style="width:120px;text-align:center;">
 	   <input type="checkbox" id="BPrtyCheck" <?php if($_REQUEST['bp']=='Y'){echo 'checked';}?>/>&nbsp;Bulk-Party
@@ -303,7 +303,7 @@ if($_REQUEST['s']>0){$qh='StateId='.$_REQUEST['s'];}else{$qh='1=1';} ?>
 $sE = mysql_query("select e.EmpCode,e.EmployeeID,Fname,Sname,Lname,DesigName from hrm_employee e inner join hrm_employee_general g on e.EmployeeID=g.EmployeeID inner join hrm_designation d on g.DesigId=d.DesigId where g.DepartmentId=6 and e.CompanyId=".$CompanyId." AND e.EmpStatus='A' group by e.EmployeeID order by Fname asc",$con); 
 while($rE=mysql_fetch_assoc($sE))
 { 
- $Earr[$rE['EmployeeID']]=ucwords(strtoupper($rE['Fname'].' '.$rE['Sname'].' '.$rE['Lname'].' - '.$rE['EmpCode'])); //$rE['DesigName']
+ $Earr[$rE['EmployeeID']]=ucwords(strtolower($rE['Fname'].' '.$rE['Sname'].' '.$rE['Lname'].' - '.$rE['EmpCode'])); //$rE['DesigName']
 }
 
 if($_REQUEST['hq']>0){ $qry='(d.Hq_vc='.$_REQUEST['hq'].' OR d.Hq_fc='.$_REQUEST['hq'].')'; $qryy='StateId='.$_REQUEST['s']; }
@@ -314,8 +314,8 @@ $sHQ = mysql_query("SELECT HqId,HqName,StateName FROM hrm_headquater hq inner jo
 ////$sHQ = mysql_query("SELECT HqId,HqName FROM hrm_headquater where ".$qryy." order by HqName ASC",$con); 
 while($rHQ=mysql_fetch_assoc($sHQ))
 { 
- //$HQarr[$rHQ['HqId']]=ucwords(strtoupper($rHQ['HqName']));
- $HQarr[$rHQ['HqId']]=ucwords(strtoupper($rHQ['HqName'].' - '.$rHQ['StateName']));
+ //$HQarr[$rHQ['HqId']]=$rHQ['HqName'];
+ $HQarr[$rHQ['HqId']]=$rHQ['HqName'].' - '.$rHQ['StateName'];
 } 
 ?>
 
@@ -355,7 +355,7 @@ while($rHQ=mysql_fetch_assoc($sHQ))
 	 <input type="hidden" id="DHQ" class="EditInputb" value="<?=$_REQUEST['hq'];?>" readonly/>
 	 <input class="EditInputb" value="<?=$rHq['HqName'];?>" readonly/>
 	 <?php }else{ ?> 
-	 <select class="EditInputb" name="DHQ" id="DHQ"><?php $sqlHArr = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' AND StateId=".$_REQUEST['s']." order by HqName ASC",$con); while($resHArr = mysql_fetch_array($sqlHArr)){ ?><option value="<?=$resHArr['HqId'];?>" <?php if($res['HqId']==$resHArr['HqId']){echo 'selected';}?>><?=ucwords(strtoupper($resHArr['HqName']));?></option><?php } ?></select>
+	 <select class="EditInputb" name="DHQ" id="DHQ"><?php $sqlHArr = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' AND StateId=".$_REQUEST['s']." order by HqName ASC",$con); while($resHArr = mysql_fetch_array($sqlHArr)){ ?><option value="<?=$resHArr['HqId'];?>" <?php if($res['HqId']==$resHArr['HqId']){echo 'selected';}?>><?=$resHArr['HqName'];?></option><?php } ?></select>
 	 <?php } ?> 
 	</td>
 	<td>&nbsp;</td>
@@ -484,19 +484,19 @@ $rTrvc=mysql_fetch_assoc($sTrvc); $rTrfc=mysql_fetch_assoc($sTrfc);
 <tr bgcolor="#FFFFFF">
  <td class="tdc" id="tdsn_<?=$res['DealerId'];?>"><?php echo $sn; ?></td>
  <td class="tdc"><img src="images/edit.png" id="E_<?=$res['DealerId'];?>" style="cursor:pointer;" onClick="edit(<?php echo $res['DealerId'];?>)"></td>
- <td class="tdc"><input class="EditInput" style="background-color:<?php if($res['BulkParty']=='Y'){echo '#FF66CC';}?>;" value="<?=$res['DealerName'];?>" readonly/></td>
- <td class="tdc"><input class="EditInput" style="background-color:<?php if($res['BulkParty']=='Y'){echo '#FF66CC';}?>;" value="<?=$res['DealerPerson'];?>" readonly/></td>
+ <td class="tdc"><input class="EditInput" style="background-color:<?php if($res['BulkParty']=='Y'){echo '#FF66CC';}?>;" value="<?=ucwords(strtolower($res['DealerName']));?>" readonly/></td>
+ <td class="tdc"><input class="EditInput" style="background-color:<?php if($res['BulkParty']=='Y'){echo '#FF66CC';}?>;" value="<?=ucwords(strtolower($res['DealerPerson']));?>" readonly/></td>
  <td class="tdc"><input class="EditInput" style="background-color:<?php if($res['BulkParty']=='Y'){echo '#FF66CC';}?>;" style="text-align:center;" value="<?=$res['DealerId'];?>" readonly/></td>
- <td class="tdc"><input class="EditInput" value="<?=$res['DealerCity'].'-'.$rHq['HqName'];?>" readonly/></td>
+ <td class="tdc"><input class="EditInput" value="<?=ucwords(strtolower($res['DealerCity'].'-'.$rHq['HqName']));?>" readonly/></td>
  <td class="tdc"><input class="EditInput" value="<?=$res['DealerCont'];?>" readonly/></td>
  <?php if($_REQUEST['VcH']>0 OR $_REQUEST['VcT']>0 OR ($_REQUEST['VcH']==0 AND $_REQUEST['FcH']==0 AND $_REQUEST['VcT']==0 AND $_REQUEST['FcT']==0)){ ?>
- <td class="tdc"><input class="EditInput" value="<?=$rHqvc['HqName'];?>" readonly/></td>
+ <td class="tdc"><input class="EditInput" value="<?=ucwords(strtolower($rHqvc['HqName']));?>" readonly/></td>
  <?php } if($_REQUEST['FcH']>0 OR $_REQUEST['FcT']>0 OR ($_REQUEST['VcH']==0 AND $_REQUEST['FcH']==0 AND $_REQUEST['VcT']==0 AND $_REQUEST['FcT']==0)){ ?>
- <td class="tdc"><input class="EditInput" value="<?=$rHqfc['HqName'];?>" readonly/></td>
+ <td class="tdc"><input class="EditInput" value="<?=ucwords(strtolower($rHqfc['HqName']));?>" readonly/></td>
  <?php } if($_REQUEST['VcH']>0 OR $_REQUEST['VcT']>0 OR ($_REQUEST['VcH']==0 AND $_REQUEST['FcH']==0 AND $_REQUEST['VcT']==0 AND $_REQUEST['FcT']==0)){ ?>
- <td class="tdc"><input class="EditInput" value="<?=$rTrvc['Fname'].' '.$rTrvc['Sname'].' '.$rTrvc['Lname'].' - '.$rTrvc['EmpCode'];?>"/></td>
+ <td class="tdc"><input class="EditInput" value="<?=ucwords(strtolower($rTrvc['Fname'].' '.$rTrvc['Sname'].' '.$rTrvc['Lname'])).' - '.$rTrvc['EmpCode'];?>"/></td>
  <?php } if($_REQUEST['FcH']>0 OR $_REQUEST['FcT']>0 OR ($_REQUEST['VcH']==0 AND $_REQUEST['FcH']==0 AND $_REQUEST['VcT']==0 AND $_REQUEST['FcT']==0)){ ?>
- <td class="tdc"><input class="EditInput" value="<?=$rTrfc['Fname'].' '.$rTrfc['Sname'].' '.$rTrfc['Lname'].' - '.$rTrfc['EmpCode'];?>"/></td>
+ <td class="tdc"><input class="EditInput" value="<?=ucwords(strtolower($rTrfc['Fname'].' '.$rTrfc['Sname'].' '.$rTrfc['Lname'])).' - '.$rTrfc['EmpCode'];?>"/></td>
  <?php } ?>
  <td class="tdc"><input class="EditInput" style="text-align:center;" value="<?=$res['DealerSts'];?>" readonly/></td>
 </tr>
@@ -519,19 +519,19 @@ $rTrvc=mysql_fetch_assoc($sTrvc); $rTrfc=mysql_fetch_assoc($sTrfc);
    <tr>
     <td style="width:50px;text-align:center;"><img src="images/delete.png" id="D_<?=$res['DealerId'];?>" style="cursor:pointer;" onClick="fclose(<?php echo $res['DealerId'];?>)"></td>
     <td class="td2" style="width:80px;">Firm Name:</td><td>
-	<td style="width:200px;"><input id="Dn_<?=$res['DealerId'];?>" class="EditInputb" value="<?=$res['DealerName'];?>"/></td>
+	<td style="width:200px;"><input id="Dn_<?=$res['DealerId'];?>" class="EditInputb" value="<?=ucwords(strtolower($res['DealerName']));?>"/></td>
 	<td>&nbsp;</td>
 	<td class="td2" style="width:100px;">Contact Person:</td>
-	<td style="width:200px;"><input id="Dp_<?=$res['DealerId'];?>" class="EditInputb" value="<?=$res['DealerPerson'];?>"/></td>
+	<td style="width:200px;"><input id="Dp_<?=$res['DealerId'];?>" class="EditInputb" value="<?=ucwords(strtolower($res['DealerPerson']));?>"/></td>
 	<td>&nbsp;</td>
 	<td class="td2" style="width:80px;">Dealer City:</td>
-	<td style="width:180px;"><input id="DCity_<?=$res['DealerId'];?>" class="EditInputb" value="<?=$res['DealerCity'];?>"/></td>
+	<td style="width:180px;"><input id="DCity_<?=$res['DealerId'];?>" class="EditInputb" value="<?=ucwords(strtolower($res['DealerCity']));?>"/></td>
 	<td>&nbsp;</td>
 	<td class="td2" style="width:80px;">Dealer HQ:</td>
 	<td style="width:180px;">
 	 <?php if($_REQUEST['hq']>0){?>
 	 <input type="hidden" id="DHQ_<?=$res['DealerId'];?>" class="EditInputb" value="<?=$res['HqId'];?>" readonly/>
-	 <input class="EditInputb" value="<?=$res['HqName'];?>" readonly/>
+	 <input class="EditInputb" value="<?=ucwords(strtolower($res['HqName']));?>" readonly/>
 	 <?php }else{ ?> 
 	 <select class="EditInputb" name="DHQ_<?=$res['DealerId'];?>" id="DHQ_<?=$res['DealerId'];?>">
 	 <?php foreach ($HQarr as $key => $value){ ?>
@@ -560,7 +560,7 @@ $rTrvc=mysql_fetch_assoc($sTrvc); $rTrfc=mysql_fetch_assoc($sTrfc);
 	<td>&nbsp;</td>
 	<td class="td2" style="width:80px;">Address:</td>
 	<td style="width:120px;" colspan="4">
-	 <input id="DAdd_<?=$res['DealerId'];?>" class="EditInputb" style="width:99%;" value="<?php echo $res['DealerAdd']; ?>"/>
+	 <input id="DAdd_<?=$res['DealerId'];?>" class="EditInputb" style="width:99%;" value="<?php echo ucwords(strtolower($res['DealerAdd'])); ?>"/>
 	</td>	
 	<td style="width:50px;">&nbsp;</td>
    </tr>

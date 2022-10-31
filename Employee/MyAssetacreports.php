@@ -377,7 +377,7 @@ if($_REQUEST['yer']=='AllY')    ////////////////////////////////////////////////
 <tr>
  <td>
   <table border="1">
-<tr bgcolor="#0080FF"><td colspan="20" style="color:#FFFFFF;font-weight:bold;height:22px;font-family:Times New Roman;font-size:14px;">&nbsp;Request:&nbsp;</td></tr>
+<tr bgcolor="#0080FF"><td colspan="25" style="color:#FFFFFF;font-weight:bold;height:22px;font-family:Times New Roman;font-size:14px;">&nbsp;Request:&nbsp;</td></tr>
   			   
 <tr bgcolor="#7a6189" style="color:#FFFFFF;font-weight:bold;height:22px;font-family:Times New Roman;font-size:12px;">
   <td rowspan="2" style="width:30px;" align="center">SNo.</td>
@@ -389,7 +389,7 @@ if($_REQUEST['yer']=='AllY')    ////////////////////////////////////////////////
   <td rowspan="2" style="width:50px;" align="center">Details</td>
   <td colspan="4" style="width:240px;" align="center">Amount</td>
   <td colspan="5" align="center">Date</td>
-  <td colspan="2" align="center">Copy</td>
+  <td colspan="6" align="center">Copy</td>
   <td rowspan="2" style="width:80px;" align="center">Status</td>
 </tr>
 <tr bgcolor="#7a6189" style="color:#FFFFFF;font-weight:bold;height:22px;font-family:Times New Roman;font-size:12px;">
@@ -402,8 +402,12 @@ if($_REQUEST['yer']=='AllY')    ////////////////////////////////////////////////
   <td style="width:60px;" align="center">Pay</td>
   <td style="width:60px;" align="center">Approval</td>
   <td style="width:60px;" align="center">Expiry</td>
-  <td style="width:60px;" align="center">Bill</td>
-  <td style="width:60px;" align="center">Asset</td>
+  <td style="width:50px;" align="center">Bill</td>
+  <td style="width:50px;" align="center">Asset</td>
+  <td style="width:50px;" align="center">RC</td>
+  <td style="width:50px;" align="center">DL</td>
+  <td style="width:50px;" align="center">Insu</td>
+  <td style="width:50px;" align="center">Odo</td>
 </tr>
 <?php $sno=1; while($resa2=mysql_fetch_assoc($sqla2)){  
 $SqlEmp = mysql_query("SELECT EmpCode,Fname,Sname,Lname,DepartmentId,MobileNo_Vnr,MobileNo from hrm_employee INNER JOIN hrm_employee_general ON hrm_employee.EmployeeID=hrm_employee_general.EmployeeID INNER JOIN hrm_employee_personal ON hrm_employee.EmployeeID=hrm_employee_personal.EmployeeID WHERE hrm_employee.EmployeeID=".$resa2['EmployeeID'], $con); $ResEmp=mysql_fetch_assoc($SqlEmp);
@@ -436,6 +440,12 @@ $sDept=mysql_query("select DepartmentCode from hrm_department where DepartmentId
   
   <td align="center"><?php if($resa2['ReqBillImgExtName']!=''){ ?><a href="#" onClick="javascript:window.open('MyAssetCopy.php?Img=Bill&value=<?php echo $resa2['ReqBillImgExtName']; ?>','ImgF','width=600,height=500')">Bill</a><?php } ?></td>
   <td align="center"><?php if($resa2['ReqAssestImgExtName']!=''){ ?><a href="#" onClick="javascript:window.open('MyAssetCopy.php?Img=Asset&value=<?php echo $resa2['ReqAssestImgExtName']; ?>','ImgF','width=600,height=500')">Asset</a><?php } ?></td>
+  <td align="center"><?php if($resa2['RCNo_File']!=''){ ?><a href="#" onClick="javascript:window.open('MyAssetCopy.php?Img=RC&value=<?php echo $resa2['RCNo_File']; ?>','ImgF','width=600,height=500')">RC</a><?php } ?></td>
+  <td align="center"><?php if($resa2['DLNo_File']!=''){ ?><a href="#" onClick="javascript:window.open('MyAssetCopy.php?Img=DL&value=<?php echo $resa2['DLNo_File']; ?>','ImgF','width=600,height=500')">DL</a><?php } ?></td>
+  <td align="center"><?php if($resa2['InsuNo_File']!=''){ ?><a href="#" onClick="javascript:window.open('MyAssetCopy.php?Img=Insu&value=<?php echo $resa2['InsuNo_File']; ?>','ImgF','width=600,height=500')">Insu</a><?php } ?></td>
+  <td align="center"><?php if($resa2['Beg_OdoPhoto']!=''){ ?><a href="#" onClick="javascript:window.open('MyAssetCopy.php?Img=Odo&value=<?php echo $resa2['Beg_OdoPhoto']; ?>','ImgF','width=600,height=500')">Odo</a><?php } ?></td>
+  
+  
   <td align="center" style="font-size:12px; font-family:Times New Roman;color:<?php if($resa2['AccPayStatus']==1){echo '#FF8C1A';}elseif($resa2['AccPayStatus']==2){echo '#008200';}elseif($resa2['AccPayStatus']==3){echo '#FF0000';} ?>;"><?php if($resa2['AccPayStatus']==0){echo 'Draft';}elseif($resa2['AccPayStatus']==1){echo 'Pending';}elseif($resa2['AccPayStatus']==2){echo 'Approved';}elseif($resa2['AccPayStatus']==3){echo 'Rejected';} ?></td>
 </tr>
  <?php $sno++; } ?>
@@ -489,7 +499,7 @@ $sDept2=mysql_query("select DepartmentCode from hrm_department where DepartmentI
 <tr>
  <td>
   <table border="1">
-   <tr bgcolor="#0080FF"><td colspan="20" style="color:#FFFFFF;font-weight:bold;height:22px;font-family:Times New Roman;font-size:14px;">&nbsp;Request:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick="Exportrep('R')" style="color:#F9F900; font-size:12px;">Export Excel</a></td></tr>		   
+   <tr bgcolor="#0080FF"><td colspan="25" style="color:#FFFFFF;font-weight:bold;height:22px;font-family:Times New Roman;font-size:14px;">&nbsp;Request:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick="Exportrep('R')" style="color:#F9F900; font-size:12px;">Export Excel</a></td></tr>		   
 <tr bgcolor="#7a6189" style="color:#FFFFFF;font-weight:bold;height:22px;font-family:Times New Roman;font-size:12px;">
   <td rowspan="2" style="width:30px;" align="center">SNo.</td>
   <td rowspan="2" style="width:50px;" align="center">EC</td>
@@ -500,7 +510,7 @@ $sDept2=mysql_query("select DepartmentCode from hrm_department where DepartmentI
   <td rowspan="2" style="width:50px;" align="center">Details</td>
   <td colspan="4" align="center">Amount</td>
   <td colspan="5" align="center">Date</td>
-  <td colspan="2" align="center">Copy</td>
+  <td colspan="6" align="center">Copy</td>
   <td rowspan="2" style="width:80px;" align="center">Status</td>
 </tr>
 <tr bgcolor="#7a6189" style="color:#FFFFFF;font-weight:bold;height:22px;font-family:Times New Roman;font-size:12px;">
@@ -513,8 +523,12 @@ $sDept2=mysql_query("select DepartmentCode from hrm_department where DepartmentI
   <td style="width:60px;" align="center">Pay</td>
   <td style="width:60px;" align="center">Approval</td>
   <td style="width:60px;" align="center">Expiry</td>
-  <td style="width:60px;" align="center">Bill</td>
-  <td style="width:60px;" align="center">Asset</td>
+  <td style="width:50px;" align="center">Bill</td>
+  <td style="width:50px;" align="center">Asset</td>
+  <td style="width:50px;" align="center">RC</td>
+  <td style="width:50px;" align="center">DL</td>
+  <td style="width:50px;" align="center">Insu</td>
+  <td style="width:50px;" align="center">Odo</td>
 </tr>
 <?php $sno=1; while($resa2=mysql_fetch_assoc($sqla2)){  $SqlEmp = mysql_query("SELECT EmpCode,Fname,Sname,Lname,DepartmentId,MobileNo_Vnr,MobileNo from hrm_employee INNER JOIN hrm_employee_general ON hrm_employee.EmployeeID=hrm_employee_general.EmployeeID INNER JOIN hrm_employee_personal ON hrm_employee.EmployeeID=hrm_employee_personal.EmployeeID WHERE hrm_employee.EmployeeID=".$resa2['EmployeeID'], $con); $ResEmp=mysql_fetch_assoc($SqlEmp);
 $Ename = $ResEmp['Fname'].'&nbsp;'.$ResEmp['Sname'].'&nbsp;'.$ResEmp['Lname']; $LEC=strlen($ResEmp['EmpCode']); 
@@ -544,6 +558,12 @@ $sDept=mysql_query("select DepartmentCode from hrm_department where DepartmentId
   
   <td align="center"><?php if($resa2['ReqBillImgExtName']!=''){ ?><a href="#" onClick="javascript:window.open('MyAssetCopy.php?Img=Bill&value=<?php echo $resa2['ReqBillImgExtName']; ?>','ImgF','width=600,height=500')">Bill</a><?php } ?></td>
   <td align="center"><?php if($resa2['ReqAssestImgExtName']!=''){ ?><a href="#" onClick="javascript:window.open('MyAssetCopy.php?Img=Asset&value=<?php echo $resa2['ReqAssestImgExtName']; ?>','ImgF','width=600,height=500')">Asset</a><?php } ?></td>
+  
+  <td align="center"><?php if($resa2['RCNo_File']!=''){ ?><a href="#" onClick="javascript:window.open('MyAssetCopy.php?Img=RC&value=<?php echo $resa2['RCNo_File']; ?>','ImgF','width=600,height=500')">RC</a><?php } ?></td>
+  <td align="center"><?php if($resa2['DLNo_File']!=''){ ?><a href="#" onClick="javascript:window.open('MyAssetCopy.php?Img=DL&value=<?php echo $resa2['DLNo_File']; ?>','ImgF','width=600,height=500')">DL</a><?php } ?></td>
+  <td align="center"><?php if($resa2['InsuNo_File']!=''){ ?><a href="#" onClick="javascript:window.open('MyAssetCopy.php?Img=Insu&value=<?php echo $resa2['InsuNo_File']; ?>','ImgF','width=600,height=500')">Insu</a><?php } ?></td>
+  <td align="center"><?php if($resa2['Beg_OdoPhoto']!=''){ ?><a href="#" onClick="javascript:window.open('MyAssetCopy.php?Img=Odo&value=<?php echo $resa2['Beg_OdoPhoto']; ?>','ImgF','width=600,height=500')">Odo</a><?php } ?></td>
+  
   <td align="center" style="font-size:12px; font-family:Times New Roman;color:<?php if($resa2['AccPayStatus']==1){echo '#FF8C1A';}elseif($resa2['AccPayStatus']==2){echo '#008200';}elseif($resa2['AccPayStatus']==3){echo '#FF0000';} ?>;"><?php if($resa2['AccPayStatus']==0){echo 'Draft';}elseif($resa2['AccPayStatus']==1){echo 'Pending';}elseif($resa2['AccPayStatus']==2){echo 'Approved';}elseif($resa2['AccPayStatus']==3){echo 'Rejected';} ?></td>
 </tr>
 <?php $sno++; } ?>

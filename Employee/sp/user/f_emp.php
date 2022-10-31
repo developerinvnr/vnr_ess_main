@@ -121,17 +121,17 @@ var x = "f_emp.php?action=newsave&c="+c+"&s="+s+"&hq="+hq;  window.location=x;}
  <td><select class="EditInput" style="width:120px;" name="State1" id="State1">
  <option value="0">Select</option>
  <?php $sqlS = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); 
-	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value=<?=$resS['StateId']?>><?=strtoupper($resS['StateName'])?></option><?php } ?><option value="99">All</option></select></td>
+	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value=<?=$resS['StateId']?>><?=$resS['StateName']?></option><?php } ?><option value="99">All</option></select></td>
 	   
  <td bgcolor="#B0FB4D"><select class="EditInput" style="width:120px;" name="State2" id="State2">
  <option value="0">Select</option>
  <?php $sqlS = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); 
-	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value=<?=$resS['StateId']?>><?=strtoupper($resS['StateName'])?></option><?php } ?><option value="99">All</option></select></td>
+	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value=<?=$resS['StateId']?>><?=$resS['StateName']?></option><?php } ?><option value="99">All</option></select></td>
 	   
  <td bgcolor="#B0FB4D"><select class="EditInput" style="width:120px;" name="State3" id="State3">
  <option value="0">Select</option>
  <?php $sqlS = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); 
-	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value=<?=$resS['StateId']?>><?=strtoupper($resS['StateName'])?></option><?php } ?><option value="99">All</option></select></td>	   
+	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value=<?=$resS['StateId']?>><?=$resS['StateName']?></option><?php } ?><option value="99">All</option></select></td>	   
  
  
  <td bgcolor="#B0FB4D"><select name="TLStatus" class="EditInput" style="width:50px;background-color:#B0FB4D;">
@@ -155,21 +155,21 @@ if(isset($_REQUEST['action']) && $_REQUEST['action']=="edit" && $_REQUEST['eid']
  <td><input name="TLPwd" class="EditInput" style="width:100px;" value="<?php echo decrypt($res['TLPwd']); ?>"/></td>
  
  <td><select class="EditInput" style="width:120px;" name="State1" id="State1"><?php $sqlS = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); 
-	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)){ ?><option value="<?=$resS['StateId']?>" <?php if($res['State1']==$resS['StateId']){echo 'selected';}?>><?=strtoupper($resS['StateName'])?></option><?php } ?>
+	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)){ ?><option value="<?=$resS['StateId']?>" <?php if($res['State1']==$resS['StateId']){echo 'selected';}?>><?=$resS['StateName']?></option><?php } ?>
 	   <option value="0" <?php if($res['State1']==0 OR $res['State1']==''){echo 'selected';} ?>>Select</option>
 	   <option value="99" <?php if($res['State1']==99){echo 'selected';} ?>>All</option>
 	   </select>
 	   </td>
 	   
  <td><select class="EditInput" style="width:120px;" name="State2" id="State2"><?php $sqlS = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); 
-	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value="<?=$resS['StateId']?>" <?php if($res['State2']==$resS['StateId']){echo 'selected';} ?>><?=strtoupper($resS['StateName'])?></option><?php } ?>
+	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value="<?=$resS['StateId']?>" <?php if($res['State2']==$resS['StateId']){echo 'selected';} ?>><?=$resS['StateName']?></option><?php } ?>
 	   <option value="0" <?php if($res['State2']==0 OR $res['State2']==''){echo 'selected';} ?>>Select</option>
 	   <option value="99" <?php if($res['State1']==99){echo 'selected';} ?>>All</option>
 	   </select>
 	   </td>
 	   
  <td><select class="EditInput" style="width:120px;" name="State3" id="State3"><?php $sqlS = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); 
-	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value="<?=$resS['StateId']?>" <?php if($res['State3']==$resS['StateId']){echo 'selected';} ?>><?=strtoupper($resS['StateName'])?></option><?php } ?>
+	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value="<?=$resS['StateId']?>" <?php if($res['State3']==$resS['StateId']){echo 'selected';} ?>><?=$resS['StateName']?></option><?php } ?>
 	   <option value="0" <?php if($res['State3']==0 OR $res['State3']==''){echo 'selected';} ?>>Select</option>
 	   <option value="99" <?php if($res['State1']==99){echo 'selected';} ?>>All</option>
 	   </select>
@@ -187,21 +187,21 @@ if(isset($_REQUEST['action']) && $_REQUEST['action']=="edit" && $_REQUEST['eid']
  <td><input type="password" name="TLPwd" class="EditInput" style="width:100px;" value="**********"/></td>
  
  <td><select class="EditInput" style="width:120px;" name="State1" id="State1"><?php $sqlS = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); 
-	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)){ ?><option value="<?=$resS['StateId']?>" <?php if($res['State1']==$resS['StateId']){echo 'selected';}?>><?=strtoupper($resS['StateName'])?></option><?php } ?>
+	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)){ ?><option value="<?=$resS['StateId']?>" <?php if($res['State1']==$resS['StateId']){echo 'selected';}?>><?=$resS['StateName']?></option><?php } ?>
 	   <option value="0" <?php if($res['State1']==0 OR $res['State1']==''){echo 'selected';} ?>>Select</option>
 	   <option value="99" <?php if($res['State1']==99){echo 'selected';} ?>>All</option>
 	   </select>
 	   </td>
 	   
  <td><select class="EditInput" style="width:120px;" name="State2" id="State2"><?php $sqlS = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); 
-	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value="<?=$resS['StateId']?>" <?php if($res['State2']==$resS['StateId']){echo 'selected';} ?>><?=strtoupper($resS['StateName'])?></option><?php } ?>
+	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value="<?=$resS['StateId']?>" <?php if($res['State2']==$resS['StateId']){echo 'selected';} ?>><?=$resS['StateName']?></option><?php } ?>
 	   <option value="0" <?php if($res['State2']==0 OR $res['State2']==''){echo 'selected';} ?>>Select</option>
 	   <option value="99" <?php if($res['State1']==99){echo 'selected';} ?>>All</option>
 	   </select>
 	   </td>
 	   
  <td><select class="EditInput" style="width:120px;" name="State3" id="State3"><?php $sqlS = mysql_query("SELECT * FROM hrm_state where CountryId=".$_REQUEST['c']." order by StateName ASC", $con); 
-	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value="<?=$resS['StateId']?>" <?php if($res['State3']==$resS['StateId']){echo 'selected';} ?>><?=strtoupper($resS['StateName'])?></option><?php } ?>
+	   $resS=mysql_fetch_array($sqlS); while($resS=mysql_fetch_array($sqlS)) {?><option value="<?=$resS['StateId']?>" <?php if($res['State3']==$resS['StateId']){echo 'selected';} ?>><?=$resS['StateName']?></option><?php } ?>
 	   <option value="0" <?php if($res['State3']==0 OR $res['State3']==''){echo 'selected';} ?>>Select</option>
 	   <option value="99" <?php if($res['State1']==99){echo 'selected';} ?>>All</option>
 	   </select>

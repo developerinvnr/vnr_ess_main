@@ -121,17 +121,17 @@ function FunETotal(v)
 	   <td style="font-size:11px;height:18px;width:60px;color:#E6E6E6;" align="right"><b>Crop :</b></td>
 	    <td>
 		 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="CropGrp" id="CropGrp" onChange="ClickGrp(this.value)">
-<?php if($_REQUEST['grp']==1){ ?><option value="1" selected>VEGETABLE CROP</option><option value="2">FIELD CROP</option><option value="3">All CROP</option>
-<?php }elseif($_REQUEST['grp']==2){ ?><option value="2" selected>FIELD CROP</option><option value="1">VEGETABLE CROP</option><option value="3">All CROP</option>
-<?php }elseif($_REQUEST['grp']==3){ ?><option value="3" selected>All CROP</option><option value="1">VEGETABLE CROP</option><option value="2">FIELD CROP</option><?php } ?>
+<?php if($_REQUEST['grp']==1){ ?><option value="1" selected>Vegetable Crop</option><option value="2">Field Crop</option><option value="3">All Crop</option>
+<?php }elseif($_REQUEST['grp']==2){ ?><option value="2" selected>Field Crop</option><option value="1">Vegetable Crop</option><option value="3">All Crop</option>
+<?php }elseif($_REQUEST['grp']==3){ ?><option value="3" selected>All Crop</option><option value="1">Vegetable Crop</option><option value="2">Field Crop</option><?php } ?>
         </select>
 		</td>
 		<td style="font-size:11px; height:18px;width:60px;color:#E6E6E6;" align="right"><b>Name :</b></td>
 	     <td>
 		 <select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="ItemV" id="ItemV" onChange="ChangeII(this.value)">
 <?php if($_REQUEST['ii']>0){ $sqlI=mysql_query("select ItemName from hrm_sales_seedsitem where ItemId=".$_REQUEST['ii'], $con); $resI=mysql_fetch_assoc($sqlI); ?>	
-         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo strtoupper($resI['ItemName']); ?></option>
-		 <?php }else{ ?><option value="0" selected>SELECT</option><?php } ?>
+         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo ucwords(strtolower($resI['ItemName'])); ?></option>
+		 <?php }else{ ?><option value="0" selected>Select</option><?php } ?>
 <?php if($_REQUEST['grp']==1){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=1 order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==2){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=2 order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==3){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where (GroupId=1 OR GroupId=2) order by GroupId ASC,ItemName ASC", $con);}
@@ -141,9 +141,9 @@ function FunETotal(v)
 		 
 		 <td style="font-size:11px;height:18px;width:170px;color:#E6E6E6; text-align:center;">
 		 <select style="font-size:12px;width:150px;height:20px;background-color:#DDFFBB;" name="BPrtyCheck" id="BPrtyCheck">
-          <option value="0" <?php if($_REQUEST['bp']=='0'){echo 'selected';}?>>ALL DEALER</option>
-		  <option value="1" <?php if($_REQUEST['bp']=='1'){echo 'selected';}?>>BULK DEALER</option>
-		  <option value="2" <?php if($_REQUEST['bp']=='2'){echo 'selected';}?>>WITHOUT BULK DEALER</option>
+           <option value="0" <?php if($_REQUEST['bp']=='0'){echo 'selected';}?>>All Dealer</option>
+		  <option value="1" <?php if($_REQUEST['bp']=='1'){echo 'selected';}?>>Bulk Dealer</option>
+		  <option value="2" <?php if($_REQUEST['bp']=='2'){echo 'selected';}?>>Without Bulk Dealer</option>
 	     </select>
 	     </td>
 		 

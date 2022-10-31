@@ -125,7 +125,7 @@ function PrintSpR()
 <?php //************************************************************************************************************************************************************?>
 <input type="hidden" id="ComId" value="<?php echo $_REQUEST['ci']; ?>" />
 <input type="hidden" id="UserId" value="<?php echo $UserId; ?>" />	
-<?php if($_REQUEST['m']==1){$m='JANUARY';}elseif($_REQUEST['m']==2){$m='FEBRUARY';}elseif($_REQUEST['m']==3){ $m='MARCH';}elseif($_REQUEST['m']==4){$m='APRIL';}elseif($_REQUEST['m']==5){$m='MAY';}elseif($_REQUEST['m']==6){$m='JUNE';}elseif($_REQUEST['m']==7){$m='JULY';}elseif($_REQUEST['m']==8){$m='AUGUST';}elseif($_REQUEST['m']==9){$m='SEPTEMBER';}elseif($_REQUEST['m']==10){$m='OCTOBER';}elseif($_REQUEST['m']==11){$m='NOVEMBER';}elseif($_REQUEST['m']==12){$m='DECEMBER';} ?>	  
+<?php if($_REQUEST['m']==1){$m='January';}elseif($_REQUEST['m']==2){$m='February';}elseif($_REQUEST['m']==3){ $m='March';}elseif($_REQUEST['m']==4){$m='April';}elseif($_REQUEST['m']==5){$m='May';}elseif($_REQUEST['m']==6){$m='June';}elseif($_REQUEST['m']==7){$m='July';}elseif($_REQUEST['m']==8){$m='August';}elseif($_REQUEST['m']==9){$m='September';}elseif($_REQUEST['m']==10){$m='October';}elseif($_REQUEST['m']==11){$m='November';}elseif($_REQUEST['m']==12){$m='December';} ?>	  
 <table border="0" style="margin-top:0px; width:100%; height:150px;">	
 <tr>
  <td valign="top">
@@ -150,32 +150,32 @@ function PrintSpR()
 		 <td style="font-size:11px;height:18px;width:60px;color:#E6E6E6;" align="right"><b>Month :</b></td>
 	    <td><select style="font-size:12px;width:100px;height:20px;background-color:#DDFFBB;" name="MonthV" id="MonthV" onChange="ChangeMM(this.value)">
 <?php if($_REQUEST['m']>0){ ?><option value="<?php echo $_REQUEST['m']; ?>" selected><?php echo $m; ?></option>
-<?php } elseif($_REQUEST['m']=='All'){ ?><option value="All" selected>All MONTH</option>
-		 <?php }else{ ?><option value="0" selected>SELECT</option><?php } if($_REQUEST['m']!=4){ ?><option value="4">APRIL</option><?php } ?>
-		 <?php if($_REQUEST['m']!=5){ ?> <option value="5">MAY</option><?php } if($_REQUEST['m']!=6){ ?><option value="6">JUNE</option><?php } ?>
-		 <?php if($_REQUEST['m']!=7){ ?><option value="7">JULY</option><?php } if($_REQUEST['m']!=8){ ?><option value="8">AUGUST</option><?php } ?>
-		 <?php if($_REQUEST['m']!=9){ ?><option value="9">SEPTEMBER</option><?php } if($_REQUEST['m']!=10){ ?><option value="10">OCTOBER</option><?php } ?>
-		 <?php if($_REQUEST['m']!=11){ ?><option value="11">NOVEMBER</option><?php } if($_REQUEST['m']!=12){ ?><option value="12">DECEMBER</option><?php } ?>
-		 <?php if($_REQUEST['m']!=1){ ?><option value="1">JANUARY</option><?php } if($_REQUEST['m']!=2){ ?><option value="2">FEBRUARY</option><?php } ?>
-		 <?php if($_REQUEST['m']!=3){ ?><option value="3">MARCH</option><?php } if($_REQUEST['m']!='All'){ ?><option value="All">ALL MONTH</option><?php } ?>
+<?php } elseif($_REQUEST['m']=='All'){ ?><option value="All" selected>All Month</option>
+		 <?php }else{ ?><option value="0" selected>Select</option><?php } if($_REQUEST['m']!=4){ ?><option value="4">April</option><?php } ?>
+		 <?php if($_REQUEST['m']!=5){ ?> <option value="5">May</option><?php } if($_REQUEST['m']!=6){ ?><option value="6">June</option><?php } ?>
+		 <?php if($_REQUEST['m']!=7){ ?><option value="7">July</option><?php } if($_REQUEST['m']!=8){ ?><option value="8">August</option><?php } ?>
+		 <?php if($_REQUEST['m']!=9){ ?><option value="9">September</option><?php } if($_REQUEST['m']!=10){ ?><option value="10">October</option><?php } ?>
+		 <?php if($_REQUEST['m']!=11){ ?><option value="11">November</option><?php } if($_REQUEST['m']!=12){ ?><option value="12">December</option><?php } ?>
+		 <?php if($_REQUEST['m']!=1){ ?><option value="1">January</option><?php } if($_REQUEST['m']!=2){ ?><option value="2">February</option><?php } ?>
+		 <?php if($_REQUEST['m']!=3){ ?><option value="3">March</option><?php } if($_REQUEST['m']!='All'){ ?><option value="All">ALL Month</option><?php } ?>
 		 </select>	  
 		 </td>
 	   <td></td>
 	   <td style="font-size:11px;height:18px;width:60px;color:#E6E6E6;" align="right"><b>Crop :</b></td>
 	    <td><select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="CropGrp" id="CropGrp" onChange="ClickGrp(this.value)">
-<?php if($_REQUEST['grp']==0){ ?><option value="0" selected>SELECT CROP</option><option value="1">VEGETABLE CROP</option>
-                                 <option value="2">FIELD CROP</option><option value="3">All CROP</option>		 
-<?php }elseif($_REQUEST['grp']==1){ ?><option value="1" selected>VEGETABLE CROP</option><option value="2">FIELD CROP</option><option value="3">All CROP</option>
-<?php }elseif($_REQUEST['grp']==2){ ?><option value="2" selected>FIELD CROP</option><option value="1">VEGETABLE CROP</option><option value="3">All CROP</option>
-<?php }elseif($_REQUEST['grp']==3){ ?><option value="3" selected>All CROP</option><option value="1">VEGETABLE CROP</option><option value="2">FIELD CROP</option><?php } ?>
+<?php if($_REQUEST['grp']==0){ ?><option value="0" selected>Select Crop</option><option value="1">Vegetable Crop</option>
+                                 <option value="2">Field Crop</option><option value="3">All Crop</option>		 
+<?php }elseif($_REQUEST['grp']==1){ ?><option value="1" selected>Vegetable Crop</option><option value="2">Field Crop</option><option value="3">All Crop</option>
+<?php }elseif($_REQUEST['grp']==2){ ?><option value="2" selected>Field Crop</option><option value="1">Vegetable Crop</option><option value="3">All Crop</option>
+<?php }elseif($_REQUEST['grp']==3){ ?><option value="3" selected>All Crop</option><option value="1">Vegetable Crop</option><option value="2">Field Crop</option><?php } ?>
         </select>
 		</td>
 		<td></td>
 		<td style="font-size:11px;height:18px;width:60px;color:#E6E6E6;" align="right"><b>Name :</b></td>
 	    <td><select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="ItemV" id="ItemV" onChange="ChangeII(this.value)">
 <?php if($_REQUEST['ii']>0){ $sqlI=mysql_query("select ItemName from hrm_sales_seedsitem where ItemId=".$_REQUEST['ii'], $con); $resI=mysql_fetch_assoc($sqlI); ?>	
-         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo strtoupper($resI['ItemName']); ?></option>
-		 <?php }else{ ?><option value="0" selected>SELECT</option><?php } ?>
+         <option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo ucwords(strtolower($resI['ItemName'])); ?></option>
+		 <?php }else{ ?><option value="0" selected>Select</option><?php } ?>
 <?php if($_REQUEST['grp']==0){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==1){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=1 order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==2){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=2 order by ItemName ASC", $con);}
@@ -230,21 +230,21 @@ $my1='<font color="#A60053">'.date("y",strtotime($resY3['FromDate'])).'</font>';
 
  </tr>
    <tr style="background-color:#D5F1D1;color:#000000;font-size:12px;">  
-<td align="center" style="width:120px;"><b>CROP</b></td>
-<?php if($_REQUEST['va']==1){ ?><td align="center" style="width:150px;"><b>VARIETY</b></td><td align="center" style="width:50px;"><b>&nbsp;TYPE&nbsp;</b></td><?php } ?>
+<td align="center" style="width:120px;"><b>Crop</b></td>
+<?php if($_REQUEST['va']==1){ ?><td align="center" style="width:150px;"><b>Variety</b></td><td align="center" style="width:50px;"><b>&nbsp;Type&nbsp;</b></td><?php } ?>
 	
-<?php if($_REQUEST['m']==4 OR $_REQUEST['m']=='All'){ ?><td align="center" width="80"><b>APR-<?php echo $my1;?></b></td><?php } ?>
-<?php if($_REQUEST['m']==5 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>MAY-<?php echo $my1;?></b></td><?php } ?>
-<?php if($_REQUEST['m']==6 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>JUN-<?php echo $my1;?></b></td><?php } ?>
-<?php if($_REQUEST['m']==7 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>JUL-<?php echo $my1;?></b></td><?php } ?>
-<?php if($_REQUEST['m']==8 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>AUG-<?php echo $my1;?></b></td><?php } ?>
-<?php if($_REQUEST['m']==9 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>SEP-<?php echo $my1;?></b></td><?php } ?>
-<?php if($_REQUEST['m']==10 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>OCT-<?php echo $my1;?></b></td><?php } ?>
-<?php if($_REQUEST['m']==11 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>NOV-<?php echo $my1;?></b></td><?php } ?>
-<?php if($_REQUEST['m']==12 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>DEC-<?php echo $my1;?></b></td><?php } ?>
-<?php if($_REQUEST['m']==1 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>JAN-<?php echo $my2;?></b></td><?php } ?>
-<?php if($_REQUEST['m']==2 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>FEB-<?php echo $my2;?></b></td><?php } ?>
-<?php if($_REQUEST['m']==3 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>MAR-<?php echo $my2;?></b></td><?php } ?>
+<?php if($_REQUEST['m']==4 OR $_REQUEST['m']=='All'){ ?><td align="center" width="80"><b>Apr-<?php echo $my1;?></b></td><?php } ?>
+<?php if($_REQUEST['m']==5 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>May-<?php echo $my1;?></b></td><?php } ?>
+<?php if($_REQUEST['m']==6 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>Jun-<?php echo $my1;?></b></td><?php } ?>
+<?php if($_REQUEST['m']==7 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>Jul-<?php echo $my1;?></b></td><?php } ?>
+<?php if($_REQUEST['m']==8 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>Aug-<?php echo $my1;?></b></td><?php } ?>
+<?php if($_REQUEST['m']==9 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>Sep-<?php echo $my1;?></b></td><?php } ?>
+<?php if($_REQUEST['m']==10 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>Oct-<?php echo $my1;?></b></td><?php } ?>
+<?php if($_REQUEST['m']==11 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>Nov-<?php echo $my1;?></b></td><?php } ?>
+<?php if($_REQUEST['m']==12 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>Dec-<?php echo $my1;?></b></td><?php } ?>
+<?php if($_REQUEST['m']==1 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>Jan-<?php echo $my2;?></b></td><?php } ?>
+<?php if($_REQUEST['m']==2 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>Feb-<?php echo $my2;?></b></td><?php } ?>
+<?php if($_REQUEST['m']==3 OR $_REQUEST['m']=='All'){ ?><td align="center" width="60"><b>Mar-<?php echo $my2;?></b></td><?php } ?>
 <td align="center" style="width:80px;"><b>Sales (Kg)</b></td>
 <td align="center" style="width:50px;"><b>%</b></td>
 <td align="center" style="width:80px;"><b>Sales (Kg)</b></td>

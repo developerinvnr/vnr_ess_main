@@ -10,11 +10,13 @@ if($_SESSION['login'] = true){require_once('AdminMenuSession.php');} else {$msg=
 $_SESSION['EmpID']=$_REQUEST['ID'];   //loyee
 $EMPID=$_SESSION['EmpID'];
 //********************************** 
+
 if(isset($_POST['EditGeneralE'])) 
 { $sql = mysql_query("select hrm_employee.*,hrm_employee_general.* from hrm_employee INNER JOIN hrm_employee_general ON hrm_employee.EmployeeID=hrm_employee_general.EmployeeID where hrm_employee.EmployeeID=".$EMPID, $con); $res=mysql_fetch_assoc($sql);
    if($sql)
    {  $sqlIns=mysql_query("Insert into hrm_employee_event(EmployeeID,EmpCode,EmpPass,EmpType,EmpStatus,Fname,Sname,Lname,CompanyId,CreatedBy,CreatedDate,YearId)values(".$res['EmployeeID'].", ".$res['EmpCode'].",'".$res['EmpPass']."','".$res['EmpType']."','".$res['EmpStatus']."','".$res['Fname']."','".$res['Sname']."','".$res['Lname']."',".$res['CompanyId'].",".$res['CreatedBy'].",'".$res['CreatedDate']."',".$res['YearId'].")", $con);
 
+    
      $sqlIns1=mysql_query("Insert into hrm_employee_general_event(GeneralId,EmployeeID,FileNo,DateJoining,DateConfirmationYN,DateConfirmation,DOB,DOB_dm,GradeId,CostCenter,HqId,DepartmentId,DesigId,DesigId2,MobileNo_Vnr,EmailId_Vnr,BankName,AccountNo,BranchName,BranchAdd,BankName2,AccountNo2,BranchName2,BranchAdd2,InsuCardNo,PfAccountNo,PF_UAN,EsicAllow,EsicNo,ReportingName,ReportingDesigId,ReportingEmailId,ReportingContactNo,CreatedBy,CreatedDate,YearId)values(".$res['GeneralId'].",".$res['EmployeeID'].",".$res['FileNo'].",'".$res['DateJoining']."','".$res['DateConfirmationYN']."','".$res['DateConfirmation']."','".$res['DOB']."','".$res['DOB_dm']."',".$res['GradeId'].",'".$res['CostCenter']."',".$res['HqId'].",".$res['DepartmentId'].",".$res['DesigId'].",".$res['DesigId2'].",".$res['MobileNo_Vnr'].",'".$res['EmailId_Vnr']."','".$res['BankName']."',".$res['AccountNo'].",'".$res['BranchName']."','".$res['BranchAdd']."','".$res['BankName2']."',".$res['AccountNo2'].",'".$res['BranchName2']."','".$res['BranchAdd2']."','".$res['InsuCardNo']."','".$res['PfAccountNo']."','".$res['PF_UAN']."','".$res['EsicAllow']."','".$res['EsicNo']."','".$res['ReportingName']."',".$res['ReportingDesigId'].",'".$res['ReportingEmailId']."',".$res['ReportingContactNo'].",".$res['CreatedBy'].",'".$res['CreatedDate']."',".$res['YearId'].")", $con);
   
      if($sqlIns)
@@ -58,7 +60,7 @@ if($_POST['Resig']=='' || $_POST['Resig']=='0000-00-00' || $_POST['Resig']=='00-
        if($_POST['ESICNo']!='' && $_POST['ESICNo']!=0){ $EsicAllow='Y';  }
        else{ $EsicAllow='N'; }
        
-       $SqlUpGen1 = mysql_query("UPDATE hrm_employee_general SET FileNo='".$_POST['FileNo']."', DateJoining='".date("Y-m-d",strtotime($_POST['DOJ']))."', DOB='".date("Y-m-d",strtotime($_POST['DOB']))."', DOB_dm='".date("0000-m-d",strtotime($_POST['DOB']))."', GradeId=".$_POST['GradeName'].", CostCenter='".$_POST['CostCenter']."', HqId=".$_POST['HQName'].", DepartmentId=".$_POST['DeptName'].", DesigId=".$_POST['DesigName'].", PositionCode='".$_POST['PositionCode']."', MobileNo_Vnr=".$_POST['OffiMobileNo'].", EmailId_Vnr='".$_POST['OffiEmialId']."', BankName='".$_POST['BankName1']."', AccountNo='".$_POST['AccountNo1']."', BranchName='".$_POST['Branch1']."', BranchAdd='".$_POST['Address1']."', BankName2='".$_POST['BankName2']."', AccountNo2='".$_POST['AccountNo2']."', BranchName2='".$_POST['Branch2']."', BranchAdd2='".$_POST['Address2']."', BankIfscCode='".$_POST['ifsc1']."', BankIfscCode2='".$_POST['ifsc2']."', InsuCardNo='".$_POST['InsCardNo']."', PfAccountNo='".$_POST['PfAccountNo']."', PF_UAN=".$_POST['PF_UAN'].", EsicAllow='".$EsicAllow."', EsicNo='".$_POST['ESICNo']."', AttMobileNo1=".$_POST['OffiMobileNo'].", EmpVertical='".$_POST['EmpVertical']."', BWageId='".$_POST['BWageCategory']."', CreatedBy=".$UserId.", CreatedDate='".date("Y-m-d",strtotime($_POST['DateCTC']))."', apply_Bond='".$_POST['TrfBond']."', Transfer_Dept_Date='".date("Y-m-d",strtotime($_POST['TrfDate']))."', Transfer_Dept_Name='".$_POST['TrfDept']."', Transfer2_Dept_Date='".date("Y-m-d",strtotime($_POST['Trf2Date']))."', Transfer2_Dept_Name='".$_POST['Trf2Dept']."', Bond_Year='".$_POST['BondYear']."', Transfer_location='".$_POST['TrfLoc']."', Transfer2_location='".$_POST['Trf2Loc']."', SysDate='".date('Y-m-d')."', YearId=".$YearId." WHERE EmployeeID=".$EMPID, $con);
+       $SqlUpGen1 = mysql_query("UPDATE hrm_employee_general SET Hiring_Mode = '".$_POST['hiring_mode']."', FileNo='".$_POST['FileNo']."', DateJoining='".date("Y-m-d",strtotime($_POST['DOJ']))."', DOB='".date("Y-m-d",strtotime($_POST['DOB']))."', DOB_dm='".date("0000-m-d",strtotime($_POST['DOB']))."', GradeId=".$_POST['GradeName'].", CostCenter='".$_POST['CostCenter']."', HqId=".$_POST['HQName'].", DepartmentId=".$_POST['DeptName'].", DesigId=".$_POST['DesigName'].", PositionCode='".$_POST['PositionCode']."', MobileNo_Vnr=".$_POST['OffiMobileNo'].", EmailId_Vnr='".$_POST['OffiEmialId']."', BankName='".$_POST['BankName1']."', AccountNo='".$_POST['AccountNo1']."', BranchName='".$_POST['Branch1']."', BranchAdd='".$_POST['Address1']."', BankName2='".$_POST['BankName2']."', AccountNo2='".$_POST['AccountNo2']."', BranchName2='".$_POST['Branch2']."', BranchAdd2='".$_POST['Address2']."', BankIfscCode='".$_POST['ifsc1']."', BankIfscCode2='".$_POST['ifsc2']."', InsuCardNo='".$_POST['InsCardNo']."', PfAccountNo='".$_POST['PfAccountNo']."', PF_UAN=".$_POST['PF_UAN'].", EsicAllow='".$EsicAllow."', EsicNo='".$_POST['ESICNo']."', AttMobileNo1=".$_POST['OffiMobileNo'].", EmpVertical='".$_POST['EmpVertical']."', BWageId='".$_POST['BWageCategory']."', CreatedBy=".$UserId.", CreatedDate='".date("Y-m-d",strtotime($_POST['DateCTC']))."', apply_Bond='".$_POST['TrfBond']."', Transfer_Dept_Date='".date("Y-m-d",strtotime($_POST['TrfDate']))."', Transfer_Dept_Name='".$_POST['TrfDept']."', Transfer2_Dept_Date='".date("Y-m-d",strtotime($_POST['Trf2Date']))."', Transfer2_Dept_Name='".$_POST['Trf2Dept']."', Bond_Year='".$_POST['BondYear']."', Transfer_location='".$_POST['TrfLoc']."', Transfer2_location='".$_POST['Trf2Loc']."', SysDate='".date('Y-m-d')."', YearId=".$YearId." WHERE EmployeeID=".$EMPID, $con);
        
        
 
@@ -470,6 +472,15 @@ $AgeMain=$years.'.'.$months;
 
 <tr>
   <td class="All_100" valign="top">Position Code :&nbsp;<font color="#FF0000"></font></td><td class="All_125"><input maxlength="50" name="PositionCode" id="PositionCode" class="All_120" value="<?php echo $ResEmp['PositionCode']; ?>" readonly></td>
+  
+  <td class="All_100" valign="top">Hiring Mode : &nbsp;</td>
+    <td class="All_125">
+        <select name="hiring_mode" id="hiring_mode" class="All_120">
+            <option value="">Select</option>
+            <option value="Campus" <?php if($ResEmp['Hiring_Mode']=='Campus'){echo 'selected';} ?> >Campus</option>
+            <option value="Non Campus" <?php if($ResEmp['Hiring_Mode']=='Non Campus'){echo 'selected';}?>>Non Campus</option>
+        </select>
+    </td>
 </tr>
 
 <tr>

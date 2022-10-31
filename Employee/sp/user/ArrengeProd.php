@@ -79,11 +79,11 @@ function show_NewArrg(originalRequest)
 	   <td style="font-size:11px;height:18px;width:60px;color:#E6E6E6;" align="right"><b>Crop :</b></td>
 	    <td style="width:185px;">
 		 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="CropGrp" id="CropGrp" onChange="ClickGrp(this.value)">
-<?php if($_REQUEST['grp']==0){ ?><option value="0" selected>SELECT CROP</option><option value="1">VEGETABLE CROP</option>
-                                 <option value="2">FIELD CROP</option><option value="3">All CROP</option>		 
-<?php }elseif($_REQUEST['grp']==1){ ?><option value="1" selected>VEGETABLE CROP</option><option value="2">FIELD CROP</option><option value="3">All CROP</option>
-<?php }elseif($_REQUEST['grp']==2){ ?><option value="2" selected>FIELD CROP</option><option value="1">VEGETABLE CROP</option><option value="3">All CROP</option>
-<?php }elseif($_REQUEST['grp']==3){ ?><option value="3" selected>All CROP</option><option value="1">VEGETABLE CROP</option><option value="2">FIELD CROP</option><?php } ?>
+<?php if($_REQUEST['grp']==0){ ?><option value="0" selected>Select Crop</option><option value="1">Vegetable Crop</option>
+                                 <option value="2">Field Crop</option><option value="3">All Crop</option>		 
+<?php }elseif($_REQUEST['grp']==1){ ?><option value="1" selected>Vegetable Crop</option><option value="2">Field Crop</option><option value="3">All Crop</option>
+<?php }elseif($_REQUEST['grp']==2){ ?><option value="2" selected>Field Crop</option><option value="1">Vegetable Crop</option><option value="3">All CROP</option>
+<?php }elseif($_REQUEST['grp']==3){ ?><option value="3" selected>All Crop</option><option value="1">Vegetable Crop</option><option value="2">Field Crop</option><?php } ?>
         </select>
 		</td>
 		<td>&nbsp;</td>
@@ -91,8 +91,8 @@ function show_NewArrg(originalRequest)
 	     <td>
 		 <select style="font-size:12px;width:120px;height:20px;background-color:#DDFFBB;" name="ItemV" id="ItemV" onChange="ChangeII(this.value)">
 <?php if($_REQUEST['ii']>0){ $sqlI=mysql_query("select ItemName from hrm_sales_seedsitem where ItemId=".$_REQUEST['ii'], $con); $resI=mysql_fetch_assoc($sqlI); ?>	
-<option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo strtoupper($resI['ItemName']); ?></option>
-<?php }  else{ ?><option value="0" selected>SELECT</option><?php } ?>
+<option value="<?php echo $_REQUEST['ii']; ?>" selected><?php echo $resI['ItemName']; ?></option>
+<?php }  else{ ?><option value="0" selected>Select</option><?php } ?>
 <?php if($_REQUEST['grp']==0){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==1){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=1 order by ItemName ASC", $con);}
       elseif($_REQUEST['grp']==2){ $sqlItem=mysql_query("select * from hrm_sales_seedsitem where GroupId=2 order by ItemName ASC", $con);}
@@ -122,7 +122,7 @@ function show_NewArrg(originalRequest)
     <td align="center" style="width:120px;font-size:11px;"><b>CROP</b></td>
 	<td align="center" style="width:120px;font-size:11px;"><b>VARIETY</b></td>
 	<td align="center" style="width:30px;font-size:11px;"><b>TYPE</b></td>
-<?php $sqls = mysql_query("SELECT StateCode FROM hrm_state order by StateName ASC", $con); while($ress = mysql_fetch_array($sqls)){?><td align="center" style="width:30px;font-size:11px;"><b><?php echo strtoupper($ress['StateCode']); ?></b></td><?php } ?>	
+<?php $sqls = mysql_query("SELECT StateCode FROM hrm_state order by StateName ASC", $con); while($ress = mysql_fetch_array($sqls)){?><td align="center" style="width:30px;font-size:11px;"><b><?php echo $ress['StateCode']; ?></b></td><?php } ?>	
   </tr>
 </thead>
 </div>  

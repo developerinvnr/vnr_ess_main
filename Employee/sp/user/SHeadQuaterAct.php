@@ -1,9 +1,9 @@
 <?php require_once('config/config.php');
 if(isset($_POST['CouId']) && $_POST['CouId']!=""){ ?>
 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="State" id="State" onChange="ClickState(this.value)">
-<option value="" selected>SELECT</option>	
+<option value="" selected>Select</option>	
 <?php $sql = mysql_query("SELECT * FROM hrm_state where CountryId=".$_POST['CouId']." order by StateName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-<option value="<?php echo $res['StateId']; ?>"><?php echo strtoupper($res['StateName']); ?></option><?php } ?></select>
+<option value="<?php echo $res['StateId']; ?>"><?php echo $res['StateName']; ?></option><?php } ?></select>
 <?php } ?>
 
 <?php if(isset($_POST['StaIdHq']) && $_POST['StaIdHq']!=""){ ?>
@@ -17,10 +17,10 @@ if(isset($_POST['CouId']) && $_POST['CouId']!=""){ ?>
 <?php $sql = mysql_query("SELECT * FROM hrm_headquater where StateId=".$_POST['StaIdHq']." AND CompanyId=".$_POST['CId']." AND HQStatus='A' order by HqName ASC", $con); 
       while($res = mysql_fetch_array($sql)){ ?>    
   <tr bgcolor="#FFFFF" id="<?php echo 'TR'.$res['HqId']; ?>">
-   <td align="center" style="color:#FFFFFF;font-size:14px;font-family:Times New Roman;"><input type="checkbox" id="Check_<?php echo $res['HqId']; ?>" onClick="ClickHq(<?php echo $res['HqId']; ?>,'<?php echo strtoupper($res['HqName']); ?>')"/></td>
-   <td style="font-size:14px;font-family:Times New Roman;" align="center"><?php echo strtoupper($res['HqId']); ?></td>
-   <td style="font-size:14px;font-family:Times New Roman;"><?php echo strtoupper($res['HqName']); ?></td>
-   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelHq(<?php echo $res['HqId']; ?>,'<?php echo strtoupper($res['HqName']); ?>')" /></td>
+   <td align="center" style="color:#FFFFFF;font-size:14px;font-family:Times New Roman;"><input type="checkbox" id="Check_<?php echo $res['HqId']; ?>" onClick="ClickHq(<?php echo $res['HqId']; ?>,'<?php echo $res['HqName']; ?>')"/></td>
+   <td style="font-size:14px;font-family:Times New Roman;" align="center"><?php echo $res['HqId']; ?></td>
+   <td style="font-size:14px;font-family:Times New Roman;"><?php echo $res['HqName']; ?></td>
+   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelHq(<?php echo $res['HqId']; ?>,'<?php echo $res['HqName']; ?>')" /></td>
   </tr>
 <?php } ?>    
 </table>
@@ -39,10 +39,10 @@ $sql = mysql_query("insert into hrm_headquater(HqName,StateId,CompanyId,CreatedB
 <?php $sql = mysql_query("SELECT * FROM hrm_headquater where StateId=".$_POST['si']." AND CompanyId=".$_POST['ci']." AND HQStatus='A' order by HqName ASC", $con); 
       while($res = mysql_fetch_array($sql)){ ?>    
   <tr bgcolor="#FFFFF" id="<?php echo 'TR'.$res['HqId']; ?>">
-   <td align="center" style="color:#FFFFFF;font-size:14px;font-family:Times New Roman;"><input type="checkbox" id="Check_<?php echo $res['HqId']; ?>" onClick="ClickHq(<?php echo $res['HqId']; ?>,'<?php echo strtoupper($res['HqName']); ?>')"/></td>
-   <td style="font-size:14px;font-family:Times New Roman;" align="center"><?php echo strtoupper($res['HqId']); ?></td>
-   <td style="font-size:14px;font-family:Times New Roman;"><?php echo strtoupper($res['HqName']); ?></td>
-   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelHq(<?php echo $res['HqId']; ?>,'<?php echo strtoupper($res['HqName']); ?>')" /></td>
+   <td align="center" style="color:#FFFFFF;font-size:14px;font-family:Times New Roman;"><input type="checkbox" id="Check_<?php echo $res['HqId']; ?>" onClick="ClickHq(<?php echo $res['HqId']; ?>,'<?php echo $res['HqName']; ?>')"/></td>
+   <td style="font-size:14px;font-family:Times New Roman;" align="center"><?php echo $res['HqId']; ?></td>
+   <td style="font-size:14px;font-family:Times New Roman;"><?php echo $res['HqName']; ?></td>
+   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelHq(<?php echo $res['HqId']; ?>,'<?php echo $res['HqName']; ?>')" /></td>
   </tr>
 <?php } ?>    
 </table>
@@ -60,10 +60,10 @@ $sql = mysql_query("update hrm_headquater set HqName='".$_POST['ChangeHqName']."
 <?php $sql = mysql_query("SELECT * FROM hrm_headquater where StateId=".$_POST['si']." AND CompanyId=".$_POST['ci']." AND HQStatus='A' order by HqName ASC", $con); 
       while($res = mysql_fetch_array($sql)){ ?>    
   <tr bgcolor="#FFFFF" id="<?php echo 'TR'.$res['HqId']; ?>">
-   <td align="center" style="color:#FFFFFF;font-size:14px;font-family:Times New Roman;"><input type="checkbox" id="Check_<?php echo $res['HqId']; ?>" onClick="ClickHq(<?php echo $res['HqId']; ?>,'<?php echo strtoupper($res['HqName']); ?>')"/></td>
-   <td style="font-size:14px;font-family:Times New Roman;" align="center"><?php echo strtoupper($res['HqId']); ?></td>
-   <td style="font-size:14px;font-family:Times New Roman;"><?php echo strtoupper($res['HqName']); ?></td>
-   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelHq(<?php echo $res['HqId']; ?>,'<?php echo strtoupper($res['HqName']); ?>')" /></td>
+   <td align="center" style="color:#FFFFFF;font-size:14px;font-family:Times New Roman;"><input type="checkbox" id="Check_<?php echo $res['HqId']; ?>" onClick="ClickHq(<?php echo $res['HqId']; ?>,'<?php echo $res['HqName']; ?>')"/></td>
+   <td style="font-size:14px;font-family:Times New Roman;" align="center"><?php echo $res['HqId']; ?></td>
+   <td style="font-size:14px;font-family:Times New Roman;"><?php echo $res['HqName']; ?></td>
+   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelHq(<?php echo $res['HqId']; ?>,'<?php echo $res['HqName']; ?>')" /></td>
   </tr>
 <?php } ?>       
 </table>
@@ -82,10 +82,10 @@ $sql = mysql_query("delete from hrm_headquater where HqId=".$_POST['DeleteHqId']
 <?php $sql = mysql_query("SELECT * FROM hrm_headquater where StateId=".$_POST['si']." AND CompanyId=".$_POST['ci']." AND HQStatus='A' order by HqName ASC", $con); 
       while($res = mysql_fetch_array($sql)){ ?>    
   <tr bgcolor="#FFFFF" id="<?php echo 'TR'.$res['HqId']; ?>">
-   <td align="center" style="color:#FFFFFF;font-size:14px;font-family:Times New Roman;"><input type="checkbox" id="Check_<?php echo $res['HqId']; ?>" onClick="ClickHq(<?php echo $res['HqId']; ?>,'<?php echo strtoupper($res['HqName']); ?>')"/></td>
-   <td style="font-size:14px;font-family:Times New Roman;" align="center"><?php echo strtoupper($res['HqId']); ?></td>
-   <td style="font-size:14px;font-family:Times New Roman;"><?php echo strtoupper($res['HqName']); ?></td>
-   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelHq(<?php echo $res['HqId']; ?>,'<?php echo strtoupper($res['HqName']); ?>')" /></td>
+   <td align="center" style="color:#FFFFFF;font-size:14px;font-family:Times New Roman;"><input type="checkbox" id="Check_<?php echo $res['HqId']; ?>" onClick="ClickHq(<?php echo $res['HqId']; ?>,'<?php echo $res['HqName']; ?>')"/></td>
+   <td style="font-size:14px;font-family:Times New Roman;" align="center"><?php echo $res['HqId']; ?></td>
+   <td style="font-size:14px;font-family:Times New Roman;"><?php echo $res['HqName']; ?></td>
+   <td align="center" style="font-size:14px;font-family:Times New Roman;"><img src="images/delete.png" border="0" onClick="ClickDelHq(<?php echo $res['HqId']; ?>,'<?php echo $res['HqName']; ?>')" /></td>
   </tr>
 <?php } ?>    
 </table>

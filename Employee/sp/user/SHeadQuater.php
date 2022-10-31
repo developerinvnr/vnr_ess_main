@@ -132,9 +132,9 @@ function show_DeleteDealer(originalRequest){ document.getElementById('TabResult'
       <tr>
 	    <td style="font-size:11px; height:18px;color:#FFFFFF;font-weight:bold;">Country Name :</td>
 	    <td><select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="Coutry" id="Coutry" onChange="ClickCoutry(this.value)"> 
-		     <option value="">SELECT</option>
+		     <option value="">Select</option>
 <?php $SqlCountry=mysql_query("SELECT * FROM hrm_country order by CountryName ASC", $con); while($ResCountry=mysql_fetch_array($SqlCountry)) { ?>
-<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo strtoupper($ResCountry['CountryName']); ?></option><?php } ?></select>
+<option value="<?php echo $ResCountry['CountryId']; ?>"><?php echo $ResCountry['CountryName']; ?></option><?php } ?></select>
        </td>
 	  </tr>
 	   <tr>
@@ -142,9 +142,9 @@ function show_DeleteDealer(originalRequest){ document.getElementById('TabResult'
 	    <td>
 		 <span id="StateSpan">
 		 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="State" id="State" onChange="ClickState(this.value)">
-         <option value="" selected>SELECT</option>	
+         <option value="" selected>Select</option>	
         <?php $sql = mysql_query("SELECT * FROM hrm_state order by StateName ASC", $con); while($res = mysql_fetch_array($sql)){ ?>
-        <option value="<?php echo $res['StateId']; ?>"><?php echo strtoupper($res['StateName']); ?></option><?php } ?></select>
+        <option value="<?php echo $res['StateId']; ?>"><?php echo $res['StateName']; ?></option><?php } ?></select>
 		 </span>
 		</td>
 		</tr>

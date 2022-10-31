@@ -165,6 +165,16 @@ $Ename = $ResEmp['Fname'].'&nbsp;'.$ResEmp['Sname'].'&nbsp;'.$ResEmp['Lname']; $
  <td align="left" valign="top" style="font-family:Times New Roman;color:#004993;font-size:14px;"><b>Insurance Copy :</b></td>
  <td><?php if($res['InsuNo_File']!=''){echo 'Available';}?></td>
 </tr>
+<tr height="20">
+ <td align="left" valign="top" style="font-family:Times New Roman;color:#004993;font-size:14px;"><b>Beginning_odomoter reading :</b></td>
+ <td><input type="text" name="Beg_OdoRead" id="Beg_OdoRead" class="inp5" value="<?php echo $res['Beg_OdoRead']; ?>" readonly></td>
+ <td align="left" valign="top" style="font-family:Times New Roman;color:#004993;font-size:14px;"><b>Odomoter_reading photograph :</b></td>
+ <td><?php if($res['Beg_OdoPhoto']!=''){echo 'Available';}?></td>
+</tr>
+<tr height="20">
+ <td align="left" valign="top" style="font-family:Times New Roman;color:#004993;font-size:14px;"><b>Owenship :</b></td>
+ <td><input name="Owenship" id="Owenship" class="All_150" value="<?php echo $res['Owenship']; ?>" readonly/></td>
+</tr>
 
     <?php /*************************** For Car Close */ ?>
     <?php /*************************** For Car Close */ ?>

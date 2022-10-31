@@ -124,31 +124,31 @@ $sql2 = mysql_query("SELECT EmployeeID,EmployeeID2,EmployeeID3,EmployeeID4 from 
  <td class="font2">&nbsp;<?php echo $res['StateName']; ?></td>
  <td class="font2" align="center"><select style="width:200px;font-size:13px;font-family:Georgia;height:22px; background-color:<?php if($res2['EmployeeID']>0){echo '#9DFF3C';} ?>;" id="EStid_<?php echo $res['StateId']; ?>" onChange="FunChangeSEmp(this.value,<?php echo $res['StateId']; ?>)">
 <?php if($res2['EmployeeID']>0){ $sqlE1=mysql_query("select hrm_employee.EmployeeID,EmpCode,Fname,Sname,Lname from hrm_employee_general INNER JOIN hrm_employee ON hrm_employee_general.EmployeeID=hrm_employee.EmployeeID where hrm_employee_general.EmployeeID=".$res2['EmployeeID'], $con); $resE1=mysql_fetch_assoc($sqlE1); ?>
-<option style="background-color:#A4FFA4;padding:1px; " value="<?php echo $res2['EmployeeID']; ?>" selected><?php echo $resE1['Fname'].' '.$resE1['Sname'].' '.$resE1['Lname']; ?></option><?php } else { ?><option style="background-color:#FFFFFF;padding:1px;" value="0" selected>&nbsp;SELECT USER</option><?php } ?>
+<option style="background-color:#A4FFA4;padding:1px; " value="<?php echo $res2['EmployeeID']; ?>" selected><?php echo ucwords(strtolower($resE1['Fname'].' '.$resE1['Sname'].' '.$resE1['Lname'])); ?></option><?php } else { ?><option style="background-color:#FFFFFF;padding:1px;" value="0" selected>&nbsp;SELECT USER</option><?php } ?>
 <?php $sqlE=mysql_query("select hrm_employee.EmployeeID,EmpCode,Fname,Sname,Lname from hrm_employee_general INNER JOIN hrm_employee ON hrm_employee_general.EmployeeID=hrm_employee.EmployeeID where hrm_employee_general.DepartmentId=7 order by Fname ASC", $con); while($resE=mysql_fetch_assoc($sqlE)) 
-{ ?><option value="<?php echo $resE['EmployeeID']; ?>" style="padding:1px;">&nbsp;<?php echo $resE['Fname'].' '.$resE['Sname'].' '.$resE['Lname']; ?></option><?php } ?>
-<option style="background-color:#FFFFFF;padding:1px;" value="0">&nbsp;NONE</option></select></td>
+{ ?><option value="<?php echo $resE['EmployeeID']; ?>" style="padding:1px;">&nbsp;<?php echo ucwords(strtolower($resE['Fname'].' '.$resE['Sname'].' '.$resE['Lname'])); ?></option><?php } ?>
+<option style="background-color:#FFFFFF;padding:1px;" value="0">&nbsp;None</option></select></td>
 
  <td class="font2" align="center"><select style="width:200px;font-size:13px;font-family:Georgia;height:22px; background-color:<?php if($res2['EmployeeID2']>0){echo '#9DFF3C';} ?>;" id="EStid2_<?php echo $res['StateId']; ?>" onChange="FunChangeSEmp2(this.value,<?php echo $res['StateId']; ?>)">
 <?php if($res2['EmployeeID2']>0){ $sqlE2=mysql_query("select hrm_employee.EmployeeID,EmpCode,Fname,Sname,Lname from hrm_employee_general INNER JOIN hrm_employee ON hrm_employee_general.EmployeeID=hrm_employee.EmployeeID where hrm_employee_general.EmployeeID=".$res2['EmployeeID2'], $con); $resE2=mysql_fetch_assoc($sqlE2); ?>
-<option style="background-color:#A4FFA4;padding:1px;" value="<?php echo $res2['EmployeeID']; ?>" selected><?php echo $resE2['Fname'].' '.$resE2['Sname'].' '.$resE2['Lname']; ?></option><?php } else { ?><option style="background-color:#FFFFFF;padding:1px;" value="0" selected>&nbsp;SELECT USER</option><?php } ?>
+<option style="background-color:#A4FFA4;padding:1px;" value="<?php echo $res2['EmployeeID']; ?>" selected><?php echo ucwords(strtolower($resE2['Fname'].' '.$resE2['Sname'].' '.$resE2['Lname'])); ?></option><?php } else { ?><option style="background-color:#FFFFFF;padding:1px;" value="0" selected>&nbsp;SELECT USER</option><?php } ?>
 <?php $sqlEE=mysql_query("select hrm_employee.EmployeeID,EmpCode,Fname,Sname,Lname from hrm_employee_general INNER JOIN hrm_employee ON hrm_employee_general.EmployeeID=hrm_employee.EmployeeID where hrm_employee_general.DepartmentId=7 order by Fname ASC", $con); while($resEE=mysql_fetch_assoc($sqlEE)) 
-{ ?><option value="<?php echo $resEE['EmployeeID']; ?>" style="padding:1px;">&nbsp;<?php echo $resEE['Fname'].' '.$resEE['Sname'].' '.$resEE['Lname']; ?></option><?php } ?>
-<option style="background-color:#FFFFFF;padding:1px;" value="0">&nbsp;NONE</option></select></td>
+{ ?><option value="<?php echo $resEE['EmployeeID']; ?>" style="padding:1px;">&nbsp;<?php echo ucwords(strtolower($resEE['Fname'].' '.$resEE['Sname'].' '.$resEE['Lname'])); ?></option><?php } ?>
+<option style="background-color:#FFFFFF;padding:1px;" value="0">&nbsp;None</option></select></td>
 
 <td class="font2" align="center"><select style="width:200px;font-size:13px;font-family:Georgia;height:22px; background-color:<?php if($res2['EmployeeID3']>0){echo '#9DFF3C';} ?>;" id="EStid3_<?php echo $res['StateId']; ?>" onChange="FunChangeSEmp3(this.value,<?php echo $res['StateId']; ?>)">
 <?php if($res2['EmployeeID3']>0){ $sqlE3=mysql_query("select hrm_employee.EmployeeID,EmpCode,Fname,Sname,Lname from hrm_employee_general INNER JOIN hrm_employee ON hrm_employee_general.EmployeeID=hrm_employee.EmployeeID where hrm_employee_general.EmployeeID=".$res2['EmployeeID3'], $con); $resE3=mysql_fetch_assoc($sqlE3); ?>
-<option style="background-color:#A4FFA4;padding:1px; " value="<?php echo $res3['EmployeeID']; ?>" selected><?php echo $resE3['Fname'].' '.$resE3['Sname'].' '.$resE3['Lname']; ?></option><?php } else { ?><option style="background-color:#FFFFFF;padding:1px;" value="0" selected>&nbsp;SELECT USER</option><?php } ?>
+<option style="background-color:#A4FFA4;padding:1px; " value="<?php echo $res3['EmployeeID']; ?>" selected><?php echo ucwords(strtolower($resE3['Fname'].' '.$resE3['Sname'].' '.$resE3['Lname'])); ?></option><?php } else { ?><option style="background-color:#FFFFFF;padding:1px;" value="0" selected>&nbsp;SELECT USER</option><?php } ?>
 <?php $sqlEEE=mysql_query("select hrm_employee.EmployeeID,EmpCode,Fname,Sname,Lname from hrm_employee_general INNER JOIN hrm_employee ON hrm_employee_general.EmployeeID=hrm_employee.EmployeeID where hrm_employee_general.DepartmentId=7 order by Fname ASC", $con); while($resEEE=mysql_fetch_assoc($sqlEEE)) 
-{ ?><option value="<?php echo $resEEE['EmployeeID']; ?>" style="padding:1px;">&nbsp;<?php echo $resEEE['Fname'].' '.$resEEE['Sname'].' '.$resEEE['Lname']; ?></option><?php } ?>
-<option style="background-color:#FFFFFF;padding:1px;" value="0">&nbsp;NONE</option></select></td>
+{ ?><option value="<?php echo $resEEE['EmployeeID']; ?>" style="padding:1px;">&nbsp;<?php echo ucwords(strtolower($resEEE['Fname'].' '.$resEEE['Sname'].' '.$resEEE['Lname'])); ?></option><?php } ?>
+<option style="background-color:#FFFFFF;padding:1px;" value="0">&nbsp;None</option></select></td>
 
 <td class="font2" align="center"><select style="width:200px;font-size:13px;font-family:Georgia;height:22px; background-color:<?php if($res2['EmployeeID4']>0){echo '#9DFF3C';} ?>;" id="EStid4_<?php echo $res['StateId']; ?>" onChange="FunChangeSEmp4(this.value,<?php echo $res['StateId']; ?>)">
 <?php if($res2['EmployeeID4']>0){ $sqlE4=mysql_query("select hrm_employee.EmployeeID,EmpCode,Fname,Sname,Lname from hrm_employee_general INNER JOIN hrm_employee ON hrm_employee_general.EmployeeID=hrm_employee.EmployeeID where hrm_employee_general.EmployeeID=".$res2['EmployeeID4'], $con); $resE4=mysql_fetch_assoc($sqlE4); ?>
-<option style="background-color:#A4FFA4;padding:1px; " value="<?php echo $res4['EmployeeID']; ?>" selected><?php echo $resE4['Fname'].' '.$resE4['Sname'].' '.$resE4['Lname']; ?></option><?php } else { ?><option style="background-color:#FFFFFF;padding:1px;" value="0" selected>&nbsp;SELECT USER</option><?php } ?>
+<option style="background-color:#A4FFA4;padding:1px; " value="<?php echo $res4['EmployeeID']; ?>" selected><?php echo ucwords(strtolower($resE4['Fname'].' '.$resE4['Sname'].' '.$resE4['Lname'])); ?></option><?php } else { ?><option style="background-color:#FFFFFF;padding:1px;" value="0" selected>&nbsp;SELECT USER</option><?php } ?>
 <?php $sqlEE4=mysql_query("select hrm_employee.EmployeeID,EmpCode,Fname,Sname,Lname from hrm_employee_general INNER JOIN hrm_employee ON hrm_employee_general.EmployeeID=hrm_employee.EmployeeID where hrm_employee_general.DepartmentId=7 order by Fname ASC", $con); while($resEE4=mysql_fetch_assoc($sqlEE4)) 
-{ ?><option value="<?php echo $resEE4['EmployeeID']; ?>" style="padding:1px;">&nbsp;<?php echo $resEE4['Fname'].' '.$resEE4['Sname'].' '.$resEE4['Lname']; ?></option><?php } ?>
-<option style="background-color:#FFFFFF;padding:1px;" value="0">&nbsp;NONE</option></select></td>
+{ ?><option value="<?php echo $resEE4['EmployeeID']; ?>" style="padding:1px;">&nbsp;<?php echo ucwords(strtolower($resEE4['Fname'].' '.$resEE4['Sname'].' '.$resEE4['Lname'])); ?></option><?php } ?>
+<option style="background-color:#FFFFFF;padding:1px;" value="0">&nbsp;None</option></select></td>
 
 </tr>
 <?php $no++;} ?>

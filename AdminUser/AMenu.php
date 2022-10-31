@@ -426,6 +426,7 @@
 	  <li><b></b></li>
 	  <li><a href="#">Asset Bill</a></li> <?php /* EmpAssBill.php */ ?>
 	  <li><a href="#">Import Asset Bill</a></li> <?php /* ImportAssExcel.php */ ?>
+	  <li><a href="EmpTrvRunKM.php?act=true&mm=sas&ask=false&ww=rightProtect&we=12345&mm=er4e&r=t5t%t5s&yy=eloi&gosto=false&rigt=checkessue&mailto=promt&wew=e%e@er%rdd=012&value=0&page=1">Running KM</a></li>
    </ul>
   </li>	 
   <?php } ?>

@@ -285,7 +285,7 @@ if($_REQUEST['Multihq']>0){ $hqt="(d.HqId=".$_REQUEST['hq1']." OR d.HqId=".$_REQ
 	   <td style="width:10px;"><input type="hidden" name="YearV" id="YearV" value="<?php echo $_REQUEST['y']; ?>" /></td>
 	    <td style="font-size:11px;height:18px;width:90px;color:#E6E6E6;" align="right"><b>Country :</b></td>
 	    <td><?php if($_REQUEST['c']>0){ $sqlC=mysql_query("SELECT CountryName FROM hrm_country where CountryId=".$_REQUEST['c'], $con); $resC=mysql_fetch_array($sqlC); ?>
-	<input style="font-size:12px;width:100px;height:20px;background-color:#DDFFBB;" name="CouN" id="CouN" value="&nbsp;<?php echo strtoupper($resC['CountryName']); ?>" readonly/>
+	<input style="font-size:12px;width:100px;height:20px;background-color:#DDFFBB;" name="CouN" id="CouN" value="&nbsp;<?php echo ucwords(strtolower($resC['CountryName'])); ?>" readonly/>
 		<input type="hidden" name="Coutry" id="Coutry" value="<?php echo $_REQUEST['c']; ?>" /><?php } ?>  
         </td>
 	   <td>&nbsp;</td>
@@ -294,10 +294,10 @@ if($_REQUEST['Multihq']>0){ $hqt="(d.HqId=".$_REQUEST['hq1']." OR d.HqId=".$_REQ
 		 <span id="StateSpan">
 		 <select style="font-size:12px;width:180px;height:20px;background-color:#DDFFBB;" name="State" id="State" onChange="ClickState(this.value)">
 <?php if($_REQUEST['s']>0){ $sqlS=mysql_query("SELECT StateName FROM hrm_state where StateId=".$_REQUEST['s'], $con); $resS=mysql_fetch_array($sqlS); ?>
-<option value="<?php echo $_REQUEST['s']; ?>"><?php echo strtoupper($resS['StateName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>
+<option value="<?php echo $_REQUEST['s']; ?>"><?php echo ucwords(strtolower($resS['StateName'])); ?></option><?php }else{ ?><option value="">Select</option><?php } ?>
 <?php if($resDept['DepartmentId']==7){ $sqlSt=mysql_query("select hrm_sales_ebillstate.StateId,StateName from hrm_sales_ebillstate INNER JOIN hrm_state ON hrm_sales_ebillstate.StateId=hrm_state.StateId where (EmployeeID=".$EmployeeId." OR EmployeeID2=".$EmployeeId." OR EmployeeID3=".$EmployeeId." OR EmployeeID4=".$EmployeeId.") order by StateName ASC", $con); }
 	  elseif($EmployeeId==169 OR $EmployeeId==223){ $sqlSt=mysql_query("SELECT * FROM hrm_state order by StateName ASC", $con); } 
-	  while($resSt=mysql_fetch_array($sqlSt)){ ?><option value="<?php echo $resSt['StateId']; ?>"><?php echo strtoupper($resSt['StateName']); ?></option><?php } ?>
+	  while($resSt=mysql_fetch_array($sqlSt)){ ?><option value="<?php echo $resSt['StateId']; ?>"><?php echo ucwords(strtolower($resSt['StateName'])); ?></option><?php } ?>
 	  <?php if($EmployeeId==116){?><option value="16">MAHARASHTRA</option><?php } ?></select>
 		 </span>
 		</td>
@@ -307,11 +307,11 @@ if($_REQUEST['Multihq']>0){ $hqt="(d.HqId=".$_REQUEST['hq1']." OR d.HqId=".$_REQ
 		 <span id="HqSpan">
 		 <select style="font-size:12px;width:150px;height:20px;background-color:#DDFFBB;" name="Hq" id="Hq" onChange="ClickHq(this.value)">
 <?php if($_REQUEST['hq']>0){ $sqlhq=mysql_query("SELECT HqName FROM hrm_headquater where HqId=".$_REQUEST['hq']." AND CompanyId=1", $con); $reshq=mysql_fetch_array($sqlhq); ?>
-<option value="<?php echo $_REQUEST['hq']; ?>"><?php echo strtoupper($reshq['HqName']); ?></option><?php }else{ ?><option value="">SELECT</option><?php } ?>
-<?php if($_REQUEST['s']>0){ $sqlhq2 = mysql_query("SELECT DISTINCT hrm_sales_dealer.HqId,HqName FROM hrm_sales_dealer INNER JOIN hrm_headquater ON hrm_sales_dealer.HqId=hrm_headquater.HqId where hrm_headquater.StateId=".$_REQUEST['s']." AND hrm_headquater.CompanyId=".$CompanyId." AND hrm_headquater.HQStatus='A' order by hrm_headquater.HqName ASC", $con); while($reshq2 = mysql_fetch_array($sqlhq2)){ ?><option value="<?php echo $reshq2['HqId']; ?>"><?php echo strtoupper($reshq2['HqName']); ?></option><?php } ?>
+<option value="<?php echo $_REQUEST['hq']; ?>"><?php echo ucwords(strtolower($reshq['HqName'])); ?></option><?php }else{ ?><option value="">Select</option><?php } ?>
+<?php if($_REQUEST['s']>0){ $sqlhq2 = mysql_query("SELECT DISTINCT hrm_sales_dealer.HqId,HqName FROM hrm_sales_dealer INNER JOIN hrm_headquater ON hrm_sales_dealer.HqId=hrm_headquater.HqId where hrm_headquater.StateId=".$_REQUEST['s']." AND hrm_headquater.CompanyId=".$CompanyId." AND hrm_headquater.HQStatus='A' order by hrm_headquater.HqName ASC", $con); while($reshq2 = mysql_fetch_array($sqlhq2)){ ?><option value="<?php echo $reshq2['HqId']; ?>"><?php echo ucwords(strtolower($reshq2['HqName'])); ?></option><?php } ?>
 <?php } elseif($resDept['DepartmentId']==7){ $sqlHq=mysql_query("select HqId,HqName from hrm_headquater INNER JOIN hrm_sales_ebillstate ON hrm_headquater.StateId=hrm_sales_ebillstate.StateId where (hrm_sales_ebillstate.EmployeeID=".$EmployeeId." OR hrm_sales_ebillstate.EmployeeID2=".$EmployeeId." OR hrm_sales_ebillstate.EmployeeID3=".$EmployeeId." OR hrm_sales_ebillstate.EmployeeID4=".$EmployeeId.") order by HqName ASC", $con);}
 	  elseif($EmployeeId==169 OR $EmployeeId==223){$sqlHq = mysql_query("SELECT * FROM hrm_headquater where CompanyId=".$CompanyId." AND HQStatus='A' order by HqName ASC", $con);}
-	  while($resHq = mysql_fetch_array($sqlHq)){ ?><option value="<?php echo $resHq['HqId']; ?>"><?php echo strtoupper($resHq['HqName']); ?></option><?php } ?>
+	  while($resHq = mysql_fetch_array($sqlHq)){ ?><option value="<?php echo $resHq['HqId']; ?>"><?php echo ucwords(strtolower($resHq['HqName'])); ?></option><?php } ?>
 </select>
 		 </span>
 		 <?php //"SELECT * FROM hrm_headquater where StateId=".$_REQUEST['s']." AND CompanyId=1 AND HQStatus='A' order by HqName ASC" ?>
@@ -359,23 +359,23 @@ if($_REQUEST['Multihq']>0){ $hqt="(d.HqId=".$_REQUEST['hq1']." OR d.HqId=".$_REQ
     <td colspan="3" valign="top">
 <table border="1" cellpadding="0" cellspacing="0" style="font-family:Times New Roman;font-size:14px;">
   <tr style="background-color:#D9F28C;color:#000000;"> 
-   <?php if($_REQUEST['hq']>0){ $sqlhq=mysql_query("SELECT HqName FROM hrm_headquater where HqId=".$_REQUEST['hq'], $con); $reshq=mysql_fetch_array($sqlhq); ?> <td colspan="15">&nbsp;&nbsp;<b>HeadQuarter:&nbsp;<?php echo strtoupper($reshq['HqName']); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $msgImp; ?></td>
-   <?php } elseif($_REQUEST['s']>0){ $sqlS=mysql_query("SELECT StateName FROM hrm_state where StateId=".$_REQUEST['s'], $con); $resS=mysql_fetch_array($sqlS);?><td colspan="16">&nbsp;&nbsp;<b>State:&nbsp;<?php echo strtoupper($resS['StateName']); ?></b>&nbsp;&nbsp;<?php echo $msgImp; ?></td>
+   <?php if($_REQUEST['hq']>0){ $sqlhq=mysql_query("SELECT HqName FROM hrm_headquater where HqId=".$_REQUEST['hq'], $con); $reshq=mysql_fetch_array($sqlhq); ?> <td colspan="15">&nbsp;&nbsp;<b>HeadQuarter:&nbsp;<?php echo ucwords(strtolower($reshq['HqName'])); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $msgImp; ?></td>
+   <?php } elseif($_REQUEST['s']>0){ $sqlS=mysql_query("SELECT StateName FROM hrm_state where StateId=".$_REQUEST['s'], $con); $resS=mysql_fetch_array($sqlS);?><td colspan="16">&nbsp;&nbsp;<b>State:&nbsp;<?php echo ucwords(strtolower($resS['StateName'])); ?></b>&nbsp;&nbsp;<?php echo $msgImp; ?></td>
    <?php } ?>		
   </tr>	
    <tr style="background-color:#D5F1D1;color:#000000;"> 
    <?php if($_REQUEST['hq']>0 OR $_REQUEST['Multihq']>0){?>
     <td rowspan="2" colspan="2" align="center" style="width:193px;"><b>HQ</b></td>
-	<td rowspan="2" align="center" style="width:350px;"><b>DEALER</b></td>
-	<td rowspan="2" align="center" style="width:200px;"><b>CITY</b></td>
+	<td rowspan="2" align="center" style="width:350px;"><b>Dealer</b></td>
+	<td rowspan="2" align="center" style="width:200px;"><b>City</b></td>
 <?php if($_REQUEST['ta']==1){?><td colspan="2" align="center"><b><?php echo $yy1; ?></b></td><?php } ?>
 <?php if($_REQUEST['tb']==1){?>	<td colspan="2" align="center"><b><?php echo $yy2; ?></b></td><?php } ?>
 <?php if($_REQUEST['tc']==1){?>	<td colspan="2" align="center"><b><?php echo $yy3; ?></b></td><?php } ?>
     <td rowspan="3" align="center" style="width:17px;"><b>&nbsp;</b></td>
    <?php } elseif($_REQUEST['s']>0){?>
 	<td rowspan="2" colspan="2" align="center" style="width:193px;"><b>HQ</b></td>
-	<td rowspan="2" align="center" style="width:350px;"><b>DEALER</b></td>
-	<td rowspan="2" align="center" style="width:200px;"><b>CITY</b></td>
+	<td rowspan="2" align="center" style="width:350px;"><b>Dealer</b></td>
+	<td rowspan="2" align="center" style="width:200px;"><b>City</b></td>
 <?php if($_REQUEST['ta']==1){?>	<td colspan="2" align="center"><b><?php echo $yy1; ?></b></td><?php } ?>
 <?php if($_REQUEST['tb']==1){?>	<td colspan="2" align="center"><b><?php echo $yy2; ?></b></td><?php } ?>
 <?php if($_REQUEST['tc']==1){?>	<td colspan="2" align="center"><b><?php echo $yy3; ?></b></td><?php } ?>

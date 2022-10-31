@@ -168,11 +168,26 @@ $(document).ready(function () { $("#table1").freezeHeader({ 'height': '500px' })
   		  
 <?php if($_REQUEST['DPid']>0){ $sqry='g.DepartmentId='.$_REQUEST['DPid'];}else{ $sqry='1=1'; }
 
-$sql=mysql_query("select s.*,e.EmpCode,e.Fname,e.Sname,e.Lname,g.DepartmentId,d.DepartmentCode from hrm_employee_separation s INNER JOIN hrm_employee e ON s.EmployeeID=e.EmployeeID INNER JOIN hrm_employee_general g ON s.EmployeeID=g.EmployeeID INNER JOIN hrm_department d ON g.DepartmentId=d.DepartmentId where s.ResignationStatus=4 AND e.CompanyId=".$CompanyId." AND ".$sqry." order by s.Emp_ResignationDate DESC", $con); 
-$Sno=1; while($res=mysql_fetch_array($sql)) { ?>
+$sql=mysql_query("select s.*,e.EmpCode,e.Fname,e.Sname,e.Lname,g.DepartmentId,d.DepartmentCode,g.DateJoining from hrm_employee_separation s INNER JOIN hrm_employee e ON s.EmployeeID=e.EmployeeID INNER JOIN hrm_employee_general g ON s.EmployeeID=g.EmployeeID INNER JOIN hrm_department d ON g.DepartmentId=d.DepartmentId where s.ResignationStatus=4 AND e.CompanyId=".$CompanyId." AND ".$sqry." order by s.Emp_ResignationDate DESC", $con); 
+$Sno=1; while($res=mysql_fetch_array($sql)) { 
+
+
+if($res['Rep_RelievingDate3']!='' && $res['Rep_RelievingDate3']!='1970-01-01'){ $RepRelDate=$res['Rep_RelievingDate3']; }
+elseif($res['Rep_RelievingDate2']!='' && $res['Rep_RelievingDate2']!='1970-01-01'){ $RepRelDate=$res['Rep_RelievingDate2']; }
+else{ $RepRelDate=$res['Rep_RelievingDate']; }
+
+
+$date1 = $res['DateJoining'];
+$date2 = date("Y-m-d");
+$diff = abs(strtotime($date2) - strtotime($date1));
+$years = floor($diff/(365*60*60*24));
+$months = floor(($diff-$years*365*60*60*24)/(30*60*60*24));
+$days = floor(($diff-$years*365*60*60*24-$months*30*60*60*24)/(60*60*24)); 
+$ExpVNRMain=$years.'.'.$months;	
+?>
 	     <div class="tbody">
          <tbody>	
-	     <tr bgcolor="#FFFFFF" id="TR<?php echo $Sno; ?>">
+	     <tr bgcolor="<?php if($ExpVNRMain>=5.0){echo '#DEE774';}else{echo '#FFFFFF';}?>" id="TR<?php echo $Sno.' - '.$ExpVNRMain; ?>">
          <td class="tdc"><input type="checkbox" id="Chk<?php echo $Sno; ?>" onClick="FucChk(<?php echo $Sno; ?>)"/></td>
 	      <td class="tdc"><?php echo $Sno; ?></td> 
 	      <td class="tdc"><?php echo $res['EmpCode']; ?></td>

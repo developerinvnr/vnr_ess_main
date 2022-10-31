@@ -14,11 +14,11 @@ stuHover = function(){ var cssRule; var newSelector;
  elseif(date("m")==10 OR date("m")==11 OR date("m")==12){$qtr=3;}elseif(date("m")==1 OR date("m")==2 OR date("m")==3){$qtr=4;} ?>
 <span class="preload1"></span><span class="preload2"></span>
 <ul id="nav">
-<li class="top"><a href="Index.php?act=441&ee=421&d=true2&c=false&d=dreefoultValue&u=UsuuerI&tt=valuased&desgn=Trern&main=FTrue%False" class="top_link"><span>HOME</span></a></li>
+<li class="top"><a href="Index.php?act=441&ee=421&d=true2&c=false&d=dreefoultValue&u=UsuuerI&tt=valuased&desgn=Trern&main=FTrue%False" class="top_link"><span>Home</span></a></li>
 <?php /************************************************************************ MASTERS ***********************************************************/ ?> 					
 					
 <?php if($resSp['Master']=='Y'){ ?>					
-<li class="top"><a href="#" id="privacy" class="top_link"><span class="down">MASTERS</span></a> 
+<li class="top"><a href="#" id="privacy" class="top_link"><span class="down">Masters</span></a> 
  <ul class="sub">  
   <?php if($resSp['CMaster']=='Y'){ ?> 
   <li><b style="color:#8000FF; font-size:14px;font-family:Times New Roman;font-weight:bold;">Crop Mast</b></li>
@@ -61,7 +61,7 @@ stuHover = function(){ var cssRule; var newSelector;
 <?php /************************************************************************ IMPORTS ***********************************************************/ ?>   	
 <?php } if($resSp['Import']=='Y'){ ?>  	
 <?php if(date("m")!=1){$em=date("m")-1;}elseif(date("m")==1){$em=12;} ?>
-<li class="top"><a href="#" id="privacy" class="top_link"><span class="down">KEY</span></a>
+<li class="top"><a href="#" id="privacy" class="top_link"><span class="down">Key</span></a>
  <ul class="sub"> 
   <li><a href="SetPlan.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $YearId; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0&y2=<?php echo $YearId; ?>&y3=<?php echo $YearId; ?>&yAchQ=<?php echo $YearId; ?>">Setting Year</a></li>
   <li><a href="Import_SetPlan.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $YearId; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0&y2=<?php echo $YearId; ?>&y3=<?php echo $YearId; ?>&yAchQ=<?php echo $YearId; ?>&mAchQ=<?php echo $em; ?>&yAchQ33=<?php echo $YearId; ?>&mAchQ33=<?php echo $em; ?>">Import Monthly Sales</a></li>
@@ -104,7 +104,7 @@ stuHover = function(){ var cssRule; var newSelector;
   
 <?php /************************************************** LOGISTICS ***********************/ ?>  
 <?php } if($resSp['Logistic']=='Y'){ ?> 
-<li class="top"><a href="#" id="privacy" class="top_link"><span class="down">LOGISTICS</span></a>
+<li class="top"><a href="#" id="privacy" class="top_link"><span class="down">Logistics</span></a>
  <ul class="sub"> 
   <?php if($resSp['LogAchi']=='Y'){ ?> 
   <li><a href="Achive.php?ern1=r114&ern2w=234&ern3y=10234&ern=4e2&erne=4e&ernw=234&erney=110022344&ernretd=ee&rernr=09drfGe&ernS=eewwqq&y=<?php echo $YearId; ?>&ci=<?php echo $CompanyId; ?>&c=0&s=0&hq=0&dil=0&grp=1&q=<?php echo $qtr; ?>&ii=0">Achivement</a></li>
@@ -120,7 +120,7 @@ stuHover = function(){ var cssRule; var newSelector;
 </li>
 <?php /************************************************************************ PRODUCTION ***********************************************************/ ?>  
 <?php } if($resSp['Production']=='Y'){ ?> 
-<li class="top"><a href="#" id="privacy" class="top_link"><span class="down">PRODUCTION</span></a>  <?php //Prod<sup>t</sup> ?> 
+<li class="top"><a href="#" id="privacy" class="top_link"><span class="down">Production</span></a>  <?php //Prod<sup>t</sup> ?> 
  <ul class="sub">  
   <?php if($resSp['PMaster']=='Y'){ ?>  
   <li><b style="color:#8000FF; font-size:14px;font-family:Times New Roman;font-weight:bold;">Production Mast</b></li>
@@ -158,7 +158,7 @@ stuHover = function(){ var cssRule; var newSelector;
    
 <?php /************************************************************************ Reports ***********************************************************/ ?>
 <?php } if($resSp['Reports']=='Y'){ ?> 
-<li class="top"><a href="#" id="privacy" class="top_link"><span class="down">REPORTS</span></a>
+<li class="top"><a href="#" id="privacy" class="top_link"><span class="down">Reports</span></a>
  <ul class="sub">  
   <?php if($resSp['ProdRep']=='Y'){ ?>
   <li><b style="color:#8000FF; font-size:14px;font-family:Times New Roman;font-weight:bold;">Prod<sup>n</sup> Reports</b></li>
@@ -228,6 +228,22 @@ stuHover = function(){ var cssRule; var newSelector;
 <?php } ?> 
 <?php /**************** FA CLOSE ***********************/ ?> 
 
-
+</li>
+<?php  $EmployeeId = $_SESSION['EmployeeID'];
+if($EmployeeId == 1084 || $EmployeeId==169 || $EmployeeId==28) {
+?>
+ <li class="top"><a href="../employee/sales_policy/vnr_sales_and_distribution_policy.pdf" download class="top_link">Sales Policy </a> </li>
+ <li class="top"><a href="#" id="privacy" class="top_link"><span class="down">Downloads</a>
+ <ul class="sub">
+     <li><a href="../employee/downloads/Distributor Proposal Format-FC.xlsx" download>Customer Proposal-FC</a></li>
+     <li><a href="../employee/downloads/Distributor Proposal Format-VC.xlsx" download>Customer Proposal-VC</a></li>
+     <li><a href="../employee/downloads/FC-Distributorship Appointment Form.pdf" download>Appointment Kit-FC</a></li>
+     <li><a href="../employee/downloads/VC-Distributorship Appointment Form.pdf" download>Appointment Kit-VC</a></li>
+     <li><a href="../employee/downloads/Gift Acknowledgement Copy.pdf" download>Gift Receiving</a></li>
+     <li><a href="../employee/downloads/Product Complaint-Form-C.pdf" download>Form-C</a></li>
+     <li><a href="../employee/downloads/Utkarsh 2022-23 (English).pdf" download>Utkarsh Scheme</a></li>
+ </ul>
+ </li>
+ <?php }  ?>
 </ul>
 <?php } ?>

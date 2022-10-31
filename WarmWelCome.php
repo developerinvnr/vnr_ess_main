@@ -101,13 +101,13 @@ else{ $Rname=ucwords(strtolower($MS2.' '.$resQ['Fname'].' '.$resQ['Lname'])); }
      <td style="width:100%;text-align:center;background-color:#119c83;">
 <table style="width:100%;font-family:Georgia;" border="0" class="redius">
  <tr>
-  <td style="width:10%;text-align:center;"><img src="hrims/images/LogoNew.png" style="width:55px; height:65px;"/></td>
+  <td style="width:10%;text-align:center;"><img src="images/LogoNew.png" style="width:55px; height:65px;"/></td>
   <td style="text-align:center;font-size:25px; color:#FFFFC1;">Warm Welcome <u><?php echo date("F Y",strtotime($ResEmp['DateJoining'])); ?></u></td>
   <td style="width:10%;"></td>
  </tr>
  <tr><td colspan="3" style="text-align:center;font-size:16px;font-weight:bold;color:#FFF;"><?php echo $Ename; ?></td></tr>
  <tr>
-  <td colspan="3" style="text-align:center;"><?php echo '<img border="0" style="border-radius:10%;width:105px;height:125px;" src="hrims/AdminUser/EmpImg'.$ResEmp['CompanyId'].'Emp/'.$ResEmp['EmpCode'].'.jpg" class="redius2"/>'; ?></td>
+  <td colspan="3" style="text-align:center;"><?php echo '<img border="0" style="border-radius:10%;width:105px;height:125px;" src="AdminUser/EmpImg'.$ResEmp['CompanyId'].'Emp/'.$ResEmp['EmpCode'].'.jpg" class="redius2"/>'; ?></td>
  </tr>
  <tr><td>&nbsp;</td></tr>
  

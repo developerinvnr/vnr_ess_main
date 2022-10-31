@@ -17,8 +17,10 @@ if($num == 0){
 }}
 
 
+//if($_REQUEST['empid']==1305){ echo $_REQUEST['value'].' - '.$_REQUEST['empid'].' - '.$_REQUEST['Att_Value'].' - '.$_REQUEST['Att_Date'].' - '.$_REQUEST['In_Remark'].' - '.$_REQUEST['InTime'].' - '.$_REQUEST['InLocation'].' - '.$_REQUEST['InLat'].' - '.$_REQUEST['InLong']; }
+
 //Punch_In_Attendance 
-if($_REQUEST['value'] == 'Punch_In_Attendance' && $_REQUEST['empid']>0 && $_REQUEST['Att_Value']!='' && $_REQUEST['Att_Date']!='' && $_REQUEST['In_Remark']!='' && $_REQUEST['InTime']!='' && $_REQUEST['InLocation']!='' && $_REQUEST['InLat']!='' && $_REQUEST['InLong']!='')
+if($_REQUEST['value'] == 'Punch_In_Attendance' && $_REQUEST['empid']>0 && $_REQUEST['Att_Value']!='' && $_REQUEST['Att_Date']!='' && $_REQUEST['InTime']!='' && $_REQUEST['InLocation']!='' && $_REQUEST['InLat']!='' && $_REQUEST['InLong']!='')
 {  
     $eid=$_REQUEST['empid']; 
 	$attv=$_REQUEST['Att_Value']; 
@@ -39,9 +41,10 @@ if($_REQUEST['value'] == 'Punch_In_Attendance' && $_REQUEST['empid']>0 && $_REQU
 	$sql=mysqli_query($con, "select Leave_Type,LeaveStatus from hrm_employee_applyleave WHERE EmployeeID=".$eid." AND ('".$attd."'>=Apply_FromDate AND '".$attd."'<=Apply_ToDate) AND LeaveStatus!=3 AND LeaveCancelStatus!='Y'"); 
 	$row=mysqli_num_rows($sql);
 	
+	//if($_REQUEST['empid']==1305){ echo 'aa'; }
 	
 	if($row==0)
-	{
+	{  
 	 /*------------------ 111111111111111111 ---------------- */
 	 /*------------------ 111111111111111111 ---------------- */
 	 
@@ -49,7 +52,7 @@ if($_REQUEST['value'] == 'Punch_In_Attendance' && $_REQUEST['empid']>0 && $_REQU
 	 {
 	  
 	  $sql2=mysqli_query($con, "select * from hrm_employee_attendance WHERE EmployeeID=".$eid." AND AttDate='".$attd."'"); 
-	  $row2=mysqli_num_rows($sql2);
+	  $row2=mysqli_num_rows($sql2); 
 	  if($row2>0)
 	  {  
 	    $res2=mysqli_fetch_assoc($sql2); 

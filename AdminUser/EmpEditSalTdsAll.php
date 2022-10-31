@@ -17,8 +17,8 @@ if(isset($_POST['Save']))
 { 
 $sqlMP=mysql_query("select * from ".$PayTable." where EmployeeID=".$_POST['E']." AND Month=".$_POST['M']." AND Year=".$_POST['Y']."", $con); 
 $rowMP=mysql_num_rows($sqlMP);
-if($rowMP>0){ $UpSal=mysql_query("update ".$PayTable." set Hra=".$_POST['Hra'].", Special=".$_POST['Special'].", Bonus=".$_POST['Bonus'].", DA=".$_POST['Da'].", Arreares=".$_POST['Arrear'].", LeaveEncash=".$_POST['LeaveEnCash'].", Incentive=".$_POST['Incentive'].", VariableAdjustment=".$_POST['VarAdjust'].", PerformancePay=".$_POST['PerformPay'].", Bonus_Adjustment=".$_POST['Bonus_Adjustment'].", CCA=".$_POST['CCA'].", RA=".$_POST['RA'].", RA_Recover=".$_POST['RA_Recover'].", Car_Allowance=".$_POST['Car_Allowance'].", VarRemburmnt=".$_POST['VarRemburmnt'].", TA=".$_POST['TA']." where EmployeeID=".$_POST['E']." AND Month=".$_POST['M']." AND Year=".$_POST['Y']."", $con);}
-else{ $UpSal=mysql_query("insert into ".$PayTable."(EmployeeID, Month, Year, Hra, Special, Bonus, DA, Arreares, LeaveEncash, Incentive, VariableAdjustment, PerformancePay, Bonus_Adjustment, CCA, RA, RA_Recover, Car_Allowance, VarRemburmnt, TA) values(".$_POST['E'].", ".$_POST['M'].", ".$_POST['Y'].", ".$_POST['Hra'].", ".$_POST['Special'].", ".$_POST['Bonus'].", ".$_POST['Da'].", ".$_POST['Arrear'].", ".$_POST['LeaveEnCash'].", ".$_POST['Incentive'].", ".$_POST['VarAdjust'].", ".$_POST['PerformPay'].", ".$_POST['Bonus_Adjustment'].", ".$_POST['CCA'].", ".$_POST['RA'].", ".$_POST['RA_Recover'].", ".$_POST['Car_Allowance'].", ".$_POST['VarRemburmnt'].", ".$_POST['TA'].")", $con);}
+if($rowMP>0){ $UpSal=mysql_query("update ".$PayTable." set Hra=".$_POST['Hra'].", Special=".$_POST['Special'].", Bonus=".$_POST['Bonus'].", DA=".$_POST['Da'].", Arreares=".$_POST['Arrear'].", LeaveEncash=".$_POST['LeaveEnCash'].", Incentive=".$_POST['Incentive'].", VariableAdjustment=".$_POST['VarAdjust'].", PerformancePay=".$_POST['PerformPay'].", PP_Inc='".$_POST['PP_Inc']."', Bonus_Adjustment=".$_POST['Bonus_Adjustment'].", CCA=".$_POST['CCA'].", RA=".$_POST['RA'].", RA_Recover=".$_POST['RA_Recover'].", Car_Allowance=".$_POST['Car_Allowance'].", VarRemburmnt=".$_POST['VarRemburmnt'].", TA=".$_POST['TA']." where EmployeeID=".$_POST['E']." AND Month=".$_POST['M']." AND Year=".$_POST['Y']."", $con);}
+else{ $UpSal=mysql_query("insert into ".$PayTable."(EmployeeID, Month, Year, Hra, Special, Bonus, DA, Arreares, LeaveEncash, Incentive, VariableAdjustment, PerformancePay, PP_Inc, Bonus_Adjustment, CCA, RA, RA_Recover, Car_Allowance, VarRemburmnt, TA) values(".$_POST['E'].", ".$_POST['M'].", ".$_POST['Y'].", ".$_POST['Hra'].", ".$_POST['Special'].", ".$_POST['Bonus'].", ".$_POST['Da'].", ".$_POST['Arrear'].", ".$_POST['LeaveEnCash'].", ".$_POST['Incentive'].", ".$_POST['VarAdjust'].", ".$_POST['PerformPay'].", '".$_POST['PP_Inc']."', ".$_POST['Bonus_Adjustment'].", ".$_POST['CCA'].", ".$_POST['RA'].", ".$_POST['RA_Recover'].", ".$_POST['Car_Allowance'].", ".$_POST['VarRemburmnt'].", ".$_POST['TA'].")", $con);}
  if($UpSal){$msg='Successfully updated...';}
 } 
 ?>
@@ -52,6 +52,8 @@ function EditSalTDSAll()
   document.getElementById("RA_Recover").readOnly=false; document.getElementById("RA_Recover").style.background='#EAEAEA'; 
   document.getElementById("Bonus_Adjustment").readOnly=false;
   document.getElementById("Bonus_Adjustment").style.background='#EAEAEA';
+  document.getElementById("PP_Inc").readOnly=false;
+  document.getElementById("PP_Inc").style.background='#EAEAEA';
 
 }
 
@@ -131,6 +133,10 @@ else
   <tr>
   <td class="Des" style="background-color:#FFFFFF;">&nbsp;PERFORMANCE PAY</td>
   <td align="center" class="Amt" style="background-color:#FFFFFF;"><input style="text-align:right;font-family:Times New Roman;font-size:12px;width:98px;border-style:hidden;" id="PerformPay" name="PerformPay" value="<?php echo intval($res['PerformancePay']); ?>" maxlength="10" readonly /></td>
+ </tr>
+ <tr>
+  <td class="Des" style="background-color:#FFFFFF;">&nbsp;PERFORMANCE INCENTIVE</td>
+  <td align="center" class="Amt" style="background-color:#FFFFFF;"><input style="text-align:right;font-family:Times New Roman;font-size:12px;width:98px;border-style:hidden;" id="PP_Inc" name="PP_Inc" value="<?php echo intval($res['PP_Inc']); ?>" maxlength="10" readonly /></td>
  </tr>
   <tr>
   <td class="Des" style="background-color:#FFFFFF;">&nbsp;CCA</td>

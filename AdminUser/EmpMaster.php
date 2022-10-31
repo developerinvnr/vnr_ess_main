@@ -70,7 +70,19 @@ function ReadFiroB(ei,ec)
   window.open("http://www.yarms.in/reg/vspl/findtreslt.php?tid=2&ei="+ei+"&ut=intvi&ec="+ec,"ff","menubar=no,scrollbars=yes,resizable=no,directories=no,width="+w+",height="+h);
 }
 
-				
+
+function ReadFiroBFromRecruitment(JCId)
+{ 
+  var w=900; var h=650;
+ // window.open("https://hrrec.vnress.in/jobportal/firob_result?jcid="+JCId,"menubar=no,scrollbars=yes,resizable=no,directories=no,width="+w+",height="+h);
+ window.open("https://hrrec.vnress.in/jobportal/firob_result?jcid="+JCId,"ff","menubar=no,scrollbars=yes,resizable=no,directories=no,width="+w+",height="+h);
+}
+
+
+//ReadFiroBFromRecruitment
+
+
+
 //function edit(value)
 //{ var agree=confirm("Are you sure you want to edit this employee record?"); 
 //  if (agree) {  var x = "EmpGeneral.php?ID="+value+"&Event=Edit";  window.location=x; }
@@ -181,7 +193,7 @@ function ReadFiroB(ei,ec)
  </div>
 <?php  if($_REQUEST['DpId'] AND $_REQUEST['DpId']!=''){
 
-$selQ="e.EmployeeID, EmpCode, Fname, Sname, Lname, EmpStatus, SubmitSelfAsset, HqName, DateJoining, DepartmentCode, DesigName, Gender, Married, DR, DateConfirmationYN, ConfirmHR, Req_DrivLic, exam_allow, KRAUnBlock, DateConfirmation, UseApps, MoveRep, Unblock_Covid";
+$selQ="e.EmployeeID, e.CandidateId, EmpCode, Fname, Sname, Lname, EmpStatus, SubmitSelfAsset, HqName, DateJoining, DepartmentCode, DesigName, Gender, Married, DR, DateConfirmationYN, ConfirmHR, Req_DrivLic, exam_allow, KRAUnBlock, DateConfirmation, UseApps, MoveRep, Unblock_Covid";
 
 $join="hrm_employee e INNER JOIN hrm_employee_general g ON e.EmployeeID=g.EmployeeID INNER JOIN hrm_employee_personal p ON e.EmployeeID=p.EmployeeID INNER JOIN hrm_department d ON g.DepartmentId=d.DepartmentId INNER JOIN hrm_designation de ON g.DesigId=de.DesigId INNER JOIN hrm_headquater hq ON g.HqId=hq.HqId";
 
@@ -225,7 +237,9 @@ $sqlDP = mysql_query("SELECT ".$selQ." FROM ".$join." WHERE ".$stsCon." AND ".$d
  <td align="center" style="font:Georgia; font-size:11px; width:60px;">
 <?php if($resDP['SubmitSelfAsset']=='Y'){?>
 <a href="javascript:ReadFiroB(<?php echo $resDP['EmployeeID']; ?>,'<?php echo $EC; ?>')">Click</a>
-<?php } ?>
+<?php } elseif($resDP['CandidateId'] > 0){ ?>
+<a href="javascript:ReadFiroBFromRecruitment(<?php echo $resDP['CandidateId']; ?>)">Click</a>
+<?php }?>
  </td>
  
  <td align="center" style="font:Georgia;font-size:11px; color:#0000CC;">

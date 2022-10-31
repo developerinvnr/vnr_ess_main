@@ -5,7 +5,8 @@ $db=mysqli_select_db( $con, 'hrims');
 if(!$db) die("Failed to select database!");
 
 $OldDate=date("d-m-Y",strtotime('-1 day', strtotime(date("Y-m-d"))));
-//$OldDate=date("24-08-2022");
+//if(date($_REQUEST['cdate'])>date('2022-09-20') && $_REQUEST['cdate']!=''){ $OldDate=date($_REQUEST['cdate']); }
+//$OldDate=date("29-10-2022");
 $json = file_get_contents('http://45.124.144.98:6868/essl/attendance/date/'.$OldDate);
 $obj = json_decode($json);
 

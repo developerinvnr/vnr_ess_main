@@ -70,6 +70,9 @@ $(document).ready(function () { $("#table1").freezeHeader({ 'height': '500px' })
 function OpenHRWindow(id)
 {  var win=window.open("PendReAppHRAct.php?act=actEdit&SepId="+id+"&Tv=HR&ss=vty&cc=it@~t~1212&p=value&a=app&true=false&cc=it@~t~1111!@1~ere&UI=aa","leaveForm","menubar=no,scrollbars=yes,resizable=no,directories=no,width=1000,height=480"); }
 
+function Export(d)
+{   
+  window.open("ApprovedCanResigExp.php?action=export&value="+d,"PrintForm","menubar=yes,scrollbars=yes,resizable=no,directories=no,width=20,height=20");} 
 </script>
 </head>
 <body class="body">
@@ -103,6 +106,7 @@ function OpenHRWindow(id)
 	  <option value="All" <?php if($_REQUEST['DPid']=='All'){echo 'selected';}?>>All</option>
 	  </select></td>
 	  <td><font style="font-family:Times New Roman;color:#005500;font-size:15px; font-weight:bold;"><?php echo $Msg; ?></font></td>
+	  <td><a href="#" onClick="Export('<?php echo $_REQUEST['DPid']; ?>')" style="font-size:12px;">Export Excel</a></td>
 	</tr>
    </table>
   </td>
