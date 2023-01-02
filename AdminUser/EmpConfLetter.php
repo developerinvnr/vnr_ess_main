@@ -71,6 +71,11 @@ function show_result(originalRequest)
   }
 }
 
+function Export(d)
+{   
+  window.open("EmpConfLetterExp.php?action=export&value="+d,"PrintForm","menubar=yes,scrollbars=yes,resizable=no,directories=no,width=20,height=20");
+    
+} 
 </Script>     
 </head>
 <body class="body">
@@ -111,6 +116,7 @@ function show_result(originalRequest)
 <?php $SqlDepartment=mysql_query("select * from hrm_department where CompanyId=".$CompanyId." order by DepartmentName ASC", $con); while($ResDepartment=mysql_fetch_array($SqlDepartment)) { ?><option value="<?php echo $ResDepartment['DepartmentId']; ?>"><?php echo '&nbsp;'.$ResDepartment['DepartmentCode'];?></option><?php } ?><option value="all">&nbsp;ALL</option></select>
 	  <input type="hidden" name="ComId" id="ComId" value="<?php echo $CompanyId; ?>" /> 
                       </td>
+                      <td><a href="#" onClick="Export('<?php echo $_REQUEST['DpId']; ?>')" style="font-size:12px;">Confirmation Deviation Report</a></td>
 		           </tr>
                    </table>
 				</td>

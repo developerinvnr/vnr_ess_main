@@ -10,6 +10,8 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
 <link href="css/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="swc.css">
+
 <script type="text/javascript">
 function EmpSS()
 { document.getElementById("AdminCell").style.display="block"; document.getElementById("ContactCell").style.display="none";}
@@ -36,6 +38,7 @@ function ActiveYearA(value)
 
 </script>
 
+
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#FFFFFF">
 <?php 
@@ -44,6 +47,17 @@ $sql_2 = mysql_query("SELECT FromDate,ToDate FROM hrm_year where Company2Status=
 $sql_3 = mysql_query("SELECT FromDate,ToDate FROM hrm_year where Company3Status='A'", $con); $res_3=mysql_fetch_assoc($sql_3);
 $sql_4 = mysql_query("SELECT FromDate,ToDate FROM hrm_year where Company4Status='A'", $con); $res_3=mysql_fetch_assoc($sql_4);
 ?>
+<div id="boxes">
+        <div style="top: 10% !important; left: 50%; display: none;" id="dialog" class="window">
+            <div id="san">
+                <a href="#" class="close agree"><img src="close-icon.png" width="25"
+                        style="float:right; margin-right: -25px; margin-top: -20px;"></a>
+                <img src="happy_new_year.jpg" width="450">
+            </div>
+        </div>
+        <div style="width: 2478px; font-size: 32pt; color:white; height: 1202px; display: none; opacity: 0.4;"
+            id="mask"></div>
+    </div>
 <center>
 <table border="0" style="margin-top:20px;margin-bottom:20px;margin-left:20px;margin-right:20px;width:1050px;height:550px;" align="center" cellpadding="2" cellspacing="0">
   <tr style="background-color:#24740A;">
@@ -171,12 +185,14 @@ $sql_4 = mysql_query("SELECT FromDate,ToDate FROM hrm_year where Company4Status=
 
 	 
    
-   
-   
+  
     </table>
  </td>	
  </tr>
 </table>
 </center>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+    <script src="swc.js"></script>
 </body>
 </html>

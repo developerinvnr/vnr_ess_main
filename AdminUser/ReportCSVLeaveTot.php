@@ -46,7 +46,9 @@ if($_REQUEST['D']!='All' AND $_REQUEST['st']!='A'){ $SqlEmp=mysql_query("select 
       if($_REQUEST['D']=='All' AND $_REQUEST['st']=='A'){ $SqlEmp=mysql_query("select e.*,DepartmentId,DateJoining from hrm_employee e INNER JOIN hrm_employee_general g ON e.EmployeeID=g.EmployeeID where e.EmpStatus='".$_REQUEST['st']."' AND e.CompanyId=".$_REQUEST['C']." AND g.DepartmentId!=17 AND g.DepartmentId!=18 AND g.DepartmentId!=23 AND g.DepartmentId!=0 AND g.DateJoining<='".date($_REQUEST['Y']."-12-31")."' order by e.EmpCode ASC", $con); }
 	  
 $Sno=1; $SqlRows=mysql_num_rows($SqlEmp); while($ResEmp=mysql_fetch_array($SqlEmp)) { 
-$Ename=$ResEmp['Fname'].' '.$ResEmp['Sname'].' '.$ResEmp['Lname']; $Y=$_REQUEST['Y']; 
+if($ResEmp['Sname']==''){ $Ename=trim($ResEmp['Fname']).' '.trim($ResEmp['Lname']); }
+else{ $Ename=trim($ResEmp['Fname']).' '.trim($ResEmp['Sname']).' '.trim($ResEmp['Lname']); }    
+//$Ename=$ResEmp['Fname'].' '.$ResEmp['Sname'].' '.$ResEmp['Lname']; $Y=$_REQUEST['Y']; 
 $sqlDept=mysql_query("select DepartmentCode,DepartmentName from hrm_department where DepartmentId=".$ResEmp['DepartmentId'], $con); $resDept=mysql_fetch_assoc($sqlDept);
 
   $schema_insert = "";

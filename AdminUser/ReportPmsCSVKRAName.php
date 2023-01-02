@@ -29,7 +29,11 @@ $result = mysql_query("SELECT EmpCode,Fname,Sname,Lname,DesigName,KRA,KRA_Descri
 {
 $csv_output .= '"'.str_replace('"', '""', $Sno).'",';
 $csv_output .= '"'.str_replace('"', '""', $res['EmpCode']).'",';
-$csv_output .= '"'.str_replace('"', '""', $res['Fname'].' '.$res['Sname'].' '.$res['Lname']).'",';
+
+if($res['Sname']==''){ $Ename=trim($res['Fname']).' '.trim($res['Lname']); }
+else{ $Ename=trim($res['Fname']).' '.trim($res['Sname']).' '.trim($res['Lname']); }
+$csv_output .= '"'.str_replace('"', '""', $Ename).'",';
+//$csv_output .= '"'.str_replace('"', '""', $res['Fname'].' '.$res['Sname'].' '.$res['Lname']).'",';
 $csv_output .= '"'.str_replace('"', '""', $res['DesigName']).'",';
 $csv_output .= '"'.str_replace('"', '""', $res['KRA']).'",';
 $csv_output .= '"'.str_replace('"', '""', $res['KRA_Description']).'",';

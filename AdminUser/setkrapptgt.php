@@ -163,6 +163,14 @@ function FunEnterAch(v,i) //LogScr Scor
   else{var EScore=document.getElementById("LogScr"+i).value=tgt;}
   var MScore=document.getElementById("Scor"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
  }
+ else if(lgc=='Logic2a')
+ {
+  var Per10=Math.round(((tgt*10)/100)*100)/100; 
+  var Per110=Math.round((tgt+Per10)*100)/100;     
+  if(ach>=Per110){var EScore=document.getElementById("LogScr"+i).value=Per110;}
+  else{var EScore=document.getElementById("LogScr"+i).value=ach;}
+  var MScore=document.getElementById("Scor"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+ }
  else if(lgc=='Logic3')
  {
   if(ach==tgt){var EScore=document.getElementById("LogScr"+i).value=ach;}
@@ -568,6 +576,14 @@ function FunEnterAch2(v,i) //LogScr Scor
   else{var EScore=document.getElementById("LogScr2"+i).value=tgt;}
   var MScore=document.getElementById("Scor2"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
  }
+ else if(lgc=='Logic2a')
+ {
+  var Per10=Math.round(((tgt*10)/100)*100)/100; 
+  var Per110=Math.round((tgt+Per10)*100)/100;
+  if(ach>=Per110){var EScore=document.getElementById("LogScr2"+i).value=Per110;}
+  else{var EScore=document.getElementById("LogScr2"+i).value=ach;}
+  var MScore=document.getElementById("Scor2"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+ }
  else if(lgc=='Logic3')
  {
   if(ach==tgt){var EScore=document.getElementById("LogScr2"+i).value=ach;}
@@ -675,7 +691,252 @@ function FunEnterAch2(v,i) //LogScr Scor
   var EScore=document.getElementById("LogScr2"+i).value=ach; 
   var MScore=document.getElementById("Scor2"+i).value=Math.round(((tgt/EScore)*wgt)*100)/100;
  }
- 
+ else if(lgc=='Logic12')
+ {
+  var Per10=Math.round(((tgt*10)/100)*100)/100; var Per90=Math.round((tgt-Per10)*100)/100;
+  if(ach<Per90){var EScore=document.getElementById("LogScr2"+i).value=0;}
+  else if(ach>=Per90){var EScore=document.getElementById("LogScr2"+i).value=ach;}
+  else{var EScore=document.getElementById("LogScr2"+i).value=0;}
+  var MScore=document.getElementById("Scor2"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+ }
+ else if(lgc=='Logic13a')
+ {
+  var Per30=Math.round(((tgt*30)/100)*100)/100; var Per130=Math.round((tgt+Per30)*100)/100;
+  var Per21=Math.round(((tgt*21)/100)*100)/100; var Per121=Math.round((tgt+Per21)*100)/100;
+  var Per20=Math.round(((tgt*20)/100)*100)/100; var Per120=Math.round((tgt+Per20)*100)/100;
+  var Per11=Math.round(((tgt*11)/100)*100)/100; var Per111=Math.round((tgt+Per11)*100)/100;
+  var Per10=Math.round(((tgt*10)/100)*100)/100; var Per110=Math.round((tgt+Per10)*100)/100;
+  var Per9=Math.round(((tgt*9)/100)*100)/100;   var Per91=Math.round((tgt-Per9)*100)/100;
+  var Per19=Math.round(((tgt*19)/100)*100)/100; var Per81=Math.round((tgt-Per19)*100)/100;
+  var Per80=Math.round((tgt-Per20)*100)/100; var Per90=Math.round((tgt-Per10)*100)/100;
+  var Per70=Math.round((tgt-Per30)*100)/100;  
+  if(ach<=Per80){var EScore=document.getElementById("LogScr2"+i).value=Per80;}
+  else if(ach>=Per81 && ach<=Per90){var EScore=document.getElementById("LogScr2"+i).value=Per90;}
+  else if(ach>=Per91 && ach<=Per110){var EScore=document.getElementById("LogScr2"+i).value=tgt;}
+  else if(ach>=Per111 && ach<=Per120){var EScore=document.getElementById("LogScr2"+i).value=Per80;}
+  else if(ach>=Per121){var EScore=document.getElementById("LogScr2"+i).value=Per70;}
+  else{var EScore=document.getElementById("LogScr2"+i).value=0;}
+  var MScore=document.getElementById("Scor2"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+/*    
+Achievement	Score
+>,=130-121 	70
+120-111	    80
+110-91	    100
+90-81	    90
+<,=80	    80
+*/  
+  
+ }
+ else if(lgc=='Logic13b')
+ {
+  var Per40=Math.round(((tgt*40)/100)*100)/100; var Per140=Math.round((tgt+Per40)*100)/100;
+  var Per31=Math.round(((tgt*31)/100)*100)/100; var Per131=Math.round((tgt+Per31)*100)/100;
+  var Per30=Math.round(((tgt*30)/100)*100)/100; var Per130=Math.round((tgt+Per30)*100)/100;
+  var Per21=Math.round(((tgt*21)/100)*100)/100; var Per121=Math.round((tgt+Per21)*100)/100;
+  var Per20=Math.round(((tgt*20)/100)*100)/100; var Per120=Math.round((tgt+Per20)*100)/100;
+  var Per19=Math.round(((tgt*19)/100)*100)/100; var Per81=Math.round((tgt-Per19)*100)/100;
+  var Per70=Math.round((tgt-Per30)*100)/100; var Per80=Math.round((tgt-Per20)*100)/100;
+  var Per29=Math.round(((tgt*29)/100)*100)/100; var Per71=Math.round((tgt-Per29)*100)/100;
+  var Per10=Math.round(((tgt*10)/100)*100)/100; var Per90=Math.round((tgt-Per10)*100)/100;  
+  if(ach<=Per70){var EScore=document.getElementById("LogScr2"+i).value=Per70;}
+  else if(ach>=Per71 && ach<=Per80){var EScore=document.getElementById("LogScr2"+i).value=Per90;}
+  else if(ach>=Per81 && ach<=Per120){var EScore=document.getElementById("LogScr2"+i).value=tgt;}
+  else if(ach>=Per121 && ach<=Per130){var EScore=document.getElementById("LogScr2"+i).value=Per80;}
+  else if(ach>=Per131){var EScore=document.getElementById("LogScr2"+i).value=Per70;}
+  else{var EScore=document.getElementById("LogScr2"+i).value=0;}
+  var MScore=document.getElementById("Scor2"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+/*  
+Achievement	Score
+140-131	     70
+130-121	     80
+120-81	     100
+80-71	     90
+<,=70	     70  
+*/
+ }
+ else if(lgc=='Logic14a')
+ {
+  var Per9=Math.round(((tgt*9)/100)*100)/100; var Per91=Math.round((tgt-Per9)*100)/100;
+  var Per10=Math.round(((tgt*10)/100)*100)/100; var Per90=Math.round((tgt-Per10)*100)/100;
+  var Per14=Math.round(((tgt*14)/100)*100)/100; var Per86=Math.round((tgt-Per14)*100)/100;
+  var Per15=Math.round(((tgt*15)/100)*100)/100; var Per85=Math.round((tgt-Per15)*100)/100;
+  var Per19=Math.round(((tgt*19)/100)*100)/100; var Per81=Math.round((tgt-Per19)*100)/100;
+  var Per20=Math.round(((tgt*20)/100)*100)/100; var Per80=Math.round((tgt-Per20)*100)/100;
+  var Per24=Math.round(((tgt*24)/100)*100)/100; var Per76=Math.round((tgt-Per24)*100)/100;
+  var Per25=Math.round(((tgt*25)/100)*100)/100; var Per75=Math.round((tgt-Per25)*100)/100;
+  var Per110=Math.round((tgt+Per10)*100)/100;  
+  if(ach<=Per75){var EScore=document.getElementById("LogScr2"+i).value=0;}
+  else if(ach>=Per76 && ach<=Per80){var EScore=document.getElementById("LogScr2"+i).value=Per80;}
+  else if(ach>=Per81 && ach<=Per85){var EScore=document.getElementById("LogScr2"+i).value=Per90;}
+  else if(ach>=Per86 && ach<=Per90){var EScore=document.getElementById("LogScr2"+i).value=tgt;}
+  else if(ach>=Per91){var EScore=document.getElementById("LogScr2"+i).value=Per110;}
+  else{var EScore=document.getElementById("LogScr2"+i).value=0;}
+  var MScore=document.getElementById("Scor2"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+/* 
+Achievement	Score
+>,=91 	    110
+90-86	    100
+85-81	    90
+80-76	    80
+<,=75	    0  
+*/
+ }
+ else if(lgc=='Logic14b')
+ {
+  var Per4=Math.round(((tgt*4)/100)*100)/100; var Per96=Math.round((tgt-Per4)*100)/100;
+  var Per5=Math.round(((tgt*5)/100)*100)/100; var Per95=Math.round((tgt-Per5)*100)/100;
+  var Per9=Math.round(((tgt*9)/100)*100)/100; var Per91=Math.round((tgt-Per9)*100)/100;
+  var Per10=Math.round(((tgt*10)/100)*100)/100; var Per90=Math.round((tgt-Per10)*100)/100;
+  var Per14=Math.round(((tgt*14)/100)*100)/100; var Per86=Math.round((tgt-Per14)*100)/100;
+  var Per15=Math.round(((tgt*15)/100)*100)/100; var Per85=Math.round((tgt-Per15)*100)/100;
+  var Per19=Math.round(((tgt*19)/100)*100)/100; var Per81=Math.round((tgt-Per19)*100)/100;
+  var Per20=Math.round(((tgt*20)/100)*100)/100; var Per80=Math.round((tgt-Per20)*100)/100;
+  var Per110=Math.round((tgt+Per10)*100)/100;
+  var Per40=Math.round(((tgt*40)/100)*100)/100; var Per60=Math.round((tgt-Per40)*100)/100;  
+  if(ach<=Per80){var EScore=document.getElementById("LogScr2"+i).value=0;}
+  else if(ach>=Per81 && ach<=Per85){var EScore=document.getElementById("LogScr2"+i).value=Per60;}
+  else if(ach>=Per86 && ach<=Per90){var EScore=document.getElementById("LogScr2"+i).value=Per90;}
+  else if(ach>=Per91 && ach<=Per95){var EScore=document.getElementById("LogScr2"+i).value=tgt;}
+  else if(ach>=Per96){var EScore=document.getElementById("LogScr2"+i).value=Per110;}
+  else{var EScore=document.getElementById("LogScr2"+i).value=0;}
+  var MScore=document.getElementById("Scor2"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+/*
+Achievement	Score
+>,=96	110
+95-91	100
+90-86	90
+85-81	60
+<,=80	0  
+*/
+ }
+ else if(lgc=='Logic15a')
+ {
+  var Per1=Math.round(((tgt*1)/100)*100)/100; var Per99=Math.round((tgt-Per1)*100)/100;
+  var Per2=Math.round(((tgt*2)/100)*100)/100; var Per98=Math.round((tgt-Per2)*100)/100;
+  var Per3=Math.round(((tgt*3)/100)*100)/100; var Per97=Math.round((tgt-Per3)*100)/100;
+  var Per4=Math.round(((tgt*4)/100)*100)/100; var Per96=Math.round((tgt-Per4)*100)/100;
+  var Per5=Math.round(((tgt*5)/100)*100)/100; var Per95=Math.round((tgt-Per5)*100)/100;
+  var Per50=Math.round(((tgt*50)/100)*100)/100; var Per50=Math.round((tgt-Per50)*100)/100;
+  var Per40=Math.round(((tgt*40)/100)*100)/100; var Per60=Math.round((tgt-Per40)*100)/100;
+  var Per10=Math.round(((tgt*10)/100)*100)/100; var Per90=Math.round((tgt-Per10)*100)/100;  
+  if(ach<Per96){var EScore=document.getElementById("LogScr2"+i).value=0;}
+  else if(ach>=Per96 && ach<Per97){var EScore=document.getElementById("LogScr2"+i).value=Per50;}
+  else if(ach>=Per97 && ach<Per98){var EScore=document.getElementById("LogScr2"+i).value=Per60;}
+  else if(ach>=Per98 && ach<Per99){var EScore=document.getElementById("LogScr2"+i).value=Per90;}
+  else if(ach>=Per99){var EScore=document.getElementById("LogScr2"+i).value=tgt;}
+  else{var EScore=document.getElementById("LogScr2"+i).value=0;}
+  var MScore=document.getElementById("Scor2"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+/*  
+Achievement	Score
+>,=99 	     110
+<99-98	     90
+<98-97	     60
+<97-96	     50
+<96-95	     0  
+*/
+ }
+ else if(lgc=='Logic15b')
+ {
+  var Per05=Math.round(((tgt*0.5)/100)*100)/100; var Per995=Math.round((tgt-Per05)*100)/100;
+  var Per1=Math.round(((tgt*1)/100)*100)/100; var Per99=Math.round((tgt-Per1)*100)/100;
+  var Per2=Math.round(((tgt*2)/100)*100)/100; var Per98=Math.round((tgt-Per2)*100)/100;
+  var Per3=Math.round(((tgt*3)/100)*100)/100; var Per97=Math.round((tgt-Per3)*100)/100;
+  var Per30=Math.round(((tgt*30)/100)*100)/100; var Per70=Math.round((tgt-Per30)*100)/100;
+  var Per10=Math.round(((tgt*10)/100)*100)/100; var Per90=Math.round((tgt-Per10)*100)/100;
+  var Per110=Math.round((tgt+Per10)*100)/100;  
+  if(ach<Per97){var EScore=document.getElementById("LogScr2"+i).value=0;}
+  else if(ach>=Per97 && ach<Per98){var EScore=document.getElementById("LogScr2"+i).value=Per70;}
+  else if(ach>=Per98 && ach<Per99){var EScore=document.getElementById("LogScr2"+i).value=Per90;}
+  else if(ach>=Per99 && ach<Per995){var EScore=document.getElementById("LogScr2"+i).value=tgt;}
+  else if(ach>=Per995){var EScore=document.getElementById("LogScr2"+i).value=Per110;}
+  else{var EScore=document.getElementById("LogScr2"+i).value=0;}
+  var MScore=document.getElementById("Scor2"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+/*
+Achievement	   Score
+>,=99.5(100)	110
+99.5-99	        100
+99-98	        90
+98-97	        70
+<97	            0
+*/  
+ }
+ else if(lgc=='Logic15c')
+ {
+  var Per1=Math.round(((tgt*1)/100)*100)/100; var Per99=Math.round((tgt-Per1)*100)/100;
+  var Per2=Math.round(((tgt*2)/100)*100)/100; var Per98=Math.round((tgt-Per2)*100)/100;
+  var Per3=Math.round(((tgt*3)/100)*100)/100; var Per97=Math.round((tgt-Per3)*100)/100;
+  var Per4=Math.round(((tgt*4)/100)*100)/100; var Per96=Math.round((tgt-Per4)*100)/100;
+  var Per40=Math.round(((tgt*40)/100)*100)/100; var Per60=Math.round((tgt-Per40)*100)/100;
+  var Per20=Math.round(((tgt*20)/100)*100)/100; var Per80=Math.round((tgt-Per20)*100)/100;
+  var Per10=Math.round(((tgt*10)/100)*100)/100; var Per110=Math.round((tgt+Per10)*100)/100;  
+  if(ach<Per96){var EScore=document.getElementById("LogScr2"+i).value=0;}
+  else if(ach>=Per96 && ach<Per97){var EScore=document.getElementById("LogScr2"+i).value=Per60;}
+  else if(ach>=Per97 && ach<Per98){var EScore=document.getElementById("LogScr2"+i).value=Per80;}
+  else if(ach>=Per98 && ach<Per99){var EScore=document.getElementById("LogScr2"+i).value=tgt;}
+  else if(ach>=Per99){var EScore=document.getElementById("LogScr2"+i).value=Per110;}
+  else{var EScore=document.getElementById("LogScr2"+i).value=0;}
+  var MScore=document.getElementById("Scor2"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+/*  
+Achievement	Score
+>,=99 	    110
+<99-98	    100
+<98-97	    80
+<97-96	    60
+<96	0
+*/  
+ }
+ else if(lgc=='Logic16')
+ {
+  var Per10=Math.round(((tgt*10)/100)*100)/100; var Per90=Math.round((tgt-Per10)*100)/100;
+  var Per6=Math.round(((tgt*6)/100)*100)/100; var Per94=Math.round((tgt-Per6)*100)/100;
+  var Per5=Math.round(((tgt*5)/100)*100)/100; var Per95=Math.round((tgt-Per5)*100)/100;
+  var Per1=Math.round(((tgt*1)/100)*100)/100; var Per99=Math.round((tgt-Per1)*100)/100;
+  var Per105=Math.round((tgt+Per5)*100)/100;  var Per106=Math.round((tgt+Per6)*100)/100;
+  var Per110=Math.round((tgt+Per10)*100)/100; var Per111=Math.round((tgt+Per10+Per1)*100)/100;
+  var Per115=Math.round((tgt+Per10+Per5)*100)/100;  
+  if(ach>=Per90 && ach<=Per94){var EScore=document.getElementById("LogScr2"+i).value=Per110;}
+  else if(ach>=Per95 && ach<=Per99){var EScore=document.getElementById("LogScr2"+i).value=Per105;}
+  else if(ach>=tgt && ach<=Per105){var EScore=document.getElementById("LogScr2"+i).value=tgt;}
+  else if(ach>=Per106 && ach<=Per110){var EScore=document.getElementById("LogScr2"+i).value=Per95;}
+  else if(ach>=Per111){var EScore=document.getElementById("LogScr2"+i).value=Per90;}
+  else{var EScore=document.getElementById("LogScr2"+i).value=0;}
+  var MScore=document.getElementById("Scor2"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+/*  
+Achievement	Score
+111-115	    90
+106-110	    95
+100-105	    100
+99-95	    105
+94-90	    110  
+*/
+ }
+ else if(lgc=='Logic17')
+ {
+  var Per15=Math.round(((tgt*15)/100)*100)/100; var Per16=Math.round(((tgt*16)/100)*100)/100;
+  var Per22=Math.round(((tgt*22)/100)*100)/100; var Per23=Math.round(((tgt*23)/100)*100)/100;
+  var Per29=Math.round(((tgt*29)/100)*100)/100; var Per30=Math.round(((tgt*30)/100)*100)/100;
+  var Per36=Math.round(((tgt*36)/100)*100)/100; var Per37=Math.round(((tgt*37)/100)*100)/100;
+  var Per42=Math.round(((tgt*42)/100)*100)/100; var Per50=Math.round(((tgt*50)/100)*100)/100;
+  var Per75=Math.round(((tgt*75)/100)*100)/100; var Per80=Math.round(((tgt*80)/100)*100)/100;
+  var Per90=Math.round(((tgt*90)/100)*100)/100;
+  if(ach<=Per15){var EScore=document.getElementById("LogScr2"+i).value=tgt;}
+  else if(ach>=Per16 && ach<=Per22){var EScore=document.getElementById("LogScr2"+i).value=Per90;}
+  else if(ach>=Per23 && ach<=Per29){var EScore=document.getElementById("LogScr2"+i).value=Per80;}
+  else if(ach>=Per30 && ach<=Per36){var EScore=document.getElementById("LogScr2"+i).value=Per75;}
+  else if(ach>=Per37 && ach<=Per42){var EScore=document.getElementById("LogScr2"+i).value=Per50;}  
+  else if(ach>Per42){var EScore=document.getElementById("LogScr2"+i).value=0;}
+  else{var EScore=document.getElementById("LogScr2"+i).value=0;}
+  var MScore=document.getElementById("Scor2"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+/*  
+Achievement	Score
+<15	        100
+16-22	    90
+23-29	    80
+30-36	    75
+37-42	    50
+>42	        0  
+*/ 
+ }
  
  //var EScore=document.getElementById("Scor"+i).value=Math.round(((ach/tgt)*wgt)*100)/100; 
  //var Score=document.getElementById("Kra2Score"+i).value=Math.round((EScore)*100)/100;

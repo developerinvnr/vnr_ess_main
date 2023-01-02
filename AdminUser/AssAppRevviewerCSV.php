@@ -40,7 +40,11 @@ while($row = mysql_fetch_array($sql))
   $schema_insert = "";
   $schema_insert .= $Sno.$sep;
   $schema_insert .= $row['EmpCode'].$sep;
-  $schema_insert .= $row['Fname'].' '.$row['Sname'].' '.$row['Lname'].$sep;
+  
+  if($row['Sname']==''){ $Ename=trim($row['Fname']).' '.trim($row['Lname']); }
+else{ $Ename=trim($row['Fname']).' '.trim($row['Sname']).' '.trim($row['Lname']); }
+  
+  $schema_insert .= $Ename.$sep;
   $schema_insert .= $row['DesigCode'].$sep;	
   $schema_insert .= date("d-m-Y",strtotime($row['DateJoining'])).$sep;
   

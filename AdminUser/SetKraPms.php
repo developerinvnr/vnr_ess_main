@@ -292,11 +292,31 @@ if($_REQUEST['action']=='PrsBBMidPms' AND $_REQUEST['value']=='true')
    
    else
    {
+       
+    /*   
     $sqlBck=mysql_query("select * from hrm_pms_formb fb INNER JOIN hrm_pms_formb_grade fbg ON fb.FormBId=fbg.FormBId where fb.SkillStatus='A' AND fb.DepartmentId=".$res['DepartmentId']." AND fbg.GradeId=".$res['GradeId'], $con); 
+	while($resBck=mysql_fetch_array($sqlBck))
+    {
+     $sqlIn=mysql_query("insert into hrm_employee_pms_behavioralformb(EmpPmsId, FormBId, EmpId, YearId, EmpStatus, AppStatus) values(".$resPms['EmpPmsId'].", ".$resBck['FormBId'].", ".$res['EmployeeID'].", ".$resSY['CurrY'].", 'A', 'A')",$con);
+    }
+    */
+    
+    /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
+	$sqlBck=mysql_query("select * from hrm_pms_formb fb INNER JOIN hrm_pms_formb_grade fbg ON fb.FormBId=fbg.FormBId where fb.SkillStatus='A' AND fb.GroupFor='' AND fb.DepartmentId=".$res['DepartmentId']." AND fbg.GradeId=".$res['GradeId'], $con); 
 	while($resBck=mysql_fetch_array($sqlBck))
     {
      $sqlIn=mysql_query("insert into hrm_employee_pms_behavioralformb(EmpPmsId, FormBId, EmpId, YearId) values(".$resPms['EmpPmsId'].", ".$resBck['FormBId'].", ".$res['EmployeeID'].", ".$resSY['CurrY'].")",$con);
     }
+	
+	/* BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB */
+	$sqlBck=mysql_query("select * from hrm_pms_formb fb INNER JOIN hrm_pms_formb_grade fbg ON fb.FormBId=fbg.FormBId where fb.SkillStatus='A' AND fb.GroupFor!='' AND fb.DepartmentId=".$res['DepartmentId']." AND fbg.GradeId=".$res['GradeId']." group by GroupFor", $con); 
+	while($resBck=mysql_fetch_array($sqlBck))
+    {
+     $sqlIn=mysql_query("insert into hrm_employee_pms_behavioralformb(EmpPmsId, FormBId, EmpId, YearId) values(".$resPms['EmpPmsId'].", ".$resBck['FormBId'].", ".$res['EmployeeID'].", ".$resSY['CurrY'].")",$con);
+    }   
+    
+    
+    
 	if($sqlIn){ $msg='FormB set successfully'; $sqlUp2=mysql_query("update hrm_employee_pms set SkillSetting='Y' where EmpPmsId=".$resPms['EmpPmsId']." AND AssessmentYear=".$resSY['CurrY'], $con); }
 	 
    } 
@@ -334,7 +354,7 @@ if($_REQUEST['action']=='PrsBBPms' AND $_REQUEST['value']=='true')
     $sqlBck=mysql_query("select * from hrm_pms_formb fb INNER JOIN hrm_pms_formb_grade fbg ON fb.FormBId=fbg.FormBId where fb.SkillStatus='A' AND fb.DepartmentId=".$res['DepartmentId']." AND fbg.GradeId=".$res['GradeId'], $con); 
 	while($resBck=mysql_fetch_array($sqlBck))
     {
-     $sqlIn=mysql_query("insert into hrm_employee_pms_behavioralformb(EmpPmsId, FormBId, EmpId, YearId) values(".$resPms['EmpPmsId'].", ".$resBck['FormBId'].", ".$res['EmployeeID'].", ".$resSY['CurrY'].")",$con);
+     $sqlIn=mysql_query("insert into hrm_employee_pms_behavioralformb(EmpPmsId, FormBId, EmpId, YearId, EmpStatus, AppStatus) values(".$resPms['EmpPmsId'].", ".$resBck['FormBId'].", ".$res['EmployeeID'].", ".$resSY['CurrY'].", 'A', 'A')",$con);
     }
 	if($sqlIn){ $msg='FormB set successfully'; $sqlUp2=mysql_query("update hrm_employee_pms set SkillSetting='Y' where EmpPmsId=".$resPms['EmpPmsId']." AND AssessmentYear=".$resSY['CurrY'], $con); }
 	 

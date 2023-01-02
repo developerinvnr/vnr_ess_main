@@ -84,6 +84,10 @@ function FucChk(sn)
 { if(document.getElementById("Chk"+sn).checked==true){document.getElementById("TR"+sn).style.background='#FF80FF'; } else if(document.getElementById("Chk"+sn).checked==false){document.getElementById("TR"+sn).style.background='#FFFFFF'; }
 }
 
+function Export(d)
+{   
+  window.open("ExportPendingClearance.php?action=export&value="+d,"PrintForm","menubar=yes,scrollbars=yes,resizable=no,directories=no,width=20,height=20");} 
+  
 $(document).ready(function () { $("#table1").freezeHeader({ 'height': '500px' }); })
 </script>
 </head>
@@ -117,7 +121,7 @@ $(document).ready(function () { $("#table1").freezeHeader({ 'height': '500px' })
 	  <?php $SqlDept=mysql_query("select * from hrm_department where CompanyId=".$CompanyId." order by DepartmentName ASC", $con); while($ResDept=mysql_fetch_array($SqlDept)) { ?><option value="<?php echo $ResDept['DepartmentId'];?>" <?php if($_REQUEST['DPid']==$ResDept['DepartmentId']){echo 'selected';}?>><?php echo $ResDept['DepartmentCode'];?></option><?php } ?>
 	  <option value="All" <?php if($_REQUEST['DPid']=='All'){echo 'selected';}?>>All</option>
 	  </select></td>
-	  
+	   <td><a href="#" onClick="Export('<?php echo $_REQUEST['DPid']; ?>')" style="font-size:12px;">Export Excel</a></td>
 	  <td><font style="font-family:Times New Roman;color:#005500;font-size:15px; font-weight:bold;"><?php echo $Msg; ?></font></td>
 	</tr>
    </table>

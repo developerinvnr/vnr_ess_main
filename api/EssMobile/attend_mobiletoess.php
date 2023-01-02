@@ -1070,8 +1070,9 @@ $SqlAph=mysqli_query($con, "select count(AttValue)as APH from hrm_employee_atten
 //In-Out Reports
 elseif($_REQUEST['value'] == 'InOutReports' && $_REQUEST['empid']>0 && $_REQUEST['month']>0 && $_REQUEST['year']>0)
 { 
-   if($_REQUEST['month']==12 OR $_REQUEST['month']==11){$year=2021;}
-   else{$year=$_REQUEST['year']=2022;}
+   //if($_REQUEST['month']==12 OR $_REQUEST['month']==11){$year=2021;}
+   //else{$year=$_REQUEST['year']=2022;}
+   $year=$_REQUEST['year'];
    $eid = $_REQUEST['empid']; $m = $_REQUEST['month']; $y = $year; 
    $day=date("t", strtotime(date($y."-".$m."-01"))); $fd = $y."-".$m."-01"; $td = $y."-".$m."-".$day;
    

@@ -17,7 +17,7 @@
 	  if($_REQUEST['OffiMobileNo']==''){$_REQUEST['OffiMobileNo']=0;} if($_REQUEST['FileNo']==''){$_REQUEST['FileNo']=0;}
 	  $pass=encrypt($_REQUEST['EmpPass']);
 	  $Fname=strtoupper($_REQUEST['FName']);  $Sname=strtoupper($_REQUEST['SName']);  $Lname=strtoupper($_REQUEST['LName']);
-	  $sqlIns = mysql_query("insert into hrm_employee(EmpCode,EmpPass,EmpStatus,Fname,Sname,Lname,CompanyId,CreatedBy,CreatedDate,YearId)values(".$_REQUEST['EmpCode'].", '".$pass."', '".$_REQUEST['EmpStatus']."', '".$Fname."', '".$Sname."', '".$Lname."', ".$_REQUEST['ComId'].", ".$_REQUEST['UserId'].", '".date("Y-m-d")."', ".$_REQUEST['YearId'].")", $con);
+	  $sqlIns = mysql_query("insert into hrm_employee(EmpCode,EmpPass,EmpStatus,Fname,Sname,Lname,CompanyId,CreatedBy,CreatedDate,YearId)values(".$_REQUEST['EmpCode'].", '".$pass."', '".$_REQUEST['EmpStatus']."', '".trim($Fname)."', '".trim($Sname)."', '".trim($Lname)."', ".$_REQUEST['ComId'].", ".$_REQUEST['UserId'].", '".date("Y-m-d")."', ".$_REQUEST['YearId'].")", $con);
 	  if($sqlIns) 
        { $SqlEmpID = mysql_query("SELECT EmployeeID FROM hrm_employee where EmpCode=".$_REQUEST['EmpCode']." AND CompanyId=".$_REQUEST['ComId'], $con);  
 	     $ResEmpID=mysql_fetch_assoc($SqlEmpID);

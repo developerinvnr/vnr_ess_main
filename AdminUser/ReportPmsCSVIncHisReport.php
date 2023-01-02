@@ -45,7 +45,11 @@ if($res['SalaryChange_Date']<$Y.'-10-01'){
 $sqlE=mysql_query("select Fname, Sname, Lname from hrm_employee where EmpCode=".$res['EmpCode'], $con); $resE=mysql_fetch_assoc($sqlE);
 $csv_output .= '"'.str_replace('"', '""', $Sno).'",';
 $csv_output .= '"'.str_replace('"', '""', $res['EmpCode']).'",';
-$csv_output .= '"'.str_replace('"', '""', $resE['Fname'].' '.$resE['Sname'].' '.$resE['Lname']).'",';
+
+if($resE['Sname']==''){ $Ename=trim($resE['Fname']).' '.trim($resE['Lname']); }
+else{ $Ename=trim($resE['Fname']).' '.trim($resE['Sname']).' '.trim($resE['Lname']); }
+$csv_output .= '"'.str_replace('"', '""', $Ename).'",';
+//$csv_output .= '"'.str_replace('"', '""', $resE['Fname'].' '.$resE['Sname'].' '.$resE['Lname']).'",';
 $csv_output .= '"'.str_replace('"', '""', $res['Current_Grade']).'",';
 $csv_output .= '"'.str_replace('"', '""', $res['Proposed_Grade']).'",';
 $csv_output .= '"'.str_replace('"', '""', $res['Department']).'",';

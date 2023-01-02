@@ -226,7 +226,12 @@ else
 } 
 
 $Sno=1; while($res = mysql_fetch_array($result))
-{ $Ename=$res['Fname'].' '.$res['Sname'].' '.$res['Lname']; 
+{ 
+
+if($res['Sname']==''){ $Ename=trim($res['Fname']).' '.trim($res['Lname']); }
+else{ $Ename=trim($res['Fname']).' '.trim($res['Sname']).' '.trim($res['Lname']); }
+//$Ename=$res['Fname'].' '.$res['Sname'].' '.$res['Lname']; 
+
 $sqlDept=mysql_query("select DepartmentCode from hrm_department where DepartmentId=".$res['DepartmentId'], $con); $resDept=mysql_fetch_assoc($sqlDept);
 $sqlDesig=mysql_query("select DesigCode,DesigName from hrm_designation where DesigId=".$res['DesigId'], $con); $resDesig=mysql_fetch_assoc($sqlDesig);
 $sqlGrade=mysql_query("select GradeValue from hrm_grade where GradeId=".$res['GradeId'], $con); $resGrade=mysql_fetch_assoc($sqlGrade);
@@ -273,7 +278,20 @@ $sqlVer=mysql_query("select VerticalName from hrm_department_vertical where Vert
 $sqlHQ=mysql_query("select HqName from hrm_headquater where HqId=".$res['HqId'], $con); $resHQ=mysql_fetch_assoc($sqlHQ);
 $sqlCC=mysql_query("select StateName from hrm_state where StateId=".$res['CostCenter'], $con); $resCC=mysql_fetch_assoc($sqlCC);
 
+/*
 $sqlRId=mysql_query("select RegionId from hrm_sales_verhq where HqId=".$res['HqId']." AND Vertical=".$res['EmpVertical']." AND DeptId=".$res['DepartmentId'], $con); $resRId=mysql_fetch_assoc($sqlRId);
+
+$sqlRR=mysql_query("select RegionName,ZoneId from hrm_sales_region where RegionId=".$resRId['RegionId'], $con); $resRR=mysql_fetch_assoc($sqlRR);
+$sqlZZ=mysql_query("select ZoneName from hrm_sales_zone where ZoneId=".$resRR['ZoneId'], $con); $resZZ=mysql_fetch_assoc($sqlZZ);
+*/
+
+$sqlRId=mysql_query("select RegionId from hrm_sales_verhq where HqId=".$res['HqId']." AND Vertical=".$res['EmpVertical']." AND DeptId=".$res['DepartmentId'], $con); $rowRId=mysql_num_rows($sqlRId);
+if($rowRId>0){ $resRId=mysql_fetch_assoc($sqlRId); }
+else
+{ $sqlHq2=mysql_query("select HqId from hrm_headquater where HqName='".$resHQ['HqName']."' and HQStatus!='De'", $con); $resHq2=mysql_fetch_assoc($sqlHq2); 
+    
+$sqlRId=mysql_query("select RegionId from hrm_sales_verhq where HqId=".$resHq2['HqId']." AND Vertical=".$res['EmpVertical']." AND DeptId=".$res['DepartmentId'], $con); $resRId=mysql_fetch_assoc($sqlRId);   
+}
 
 $sqlRR=mysql_query("select RegionName,ZoneId from hrm_sales_region where RegionId=".$resRId['RegionId'], $con); $resRR=mysql_fetch_assoc($sqlRR);
 $sqlZZ=mysql_query("select ZoneName from hrm_sales_zone where ZoneId=".$resRR['ZoneId'], $con); $resZZ=mysql_fetch_assoc($sqlZZ);
@@ -392,14 +410,14 @@ $csv_output .= '"'.str_replace('"', '""', $res['PreviousExpYear']).'",';
 $csv_output .= '"'.str_replace('"', '""', $TotalExp).'",';
 
 $sqlQuali=mysql_query("select Qualification,Specialization,Subject,Institute from hrm_employee_qualification where EmployeeID=".$res['EmployeeID']." order by QualificationId ASC ", $con); 
-$sqlQ1=mysql_query("select Qualification,Specialization,Institute from hrm_employee_qualification where Qualification='10th' AND EmployeeID=".$res['EmployeeID'], $con); 
-$sqlQ2=mysql_query("select Qualification,Specialization,Institute from hrm_employee_qualification where Qualification='12th' AND EmployeeID=".$res['EmployeeID'], $con); 
-$sqlQ3=mysql_query("select Qualification,Specialization,Institute from hrm_employee_qualification where Qualification='Graduation' AND EmployeeID=".$res['EmployeeID'], $con); 
-$sqlQ4=mysql_query("select Qualification,Specialization,Institute from hrm_employee_qualification where Qualification='Post_Graduation' AND EmployeeID=".$res['EmployeeID'], $con); 
+$sqlQ1=mysql_query("select Qualification,Specialization,Institute,Subject from hrm_employee_qualification where Qualification='10th' AND EmployeeID=".$res['EmployeeID'], $con); 
+$sqlQ2=mysql_query("select Qualification,Specialization,Institute,Subject from hrm_employee_qualification where Qualification='12th' AND EmployeeID=".$res['EmployeeID'], $con); 
+$sqlQ3=mysql_query("select Qualification,Specialization,Institute,Subject from hrm_employee_qualification where Qualification='Graduation' AND EmployeeID=".$res['EmployeeID'], $con); 
+$sqlQ4=mysql_query("select Qualification,Specialization,Institute,Subject from hrm_employee_qualification where Qualification='Post_Graduation' AND EmployeeID=".$res['EmployeeID'], $con); 
 $rowQ1=mysql_num_rows($sqlQ1); $rowQ2=mysql_num_rows($sqlQ2); $rowQ3=mysql_num_rows($sqlQ3); $rowQ4=mysql_num_rows($sqlQ4);
 if($rowQ1>0){$resQ1=mysql_fetch_assoc($sqlQ1);} if($rowQ2>0){$resQ2=mysql_fetch_assoc($sqlQ2);} 
 if($rowQ3>0){$resQ3=mysql_fetch_assoc($sqlQ3);} if($rowQ4>0){$resQ4=mysql_fetch_assoc($sqlQ4);}
-$sqlQQ=mysql_query("select Qualification,Specialization from hrm_employee_qualification where Qualification!='10th' AND Qualification!='12th' AND Qualification!='Graduation' AND Qualification!='Post_Graduation' AND EmployeeID=".$res['EmployeeID'], $con); $rowQQ=mysql_num_rows($sqlQQ); 
+$sqlQQ=mysql_query("select Qualification,Specialization,Subject from hrm_employee_qualification where Qualification!='10th' AND Qualification!='12th' AND Qualification!='Graduation' AND Qualification!='Post_Graduation' AND EmployeeID=".$res['EmployeeID'], $con); $rowQQ=mysql_num_rows($sqlQQ); 
 if($rowQQ>0){$resQQ=mysql_fetch_assoc($sqlQQ);}
 
 $Qua1=''; $Qua2=''; $Qua3=''; $Qua4=''; $Qua5='';
@@ -418,7 +436,7 @@ $no++;
 }
 $csv_output .= '"'.str_replace('"', '""', strtoupper($Qual)).'",';
 
-if($resQ4['Specialization']!=''){$Qual2=$resQ4['Specialization'];}elseif($resQ3['Specialization']!=''){$Qual2=$resQ3['Specialization'];}elseif($resQ2['Institute']!=''){$Qual2='12th';}elseif($resQ1['Institute']!=''){$Qual2='10th';}else{$Qual2='';}
+if($resQ4['Specialization']!=''){$Qual2=$resQ4['Specialization'].' '.$resQ4['Subject'];}elseif($resQ3['Specialization']!=''){$Qual2=$resQ3['Specialization'].' '.$resQ3['Subject'];}elseif($resQ2['Institute']!=''){$Qual2='12th'.' '.$resQ2['Subject'];}elseif($resQ1['Institute']!=''){$Qual2='10th'.' '.$resQ1['Subject'];}else{$Qual2='';}
 $csv_output .= '"'.str_replace('"', '""',strtoupper($Qual2)).'",';
 
 if($rowQQ>0){ while($resQQ=mysql_fetch_assoc($sqlQQ)){$Qual3=$resQQ['Qualification'].'-'.$resQQ['Specialization'].', '; }}

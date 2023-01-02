@@ -35,7 +35,11 @@ $sqlRemp=mysql_query("select Fname,Sname,Lname from hrm_employee where EmployeeI
 
 $csv_output .= '"'.str_replace('"', '""', $sn).'",';
 $csv_output .= '"'.str_replace('"', '""', $res['EmpCode']).'",';
-$csv_output .= '"'.str_replace('"', '""', $res['Fname'].' '.$res['Sname'].' '.$res['Lname']).'",';
+
+if($res['Sname']==''){ $Ename=trim($res['Fname']).' '.trim($res['Lname']); }
+else{ $Ename=trim($res['Fname']).' '.trim($res['Sname']).' '.trim($res['Lname']); }
+$csv_output .= '"'.str_replace('"', '""', $Ename).'",';
+//$csv_output .= '"'.str_replace('"', '""', $res['Fname'].' '.$res['Sname'].' '.$res['Lname']).'",';
 $csv_output .= '"'.str_replace('"', '""', $resDept['DepartmentName']).'",'; 
 $csv_output .= '"'.str_replace('"', '""', $resDesig['DesigName']).'",';
 $csv_output .= '"'.str_replace('"', '""', $resHQ['HqName']).'",';

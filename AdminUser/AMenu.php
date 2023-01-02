@@ -281,7 +281,7 @@
     <ul> 
 	<?php if($_SESSION['PMS']==1 OR $_SESSION['PMS_KRA']==1){?><li><a href="KRA.php?YI=<?php echo $YearId; ?>">Departmental KRA</a></li><?php } ?>
     <?php /* if($_SESSION['PMS']==1 OR $_SESSION['PMS_DeptKRA']==1){?><li><a href="DesigKRA.php">Distribute Standard KRA</a></li><?php } */ ?>
-    <?php if($_SESSION['PMS']==1 OR $_SESSION['PMS_EditKRA']==1){?><li><a href="EditKRA.php">Employee KRA</a></li><?php } ?>
+    <?php if($_SESSION['PMS']==1 OR $_SESSION['PMS_EditKRA']==1){?><li><a href="EditKRA.php">Employee KRA/ Form-B</a></li><?php } ?>
     <?php if($_SESSION['PMS']==1 OR $_SESSION['PMS_KRAStatus']==1){?><li><a href="KRAStatus.php">KRA Status</a></li><?php } ?>
     <?php if($_SESSION['PMS']==1 OR $_SESSION['PMS_EditKRA']==1){?><li><a href="PendKRASub.php">Pending KRA Submission</a></li><?php } ?>
     <?php if($_SESSION['PMS']==1 OR $_SESSION['PMS_EditKRA']==1){?><li><a href="PeriodicKraEmp.php">Employee (Periodic KRA) </a></li><?php } ?>

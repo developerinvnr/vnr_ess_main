@@ -41,13 +41,13 @@ if ($_POST['For'] == 'RecuitToEss' && $_POST['sn'] != '' && $_POST['ecode'] != '
         $db = mysql_select_db('hrims', $con);
         $sR = mysql_query("select Fname,Sname,Lname,DesigId,MobileNo_Vnr,EmailId_Vnr from hrm_employee e inner join hrm_employee_general g on e.EmployeeId=g.EmployeeID where e.EmployeeID=" . $res['A_ReportingManager'], $con);
         $rR = mysql_fetch_assoc($sR);
-        $Rname = $rR['Fname'] . ' ' . $rR['Sname'] . ' ' . $rR['Lname'];
+        $Rname = trim($rR['Fname']).' '.trim($rR['Sname']).' '.trim($rR['Lname']);
 
         $sEmpIDChk = mysql_query("SELECT EmployeeID FROM hrm_employee where EmpCode=" . $_POST['ncode'] . " AND EmpStatus!='De' AND CompanyId=" . $_POST['comid'], $con);
         $rowEmpIDchk = mysql_num_rows($sEmpIDChk);
         if ($rowEmpIDchk == 0) {
 
-            $InsE = mysql_query("insert into hrm_employee(EmpCode, CandidateId, EmpType, EmpStatus, Fname, Sname, Lname, CompanyId, CreatedBy, CreatedDate, YearId)values(" . $_POST['ncode'] . ", " . $res['CandidateId'] . ", '" . $res['EmpType'] . "', '" . $res['EmpStatus'] . "', '" . $res['FName'] . "', '" . $res['MName'] . "', '" . $res['LName'] . "',  " . $_POST['comid'] . ", " . $_POST['uid'] . ", '" . date("Y-m-d") . "', " . $_POST['uid'] . ")", $con);
+            $InsE = mysql_query("insert into hrm_employee(EmpCode, CandidateId, EmpType, EmpStatus, Fname, Sname, Lname, CompanyId, CreatedBy, CreatedDate, YearId)values(" . $_POST['ncode'] . ", " . $res['CandidateId'] . ", '" . $res['EmpType'] . "', '" . $res['EmpStatus'] . "', '".trim($res['FName']). "', '" .trim($res['MName'])."', '".trim($res['LName'])."',  " . $_POST['comid'] . ", " . $_POST['uid'] . ", '" . date("Y-m-d") . "', " . $_POST['uid'] . ")", $con);
             if ($InsE) {
                 $sEmpID = mysql_query("SELECT EmployeeID FROM hrm_employee where EmpCode=" . $_POST['ncode'] . " AND EmpStatus!='De' AND CompanyId=" . $_POST['comid'], $con);
                 $rEmpID = mysql_fetch_assoc($sEmpID);

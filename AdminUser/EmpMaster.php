@@ -385,7 +385,9 @@ function show_UseApps(originalRequest)
 function FunMoveRep(eid,uid)
 {
  if(document.getElementById('MoveRep_'+eid).checked==true){var vv='Y';}else{var vv='N';} 
- var url = 'EmpDLChk.php';	var pars = 'For=ChkMoveRep&Eid='+eid+'&vv='+vv+'&Uid='+uid;	var myAjax = new Ajax.Request(
+ var url = 'EmpDLChk.php';	var pars = 'For=ChkMoveRep&Eid='+eid+'&vv='+vv+'&Uid='+uid;	
+ 
+ var myAjax = new Ajax.Request(
  url, 
 	{
 		method: 'post', 

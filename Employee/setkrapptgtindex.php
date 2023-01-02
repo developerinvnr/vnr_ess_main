@@ -111,6 +111,14 @@ function FunEnterAch(v,i) //LogScr Scor
   else{var EScore=document.getElementById("LogScr"+i).value=tgt;}
   var MScore=document.getElementById("Scor"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
  }
+ else if(lgc=='Logic2a')
+ {
+  var Per10=Math.round(((tgt*10)/100)*100)/100; 
+  var Per110=Math.round((tgt+Per10)*100)/100;      
+  if(ach>=Per110){var EScore=document.getElementById("LogScr"+i).value=Per11;}
+  else{var EScore=document.getElementById("LogScr"+i).value=ach;}
+  var MScore=document.getElementById("Scor"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+ }
  else if(lgc=='Logic3')
  {
   if(ach==tgt){var EScore=document.getElementById("LogScr"+i).value=ach;}

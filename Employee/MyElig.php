@@ -87,7 +87,9 @@ function SalaryHelpDoc()
 			<tr>
 			 <td>
 			<table border="1">
-<?php $SqlE=mysql_query("SELECT GradeId, DepartmentId, EmpAddBenifit_MediInsu_value, ESCI FROM hrm_employee_general g INNER JOIN hrm_employee_ctc c ON g.EmployeeID=c.EmployeeID WHERE g.EmployeeID=".$EmployeeId, $con); $ResE=mysql_fetch_assoc($SqlE); 
+<?php $SqlE=mysql_query("SELECT GradeId, DepartmentId, EmpAddBenifit_MediInsu_value FROM hrm_employee_general g INNER JOIN hrm_employee_ctc c ON g.EmployeeID=c.EmployeeID WHERE g.EmployeeID=".$EmployeeId, $con); $ResE=mysql_fetch_assoc($SqlE); 
+
+$SqlCtc=mysql_query("SELECT ESCI FROM hrm_employee_ctc WHERE Status='A' AND EmployeeID=".$EmployeeId, $con); $ResCtc=mysql_fetch_assoc($SqlCtc); 
 
 $sqlGrade=mysql_query("select GradeValue from hrm_grade where GradeId=".$ResE['GradeId'], $con); 
 $resGrade=mysql_fetch_assoc($sqlGrade);
@@ -208,16 +210,16 @@ $SqlEligEmp = mysql_query("SELECT * FROM hrm_employee_eligibility WHERE Employee
 			  </tr>
 			  */ ?>
 			  
-<?php if($ResE['ESCI']>0){ echo ''; } else {?>			  
+<?php if($ResCtc['ESCI']>0){ echo ''; } else {?>			  
 			  <tr>
 			    <td style="width:485px;font-size:16px;height:22px;" align="left"><b>*.</b>&nbsp;Health Insurance(Premium Paid by Company)  </td>
 				<td style="width:200px;">: <?php if($ResEligEmp['Health_Insurance']>0 AND $ResEligEmp['Health_Insurance']!=''){ if($ResEligEmp['Health_Insurance']==100000.00){echo '1 Lakhs';}elseif($ResEligEmp['Health_Insurance']==200000.00){echo '2 Lakhs';}elseif($ResEligEmp['Health_Insurance']==300000.00){echo '3 Lakhs';} elseif($ResEligEmp['Health_Insurance']==500000.00){echo '5 Lakhs';} elseif($ResEligEmp['Health_Insurance']==500000.00){echo '5 Lakhs';} elseif($ResEligEmp['Health_Insurance']==600000.00){echo '6 Lakhs';} elseif($ResEligEmp['Health_Insurance']==800000.00){echo '8 Lakhs';} elseif($ResEligEmp['Health_Insurance']==900000.00){echo '9 Lakhs';} elseif($ResEligEmp['Health_Insurance']==1000000.00){echo '10 Lakhs';} } else {echo 'NA';}?></td>
 			  </tr>
 <?php } ?>			
 
-<?php if($CompanyId==1) { ?>  
+<?php if($CompanyId==1) { //Group Personal Accident Insurance ?>  
               <tr>
-			    <td style="width:485px;font-size:16px;height:22px;" align="left"><b>*.</b>&nbsp;Group Personal Accident Insurance </td>
+			    <td style="width:485px;font-size:16px;height:22px;" align="left"><b>*.</b>&nbsp;Group Term Insurance </td>
 				<td style="width:200px;">: 
 				    <?php
                     if($ResE['GradeId']==61 || $ResE['GradeId']==62){
@@ -235,7 +237,7 @@ $SqlEligEmp = mysql_query("SELECT * FROM hrm_employee_eligibility WHERE Employee
 <?php } ?>
 <?php if($CompanyId==3) { ?>  
               <tr>
-			    <td style="width:485px;font-size:16px;height:22px;" align="left"><b>*.</b>&nbsp;Group Personal Accident Insurance </td>
+			    <td style="width:485px;font-size:16px;height:22px;" align="left"><b>*.</b>&nbsp;Group Term Insurance </td>
 				<td style="width:200px;">: 
 				    <?php
                     if($ResE['GradeId']==31){
@@ -255,7 +257,7 @@ $SqlEligEmp = mysql_query("SELECT * FROM hrm_employee_eligibility WHERE Employee
 
                <?php if($ResEligEmp['HelthCheck']=='Y'){ ?>
               <tr>
-			   <td style="width:485px;font-size:16px;height:22px;" align="left"><b><?php if($ResE['ESCI']>0){ echo '*'; } else {echo '*';} ?>.</b>&nbsp;Executive Health Check-up (Once in 2 yrs)</td>
+			   <td style="width:485px;font-size:16px;height:22px;" align="left"><b><?php if($ResCtc['ESCI']>0){ echo '*'; } else {echo '*';} ?>.</b>&nbsp;Executive Health Check-up (Once in 2 yrs)</td>
 				<td style="width:200px;">: <?php if($ResEligEmp['HelthCheck']=='Y'){echo $resDaily['HelthChekUp'];} ?></td>
 			  </tr>
 			  <?php } ?>
@@ -300,16 +302,16 @@ if($vehiclaCose!='' AND $vehiclaCose!=0){ ?>
 			  
 			  <?php /*
 			  <tr>
-			   <td style="width:485px;font-size:16px;height:22px;" align="left"><b><?php if($ResE['ESCI']>0){ echo '*'; } else {echo '*';} ?>.</b>&nbsp;Bonus/Exgretia(yearly)</td>
+			   <td style="width:485px;font-size:16px;height:22px;" align="left"><b><?php if($ResCtc['ESCI']>0){ echo '*'; } else {echo '*';} ?>.</b>&nbsp;Bonus/Exgretia(yearly)</td>
 				<td style="width:200px;">: As Per Law</td>
 			  </tr>
 			  */ ?>
 			  <tr>
-			    <td style="width:485px;font-size:16px;height:22px;" align="left"><b><?php if($ResE['ESCI']>0){ echo '*'; } else {echo '*';} ?>.</b>&nbsp;Gratuity </td>
+			    <td style="width:485px;font-size:16px;height:22px;" align="left"><b><?php if($ResCtc['ESCI']>0){ echo '*'; } else {echo '*';} ?>.</b>&nbsp;Gratuity </td>
 				<td style="width:200px;">: As Per Law</td>
 			  </tr>
 			  <tr>
-			    <td style="width:485px;font-size:16px;height:22px;" align="left"><b><?php if($ResE['ESCI']>0){ echo '*'; } else {echo '*';} ?>.</b>&nbsp;Deduction</td>
+			    <td style="width:485px;font-size:16px;height:22px;" align="left"><b><?php if($ResCtc['ESCI']>0){ echo '*'; } else {echo '*';} ?>.</b>&nbsp;Deduction</td>
 				<td style="width:200px;">&nbsp;</td>
 			  </tr>
 			  <tr>

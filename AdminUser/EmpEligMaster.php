@@ -127,6 +127,7 @@ $SqlEv = mysql_query("SELECT EmpVertical FROM hrm_employee_general WHERE Employe
  
  $sElig=mysql_query("select * from hrm_master_eligibility where DepartmentId='".$di."' AND GradeId='".$gi."' AND VerticalId=".$Resv['EmpVertical']." AND CompanyId=".$ci, $con); $rowElig=mysql_num_rows($sElig);
  
+ 
  if($rowElig>0){ $rElig=mysql_fetch_assoc($sElig); }
  else{
      
@@ -177,7 +178,14 @@ $SqlEv = mysql_query("SELECT EmpVertical FROM hrm_employee_general WHERE Employe
 <input type="hidden" Name="H_GPCheck" id="H_GPCheck" value="<?php echo trim($rElig['Mobile_WithGPS']); ?>"/>
 
 <input type="hidden" Name="H_MiscExp" id="H_MiscExp" value="N"/>
-<input type="hidden" Name="H_HealthInsu" id="H_HealthInsu" value="<?php echo trim($rElig['Mediclaim_Coverage_Slabs']); ?>"/>
+
+<?php $SqlCtc=mysql_query("SELECT ESCI FROM hrm_employee_ctc WHERE Status='A' AND EmployeeID=".$ei, $con); $ResCtc=mysql_fetch_assoc($SqlCtc); 
+
+if($ResCtc['ESCI']>0){ $HealthInsu1=''; }
+else{ $HealthInsu1=$rElig['Mediclaim_Coverage_Slabs']; }
+?>
+
+<input type="hidden" Name="H_HealthInsu" id="H_HealthInsu" value="<?php echo trim($HealthInsu1); ?>"/>
 <input type="hidden" Name="H_HelthChekUp" id="H_HelthChekUp" value="<?php echo trim($rElig['Helth_CheckUp']); ?>"/>
 
 <?php $sqldb=mysql_query("select DOB,GradeId from hrm_employee_general where EmployeeID=".$ei,$con); 
@@ -559,9 +567,15 @@ $VNRExpMain=$years.'.'.$months;
    <tr>
     <td class="tdc">
 	 <table style="width:100%;">
+	     
+<?php $SqlCtc=mysql_query("SELECT ESCI FROM hrm_employee_ctc WHERE Status='A' AND EmployeeID=".$ei, $con); $ResCtc=mysql_fetch_assoc($SqlCtc); 
+
+if($ResCtc['ESCI']>0){ $HealthInsu=''; }
+else{ $HealthInsu=$rEligE['Health_Insurance']; }
+?>	     
 	  <tr>
 	   <td class="tdl">&nbsp;* Health Insurance(Premium Paid by Company) :</td>
-       <td class="tdr"><input Name="HealthInsu" id="HealthInsu" class="tdc" style="width:100px;" value="<?=trim($rEligE['Health_Insurance'])?>" disabled/></td>
+       <td class="tdr"><input Name="HealthInsu" id="HealthInsu" class="tdc" style="width:100px;" value="<?=trim($HealthInsu)?>" disabled/></td>
 	  </tr>
 	 </table>
 	 
@@ -569,7 +583,7 @@ $VNRExpMain=$years.'.'.$months;
 	 <table style="width:100%;">
 	  <tr>
 	   <td class="tdl" style="color:#FF8000;">&nbsp;<?php //* Old : ?></td>
-       <td class="tdr"><input class="tdc" style="width:100px;background-color:#92D1BD;border:hidden;" value="<?=trim($rEligE['Health_Insurance'])?>" disabled/></td>
+       <td class="tdr"><input class="tdc" style="width:100px;background-color:#92D1BD;border:hidden;" value="<?=trim($HealthInsu)?>" disabled/></td>
 	  </tr>
 	 </table>
      </div>
@@ -581,7 +595,7 @@ $VNRExpMain=$years.'.'.$months;
  </tr>
  
  
-<?php if($ci==1){ ?>
+<?php if($ci==1){ //Group Personal Accident Insurance?>
  <tr>
  <td>
   <table style="width:600px;">
@@ -589,7 +603,7 @@ $VNRExpMain=$years.'.'.$months;
     <td class="tdc">
 	 <table style="width:100%;">
 	  <tr>
-	   <td class="tdl">&nbsp;* Group Personal Accident Insurance :</td>
+	   <td class="tdl">&nbsp;* Group Term Insurance :</td>
        <td class="tdr"><input Name="" id="" class="tdc" style="width:100px;" value="<?php if($resdb['GradeId']==61 || $resdb['GradeId']==62 ){echo '05 Lakhs';}elseif($resdb['GradeId']==63 || $resdb['GradeId']==64 || $resdb['GradeId']==65 || $resdb['GradeId']==66){echo '10 Lakhs';}elseif($resdb['GradeId']==67 || $resdb['GradeId']==68 || $resdb['GradeId']==69 || $resdb['GradeId']==70|| $resdb['GradeId']==71){ echo '25 Lakhs';}elseif($resdb['GradeId']==72 || $resdb['GradeId']==73 || $resdb['GradeId']==74 || $resdb['GradeId']==75|| $resdb['GradeId']==76){ echo '50 Lakhs';} ?>" disabled/></td>
 	  </tr>
 	 </table>

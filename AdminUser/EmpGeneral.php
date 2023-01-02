@@ -44,7 +44,10 @@ if($_POST['Resig']=='' || $_POST['Resig']=='0000-00-00' || $_POST['Resig']=='00-
 
        if($_POST['RepName']!=0) { 
        $sqlE=mysql_query("select * from hrm_employee where EmployeeID=".$_POST['RepName'], $con); $resE=mysql_fetch_assoc($sqlE); 
-	   $ename=$resE['Fname'].' '.$resE['Sname'].' '.$resE['Lname'];
+       if($resE['Sname']==''){ $ename=trim($resE['Fname']).' '.trim($resE['Lname']); }
+else{ $ename=trim($resE['Fname']).' '.trim($resE['Sname']).' '.trim($resE['Lname']); }
+       
+	   //$ename=$resE['Fname'].' '.$resE['Sname'].' '.$resE['Lname'];
 	   $SqlUpE = mysql_query("UPDATE hrm_employee_general SET RepEmployeeID=".$_POST['RepName'].",ReportingName='".$ename."',ReportingDesigId=".$_POST['RepDesigF'].",ReportingEmailId='".$_POST['RepEmailIdF']."',ReportingContactNo='".$_POST['RepContactNoF']."' WHERE EmployeeID=".$EMPID, $con); 
 	   
 	   $sH=mysql_query("select RepEmployeeID from hrm_employee_general where EmployeeID=".$_POST['RepName'],$con); $rH=mysql_fetch_assoc($sH);
@@ -60,7 +63,20 @@ if($_POST['Resig']=='' || $_POST['Resig']=='0000-00-00' || $_POST['Resig']=='00-
        if($_POST['ESICNo']!='' && $_POST['ESICNo']!=0){ $EsicAllow='Y';  }
        else{ $EsicAllow='N'; }
        
-       $SqlUpGen1 = mysql_query("UPDATE hrm_employee_general SET Hiring_Mode = '".$_POST['hiring_mode']."', FileNo='".$_POST['FileNo']."', DateJoining='".date("Y-m-d",strtotime($_POST['DOJ']))."', DOB='".date("Y-m-d",strtotime($_POST['DOB']))."', DOB_dm='".date("0000-m-d",strtotime($_POST['DOB']))."', GradeId=".$_POST['GradeName'].", CostCenter='".$_POST['CostCenter']."', HqId=".$_POST['HQName'].", DepartmentId=".$_POST['DeptName'].", DesigId=".$_POST['DesigName'].", PositionCode='".$_POST['PositionCode']."', MobileNo_Vnr=".$_POST['OffiMobileNo'].", EmailId_Vnr='".$_POST['OffiEmialId']."', BankName='".$_POST['BankName1']."', AccountNo='".$_POST['AccountNo1']."', BranchName='".$_POST['Branch1']."', BranchAdd='".$_POST['Address1']."', BankName2='".$_POST['BankName2']."', AccountNo2='".$_POST['AccountNo2']."', BranchName2='".$_POST['Branch2']."', BranchAdd2='".$_POST['Address2']."', BankIfscCode='".$_POST['ifsc1']."', BankIfscCode2='".$_POST['ifsc2']."', InsuCardNo='".$_POST['InsCardNo']."', PfAccountNo='".$_POST['PfAccountNo']."', PF_UAN=".$_POST['PF_UAN'].", EsicAllow='".$EsicAllow."', EsicNo='".$_POST['ESICNo']."', AttMobileNo1=".$_POST['OffiMobileNo'].", EmpVertical='".$_POST['EmpVertical']."', BWageId='".$_POST['BWageCategory']."', CreatedBy=".$UserId.", CreatedDate='".date("Y-m-d",strtotime($_POST['DateCTC']))."', apply_Bond='".$_POST['TrfBond']."', Transfer_Dept_Date='".date("Y-m-d",strtotime($_POST['TrfDate']))."', Transfer_Dept_Name='".$_POST['TrfDept']."', Transfer2_Dept_Date='".date("Y-m-d",strtotime($_POST['Trf2Date']))."', Transfer2_Dept_Name='".$_POST['Trf2Dept']."', Bond_Year='".$_POST['BondYear']."', Transfer_location='".$_POST['TrfLoc']."', Transfer2_location='".$_POST['Trf2Loc']."', SysDate='".date('Y-m-d')."', YearId=".$YearId." WHERE EmployeeID=".$EMPID, $con);
+       $SqlUpGen1 = mysql_query("UPDATE hrm_employee_general SET Hiring_Mode = '".$_POST['hiring_mode']."', FileNo='".$_POST['FileNo']."', DateJoining='".date("Y-m-d",strtotime($_POST['DOJ']))."', DOB='".date("Y-m-d",strtotime($_POST['DOB']))."', DOB_dm='".date("0000-m-d",strtotime($_POST['DOB']))."', GradeId=".$_POST['GradeName'].", CostCenter='".$_POST['CostCenter']."', HqId=".$_POST['HQName'].", SubLocation='".$_POST['SubLocation']."', DepartmentId=".$_POST['DeptName'].", DesigId=".$_POST['DesigName'].", PositionCode='".$_POST['PositionCode']."', MobileNo_Vnr=".$_POST['OffiMobileNo'].", EmailId_Vnr='".$_POST['OffiEmialId']."', BankName='".$_POST['BankName1']."', AccountNo='".$_POST['AccountNo1']."', BranchName='".$_POST['Branch1']."', BranchAdd='".$_POST['Address1']."', BankName2='".$_POST['BankName2']."', AccountNo2='".$_POST['AccountNo2']."', BranchName2='".$_POST['Branch2']."', BranchAdd2='".$_POST['Address2']."', BankIfscCode='".$_POST['ifsc1']."', BankIfscCode2='".$_POST['ifsc2']."', InsuCardNo='".$_POST['InsCardNo']."', PfAccountNo='".$_POST['PfAccountNo']."', PF_UAN=".$_POST['PF_UAN'].", EsicAllow='".$EsicAllow."', EsicNo='".$_POST['ESICNo']."', AttMobileNo1=".$_POST['OffiMobileNo'].", EmpVertical='".$_POST['EmpVertical']."', BWageId='".$_POST['BWageCategory']."', CreatedBy=".$UserId.", CreatedDate='".date("Y-m-d",strtotime($_POST['DateCTC']))."', apply_Bond='".$_POST['TrfBond']."', Transfer_Dept_Date='".date("Y-m-d",strtotime($_POST['TrfDate']))."', Transfer_Dept_Name='".$_POST['TrfDept']."', Transfer2_Dept_Date='".date("Y-m-d",strtotime($_POST['Trf2Date']))."', Transfer2_Dept_Name='".$_POST['Trf2Dept']."', Bond_Year='".$_POST['BondYear']."', NoticeDay_Prob='".$_POST['NoticeDay_Prob']."', NoticeDay_Conf='".$_POST['NoticeDay_Conf']."', Transfer_location='".$_POST['TrfLoc']."', Transfer2_location='".$_POST['Trf2Loc']."', SysDate='".date('Y-m-d')."', YearId=".$YearId." WHERE EmployeeID=".$EMPID, $con);
+	   
+       
+       
+      $sqlRatt=mysql_query("select * from hrm_sales_verhq rh where HqId=".$_POST['HQName']." AND Vertical=".$_POST['EmpVertical']." AND DeptId=".$_POST['DeptName']." AND CompanyId=".$CompanyId, $con); 
+	  $resRatt=mysql_num_rows($sqlRatt);
+	   if($resRatt>0)
+       {
+        $SqlUpdate = mysql_query("UPDATE hrm_sales_verhq SET RegionId=".$_POST['RegionId'].", CreatedBy=".$UserId.", CreatedDate='".date("Y-m-d")."' where HqId=".$_POST['HQName']." AND Vertical=".$_POST['EmpVertical']." AND DeptId=".$_POST['DeptName']." AND CompanyId=".$CompanyId, $con) or die(mysql_error());
+       }
+       else
+       {
+        $SqlUpdate = mysql_query("insert into hrm_sales_verhq (Vertical, HqId, RegionId, CompanyId, DeptId, Status, CreatedBy, CreatedDate) values(".$_POST['EmpVertical'].", ".$_POST['HQName'].", ".$_POST['RegionId'].", ".$CompanyId.", ".$_POST['DeptName'].", 'A', ".$UserId.", '".date("Y-m-d")."')", $con);
+       }
        
        
 
@@ -72,7 +88,12 @@ if($_POST['Resig']=='' || $_POST['Resig']=='0000-00-00' || $_POST['Resig']=='00-
 		  /***************************************** History Open **************/ 
 		  
           $SqlE = mysql_query("select EmpCode,Fname,Sname,Lname from hrm_employee where EmployeeID=".$EMPID, $con); 
-		  $ResE=mysql_fetch_assoc($SqlE); $EnameE = $ResE['Fname'].' '.$ResE['Sname'].' '.$ResE['Lname']; 
+		  $ResE=mysql_fetch_assoc($SqlE); 
+		  
+		  if($ResE['Sname']==''){ $EnameE=trim($ResE['Fname']).' '.trim($ResE['Lname']); }
+else{ $EnameE=trim($ResE['Fname']).' '.trim($ResE['Sname']).' '.trim($ResE['Lname']); }
+		  
+		  //$EnameE = $ResE['Fname'].' '.$ResE['Sname'].' '.$ResE['Lname']; 
           $sqlEDept = mysql_query("select DepartmentName from hrm_department where DepartmentId=".$_POST['DeptName'],$con);
 		  $sqlEDe=mysql_query("select DesigName from hrm_designation where DesigId=".$_POST['DesigName'], $con);
 		  $sqlEGr=mysql_query("select GradeValue from hrm_grade where GradeId=".$_POST['GradeName']." AND CompanyId=".$CompanyId, $con);
@@ -187,8 +208,14 @@ document.getElementById("ESICNo1").style.display = 'block'; document.getElementB
 
 function EditGeneral()
 {
-document.getElementById("EditGeneralE").style.display = 'block'; document.getElementById("ChangeGeneral").style.display = 'none'; document.getElementById("Fname").readOnly = false; document.getElementById("Sname").readOnly = false; document.getElementById("Lname").readOnly = false; document.getElementById("FileNo").readOnly = false; document.getElementById("DOJ").readOnly = false; document.getElementById("DOC").readOnly = false; document.getElementById("DOB").readOnly = false; document.getElementById("DeptName").disabled = false; document.getElementById("DesigName").disabled = false; document.getElementById("GradeName").disabled = false; document.getElementById("HQName").disabled = false; document.getElementById("CostCenter").disabled = false; document.getElementById("OffiMobileNo").readOnly = false; document.getElementById("OffiEmialId").readOnly = false; document.getElementById("BankName1").readOnly = false; document.getElementById("AccountNo1").readOnly = false; document.getElementById("Branch1").readOnly = false; document.getElementById("Address1").readOnly = false; document.getElementById("BankName2").readOnly = false; document.getElementById("AccountNo2").readOnly = false; document.getElementById("Branch2").readOnly = false; document.getElementById("Address2").readOnly = false; document.getElementById("ifsc1").readOnly = false; document.getElementById("ifsc2").readOnly = false;
+document.getElementById("EditGeneralE").style.display = 'block'; document.getElementById("ChangeGeneral").style.display = 'none'; document.getElementById("Fname").readOnly = false; document.getElementById("Sname").readOnly = false; document.getElementById("Lname").readOnly = false; document.getElementById("FileNo").readOnly = false; document.getElementById("DOJ").readOnly = false; document.getElementById("DOC").readOnly = false; document.getElementById("DOB").readOnly = false; document.getElementById("DeptName").disabled = false; document.getElementById("DesigName").disabled = false; document.getElementById("GradeName").disabled = false; document.getElementById("HQName").disabled = false; 
+    document.getElementById("RegionId").disabled = false; 
+    document.getElementById("SubLocation").disabled = false; 
+
+document.getElementById("CostCenter").disabled = false; document.getElementById("OffiMobileNo").readOnly = false; document.getElementById("OffiEmialId").readOnly = false; document.getElementById("BankName1").readOnly = false; document.getElementById("AccountNo1").readOnly = false; document.getElementById("Branch1").readOnly = false; document.getElementById("Address1").readOnly = false; document.getElementById("BankName2").readOnly = false; document.getElementById("AccountNo2").readOnly = false; document.getElementById("Branch2").readOnly = false; document.getElementById("Address2").readOnly = false; document.getElementById("ifsc1").readOnly = false; document.getElementById("ifsc2").readOnly = false;
    document.getElementById("ESICNo").readOnly = false;
+   
+   
 
 document.getElementById("InsCardNo").readOnly = false; document.getElementById("PfAccountNo").readOnly = false;
 document.getElementById("PF_UAN").readOnly = false; document.getElementById("ESIC_Allow").disabled = false; document.getElementById("RepName").disabled = false; document.getElementById("f_btn1").disabled = false; document.getElementById("f_btn2").disabled = false; document.getElementById("f_btn3").disabled = false; document.getElementById("EmpStatus").disabled = false; document.getElementById("GradeName").disabled = false; 
@@ -439,6 +466,25 @@ $Ename = $ResEmp['Fname'].'&nbsp;'.$ResEmp['Sname'].'&nbsp;'.$ResEmp['Lname']; $
        //$SqlCC1=mysql_query("select * from hrm_state where StateId=".$ResCC['CostCenterName'], $con); $ResCC1=mysql_fetch_array($SqlCC1); ?>
 	   <option value="<?php echo $ResCC['StateId']; ?>"><?php echo $ResCC['StateName']; ?></option><?php } ?></select></td>
 </tr>
+
+<?php //****************************************// ?>
+<tr>
+  <td class="All_100" valign="top">Region :&nbsp;</td>
+  <td class="All_125" valign="top"><select class="All_120" name="RegionId" id="RegionId" class="tdinput" style="width:99%;" disabled>
+  <option value="0" <?php if($resRat['RegionId']==0){echo 'selected';}?>>&nbsp;Select</option>
+  <?php $sqlRat2=mysql_query("select VHqId,rh.RegionId,RegionName from hrm_sales_verhq rh inner join hrm_sales_region r on rh.RegionId=r.RegionId where HqId=".$ResEmp['HqId']." AND Vertical=".$ResEmp['EmpVertical']." AND DeptId=".$ResEmp['DepartmentId']." AND CompanyId=".$CompanyId, $con); 
+	  $resRat2=mysql_fetch_assoc($sqlRat2);
+ 
+  $sqlReg=mysql_query("select r.*,ZoneName from hrm_sales_region r inner join hrm_sales_zone z on r.ZoneId=z.ZoneId where sts='A' order by RegionName ASC", $con); 
+      while($resReg=mysql_fetch_array($sqlReg)){ ?><option value="<?=$resReg['RegionId']?>" <?php if($resRat2['RegionId']==$resReg['RegionId']){echo 'selected';}?>>&nbsp;<?=$resReg['RegionName'].' - '.$resReg['ZoneName']?></option><?php } ?>
+  </select> 
+  </td>
+ 
+  <td class="All_100" valign="top">Sub Location :</td>
+  <td class="All_125"> <input class="All_120" name="SubLocation" id="SubLocation" value="<?=$res['SubLocation']?>" disabled></td>  
+</tr>
+<?php //****************************************// ?>
+
 <?php //$timestamp_start = strtotime($ResEmp['DOB']);  $timestamp_end = strtotime(date("Y-m-d")); 
       //$difference = abs($timestamp_end - $timestamp_start); 
       //$days = floor($difference/(60*60*24)); $months = floor($difference/(60*60*24*30)); $years2 = $difference/(60*60*24*365); 
@@ -481,7 +527,13 @@ $AgeMain=$years.'.'.$months;
             <option value="Non Campus" <?php if($ResEmp['Hiring_Mode']=='Non Campus'){echo 'selected';}?>>Non Campus</option>
         </select>
     </td>
+	
+  <td class="All_100" valign="top">ESSL Code : &nbsp;</td>
+    <td class="All_125">
+        <input class="All_120" type="text" id="EsslCode" name="EsslCode" value="<?php echo $ResEmp['EsslCode'];  ?>" />
+    </td>	
 </tr>
+
 
 <tr>
   <td style="font-size:11px;" colspan="2" valign="top">
@@ -538,8 +590,8 @@ $AgeMain=$years.'.'.$months;
 <tr><td class="All_100" valign="top">Esic No. :</td><td class="All_125"><input class="All_120" name="ESICNo" id="ESICNo" value="<?php if($ResEmp['EsicNo']>0){echo $ResEmp['EsicNo'];} else { echo ''; } ?>" readonly>
 
 <?php /* <?php $sqlEsic=mysql_query("select Esic_EmployerCode from hrm_company_statutory_esic", $con); $resEsic=mysql_fetch_assoc($sqlEsic);?> 
- <input class="All_120" style="display:none;" name="ESICNo" id="ESICNo2" value="<?php echo $resEsic['Esic_EmployerCode']; ?>" readonly>*/ ?>
-                                              </td></tr>
+ <input class="All_120" style="display:none;" name="ESICNo" id="ESICNo2" value="<?php echo $resEsic['Esic_EmployerCode']; ?>" readonly>*/ ?></td></tr>
+ 
 
 </table>
 </fieldset>
@@ -570,32 +622,69 @@ $AgeMain=$years.'.'.$months;
 </fieldset>
 </tr>
 
+<?php /***************************** Service bond/ Notice Period *****************/ ?>
+<?php /***************************** Service bond/ Notice Period *****************/ ?>
 <tr>
-  <td style="font-size:11px;" colspan="6">
-<fieldset align="center"><legend><b>Others</b></legend>
+ <td style="font-size:11px;" colspan="8">
+<fieldset align="center"><legend><b>Service Bond/ Notice Period</b></legend>
 <table border="0">
  <tr>
-  <td class="All_100" colspan="4">Apply Bond:&nbsp;<input type="checkbox" id="applyBond" <?php if($ResEmp['Apply_Bond']=='Y'){echo 'checked';} ?> onClick="FUnBond()"/><input type="hidden" id="TrfBond" name="TrfBond" value="<?=$ResEmp['Apply_Bond']?>" />
+  <td class="All_100" colspan="4">Apply_Bond:&nbsp;<input type="checkbox" id="applyBond" <?php if($ResEmp['Apply_Bond']=='Y'){echo 'checked';} ?> onClick="FUnBond()"/><input type="hidden" id="TrfBond" name="TrfBond" value="<?=$ResEmp['Apply_Bond']?>" />
   <script>
   function FUnBond()
-  {
-   if(document.getElementById("applyBond").checked==true){var v='Y'; document.getElementById("BondYear").disabled=false;}
+  { if(document.getElementById("applyBond").checked==true){var v='Y'; document.getElementById("BondYear").disabled=false;}
    else{v='N'; document.getElementById("BondYear").disabled=true;} 
    document.getElementById("TrfBond").value=v; }
-   </script>
-  &nbsp;&nbsp;
-  Year&nbsp;<select class="All_100" name="BondYear" id="BondYear" <?php if($ResEmp['Apply_Bond']=='Y'){echo '';}else{echo 'disabled'; }?>>
+  </script>
+  </td>	
+  <td class="All_50" style="text-align:right;">Year:</td>
+  <td class="All_100"><select class="All_80" name="BondYear" id="BondYear" <?php if($ResEmp['Apply_Bond']=='Y'){echo '';}else{echo 'disabled'; }?>>
    <option value="" <?php if($ResEmp['Bond_Year']==''){echo 'selected';}?>>Select</option>
   <option value="1" <?php if($ResEmp['Bond_Year']==1){echo 'selected';}?>>1 Year</option>
   <option value="2" <?php if($ResEmp['Bond_Year']==2){echo 'selected';}?>>2 Year</option>
   <option value="3" <?php if($ResEmp['Bond_Year']==3){echo 'selected';}?>>3 Year</option>
   <option value="4" <?php if($ResEmp['Bond_Year']==4){echo 'selected';}?>>4 Year</option>
   <option value="5" <?php if($ResEmp['Bond_Year']==5){echo 'selected';}?>>5 Year</option>
-  </select>
-  </td>	
-   <td class="All_100">ESSL Code:</td>
-  <td class="All_120"><input class="All_100" type="text" id="EsslCode" name="EsslCode" value="<?php echo $ResEmp['EsslCode'];  ?>" /></td>
+  </select></td>
+   <td class="All_150" style="text-align:right;">Notice Day (Probation):</td>
+   <td class="All_50"><select class="All_50" name="NoticeDay_Prob" id="NoticeDay_Prob">
+  <option value="0" <?php if($ResEmp['NoticeDay_Prob']==0){echo 'selected';}?>>Sel</option>
+  <option value="15" <?php if($ResEmp['NoticeDay_Prob']==15){echo 'selected';}?>>15</option>
+  <option value="30" <?php if($ResEmp['NoticeDay_Prob']==30){echo 'selected';}?>>30</option>
+  <option value="45" <?php if($ResEmp['NoticeDay_Prob']==45){echo 'selected';}?>>45</option>
+  <option value="60" <?php if($ResEmp['NoticeDay_Prob']==60){echo 'selected';}?>>60</option>
+  <option value="75" <?php if($ResEmp['NoticeDay_Prob']==75){echo 'selected';}?>>75</option>
+  <option value="90" <?php if($ResEmp['NoticeDay_Prob']==90){echo 'selected';}?>>90</option>
+  <option value="105" <?php if($ResEmp['NoticeDay_Prob']==105){echo 'selected';}?>>105</option>
+  <option value="120" <?php if($ResEmp['NoticeDay_Prob']==120){echo 'selected';}?>>120</option>
+  </select></td>
+   <td class="All_180" style="text-align:right;">Notice Day (Confirmation):</td>
+   <td class="All_50"><select class="All_50" name="NoticeDay_Conf" id="NoticeDay_Conf">
+  <option value="0" <?php if($ResEmp['NoticeDay_Conf']==0){echo 'selected';}?>>Sel</option>
+  <option value="15" <?php if($ResEmp['NoticeDay_Conf']==15){echo 'selected';}?>>15</option>
+  <option value="30" <?php if($ResEmp['NoticeDay_Conf']==30){echo 'selected';}?>>30</option>
+  <option value="45" <?php if($ResEmp['NoticeDay_Conf']==45){echo 'selected';}?>>45</option>
+  <option value="60" <?php if($ResEmp['NoticeDay_Conf']==60){echo 'selected';}?>>60</option>
+  <option value="75" <?php if($ResEmp['NoticeDay_Conf']==75){echo 'selected';}?>>75</option>
+  <option value="90" <?php if($ResEmp['NoticeDay_Conf']==90){echo 'selected';}?>>90</option>
+  <option value="105" <?php if($ResEmp['NoticeDay_Conf']==105){echo 'selected';}?>>105</option>
+  <option value="120" <?php if($ResEmp['NoticeDay_Conf']==120){echo 'selected';}?>>120</option>
+  </select></td>
  </tr>		
+</table>
+</fieldset>
+  </td>
+</tr>
+<?php /***************************** Service bond/ Notice Period *****************/ ?>
+<?php /***************************** Service bond/ Notice Period *****************/ ?>
+
+
+<?php /***************************** Transfer *****************/ ?>
+<?php /***************************** Transfer *****************/ ?>
+<tr>
+ <td style="font-size:11px;" colspan="6">
+<fieldset align="center"><legend><b>Transfer</b></legend>
+<table border="0">
  <tr>
   <td class="All_120">(1) Transfer Date:</td>
   <td class="All_120"><input class="All_100" type="text" id="TrfDate" name="TrfDate" value="<?php if($ResEmp['Transfer_Dept_Date']!='' && $ResEmp['Transfer_Dept_Date']!='0000-00-00' && $ResEmp['Transfer_Dept_Date']!='1970-01-01'){ echo date("d-m-Y",strtotime($ResEmp['Transfer_Dept_Date'])); } ?>" /><button id="f_btnn6" class="CalenderButton"></button></td>
@@ -638,7 +727,8 @@ $AgeMain=$years.'.'.$months;
 </fieldset>
   </td>
 </tr>
-
+<?php /***************************** Transfer *****************/ ?>
+<?php /***************************** Transfer *****************/ ?>
 
 <tr>
   <td style="font-size:11px;" colspan="6" valign="top">

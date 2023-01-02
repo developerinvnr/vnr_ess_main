@@ -60,18 +60,27 @@ if($_REQUEST['action']=='SetFormBB' AND $_REQUEST['EI']!='' AND $_REQUEST['YI']!
    $sqlb=mysql_query("select * from hrm_employee_pms_behavioralformb where EmpId=".$_REQUEST['EI']." AND YearId=".$_REQUEST['YI']."", $con); $rowb=mysql_num_rows($sqlb);
    if($rowb>0)
    {
-    $sqlbUp=mysql_query("update hrm_employee_pms_behavioralformb set EmpPmsId=".$resPms['EmpPmsId']." where EmpId=".$_REQUEST['EI']." AND YearId=".$_REQUEST['YI']."", $con);
+    $sqlbUp=mysql_query("update hrm_employee_pms_behavioralformb set EmpPmsId=".$resPms['EmpPmsId'].", EmpStatus='A' where EmpId=".$_REQUEST['EI']." AND YearId=".$_REQUEST['YI']."", $con);
 	if($sqlbUp){ $msg='FormB set successfully'; 
 	             $sqlUp2=mysql_query("update hrm_employee_pms set SkillSetting='Y' where EmpPmsId=".$resPms['EmpPmsId']." AND AssessmentYear=".$_REQUEST['YI'], $con); }
    }
    else
    {
 	$sql=mysql_query("select GradeId,DepartmentId from hrm_employee_general where EmployeeID=".$_REQUEST['EI'],$con); $res=mysql_fetch_array($sql);
-     $sqlBck=mysql_query("select * from hrm_pms_formb fb INNER JOIN hrm_pms_formb_grade fbg ON fb.FormBId=fbg.FormBId where fb.SkillStatus='A' AND fb.DepartmentId=".$res['DepartmentId']." AND fbg.GradeId=".$res['GradeId'], $con); 
+     /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
+	 $sqlBck=mysql_query("select * from hrm_pms_formb fb INNER JOIN hrm_pms_formb_grade fbg ON fb.FormBId=fbg.FormBId where fb.SkillStatus='A' AND fb.GroupFor='' AND fb.DepartmentId=".$res['DepartmentId']." AND fbg.GradeId=".$res['GradeId']." AND fbg.Vertical=0", $con); 
 	 while($resBck=mysql_fetch_array($sqlBck))
      {
-      $sqlIn=mysql_query("insert into hrm_employee_pms_behavioralformb(EmpPmsId, FormBId, EmpId, YearId) values(".$resPms['EmpPmsId'].", ".$resBck['FormBId'].", ".$_REQUEST['EI'].", ".$_REQUEST['YI'].")",$con);
+      $sqlIn=mysql_query("insert into hrm_employee_pms_behavioralformb(EmpPmsId, FormBId, EmpId, YearId, EmpStatus, AppStatus) values(".$resPms['EmpPmsId'].", ".$resBck['FormBId'].", ".$_REQUEST['EI'].", ".$_REQUEST['YI'].", 'A', 'A')",$con);
      }
+	 
+	 /* BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB */
+	 $sqlBck=mysql_query("select * from hrm_pms_formb fb INNER JOIN hrm_pms_formb_grade fbg ON fb.FormBId=fbg.FormBId where fb.SkillStatus='A' AND fb.GroupFor!='' AND fb.DepartmentId=".$res['DepartmentId']." AND fbg.GradeId=".$res['GradeId']." AND fbg.Vertical=0 group by GroupFor", $con); 
+	 while($resBck=mysql_fetch_array($sqlBck))
+     {
+      $sqlIn=mysql_query("insert into hrm_employee_pms_behavioralformb(EmpPmsId, FormBId, EmpId, YearId, EmpStatus, AppStatus) values(".$resPms['EmpPmsId'].", ".$resBck['FormBId'].", ".$_REQUEST['EI'].", ".$_REQUEST['YI'].", 'A', 'A')",$con);
+     }
+	 
 	 if($sqlIn){ $msg='FormB set successfully'; $sqlUp2=mysql_query("update hrm_employee_pms set SkillSetting='Y' where EmpPmsId=".$resPms['EmpPmsId']." AND AssessmentYear=".$_REQUEST['YI'], $con); }
 	 
    }
@@ -118,11 +127,16 @@ function EmpKRA(CId,YId,EmpId)
 function SetK(EI,YI)
 { var DI=document.getElementById("DId").value;  window.location="EditKRA.php?action=SetKRA&EI="+EI+"&YI="+YI+"&DpId="+DI;}		
 
-function EmpFormB(CId,YId,EmpId) 
-{ window.open ("EmpFormBForm.php?YId="+YId+"&EmpId="+EmpId+"&CId="+CId,"FormBForm","menubar=yes,scrollbars=yes,resizable=1,width=1100,height=550");}
+function EmpFormB(T,CId,YId,EmpId) 
+{ window.open ("EmpFormBForm.php?YId="+YId+"&EmpId="+EmpId+"&CId="+CId+"&T="+T,"FormBForm","menubar=yes,scrollbars=yes,resizable=1,width=1100,height=550");}
 
 function SetBB(EI,YI)
 { var DI=document.getElementById("DId").value;  window.location="EditKRA.php?action=SetFormBB&EI="+EI+"&YI="+YI+"&DpId="+DI;}
+
+function FucChk(sn)
+{ if(document.getElementById("Chk"+sn).checked==true){document.getElementById("TR"+sn).style.background='#9BEF47'; }
+  else if(document.getElementById("Chk"+sn).checked==false){document.getElementById("TR"+sn).style.background='#FFFFFF'; }
+}
 
 </Script>     
 </head>
@@ -173,21 +187,24 @@ $resKey=mysql_fetch_assoc($sqlKey); ?>
  <div class="thead">
  <thead>
  <tr bgcolor="#7a6189">
+   <td rowspan="2" class="th" style="width:3%;">&nbsp;</td> 
    <td rowspan="2" class="th" style="width:3%;">SNo.</td>
    <td rowspan="2" class="th" style="width:5%;">EC</td>
-   <td rowspan="2" class="th" style="width:30%;">Name</td>
+   <td rowspan="2" class="th" style="width:20%;">Name</td>
    <td rowspan="2" class="th" style="width:13%;">HeadQuater</td>
-   <td rowspan="2" class="th" style="width:15%;">Department</td>
+   <td rowspan="2" class="th" style="width:10%;">Department</td>
  <?php /*?><td rowspan="2" class="th" style="width:15%;"><b>Designation</b></td><?php */?>
    <td colspan="4" class="th" style="width:15%;">KRA</td>
-   <td colspan="3" class="th" style="width:15%;">Form-B</td>
+   <td colspan="4" class="th" style="width:15%;">Form-B</td>
  </tr>
  <tr bgcolor="#7a6189">
 	<td class="th" style="width:5%;"><b>KRA</b></td>	
 	<td class="th" style="width:5%;"><b>Action</b></td>
 	<td class="th" style="width:5%;"><b>SetKRA</b></td>
 	<td class="th" style="width:5%;"><b>Set</b></td>
+	
 	<td class="th" style="width:5%;"><b>FormB</b></td>
+	<td class="th" style="width:5%;"><b>Action</b></td>
 	<td class="th" style="width:5%;"><b>SetFormB</b></td>
 	<td class="th" style="width:5%;"><b>Set</b></td>
  </tr>
@@ -204,19 +221,20 @@ $sqlSet=mysql_query("select KRASetting,SkillSetting from hrm_employee_pms where 
 ?>
  <div class="tbody">
  <tbody>
- <tr bgcolor="#FFFFFF"> 
+ <tr bgcolor="#FFFFFF" style="height:24px;" id="TR<?php echo $Sno; ?>">
+   <td align="center" style="width:30px;"><input type="checkbox" id="Chk<?php echo $Sno; ?>" onClick="FucChk(<?php echo $Sno; ?>)" /></td> 
   <td class="td"><?php echo $Sno; ?></td>
   <td class="td"><?php echo $EC; ?></td>
   <td class="tdl">&nbsp;<?php echo $Name; ?></td>
   <td class="tdl">&nbsp;<?php echo $resDP['HqName'];?></td>
   <td class="tdl">&nbsp;<?php echo $resDP['DepartmentCode'];?></td>
 <?php /*?><td class="tdl">&nbsp;<?php echo $resDP['DesigName'];?></td><?php */?>   
-  <td class="td"><?php if($res3E2['EmpStatus']=='A'){ ?><a href="#" onClick="EmpKRA(<?php echo $CompanyId.', '.$_REQUEST['YeId'].', '.$resDP['EmployeeID']; ?>)">Click</a><?php } ?></td>
+  <td class="td" style="background-color:#D2E9FF;"><?php if($res3E2['EmpStatus']=='A'){ ?><a href="#" onClick="EmpKRA(<?php echo $CompanyId.', '.$_REQUEST['YeId'].', '.$resDP['EmployeeID']; ?>)">Click</a><?php } ?></td>
 
-  <td class="td"><?php if($_REQUEST['YeId']==$resSY['CurrY'] OR $_REQUEST['YeId']==$resSYP['CurrY']){ ?><?php if($_SESSION['User_Permission']=='Edit'){ ?><a href="#"><img src="images/edit.png" border="0" alt="Edit" onClick="edit(<?php echo $resDP['EmployeeID'].','.$_REQUEST['YeId']; ?>)"></a><?php } } ?></td>
+  <td class="td" style="background-color:#D2E9FF;"><?php if($_REQUEST['YeId']==$resSY['CurrY'] OR $_REQUEST['YeId']==$resSYP['CurrY']){ ?><?php if($_SESSION['User_Permission']=='Edit'){ ?><a href="#"><img src="images/edit.png" border="0" alt="Edit" onClick="edit(<?php echo $resDP['EmployeeID'].','.$_REQUEST['YeId']; ?>)"></a><?php } } ?></td>
   		
-  <td class="td"><?php if($resSet['KRASetting']=='Y'){echo '<font color="#008000">Yes</font>';}else{echo 'No';}?></td>
-  <td class="td">
+  <td class="td" style="background-color:#D2E9FF;"><?php if($resSet['KRASetting']=='Y'){echo '<font color="#008000">Yes</font>';}else{echo 'No';}?></td>
+  <td class="td" style="background-color:#D2E9FF;">
   <?php if($resKey['AppraisalForm']=='Y' OR $resKey['MidPmsForm']=='Y')
         { 		
          if($res3E2['EmpStatus']=='A' AND $resDP['DateJoining']<=date("Y").'-06-30')
@@ -226,9 +244,14 @@ $sqlSet=mysql_query("select KRASetting,SkillSetting from hrm_employee_pms where 
         } ?>
   </td>
 
-  <td class="td"><?php if($rowb>0){ ?><a href="#" onClick="EmpFormB(<?php echo $CompanyId.', '.$_REQUEST['YeId'].', '.$resDP['EmployeeID']; ?>)">Click</a><?php } ?></td> 
-  <td class="td"><?php if($resSet['SkillSetting']=='Y'){echo '<font color="#008000">Yes</font>';}else{echo 'No';}?> </td>
-   <td class="td">
+  <td class="td" style="background-color:#FFFFDD;"><?php if($rowb>0 ){ ?>
+  <a href="#" onClick="EmpFormB('V',<?php echo $CompanyId.', '.$_REQUEST['YeId'].', '.$resDP['EmployeeID'];?>)">Click</a>
+  <?php } ?></td> 
+  
+  <td class="td" style="background-color:#FFFFDD;"><?php if($_REQUEST['YeId']==$resSY['CurrY'] OR $_REQUEST['YeId']==$resSYP['CurrY']){ ?><?php if($_SESSION['User_Permission']=='Edit'){ ?><a href="#"><img src="images/edit.png" border="0" alt="Edit" onClick="EmpFormB('E', <?php echo $CompanyId.', '.$_REQUEST['YeId'].', '.$resDP['EmployeeID'];?>)"></a><?php } } ?></td>
+  
+  <td class="td" style="background-color:#FFFFDD;"><?php if($resSet['SkillSetting']=='Y'){echo '<font color="#008000">Yes</font>';}else{echo 'No';}?> </td>
+   <td class="td" style="background-color:#FFFFDD;">
    <?php if($_REQUEST['YeId']==$resSY['CurrY'] OR $_REQUEST['YeId']==$resSYP['CurrY']){ ?>
    <?php if($resKey['AppraisalForm']=='Y' OR $resKey['MidPmsForm']=='Y')
          { 		

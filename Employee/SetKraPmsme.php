@@ -114,13 +114,20 @@ if($ResP['Hod_TotalFinalRating']>0){$EmpRating=$ResP['Hod_TotalFinalRating']; } 
 <?php } if($_SESSION['eHelpfaq']=='Y' AND $_SESSION['eKraform']=='Y'){ ?> 
 <td class="tdc"><a href="#" onClick="OpenKRAHelpfile('krahelp')"><img src="images/btnKhelp1.png" border="0"/></a></td>
 
-<?php $sdp=mysql_query("select DepartmentId from hrm_employee_general where EmployeeID=".$EmployeeId,$con); $rdp=mysql_fetch_assoc($sdp); 
-
+<?php  
 //if($rdp['DepartmentId']!=4){ ?>
 
 <!-- Kra form -->                                                  <!--AND $CuDate<=$_SESSION['ekTo']--> 
-<?php } if($_SESSION['eKraform']=='Y' AND $CuDate>=$_SESSION['ekFrom'] AND $_SESSION['ekSts']=='A'){ if($CompanyId==1){$Lblk='KraYear_1.png'; $Lblk1='KraYear1_1.png';}else{$Lblk='KraYear.png'; $Lblk1='KraYear1.png';}?>
+<?php } 
+
+$sdp=mysql_query("select DepartmentId from hrm_employee_general where EmployeeID=".$EmployeeId,$con);  $rdp=mysql_fetch_assoc($sdp);
+
+if($_SESSION['eKraform']=='Y' AND $CuDate>=$_SESSION['ekFrom'] AND $_SESSION['ekSts']=='A'){ if($CompanyId==1){$Lblk='KraYear_1.png'; $Lblk1='KraYear1_1.png'; $LblB='FormBYear_1.png'; $LblB1='FormBYear1_1.png'; }else{$Lblk='KraYear.png'; $Lblk1='KraYear1.png'; $LblB='FormBYear_1.png'; $LblB1='FormBYear1_1.png'; }?>
 <td class="tdc"><a href="EmpAddNewKRA.php?ee=0&aa=1&rr=1&hh=1&sh=1&hp=1&fr=1&kr=0&fq=1&prt=1&msg=1&pd=1&mt=1&mts=1&scr=1&prom=1&inc=1&incr=1&pmsr=1&rg=1&h=1&fachiv=0&fa=1&fb=1&ffeedb=1&org=1"/><img src="images/<?php echo $Lblk1;?>" border="0" style="display:<?php if($_REQUEST['kr']==1){echo 'block';}else{echo 'none';} ?>"/></a><img src="images/<?php echo $Lblk;?>" border="0" style="display:<?php if($_REQUEST['kr']==0){echo 'block';}else{echo 'none';} ?>"/></td>
+
+<?php /* if($rdp['DepartmentId']==3 OR $rdp['DepartmentId']==6){ ?>
+<td class="tdc"><a href="EmpAddNewFormB.php?ee=0&aa=1&rr=1&hh=1&sh=1&hp=1&fr=1&kr=1&formb=1&fq=1&prt=1&msg=1&pd=1&mt=1&mts=1&scr=1&prom=1&inc=1&incr=1&pmsr=1&rg=1&h=1&fachiv=0&fa=1&fb=1&ffeedb=1&org=1"/><img src="images/<?php echo $LblB1;?>" border="0" style="display:<?php if($_REQUEST['formb']==0){echo 'block';}else{echo 'none';} ?>"/></a><img src="images/<?php echo $LblB;?>" border="0" style="display:<?php if($_REQUEST['formb']==1){echo 'block';}else{echo 'none';} ?>"/></td>
+<?php } */ ?>
 
 <?php } ?>
 

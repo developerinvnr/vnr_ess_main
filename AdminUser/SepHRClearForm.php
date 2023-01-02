@@ -1,4 +1,5 @@
-<?php require_once('../AdminUser/config/config.php'); 
+<?php 
+require_once('../AdminUser/config/config.php'); 
 if(isset($_POST['saveHRNoc']))
 { 
   $search =  '!"#$%&/\'-:_' ; $search = str_split($search);
@@ -31,9 +32,15 @@ if(isset($_POST['submitHRNoc']))
   { $sqlIns=mysql_query("insert into hrm_employee_separation_nochr(EmpSepId, NocSubmitDate, BEP, BEP_Amt, BEP_Remark, BPP, BPP_Amt, BPP_Remark, BExP, BExP_Amt, BExP_Remark, AdminIC, AdminIC_Amt, AdminIC_Remark, AdminVC, AdminVC_Amt, AdminVC_Remark, CV, CV_Amt, CV_Remark, WorkDay, NoticeDay, TotWorkDay, ServedDay, RecoveryDay, TotEL, EnCashEL, Basic, HRA, CA, Bonus_Month, SA, DA, Arrear, Incen, PP, VA, TA, CCA, RA, Gross, LTA, MA, CEA, LE, Bonus, Bonus_Adjustment, Gratuity, Mediclaim, RTSB, NPS_Ded, Exgredia, NoticePay, TotEar, PF, NPR, NPR_Actual, ESIC, ARR_ESIC, VolC, RA_allow, HrRemark, TotDeduct) values(".$_POST['si'].", '".date("Y-m-d")."', '".$_POST['BEP_YN']."', '".$_POST['BEP_Amt']."', '".$BEP_R."', '".$_POST['BPP_YN']."', '".$_POST['BPP_Amt']."', '".$BPP_R."', '".$_POST['BExP_YN']."', '".$_POST['BExP_Amt']."', '".$BExP_R."', '".$_POST['AdminIC_YN']."', '".$_POST['AdminIC_Amt']."', '".$AdminIC_R."', '".$_POST['AdminVC_YN']."', '".$_POST['AdminVC_Amt']."', '".$AdminVC_R."', '".$_POST['CV_YN']."', '".$_POST['CV_Amt']."', '".$CV_R."', ".$_POST['WorkDay'].", ".$_POST['NoticeDay'].", ".$_POST['TotWorkDay'].", ".$_POST['ServedDay'].", ".$_POST['RecoveryDay'].", ".$_POST['TotEL'].", ".$_POST['EnCashEL'].", '".$_POST['Basic']."', '".$_POST['HRA']."', '".$_POST['CA']."', '".$_POST['Bonus_Month']."', '".$_POST['SA']."', '".$_POST['DA']."', '".$_POST['Arrear']."', '".$_POST['Incen']."', '".$_POST['PP']."', '".$_POST['VA']."', '".$_POST['TA']."', '".$_POST['CCA']."', '".$_POST['RA']."', '".$_POST['Gross']."', '".$_POST['LTA']."', '".$_POST['MA']."', '".$_POST['CEA']."', '".$_POST['LE']."', '".$_POST['Bonus']."', '".$_POST['Bonus_Adjustment']."', '".$_POST['Gratuity']."', '".$_POST['Mediclaim']."', '".$_POST['RTSB']."', '".$_POST['NPS_Ded']."', '".$_POST['Exgredia']."', '".$_POST['NoticePay']."', '".$_POST['TotEar']."', '".$_POST['PF']."', '".$_POST['NPR']."', '".$_POST['NPR_Actual']."', '".$_POST['ESIC']."', '".$_POST['ARRESIC']."', '".$_POST['VolC']."', '".$_POST['RA_allow']."', '".$HrRemark."', '".$_POST['TotAmt']."')", $con); }
   
   if($sqlIns){$sqlUp=mysql_query("update hrm_employee_separation set HR_NOC='Y', Acc_HrNOC='N', HR_Earn='".$_POST['TotEar']."', HR_Deduct='".$_POST['TotAmt']."' where EmpSepId=".$_POST['si'], $con);}
-  if($sqlUp)
+  if($sqlUp) 
   {
-    $sqlNoc=mysql_query("select EmployeeID from hrm_employee_separation_nocdept_emp where DepartmentId=8 AND Status='A'", $con); $rowNoc=mysql_num_rows($sqlNoc); 
+      
+    $sqlC=mysql_query("select CompanyId from hrm_employee where EmployeeID=".$resNoc['EmployeeID'], $con); $resC=mysql_fetch_assoc($sqlC);
+    if($resC['CompanyId']==1){ $dept=8; }
+    elseif($resC['CompanyId']==3){ $dept=20; }
+    
+      
+    $sqlNoc=mysql_query("select EmployeeID from hrm_employee_separation_nocdept_emp where DepartmentId=".$dept." AND Status='A'", $con); $rowNoc=mysql_num_rows($sqlNoc); 
 /******** 8-Finance ************/
   if($rowNoc>0)
   { $resNoc=mysql_fetch_assoc($sqlNoc);

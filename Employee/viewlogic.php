@@ -49,6 +49,27 @@
  <tr>
   <td valign="top" style="width:50%;">
    <table style="width:100%;">
+    <tr><td align="center"><b style="font-size:18px;">Logic 2A <br /><font color="#0070DF">[Higher the achievement, higher the scoring till 110 as upper limit]</font></b></td></tr>
+	<tr>
+	 <td>
+	  <table border="1" cellspacing="0" style="width:100%;">
+       <tr><td class="th">Target</td><td class="th">Achievement</td><td class="th">Score</td></tr>
+	   <tr><td class="td">100</td><td class="td">>110</td><td class="td">110</td></tr>
+	   <tr><td class="td">100</td><td class="td">110</td><td class="td">110</td></tr>
+	   <tr><td class="td">100</td><td class="td">100</td><td class="td">100</td></tr>
+	   <tr><td class="td">100</td><td class="td">90</td><td class="td">90</td></tr>
+      </table>
+	 </td>
+	</tr>
+   </table>
+  </td>
+  <td>&nbsp;</td>
+ 
+ </tr>
+ <tr><td>&nbsp;</td></tr>
+ <tr>
+  <td valign="top" style="width:50%;">
+   <table style="width:100%;">
     <tr><td align="center"><b style="font-size:18px;">Logic 3 <br /><font color="#0070DF">[Either 100 or Zero]</font></b></td></tr>
 	<tr>
 	 <td>

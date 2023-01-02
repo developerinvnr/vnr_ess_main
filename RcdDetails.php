@@ -179,6 +179,15 @@ from hrm_employee e inner join hrm_employee_general g on e.EmployeeID=g.Employee
     }
 	echo json_encode(array( "eligibility_list" => $ElgList) ); 
   }
+  
+  
+  if($_REQUEST['val']=='grade_desig'){
+      $sql = mysql_query("SELECT  `DepartmentId`, `DesigId`, `GradeId`, `GradeId_2`, `GradeId_3`, `GradeId_4`, `GradeId_5`, `CompanyId`, `DGDStatus` FROM hrm_deptgradedesig",$con);
+      while($resDepDesig = mysql_fetch_assoc($sql)){
+          $grade_designation_list[]=$resDepDesig;
+      }
+      echo json_encode(array("grade_designation_list"=>$grade_designation_list));
+  }
 }
 else
 {

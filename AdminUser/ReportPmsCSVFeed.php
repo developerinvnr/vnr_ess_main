@@ -23,7 +23,11 @@ $csv_output .= "\n";
 if($_REQUEST['value']=='All') { $result = mysql_query("SELECT hrm_employee_pms_workenvironment.*,Fname,Sname,Lname from hrm_employee_pms_workenvironment INNER JOIN hrm_employee_pms ON hrm_employee_pms_workenvironment.EmpPmsId=hrm_employee_pms.EmpPmsId INNER JOIN hrm_employee_general ON hrm_employee_pms.EmployeeID=hrm_employee_general.EmployeeID INNER JOIN hrm_employee ON hrm_employee_pms.EmployeeID=hrm_employee.EmployeeID WHERE hrm_employee_pms.CompanyId=".$_REQUEST['C']." AND hrm_employee_pms.AssessmentYear=".$_REQUEST['Y']." AND hrm_employee_general.DateJoining<='".$Y."-06-30' AND hrm_employee_pms_workenvironment.Answer!='' order by WorkEnvironment ASC", $con) or die(mysql_error()); } else {$result = mysql_query("SELECT hrm_employee_pms_workenvironment.*,Fname,Sname,Lname from hrm_employee_pms_workenvironment INNER JOIN hrm_employee_pms ON hrm_employee_pms_workenvironment.EmpPmsId=hrm_employee_pms.EmpPmsId INNER JOIN hrm_employee_general ON hrm_employee_pms.EmployeeID=hrm_employee_general.EmployeeID INNER JOIN hrm_employee ON hrm_employee_pms.EmployeeID=hrm_employee.EmployeeID WHERE hrm_employee_pms.CompanyId=".$_REQUEST['C']." AND hrm_employee_pms.AssessmentYear=".$_REQUEST['Y']." AND hrm_employee_general.DateJoining<='".$Y."-06-30' AND hrm_employee_pms_workenvironment.Answer!='' AND hrm_employee_pms.HR_Curr_DepartmentId=".$_REQUEST['value']." order by WorkEnvironment ASC", $con) or die(mysql_error());} $Sno=1; while($res = mysql_fetch_array($result))
 {
 $csv_output .= '"'.str_replace('"', '""', $Sno).'",';
-$csv_output .= '"'.str_replace('"', '""', $res['Fname'].' '.$res['Sname'].' '.$res['Lname']).'",';
+
+if($res['Sname']==''){ $Ename=trim($res['Fname']).' '.trim($res['Lname']); }
+else{ $Ename=trim($res['Fname']).' '.trim($res['Sname']).' '.trim($res['Lname']); }
+$csv_output .= '"'.str_replace('"', '""', $Ename).'",';
+//$csv_output .= '"'.str_replace('"', '""', $res['Fname'].' '.$res['Sname'].' '.$res['Lname']).'",';
 $csv_output .= '"'.str_replace('"', '""', $res['WorkEnvironment']).'",';
 $csv_output .= '"'.str_replace('"', '""', $res['Answer']).'",';
 $csv_output .= "\n";

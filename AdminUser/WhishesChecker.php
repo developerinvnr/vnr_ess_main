@@ -126,14 +126,16 @@ function show_Exam(originalRequest)
     </div>
 	<div class="tbody">
     <tbody>
-<?php $y=date("Y"); $len=strlen($_REQUEST['m']); if($len==1){$m='0'.$_REQUEST['m'];}else{$m=$_REQUEST['m'];} ?>	 
+<?php if($_REQUEST['y']>0){$y=$_REQUEST['y'];}else{$y=date("Y");} $len=strlen($_REQUEST['m']); if($len==1){$m='0'.$_REQUEST['m'];}else{$m=$_REQUEST['m'];} 
+
+?>	 
 <?php for($i=1; $i<=date("t",strtotime(date("Y-".$m."-01"))); $i++){ ?>
 
-<?php $sW=mysql_query("select * from hrm_wishmail_checker where WDate='".date("Y-".$m."-".$i)."' AND CompanyId=".$CompanyId,$con); 
+<?php $sW=mysql_query("select * from hrm_wishmail_checker where WDate='".date($y."-".$m."-".$i)."' AND CompanyId=".$CompanyId,$con); 
       $rwW=mysql_num_rows($sW); $rW=mysql_fetch_assoc($sW); ?>
 
      <tr style="background-color:<?php if($rwW>0 && $rW['WCheck']==1){echo '#D5FFAA';}else{echo '#FFFFFF';}?>;height:25px;">
-	  <td class="tdc" style="width:80px;"><b><?=date($i."-".$m."-Y")?></b></td>
+	  <td class="tdc" style="width:80px;"><b><?=date($i."-".$m."-".$y)?></b></td>
 	  <td class="tdl" style="width:400px;">
 <?php 
       $sqlE=mysql_query("select e.EmployeeID,e.EmpCode,Fname,Sname,Lname,Gender,Married,DR,DepartmentCode,HqName from hrm_employee_general g inner join hrm_employee e on g.EmployeeID=e.EmployeeID inner join hrm_employee_personal p on g.EmployeeID=p.EmployeeID inner join hrm_department d on g.DepartmentId=d.DepartmentId inner join hrm_headquater hq on g.HqId=hq.HqId where e.EmpStatus='A' AND e.CompanyId=".$CompanyId." AND g.DOB_dm='".date("0000-".$m."-".$i)."' order by g.GradeId DESC",$con);  $rowE=mysql_num_rows($sqlE);

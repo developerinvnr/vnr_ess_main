@@ -280,6 +280,7 @@ if($_REQUEST['For']=='MoveAllEmp')
 	 'Action'=> 'AllEmpDataMoveToVess',
 	 'vv'=> 'Y',
 	 'EmployeeID'=> $res['EmployeeID'], 
+	 'DesigId' =>$res['DesigId'],
 	 'Designation'=> $rDesig['DesigName'],
 	 'Vertical'=> $rVer['VerticalName'],
 	 'HQ'=> $rHq['HqName'],
@@ -291,7 +292,7 @@ if($_REQUEST['For']=='MoveAllEmp')
       array_push($earr,$arr);
       $data['emp_personal_detail'] = $earr;
       $json_response = json_encode($data);
-     
+     //print_r($json_response);die;
       $url = 'https://www.vnress.in/AdminUser/api/MoveExt.php';
       $ch = curl_init($url);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $json_response);

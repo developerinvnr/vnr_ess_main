@@ -26,7 +26,10 @@ $sql=mysql_query("select EmpCode,Fname,Sname,Lname,DepartmentId,DesigId,HqId,Rep
 
 $sn=1; while($res=mysql_fetch_array($sql)) 
 { 
-$Ename=$res['Fname'].' '.$res['Sname'].' '.$res['Lname']; $month=$_REQUEST['m'];
+    if($res['Sname']==''){ $Ename=trim($res['Fname']).' '.trim($res['Lname']); }
+else{ $Ename=trim($res['Fname']).' '.trim($res['Sname']).' '.trim($res['Lname']); }
+//$Ename=$res['Fname'].' '.$res['Sname'].' '.$res['Lname'];
+$month=$_REQUEST['m'];
 $sqlDept=mysql_query("select DepartmentCode,DepartmentName from hrm_department where DepartmentId=".$res['DepartmentId'], $con); $resDept=mysql_fetch_assoc($sqlDept);
 $sqlDesig=mysql_query("select DesigCode,DesigName from hrm_designation where DesigId=".$res['DesigId'], $con); $resDesig=mysql_fetch_assoc($sqlDesig);
 $sqlHQ=mysql_query("select HqName from hrm_headquater where HqId=".$res['HqId'], $con); $resHQ=mysql_fetch_assoc($sqlHQ);

@@ -47,7 +47,11 @@ if($res['HR_DesigId']!=$res['HR_CurrDesigId']){$Desig2=$resDesig2['DesigName'];}
 if($res['HR_DesigId']!=$res['HR_CurrDesigId']){$Desig2=$resDesig2['DesigName'];}else{$Desig2='';}
 if($res['HR_GradeId']!=$res['HR_CurrGradeId']){$Grade2=$resG2['GradeValue'];}else{$Grade22='';} 
 $csv_output .= '"'.str_replace('"', '""', $res['EmpCode']).'",';
-$csv_output .= '"'.str_replace('"', '""', $res['Fname'].' '.$res['Sname'].' '.$res['Lname']).'",';
+
+if($res['Sname']==''){ $Ename=trim($res['Fname']).' '.trim($res['Lname']); }
+else{ $Ename=trim($res['Fname']).' '.trim($res['Sname']).' '.trim($res['Lname']); }
+$csv_output .= '"'.str_replace('"', '""', $Ename).'",';
+//$csv_output .= '"'.str_replace('"', '""', $res['Fname'].' '.$res['Sname'].' '.$res['Lname']).'",';
 $csv_output .= '"'.str_replace('"', '""', $resDept['DepartmentCode']).'",';
 $csv_output .= '"'.str_replace('"', '""', $res['HR_Score']).'",';
 $csv_output .= '"'.str_replace('"', '""', $res['HR_Rating']).'",';	

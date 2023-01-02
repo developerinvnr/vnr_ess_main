@@ -28,7 +28,7 @@ if(isset($_POST['SendRequest']))
     $newname = dirname(__FILE__).'/AssetReqUploadFile/'.$newfilenameBill;
     move_uploaded_file($_FILES['uBill']['tmp_name'],$newname); 
    }
-   else { $msgUp = "Error: Bill copy only jpg, jpeg, png or pdf files is allowed"; }
+   else { $msgUp = "Error: Bill copy only jpg, jpeg, png files is allowed"; }
    //include_once("ak_php_img_lib_1.0.php");
    //$target_file = "AssetReqUploadFile/$newfilenameBill";
    //$resized_file = "AssetReqUploadFile/$newfilenameBill";
@@ -47,7 +47,7 @@ if(isset($_POST['SendRequest']))
       $newname2= dirname(__FILE__).'/AssetReqUploadFile/'.$newfilenameAsset;
       move_uploaded_file($_FILES['uAssImg']['tmp_name'],$newname2); 
    }
-   else { $msgUp = "Error: Assest copy only jpg, jpeg, png or pdf files is allowed"; }
+   else { $msgUp = "Error: Assest copy only jpg, jpeg, png files is allowed"; }
   }
   
 /***************************************************/  
@@ -67,7 +67,7 @@ if(isset($_POST['SendRequest']))
       $RCImg= dirname(__FILE__).'/AssetReqUploadFile/'.$newfile1;
       if(move_uploaded_file($_FILES['RCImg']['tmp_name'],$RCImg)){ $RCImg_File=$newfile1; } 
      }
-     else { $msgUp = "Error: RC copy only jpg, jpeg, png or pdf files is allowed"; }  
+     else { $msgUp = "Error: RC copy only jpg, jpeg, png files is allowed"; }  
     }
 	
 	$DLImg_File='';
@@ -82,7 +82,7 @@ if(isset($_POST['SendRequest']))
       $DLImg= dirname(__FILE__).'/AssetReqUploadFile/'.$newfile2;
       if(move_uploaded_file($_FILES['DLImg']['tmp_name'],$DLImg)){ $DLImg_File=$newfile2; } 
      }
-     else { $msgUp = "Error: DL copy only jpg, jpeg, png or pdf files is allowed"; }  
+     else { $msgUp = "Error: DL copy only jpg, jpeg, png files is allowed"; }  
     }
 	
 	$InsuImg_File='';
@@ -97,16 +97,36 @@ if(isset($_POST['SendRequest']))
       $InsuImg= dirname(__FILE__).'/AssetReqUploadFile/'.$newfile3;
       if(move_uploaded_file($_FILES['InsuImg']['tmp_name'],$InsuImg)){ $InsuImg_File=$newfile3; }
      }
-     else { $msgUp = "Error: Insurance copy only jpg, jpeg, png or pdf files is allowed"; }  
+     else { $msgUp = "Error: Insurance copy only jpg, jpeg, png files is allowed"; }  
     }
 	
-	$RCNo=$_POST['RCNo']; $DLNo=$_POST['DLNo']; $InsuNo=$_POST['InsuNo']; 
-	$VehiNo=$_POST['VehiNo']; $DLExpTo=$_POST['DLExpTo'];
+	
+	$Beg_OdoPhoto=''; 
+	if((!empty($_FILES["Beg_OdoPhoto"])) && ($_FILES['Beg_OdoPhoto']['error'] == 0))
+    {
+     $file4 = strtolower(basename($_FILES['Beg_OdoPhoto']['name']));
+     $file4Size =$_FILES['Beg_OdoPhoto']['size'];
+     $ext4 = substr($file4, strrpos($file4, '.') + 1);
+     $newfile4='OdoMeter_'.$FileN.'_'.date("dmyHis").'.'.$ext4;
+     if(($ext4=='jpg' || $ext4 =='jpeg' || $ext4=='png' || $ext4=='pdf'))
+     { 
+      $OdoImg= dirname(__FILE__).'/AssetReqUploadFile/'.$newfile4;
+      if(move_uploaded_file($_FILES['Beg_OdoPhoto']['tmp_name'],$OdoImg)){ $Beg_OdoPhoto=$newfile4; }
+     }
+     else { $msgUp = "Error: Insurance copy only jpg, jpeg, png files is allowed"; }  
+    }
+	
+	
+	$RCNo=$_POST['RCNo']; $DLNo=$_POST['DLNo']; $InsuNo=$_POST['InsuNo']; $VehiNo=$_POST['VehiNo']; 
+	$DLExpTo=$_POST['DLExpTo']; $ChasNo=$_POST['ChasNo']; $EngNo=$_POST['EngNo']; $RegNo=$_POST['RegNo']; 
+	$RegDate=date("Y-m-d",strtotime($_POST['RegDate']));
+	$Beg_OdoRead=$_POST['Beg_OdoRead']; $Owenship=$_POST['Owenship'];
 	
   } //if($_POST['AssetNId']==1)
   else
   {
     $RCImg_File=''; $DLImg_File=''; $InsuImg_File=''; $RCNo=''; $DLNo=''; $InsuNo=''; $VehiNo=''; $DLExpTo='0000-00-00';
+	$ChasNo=''; $EngNo=''; $RegNo=''; $RegDate=''; $Beg_OdoPhoto=''; $Beg_OdoRead=''; $Owenship='';
   }
 /***************************************************/  
 /***************************************************/   
@@ -117,61 +137,71 @@ if(isset($_POST['SendRequest']))
  else
  { 
    if($_POST['AssetNId']==11 OR $_POST['AssetNId']==12 OR $_POST['AssetNId']==18){ $sqlIns=mysql_query("insert into hrm_asset_employee_request(EmployeeID, AssetNId, ReqAmt, ReqDate, ReqAmtExpiryNOM, ReqAmtExpiryDate, ComName, Srn, ModelNo, ModelName, WarrantyNOY, WarrantyExpiry, PurDate, BillNo, Price, EmiNo, ReportingId, HodId, HODApprovalStatus, ITId, MaxLimitAmt, ReqAssestImgExtName, ReqAssestImgExt, ReqBillImgExtName, ReqBillImgExt, DealeName, DealerContNo, BatteryCom, BatteryModel, AnyOtherRemark, ApprovalStatus) values(".$EmployeeId.", ".$_POST['AssetNId'].", '".$_POST['ReqAmt']."', '".date("Y-m-d")."', 36, '".$ExpMDate."', '".$_POST['ComName']."', '".$_POST['Srn']."', '".$_POST['ModelNo']."', '".$_POST['ModelName']."', '".$_POST['WarrantyNOY']."', '".date("Y-m-d",strtotime($_POST['WarrantyExpiry']))."', '".date("Y-m-d",strtotime($_POST['PurDate']))."', '".$_POST['BillNo']."', '".$_POST['Price']."', '".$_POST['EmiNo']."', '".$_POST['RID']."', '".$_POST['HID']."', 2, '".$_POST['ITID']."', '".$_POST['MaxLimitAmt']."', '".$newfilenameAsset."', '".$extAsset."', '".$newfilenameBill."', '".$extBill."', '".$_POST['DealeName']."', '".$_POST['DealerContNo']."', '".$_POST['BatteryCom']."', '".$_POST['BatteryModel']."', '".$_POST['Remark']."', 1)", $con); }
-   else{ echo "insert into hrm_asset_employee_request(EmployeeID, AssetNId, ReqAmt, ReqDate, ReqAmtExpiryNOM, ReqAmtExpiryDate, ComName, Srn, ModelNo, ModelName, WarrantyNOY, WarrantyExpiry, PurDate, BillNo, Price, EmiNo, ReportingId, HodId, ITId, MaxLimitAmt, ReqAssestImgExtName, ReqAssestImgExt, ReqBillImgExtName, ReqBillImgExt, DealeName, DealerContNo, BatteryCom, BatteryModel, AnyOtherRemark, RCNo, RCNo_File, DLNo, DLNo_File, InsuNo, InsuNo_File, VehiNo, DLExpTo) values(".$EmployeeId.", ".$_POST['AssetNId'].", '".$_POST['ReqAmt']."', '".date("Y-m-d")."', 36, '".$ExpMDate."', '".$_POST['ComName']."', '".$_POST['Srn']."', '".$_POST['ModelNo']."', '".$_POST['ModelName']."', '".$_POST['WarrantyNOY']."', '".date("Y-m-d",strtotime($_POST['WarrantyExpiry']))."', '".date("Y-m-d",strtotime($_POST['PurDate']))."', '".$_POST['BillNo']."', '".$_POST['Price']."', '".$_POST['EmiNo']."', '".$_POST['RID']."', '".$_POST['HID']."', '".$_POST['ITID']."', '".$_POST['MaxLimitAmt']."', '".$newfilenameAsset."', '".$extAsset."', '".$newfilenameBill."', '".$extBill."', '".$_POST['DealeName']."', '".$_POST['DealerContNo']."', '".$_POST['BatteryCom']."', '".$_POST['BatteryModel']."', '".$_POST['Remark']."', '".$RCNo."', '".$RCImg_File."', '".$DLNo."', '".$DLImg_File."', '".$InsuNo."', '".$InsuImg_File."', '".$VehiNo."', '".date("Y-m-d",strtotime($DLExpTo))."')";
-   
-   $sqlIns=mysql_query("insert into hrm_asset_employee_request(EmployeeID, AssetNId, ReqAmt, ReqDate, ReqAmtExpiryNOM, ReqAmtExpiryDate, ComName, Srn, ModelNo, ModelName, WarrantyNOY, WarrantyExpiry, PurDate, BillNo, Price, EmiNo, ReportingId, HodId, ITId, MaxLimitAmt, ReqAssestImgExtName, ReqAssestImgExt, ReqBillImgExtName, ReqBillImgExt, DealeName, DealerContNo, BatteryCom, BatteryModel, AnyOtherRemark, RCNo, RCNo_File, DLNo, DLNo_File, InsuNo, InsuNo_File, VehiNo, DLExpTo) values(".$EmployeeId.", ".$_POST['AssetNId'].", '".$_POST['ReqAmt']."', '".date("Y-m-d")."', 36, '".$ExpMDate."', '".$_POST['ComName']."', '".$_POST['Srn']."', '".$_POST['ModelNo']."', '".$_POST['ModelName']."', '".$_POST['WarrantyNOY']."', '".date("Y-m-d",strtotime($_POST['WarrantyExpiry']))."', '".date("Y-m-d",strtotime($_POST['PurDate']))."', '".$_POST['BillNo']."', '".$_POST['Price']."', '".$_POST['EmiNo']."', '".$_POST['RID']."', '".$_POST['HID']."', '".$_POST['ITID']."', '".$_POST['MaxLimitAmt']."', '".$newfilenameAsset."', '".$extAsset."', '".$newfilenameBill."', '".$extBill."', '".$_POST['DealeName']."', '".$_POST['DealerContNo']."', '".$_POST['BatteryCom']."', '".$_POST['BatteryModel']."', '".$_POST['Remark']."', '".$RCNo."', '".$RCImg_File."', '".$DLNo."', '".$DLImg_File."', '".$InsuNo."', '".$InsuImg_File."', '".$VehiNo."', '".date("Y-m-d",strtotime($DLExpTo))."')", $con); }
+   else{ $sqlIns=mysql_query("insert into hrm_asset_employee_request(EmployeeID, AssetNId, ReqAmt, ReqDate, ReqAmtExpiryNOM, ReqAmtExpiryDate, ComName, Srn, ModelNo, ModelName, WarrantyNOY, WarrantyExpiry, PurDate, BillNo, Price, EmiNo, ReportingId, HodId, ITId, MaxLimitAmt, ReqAssestImgExtName, ReqAssestImgExt, ReqBillImgExtName, ReqBillImgExt, DealeName, DealerContNo, BatteryCom, BatteryModel, AnyOtherRemark, RCNo, RCNo_File, DLNo, DLNo_File, InsuNo, InsuNo_File, VehiNo, DLExpTo, ChasNo, EngNo, RegNo, RegDate, Beg_OdoPhoto, Beg_OdoRead, Owenship) values(".$EmployeeId.", ".$_POST['AssetNId'].", '".$_POST['ReqAmt']."', '".date("Y-m-d")."', 36, '".$ExpMDate."', '".$_POST['ComName']."', '".$_POST['Srn']."', '".$_POST['ModelNo']."', '".$_POST['ModelName']."', '".$_POST['WarrantyNOY']."', '".date("Y-m-d",strtotime($_POST['WarrantyExpiry']))."', '".date("Y-m-d",strtotime($_POST['PurDate']))."', '".$_POST['BillNo']."', '".$_POST['Price']."', '".$_POST['EmiNo']."', '".$_POST['RID']."', '".$_POST['HID']."', '".$_POST['ITID']."', '".$_POST['MaxLimitAmt']."', '".$newfilenameAsset."', '".$extAsset."', '".$newfilenameBill."', '".$extBill."', '".$_POST['DealeName']."', '".$_POST['DealerContNo']."', '".$_POST['BatteryCom']."', '".$_POST['BatteryModel']."', '".$_POST['Remark']."', '".$RCNo."', '".$RCImg_File."', '".$DLNo."', '".$DLImg_File."', '".$InsuNo."', '".$InsuImg_File."', '".$VehiNo."', '".date("Y-m-d",strtotime($DLExpTo))."', '".addslashes($ChasNo)."', '".addslashes($EngNo)."', '".addslashes($RegNo)."', '".$RegDate."', '".$Beg_OdoPhoto."', '".$Beg_OdoRead."', '".$Owenship."')", $con); }
  }
   
   if($sqlIns)
   {   
       if($_POST['EmailRep']!='')
       {
-      $email_to = $_POST['EmailRep'];
-      $email_from='admin@vnrseeds.co.in';
+     // $email_to = $_POST['EmailRep'];
+     // $email_from='admin@vnrseeds.co.in';
       $email_subject = $_POST['Ename']." submitted asset request form";
-      $email_txt = $_POST['Ename']." submitted asset request form"; 
-      $headers = "From: ".$email_from."\r\n"; 
-      $semi_rand = md5(time()); 
-      $headers .= "MIME-Version: 1.0\r\n";
-      $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+      //$email_txt = $_POST['Ename']." submitted asset request form"; 
+      //$headers = "From: ".$email_from."\r\n"; 
+      //$semi_rand = md5(time()); 
+      //$headers .= "MIME-Version: 1.0\r\n";
+      //$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
       $email_message .="<html><head></head><body>";
 	  $email_message .= "Dear <b>".$_POST['Rname']."</b> <br><br>\n\n\n";
       $email_message .=$_POST['EName']." has submitted asset request form, for details, kindly log on to ESS <a href='https://www.vnrseeds.co.in'>www.vnrseeds.co.in</a>.<br><br>\n\n";
 	  $email_message .= "From <br><b>ADMIN ESS</b><br>";
       $email_message .="</body></html>";	      
-	  $ok = @mail($email_to, $email_subject, $email_message, $headers);
+	  //$ok = @mail($email_to, $email_subject, $email_message, $headers);
+	  
+$subject=$email_subject;
+$body=$email_message;
+$email_to=$_POST['EmailRep'];
+require 'vendor/mail_admin.php';
+	  
 	  }	  
 	  
   if($_POST['AssetNId']!=11 OR $_POST['AssetNId']!=12 OR $_POST['AssetNId']!=18)
   {
      if($_POST['EmailHod']!='')
       {
-      $email_to22 = $_POST['EmailHod'];
-      $email_from22='admin@vnrseeds.co.in';
+      //$email_to22 = $_POST['EmailHod'];
+      //$email_from22='admin@vnrseeds.co.in';
       $email_subject22 = $_POST['EName']." submitted asset request form";
-      $email_txt22 = $_POST['EName']." submitted asset request form"; 
-      $headers22 = "From: ".$email_from22."\r\n"; 
-      $semi_rand = md5(time()); 
-      $headers22 .= "MIME-Version: 1.0\r\n";
-      $headers22 .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+      //$email_txt22 = $_POST['EName']." submitted asset request form"; 
+      //$headers22 = "From: ".$email_from22."\r\n"; 
+      //$semi_rand = md5(time()); 
+      //$headers22 .= "MIME-Version: 1.0\r\n";
+      //$headers22 .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
       $email_message22 .="<html><head></head><body>";
 	  $email_message22 .= "Dear <b>".$_POST['Hname']."</b> <br><br>\n\n\n";
       $email_message22 .=$_POST['EName']." has submitted asset request form, for your approval & details, kindly log on to ESS <a href='https://www.vnrseeds.co.in'>www.vnrseeds.co.in</a>.<br><br>\n\n";
 	  $email_message22 .= "From <br><b>ADMIN ESS</b><br>";
       $email_message22 .="</body></html>";	      
-	  $ok2 = @mail($email_to22, $email_subject22, $email_message22, $headers22);
+	  //$ok2 = @mail($email_to22, $email_subject22, $email_message22, $headers22);
+	  
+$subject=$email_subject22;
+$body=$email_message22;
+$email_to=$_POST['EmailHod'];
+require 'vendor/mail_admin.php';
+
 	  }
   }	  
       if($_POST['EmailITEmp']!='')
       {
-      $email_to33 = $_POST['EmailITEmp'];
-      $email_from33='admin@vnrseeds.co.in';
+      //$email_to33 = $_POST['EmailITEmp'];
+      //$email_from33='admin@vnrseeds.co.in';
       $email_subject33 = $_POST['Ename']." submitted asset request form";
-      $email_txt33 = $_POST['Ename']." submitted asset request form"; 
-      $headers33 = "From: ".$email_from33."\r\n"; 
-      $semi_rand33 = md5(time()); 
-      $headers33 .= "MIME-Version: 1.0\r\n";
-      $headers33 .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+      //$email_txt33 = $_POST['Ename']." submitted asset request form"; 
+      //$headers33 = "From: ".$email_from33."\r\n"; 
+      //$semi_rand33 = md5(time()); 
+      //$headers33 .= "MIME-Version: 1.0\r\n";
+      //$headers33 .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
       $email_message33 .="<html><head></head><body>";
       $email_message33 .= "Dear <b>".$_POST['ITEMpname']."</b> <br><br>\n\n\n";
 
@@ -180,23 +210,34 @@ else { $email_message33 .=$_POST['EName']." has submitted asset request form, fo
 
       $email_message33 .= "From <br><b>ADMIN ESS</b><br>";
       $email_message33 .="</body></html>";	      
-	  $ok3 = @mail($email_to33, $email_subject33, $email_message33, $headers33);
+	  //$ok3 = @mail($email_to33, $email_subject33, $email_message33, $headers33);
+	  
+$subject=$email_subject33;
+$body=$email_message33;
+$email_to=$_POST['EmailITEmp'];
+require 'vendor/mail_admin.php';
+
 	  }
 	  
-      $email_to44 = 'vspl.hr@vnrseeds.com';
-      $email_from44='admin@vnrseeds.co.in';
+      //$email_to44 = 'vspl.hr@vnrseeds.com';
+      //$email_from44='admin@vnrseeds.co.in';
       $email_subject44 = $_POST['Ename']." submitted asset request form";
-      $email_txt44 = $_POST['Ename']." submitted asset request form"; 
-      $headers44 = "From: ".$email_from44."\r\n"; 
-      $semi_rand44 = md5(time()); 
-      $headers44 .= "MIME-Version: 1.0\r\n";
-      $headers44 .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+      //$email_txt44 = $_POST['Ename']." submitted asset request form"; 
+      //$headers44 = "From: ".$email_from44."\r\n"; 
+      //$semi_rand44 = md5(time()); 
+      //$headers44 .= "MIME-Version: 1.0\r\n";
+      //$headers44 .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
       $email_message44 .="<html><head></head><body>";
 	  $email_message44 .= "Dear <b>Sir/Mam, </b> <br><br>\n\n\n";
       $email_message44 .=$_POST['EName']." has submitted asset request form, for details, kindly log on to ESS <a href='https://www.vnrseeds.co.in'>www.vnrseeds.co.in</a>.<br><br>\n\n";
 	  $email_message44 .= "From <br><b>ADMIN ESS</b><br>";
       $email_message44 .="</body></html>";	      
-	  $ok4 = @mail($email_to44, $email_subject44, $email_message44, $headers44);
+	  //$ok4 = @mail($email_to44, $email_subject44, $email_message44, $headers44);
+	  
+$subject=$email_subject44;
+$body=$email_message44;
+$email_to='vspl.hr@vnrseeds.com';
+require 'vendor/mail_admin.php';	  
 
       // echo $email_to.'<br>'; echo $email_to22.'<br>'; echo $email_to33.'<br>'; echo $email_to44.'<br>';
 	  
@@ -251,21 +292,36 @@ function ClickEdit()
   document.getElementById("BillNo").readOnly=false; document.getElementById("WarrantyNOY").readOnly=false;
   document.getElementById("DealeName").readOnly=false; document.getElementById("DealerContNo").readOnly=false; 
   document.getElementById("BatteryCom").readOnly=false; document.getElementById("BatteryModel").readOnly=false; 
+  //document.getElementById("PurDate").readOnly=false;
   document.getElementById("PurDateBtn").disabled=false; document.getElementById("uAssImg").disabled=false; 
-  document.getElementById("WarrantyExpiryBtn").disabled=false; document.getElementById("uBill").disabled=false; 
+  document.getElementById("uBill").disabled=false; 
   //document.getElementById("PurDate").readOnly=false; document.getElementById("WarrantyExpiry").readOnly=false;
+  //document.getElementById("WarrantyExpiryBtn").disabled=false;
+  
+  document.getElementById("ChasNo").readOnly=false; document.getElementById("EngNo").readOnly=false; 
+  document.getElementById("RegNo").readOnly=false; document.getElementById("RegDateBtn").disabled=false;
   document.getElementById("RCNo").readOnly=false; document.getElementById("RCImg").disabled=false;
   document.getElementById("DLNo").readOnly=false; document.getElementById("DLImg").disabled=false;
   document.getElementById("InsuNo").readOnly=false; document.getElementById("InsuImg").disabled=false;
   document.getElementById("VehiNo").readOnly=false;
-  document.getElementById("DLExpTo").readOnly=false; document.getElementById("DLExpToBtn").disabled=false; 
+  //document.getElementById("DLExpTo").readOnly=false; 
+  document.getElementById("DLExpToBtn").disabled=false; 
   document.getElementById("Remark").disabled=false;      
 }
 
 function FunChgAsset(v,ei,gi)
 { 
-  if(v==1){ document.getElementById("ForCar").style.display='block'; }
-  else{ document.getElementById("ForCar").style.display='none'; }
+  //if(v==1){ document.getElementById("ForCar").style.display='block'; }
+  //else{ document.getElementById("ForCar").style.display='none'; }
+  if(v==1)
+  { document.getElementById("ForCar").style.display='block'; document.getElementById("ForNCar").style.display='none';    
+    document.getElementById("ForN2Car").style.display='block';
+  }
+  else
+  { 
+    document.getElementById("ForCar").style.display='none'; document.getElementById("ForNCar").style.display='block'; 
+    document.getElementById("ForN2Car").style.display='none';
+  }
   var url = 'MyAssetReqAct.php'; var pars = 'act=SetAssetMaxMint&v='+v+'&gi='+gi+'&ei='+ei; 
   var myAjax = new Ajax.Request( url, { method: 'post', parameters: pars, onComplete: show_valueMax });
 }
@@ -315,8 +371,8 @@ function validate(form1)
     if(EmiNo.length===0){ alert("You must enter emi no.");  return false; }
    }
    
-   var WarrantyExpiry = document.getElementById("WarrantyExpiry").value;
-   if(WarrantyExpiry.length===0){ alert("You must enter warranty expiry date.");  return false; }
+   //var WarrantyExpiry = document.getElementById("WarrantyExpiry").value;
+   //if(WarrantyExpiry.length===0){ alert("You must enter warranty expiry date.");  return false; }
    
    var DealeName = document.getElementById("DealeName").value;
    var testb_DealeName = filter.test(DealeName);
@@ -331,15 +387,15 @@ function validate(form1)
    
    var uAssImg = document.getElementById("uAssImg").value;
    var extt = uAssImg.substring(uAssImg.lastIndexOf('.') + 1); 
-   if(extt != "jpg" && extt != "jpeg" && extt != "JPEG" && extt != "JPG" && extt != "png")
-   { alert("Asset copy: only image/pdf file accepted!"); return false; }
+   if(extt != "jpg" && extt != "jpeg" && extt != "JPEG" && extt != "JPG" && extt != "png" && extt != "pdf")
+   { alert("Asset copy: only image file accepted!"); return false; }
    
    var uBill = document.getElementById("uBill").value;
    var ext = uBill.substring(uBill.lastIndexOf('.') + 1); 
-   if(ext != "jpg" && ext != "jpeg" && ext != "JPEG" && ext != "JPG" && ext != "png")
-   { alert("Bill copy: only image/pdf file accepted!"); return false; }
+   if(ext != "jpg" && ext != "jpeg" && ext != "JPEG" && ext != "JPG" && ext != "png" && extt != "pdf")
+   { alert("Bill copy: only image file accepted!"); return false; }
    
-  
+   /*
    if(AssetNId==11)
    {
     var BatteryCom = document.getElementById("BatteryCom").value;
@@ -350,6 +406,7 @@ function validate(form1)
     var BatteryModel = document.getElementById("BatteryModel").value;
     if(BatteryModel.length===0){ alert("You must enter battory model.");  return false; }
    }
+   */
    
    var msgno = parseFloat(document.getElementById("msgno").value); 
    if(MaxLimitAmt>=0 && msgno==0)
@@ -365,10 +422,17 @@ function validate(form1)
    
    if(AssetNId==1)
    {
+     var ChasNo = document.getElementById("ChasNo").value; var EngNo = document.getElementById("EngNo").value; 
+	 var RegNo = document.getElementById("RegNo").value; var RegDate = document.getElementById("RegDate").value;
      var VehiNo = document.getElementById("VehiNo").value; var DLExpTo = document.getElementById("DLExpTo").value;
 	 var DLNo = document.getElementById("DLNo").value; var DLImg = document.getElementById("DLImg").value;
 	 var RCNo = document.getElementById("RCNo").value; var RCImg = document.getElementById("RCImg").value;
 	 var InsuNo = document.getElementById("InsuNo").value; var InsuImg = document.getElementById("InsuImg").value;
+	 
+	 if(ChasNo.length===0){ alert("Chasis no. is required"); return false; }
+	 if(EngNo.length===0){ alert("Emgine no. is required"); return false; }
+	 if(RegNo.length===0){ alert("Registration no. is required"); return false; }
+	 if(RegDate.length===0){ alert("Registration Date is required"); return false; }
 	 if(VehiNo.length===0){ alert("Vehical no. is required"); return false; }
 	 if(DLExpTo.length===0){ alert("DL expiry date is required"); return false; }
 	 if(DLNo.length===0){ alert("DL no. is required"); return false; }
@@ -466,51 +530,77 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
     <tr height="20">
      <td class="th">&nbsp;Model_Name<font color="#FF0000">*</font> :</td>
      <td><input name="ModelName" id="ModelName" class="inp5" value="" readonly required/></td>
-     <td class="th">Request_Amount<font color="#FF0000">*</font> :</td>
-     <td><input name="ReqAmt" id="ReqAmt" class="inpr" readonly required/></td>
+     <td class="th">Model No<font color="#FF0000">*</font> :</td>
+     <td><input name="ModelNo" id="ModelNo" class="inpr" readonly required/></td>
     </tr>
-    <tr height="20">
-     <td class="th">&nbsp;Model No<font color="#FF0000">*</font> :</td>
-     <td><input name="ModelNo" id="ModelNo" class="inp5" value="" readonly required/></td>
-     <td class="th">Price<font color="#FF0000">*</font> :</td>
-     <td><input name="Price" id="Price" class="inpr" readonly required/></td>
-    </tr>
+    
     <tr height="20">
      <td class="th">&nbsp;Company_Name<font color="#FF0000">*</font> :</td>
      <td><input name="ComName" id="ComName" class="inp5" value="" readonly required/></td>
      <td class="th">Purchase_Date<font color="#FF0000">*</font> :</td>
      <td><input name="PurDate" id="PurDate" class="inpc" readonly required/><button id="PurDateBtn" class="CalenderButton" disabled></button></td>
     </tr>
-    <tr height="20">
-     <td class="th">&nbsp;IEMI No :</td>
-     <td><input name="EmiNo" id="EmiNo" class="inp5" value="" readonly/></td>
-     <td class="th">Warranty Expiry :<input type="hidden" name="WarrantyNOY" id="WarrantyNOY" class="inp5" readonly/></td>
-     <td><input name="WarrantyExpiry" id="WarrantyExpiry" class="inpc" readonly required/><button id="WarrantyExpiryBtn" class="CalenderButton" disabled></button><script type="text/javascript">  var cal = Calendar.setup({ onSelect:  function(cal) { cal.hide()}, showTime: true }); cal.manageFields("PurDateBtn", "PurDate", "%d-%m-%Y"); cal.manageFields("WarrantyExpiryBtn", "WarrantyExpiry", "%d-%m-%Y");</script></td>
-    </tr>
-    <tr height="20">
-     <td class="th">&nbsp;Serial No<font color="#FF0000">*</font> :</td>
-     <td><input name="Srn" id="Srn" class="inp5" value="" readonly required/></td>
-     <td class="th">Bill No<font color="#FF0000">*</font> :</td>
-     <td><input name="BillNo" id="BillNo" class="inp" readonly required/></td>
-    </tr>
-    <tr height="20">
+	
+	<tr height="20">
      <td class="th">&nbsp;Dealer_Name<font color="#FF0000">*</font> :</td>
      <td><input name="DealeName" id="DealeName" class="inp5" value="" readonly required/></td>
      <td class="th">Dealer_Contact :</td>
      <td><input name="DealerContNo" id="DealerContNo" class="inp" readonly maxlength="10"/></td>
     </tr>
+	
+	<tr height="20">
+     <td class="thh">&nbsp;Price</td>
+     <td class="th2"><input name="Price" id="Price" class="inp5" value="" readonly required/></td>
+     <td class="thh2">Bill No<font color="#FF0000">*</font> :</td>
+     <td><input name="BillNo" id="BillNo" class="inp" readonly required/></td>
+    </tr>
+    <tr height="20">
+     <td class="th">&nbsp;Bill_Copy(Img)<font color="#FF0000">*</font> :</td>
+     <td><input type="file" size="" name="uBill" id="uBill" style="width:150px;" disabled required></td>
+     <td class="th">Asset_Copy(Img) :</td>
+     <td><input type="file" size="" name="uAssImg" id="uAssImg" style="width:120px;" disabled required></td>
+    </tr>
+	
+    <tr>
+     <td colspan="4">
+	 <div id="ForNCar" style="display:block;">
+    <table border="0">
+	<tr>
+     <td class="thh">Request_Amount :</td>
+     <td class="th2" style="width:170px;"><input name="ReqAmt" id="ReqAmt" class="inp5" style="width:147px;" value="0" readonly/></td>
+     <td class="thh2">IEMI No :</td>
+     <td><input name="EmiNo" id="EmiNo" class="inp"  value="" readonly/>
+	     <input type="hidden" name="WarrantyNOY" id="WarrantyNOY" class="inp5" readonly/>
+		 <input type="hidden" name="WarrantyExpiry" id="WarrantyExpiry" class="inpc" readonly/>
+		 <script type="text/javascript">  var cal = Calendar.setup({ onSelect:  function(cal) { cal.hide()}, showTime: true }); cal.manageFields("PurDateBtn", "PurDate", "%d-%m-%Y"); cal.manageFields("WarrantyExpiryBtn", "WarrantyExpiry", "%d-%m-%Y");</script>
+	 </td>
+    </tr> 
+	</table>
+	 </div>
+	 <div id="ForN2Car" style="display:none;">
+	  <input type="hidden" name="ReqAmt" id="ReqAmt" class="inpr" value="0" readonly/>
+	  <input type="hidden" name="EmiNo" id="EmiNo" class="inp5" value="0" readonly/>
+	  <input type="hidden" name="WarrantyNOY" id="WarrantyNOY" class="inp5" value="0" readonly/>
+	  <input type="hidden" name="WarrantyExpiry" id="WarrantyExpiry" class="inpc" value="0000-00-00" readonly/>
+	 </div>
+	 </td>
+	</tr>
+	
+	<?php /*
     <tr height="20">
      <td class="th">&nbsp;Battery_Name<span id="B1Span" style="color:#E0DBE3;">*</span> :</td>
      <td><input name="BatteryCom" id="BatteryCom" class="inp5" value="" readonly/></td>
      <td class="th">Battery_Model<span id="B2Span" style="color:#E0DBE3;">*</span> :</td>
      <td><input name="BatteryModel" id="BatteryModel" class="inp" readonly/></td>
     </tr> 
-    <tr height="20">
-     <td class="th">&nbsp;Bill_Copy<font color="#FF0000">*</font> :</td>
-     <td><input type="file" size="" name="uBill" id="uBill" style="width:150px;" disabled required></td>
-     <td class="th">Asset_Images :</td>
-     <td><input type="file" size="" name="uAssImg" id="uAssImg" style="width:120px;" disabled required></td>
-    </tr>
+	*/ ?>
+	<input type="hidden" name="BatteryCom" id="BatteryCom" class="inp5" value="" readonly/>
+	<input type="hidden" name="BatteryModel" id="BatteryModel" class="inp" readonly/>
+	<input type="hidden" name="Srn" id="Srn" class="inp5" value="" readonly/>
+	
+	
+	
+	
 	
     <?php /*************************** For Car *******/ ?>
     <?php /*************************** For Car *******/ ?>
@@ -518,6 +608,20 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
      <td colspan="4">
 	 <div id="ForCar" style="display:none;">
      <table>
+	 
+	<tr height="20">
+     <td class="thh" style="width:130px;">Chassis No.<font color="#FF0000">*</font> :</td>
+     <td class="th2"><input type="text" name="ChasNo" id="ChasNo" class="inp5" readonly></td>
+     <td class="thh2">Engine No.<font color="#FF0000">*</font> :</td>
+     <td><input type="text" name="EngNo" id="EngNo" class="inp" readonly></td>
+    </tr>
+	<tr height="20">
+     <td class="thh">Regis. No.<font color="#FF0000">*</font> :</td>
+     <td class="th2"><input type="text" name="RegNo" id="RegNo" class="inp5" readonly></td>
+     <td class="thh2">Regis. Date<font color="#FF0000">*</font> :</td>
+     <td><input type="text" name="RegDate" id="RegDate" class="inp" readonly><button id="RegDateBtn" class="CalenderButton" disabled></button></td> 
+    </tr> 
+	 
     <tr height="20">
      <td class="thh">Vehicle No.<font color="#FF0000">*</font> :</td>
      <td class="th2"><input type="text" name="VehiNo" id="VehiNo" class="inp5" readonly></td>
@@ -525,26 +629,34 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
      <td><input type="text" name="DLExpTo" id="DLExpTo" class="inp" readonly><button id="DLExpToBtn" class="CalenderButton" disabled></button></td>
     </tr>
 	<tr height="20">
-     <td class="thh">DL No<font color="#FF0000">*</font> :</td>
-     <td class="th2"><input type="text" name="DLNo" id="DLNo" class="inp5" readonly></td>
-     <td class="thh2">DL Copy<font color="#FF0000">*</font> :</td>
-     <td><input type="file" size="" name="DLImg" id="DLImg" style="width:120px;" disabled></td>
-    </tr>
-	<tr height="20">
-     <td class="thh">RC No<font color="#FF0000">*</font> :</td>
-     <td class="th2"><input type="text" name="RCNo" id="RCNo" class="inp5" readonly></td>
+     <td class="thh">DL Copy<font color="#FF0000">*</font> :</td>
+     <td class="th2"><input type="file" size="" name="DLImg" id="DLImg" style="width:120px;"></td>
      <td class="thh2">RC Copy<font color="#FF0000">*</font> :</td>
-     <td><input type="file" size="" name="RCImg" id="RCImg" style="width:120px;" disabled></td>
+     <td><input type="file" size="" name="RCImg" id="RCImg" style="width:120px;"></td>
     </tr>
 	<tr height="20">
-     <td class="thh">Insurance No.<font color="#FF0000">*</font> :</td>
-     <td class="th2"><input type="text" name="InsuNo" id="InsuNo" class="inp5" readonly></td>
-     <td class="thh2">Insurance Copy<font color="#FF0000">*</font> :</td>
-     <td><input type="file" size="" name="InsuImg" id="InsuImg" style="width:120px;" disabled></td>
+     <td class="thh">Insurance Copy<font color="#FF0000">*</font> :</td>
+     <td class="th2"><input type="file" size="" name="InsuImg" id="InsuImg" style="width:120px;"></td>
+     <td class="thh2">Odomoter_reading photograph:<font color="#FF0000">*</font</td>
+     <td><input type="file" size="" name="Beg_OdoPhoto" id="Beg_OdoPhoto" style="width:120px;"></td>
     </tr>
+	<tr height="20">
+     <td class="thh">Current_odomoter reading.<font color="#FF0000">*</font> :</td>
+     <td class="th2"><input type="text" name="Beg_OdoRead" id="Beg_OdoRead" class="inp5"></td>
+     <td class="thh2">Ownership<font color="#FF0000">*</font> :</td>
+     <td><select name="Owenship" id="Owenship" class="inp" >
+	      <option value="1">First</option>
+		  <option value="2">Second</option>
+		  <option value="3">Third</option>
+         </select></td>
+    </tr>
+	
+	<input type="hidden" name="DLNo" id="DLNo" class="inp5" value="0" readonly>
+	<input type="hidden" name="RCNo" id="RCNo" class="inp5" value="0" readonly>
+	<input type="hidden" name="InsuNo" id="InsuNo" class="inp5" value="0" readonly>
 	<script type="text/javascript">  
 	  var cal = Calendar.setup({ onSelect:  function(cal) { cal.hide()}, showTime: true }); 
-	  cal.manageFields("DLExpToBtn", "DLExpTo", "%d-%m-%Y"); 
+	  cal.manageFields("RegDateBtn", "RegDate", "%d-%m-%Y"); cal.manageFields("DLExpToBtn", "DLExpTo", "%d-%m-%Y"); 
 	</script>
 	 </table>
 	 </div>
@@ -555,7 +667,7 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
  
     <tr height="20">
      <td class="th">&nbsp;Comment :</td>
-     <td colspan="3" align=""><textarea name="Remark" id="Remark" cols="52" rows="1" disabled></textarea></td>
+     <td colspan="3"><textarea name="Remark" id="Remark" cols="52" rows="1"></textarea></td>
     </tr>
     <tr height="20">
      <td colspan="4" align="right" style="background-color:#7a6189;">
@@ -588,21 +700,23 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
 <?php //$sqlIT=mysql_query("select EmployeeID from hrm_asset_dept_access where DepartmentId=9", $con); 
       //$resIT=mysql_fetch_assoc($sqlIT);
       $sqlItEmp=mysql_query("select hrm_employee.EmployeeID,Fname,Sname,Lname,Gender,DR,Married,EmailId_Vnr,RepEmployeeID from hrm_employee INNER JOIN hrm_employee_general ON hrm_employee.EmployeeID=hrm_employee_general.EmployeeID INNER JOIN hrm_employee_personal ON hrm_employee.EmployeeID=hrm_employee_personal.EmployeeID where hrm_employee.EmployeeID=(select EmployeeID from hrm_asset_dept_access where DepartmentId=9)", $con); $resItEmp=mysql_fetch_assoc($sqlItEmp); if($resItEmp['DR']=='Y'){$MMIT='Dr.';} elseif($resItEmp['Gender']=='M'){$MMIT='Mr.';} elseif($resItEmp['Gender']=='F' AND $resItEmp['Married']=='Y'){$MMIT='Mrs.';} elseif($resItEmp['Gender']=='F' AND $resItEmp['Married']=='N'){$MMIT='Miss.';} $ITEmpName=$MMIT.' '.$resItEmp['Fname'].' '.$resItEmp['Sname'].' '.$resItEmp['Lname'];
- ?>
-<input type="hidden" name="ITID" value="<?php echo $resItEmp['EmployeeID']; ?>" />
-<input type="hidden" name="EmailITEmp" value="<?php echo $resItEmp['EmailId_Vnr']; ?>" />
-<input type="hidden" name="ITEMpname" value="<?php echo $ITEmpName; ?>" />
+?>
+ <input type="hidden" name="ITID" value="<?php echo $resItEmp['EmployeeID']; ?>" />
+ <input type="hidden" name="EmailITEmp" value="<?php echo $resItEmp['EmailId_Vnr']; ?>" />
+ <input type="hidden" name="ITEMpname" value="<?php echo $ITEmpName; ?>" />
 
 </td>
 </tr>
 </form>
+
 <tr height="20">
   <td colspan="4" align="">
   <table border="0">
-  <tr><td valign="top" colspan="2">&nbsp;<font color="#008000" style='font-family:Times New Roman;' size="3"><b><?php echo $msg; ?><?php echo $msgerror; ?></b></font></td></tr>
+   <tr><td valign="top" colspan="2">&nbsp;<font color="#008000" style='font-family:Times New Roman;' size="3"><b><?php echo $msg; ?><?php echo $msgerror; ?></b></font></td></tr>
   </table>
   </td>
 </tr>
+
 </table>
      </td>
 	</tr>
@@ -626,17 +740,17 @@ $sql_statement = mysql_query("select * from hrm_asset_employee_request where Emp
    <tr>
     <td colspan="2" align="center" id="QueryStatusTD" style="margin-left:0px;" valign="top">
 	<table border="1">
-	   <tr bgcolor="#7a6189" style="height:22px;">
+  <tr bgcolor="#7a6189" style="height:22px;">
 	<?php /*   <td rowspan="2" style="color:#FFFFFF;font-family:Times New Roman;font-size:12px;width:30px;" align="center" ><b>SNo</b></td> */ ?>
 	   <td rowspan="2" style="color:#ffffff;font-family:Times New Roman;font-size:12px;width:80px;" align="center"><b>Request<br>Date</b></td>
 	   <td rowspan="2" style="color:#ffffff;font-family:Times New Roman;font-size:12px;width:140px;" align="center"><b>Type Of Asset</b></td>
 	   <td rowspan="2" style="color:#ffffff;font-family:Times New Roman;font-size:12px;width:80px;" align="center"><b>Balance<br>Amount</b></td>
 	   <td rowspan="2" style="color:#ffffff;font-family:Times New Roman;font-size:12px;width:80px;" align="center"><b>Request<br>Amount</b></td>
-           <td rowspan="2" style="color:#ffffff;font-family:Times New Roman;font-size:12px;width:80px;" align="center"><b>Approval<br>Amount</b></td>
+       <td rowspan="2" style="color:#ffffff;font-family:Times New Roman;font-size:12px;width:80px;" align="center"><b>Approval<br>Amount</b></td>
 	   <td colspan="3" style="color:#ffffff;font-family:Times New Roman;font-size:12px;" align="center"><b>ApprovalStatus</b></td>
 	   <td colspan="2" style="color:#ffffff;font-family:Times New Roman;font-size:12px;" align="center"><b>Copy</b></td>
 	   <td rowspan="2" style="color:#ffffff;font-family:Times New Roman;font-size:12px;width:50px;" align="center"><b>Details</b></td>
-	  </tr>	
+   </tr>	
 	  <tr bgcolor="#7a6189" style="height:22px;">
 	   <td style="color:#ffffff;font-family:Times New Roman;font-size:12px;width:80px;" align="center"><b>Level-1</b></td>
 	   <td style="color:#ffffff;font-family:Times New Roman;font-size:12px;width:80px;" align="center"><b>Level-2</b></td>

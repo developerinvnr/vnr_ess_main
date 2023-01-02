@@ -82,7 +82,11 @@ if($resDe2['DepartmentCode']==''){$D2=$resDe['DepartmentCode'];}else{$D2=$resDe2
 if($resDesig2['DesigName']==''){$De2=$resD['DesigName'];}else{$De2=$resDesig2['DesigName']; }
 
 $csv_output .= '"'.str_replace('"', '""', $ResCtc['EmpCode']).'",';
-$csv_output .= '"'.str_replace('"', '""', $ResCtc['Fname'].' '.$ResCtc['Sname'].' '.$ResCtc['Lname']).'",';
+
+if($ResCtc['Sname']==''){ $Ename=trim($ResCtc['Fname']).' '.trim($ResCtc['Lname']); }
+else{ $Ename=trim($ResCtc['Fname']).' '.trim($ResCtc['Sname']).' '.trim($ResCtc['Lname']); }
+$csv_output .= '"'.str_replace('"', '""', $Ename).'",';
+//$csv_output .= '"'.str_replace('"', '""', $ResCtc['Fname'].' '.$ResCtc['Sname'].' '.$ResCtc['Lname']).'",';
 $csv_output .= '"'.str_replace('"', '""', $resG['GradeValue']).'",';
 $csv_output .= '"'.str_replace('"', '""', $G2).'",';
 $csv_output .= '"'.str_replace('"', '""', $resDe['DepartmentCode']).'",';

@@ -43,7 +43,11 @@ $sqlG=mysql_query("select GradeValue from hrm_grade where GradeId=".$res['GradeI
 $sqlS=mysql_query("select StateName from hrm_state INNER JOIN hrm_headquater ON hrm_state.StateId=hrm_headquater.StateId where HqId=".$res['HqId'], $con); $resS=mysql_fetch_assoc($sqlS);
 
 $csv_output .= '"'.str_replace('"', '""', $res['EmpCode']).'",';
-$csv_output .= '"'.str_replace('"', '""', $res['Fname'].' '.$res['Sname'].' '.$res['Lname']).'",';
+
+if($res['Sname']==''){ $Ename=trim($res['Fname']).' '.trim($res['Lname']); }
+else{ $Ename=trim($res['Fname']).' '.trim($res['Sname']).' '.trim($res['Lname']); }
+$csv_output .= '"'.str_replace('"', '""', $Ename).'",';
+//$csv_output .= '"'.str_replace('"', '""', $res['Fname'].' '.$res['Sname'].' '.$res['Lname']).'",';
 $csv_output .= '"'.str_replace('"', '""', $resDept['DepartmentCode']).'",';
 $csv_output .= '"'.str_replace('"', '""', $resDesig['DesigName']).'",';
 $csv_output .= '"'.str_replace('"', '""', $resG['GradeValue']).'",';	

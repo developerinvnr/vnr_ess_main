@@ -157,9 +157,10 @@ if($rEG['CompanyId']==1)
 { 
 if($rEG['HR_GradeId']>0){ $ggId=$rEG['HR_GradeId']; }else{ $ggId=$rEG['HR_CurrGradeId']; }
 
+//Group Personal Accident Insurance
 ?>
  <tr>
-  <td class="tdd1"><b>*</b>&nbsp;&nbsp;Group Personal Accident Insurance  </td>
+  <td class="tdd1"><b>*</b>&nbsp;&nbsp;Group Term Insurance  </td>
   <td class="tdd2"> : &nbsp;<?php if($ggId==61 || $ggId==62 ){echo '05 Lakhs';}elseif($ggId==63 || $ggId==64 || $ggId==65 || $ggId==66){echo '10 Lakhs';}elseif($ggId==67 || $ggId==68 || $ggId==69 || $ggId==70|| $ggId==71){ echo '25 Lakhs';}elseif($ggId==72 || $ggId==73 || $ggId==74 || $ggId==75|| $ggId==76){ echo '50 Lakhs';} ?></td>  
  </tr>
 <?php } ?>

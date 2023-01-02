@@ -38,18 +38,37 @@ if($_REQUEST['actti']=='formbempproc' && $_REQUEST['DPid']!='' && $_REQUEST['fbi
  while($res=mysql_fetch_array($sql))
  {
 
-  $sqlBck=mysql_query("select * from hrm_pms_formb fb INNER JOIN hrm_pms_formb_grade fbg ON fb.FormBId=fbg.FormBId where fb.SkillStatus='A' AND fb.FormBId=".$_REQUEST['fbid']." AND fb.DepartmentId=".$_REQUEST['DPid']." AND fbg.GradeId=".$res['GradeId'], $con); $resBck=mysql_num_rows($sqlBck);
+  /*1111111111111111111111*/
+  $sqlBck=mysql_query("select * from hrm_pms_formb fb INNER JOIN hrm_pms_formb_grade fbg ON fb.FormBId=fbg.FormBId where fb.SkillStatus='A' AND fb.FormBId=".$_REQUEST['fbid']." AND fb.GroupFor='' AND fb.DepartmentId=".$_REQUEST['DPid']." AND fbg.GradeId=".$res['GradeId'], $con); $resBck=mysql_num_rows($sqlBck);
   
   $sqlb=mysql_query("select * from hrm_employee_pms_behavioralformb where FormBId=".$_REQUEST['fbid']." AND EmpId=".$res['EmployeeID']." AND YearId=".$_REQUEST['yid']."", $con); $rowb=mysql_num_rows($sqlb);
   $sqlPmsId=mysql_query("select EmpPmsId from hrm_employee_pms where EmployeeID=".$res['EmployeeID']." AND AssessmentYear=".$_REQUEST['yid']."", $con); $rowPmsId=mysql_num_rows($sqlPmsId);
   if($rowPmsId>0){$resPmsId=mysql_fetch_assoc($sqlPmsId); $PmsId=$resPmsId['EmpPmsId'];}else{$PmsId=0;}
   if($resBck>0 AND $rowb==0)
   {
-   $sqlIn=mysql_query("insert into hrm_employee_pms_behavioralformb(EmpPmsId, FormBId, EmpId, YearId) values(".$PmsId.", ".$_REQUEST['fbid'].", ".$res['EmployeeID'].", ".$_REQUEST['yid'].")",$con);
-   if($sqlIn){ echo '<script>alert("FormB set successfully!"); window.location="GradeFormB.php?DPid='.$_REQUEST['DPid'].'"; </script>'; }
+   $sqlIn=mysql_query("insert into hrm_employee_pms_behavioralformb(EmpPmsId, FormBId, EmpId, YearId, EmpStatus, AppStatus) values(".$PmsId.", ".$_REQUEST['fbid'].", ".$res['EmployeeID'].", ".$_REQUEST['yid'].", 'A', 'A')",$con);
   }
   
+  /* 222222222222222222222222222 */ 
+  $sqlBck=mysql_query("select * from hrm_pms_formb fb INNER JOIN hrm_pms_formb_grade fbg ON fb.FormBId=fbg.FormBId where fb.SkillStatus='A' AND fb.FormBId=".$_REQUEST['fbid']." AND fb.GroupFor!='' AND fb.DepartmentId=".$_REQUEST['DPid']." AND fbg.GradeId=".$res['GradeId']." group by GroupFor", $con); $resBck=mysql_num_rows($sqlBck);
+  
+  $sqlb=mysql_query("select * from hrm_employee_pms_behavioralformb where FormBId=".$_REQUEST['fbid']." AND EmpId=".$res['EmployeeID']." AND YearId=".$_REQUEST['yid']."", $con); $rowb=mysql_num_rows($sqlb);
+  $sqlPmsId=mysql_query("select EmpPmsId from hrm_employee_pms where EmployeeID=".$res['EmployeeID']." AND AssessmentYear=".$_REQUEST['yid']."", $con); $rowPmsId=mysql_num_rows($sqlPmsId);
+  if($rowPmsId>0){$resPmsId=mysql_fetch_assoc($sqlPmsId); $PmsId=$resPmsId['EmpPmsId'];}else{$PmsId=0;}
+  if($resBck>0 AND $rowb==0)
+  {
+   $sqlIn=mysql_query("insert into hrm_employee_pms_behavioralformb(EmpPmsId, FormBId, EmpId, YearId, EmpStatus, AppStatus) values(".$PmsId.", ".$_REQUEST['fbid'].", ".$res['EmployeeID'].", ".$_REQUEST['yid'].", 'A', 'A')",$con);
+  }
+  
+  if($sqlIn){ echo '<script>alert("FormB set successfully!"); window.location="GradeFormB.php?DPid='.$_REQUEST['DPid'].'"; </script>'; }
+  
+  
  }
+ 
+ 
+ 
+ 
+ 
 }
 
 
@@ -76,7 +95,7 @@ if($_REQUEST['actti']=='formbempproc' && $_REQUEST['DPid']!='' && $_REQUEST['fbi
 <script type="text/javascript" src="js/Prototype.js"></script>
 <Script type="text/javascript">window.history.forward(1);</Script>
 <Script> 
-function SelectDeptEmp(value){  var x = 'GradeFormB.php?DPid='+value; window.location=x; }                                
+function SelectDeptEmp(D,V){  var x = 'GradeFormB.php?DPid='+D+'&VPid='+V; window.location=x; }                                
 function Check(value,sn) 
 { 
   document.getElementById("Check_"+value).style.display='none'; document.getElementById("UnCheck_"+value).style.display='block';
@@ -92,16 +111,16 @@ var GradeNo=document.getElementById("GradeNo").value; var YId=document.getElemen
   { document.getElementById('FormB'+sn+'_'+i).disabled=true; }
 }
 
-function Click(b,g,sn,dt)
+function Click(b,g,sn,dt,v)
 { 
  document.getElementById("sn").value=sn; document.getElementById("dt").value=dt;
  if(document.getElementById('FormB'+sn+'_'+dt).checked==false)
- { var url = 'CheckFormBGrade.php';	var pars = 'bid='+b+'&gid='+g;	var myAjax = new Ajax.Request(
+ { var url = 'CheckFormBGrade.php';	var pars = 'bid='+b+'&gid='+g+'&vid='+v;	var myAjax = new Ajax.Request(
    url, { method: 'post', parameters: pars,  onComplete: show_CheckFormBGrade});
  }
  else if(document.getElementById('FormB'+sn+'_'+dt).checked==true)
  { var YId=document.getElementById("YearId").value; var UId=document.getElementById("UserId").value;
-   var url = 'CheckFormBGrade.php';	var pars = 'bid2='+b+'&gid2='+g+'&YId='+YId+'&UId='+UId; var myAjax = new Ajax.Request(
+   var url = 'CheckFormBGrade.php';	var pars = 'bid2='+b+'&gid2='+g+'&YId='+YId+'&UId='+UId+'&vid='+v; var myAjax = new Ajax.Request(
    url, { 	method: 'post', parameters: pars,  onComplete: show_CheckFormBGrade });
  }
 }
@@ -167,12 +186,15 @@ function fEView(fbId,YId,DpId)
    <table border="0">
     <tr><td align="right" width="400" class="heading">PMS - Grade Wise Behavioral Parameter(Form B)</td><td width="50">&nbsp;</td>
 		 <td class="td1" style="font-size:11px; width:150px;">
-           <select class="InputS" style="width:150px;" id="DepartmentE" onChange="SelectDeptEmp(this.value)"><option value="" selected>Select Department</option><?php $SqlDepartment=mysql_query("select * from hrm_department where CompanyId=".$CompanyId." AND DeptStatus='A' order by DepartmentName ASC", $con); while($ResDepartment=mysql_fetch_array($SqlDepartment)) { ?><option value="<?php echo $ResDepartment['DepartmentId']; ?>"><?php echo '&nbsp;'.$ResDepartment['DepartmentCode'];?></option><?php } ?></select>
+           <select class="InputS" style="width:150px;" id="DepartmentE" onChange="SelectDeptEmp(this.value,0)"><option value="" <?php if($_REQUEST['DPid']==''){echo 'selected'; } ?>>Select Department</option><?php $SqlDepartment=mysql_query("select * from hrm_department where CompanyId=".$CompanyId." AND DeptStatus='A' order by DepartmentName ASC", $con); while($ResDepartment=mysql_fetch_array($SqlDepartment)) { ?><option value="<?php echo $ResDepartment['DepartmentId']; ?>" <?php if($_REQUEST['DPid']==$ResDepartment['DepartmentId']){ echo 'selected';} ?>><?php echo '&nbsp;'.$ResDepartment['DepartmentCode'];?></option><?php } ?></select>
 		   <input type="hidden" name="ComId" id="ComId" value="<?php echo $CompanyId; ?>" /> 
         </td>
 		<td width="20">&nbsp;</td>
-		<td><?php if($_REQUEST['DPid']){ $_SESSION['DPid']=$_REQUEST['DPid']; $Sql=mysql_query("select * from hrm_department where DepartmentId=".$_SESSION['DPid'], $con); $Res=mysql_fetch_assoc($Sql); } ?>		
-<input class="InputT" style="color:#4A0000;font-size:14px;background-color:#E0DBE3;border-style:none;font-weight:bold;" value="<?php echo $Res['DepartmentName'] ?>" /></td>
+		<td><select class="InputS" style="width:150px;" id="VPid" onChange="SelectDeptEmp(<?=$_REQUEST['DPid']?>,this.value)" <?php if($_REQUEST['DPid']>0){ echo '';}else{ echo 'disabled'; } ?>><option value="0" <?php if($_REQUEST['VPid']=='' OR $_REQUEST['VPid']==0){echo 'selected'; } ?>>Select Vertical</option><?php $sCat=mysql_query("select * from hrm_department_vertical where ComId=".$CompanyId." AND DeptId=".$_REQUEST['DPid']." order by VerticalName ASC"); while($rCat=mysql_fetch_assoc($sCat)){ ?><option value="<?=$rCat['VerticalId']; ?>" <?php if($_REQUEST['VPid']==$rCat['VerticalId']){ echo 'selected';} ?>><?php echo '&nbsp;'.$rCat['VerticalName']; ?></option><?php } ?></select></td>
+		
+		<?php /*<td><?php if($_REQUEST['DPid']){ $_SESSION['DPid']=$_REQUEST['DPid']; $Sql=mysql_query("select * from hrm_department where DepartmentId=".$_SESSION['DPid'], $con); $Res=mysql_fetch_assoc($Sql); } ?>		
+<input class="InputT" style="color:#4A0000;font-size:14px;background-color:#E0DBE3;border-style:none;font-weight:bold;" value="<?php echo $Res['DepartmentName'] ?>" /></td>*/ ?>
+
 		<td class="font4" style="left">&nbsp;&nbsp;&nbsp;<b><span id="MsgSpan"></span><?php echo $msg;?></b></td>
 		<td align="center" style="width:60px;"><input type="button" name="back" id="back" style="width:90px;" value="back" onClick="javascript:window.location='Index.php?log=<?php echo $_SESSION['logCheckUser']; ?>'"/></td>        <td align="center" style="width:60px;"><input type="button" name="Refresh" value="refresh" onClick="javascript:window.location='GradeFormB.php'"/></td>
 	</tr>
@@ -196,6 +218,7 @@ function fEView(fbId,YId,DpId)
 		   <td rowspan="2" class="th" style="width:3%;"><b>Sn</b></td>
 		   <td rowspan="2" class="th" style="width:30%;"><b>Behavioral(Form B)</b></td>
 		   <td rowspan="2" class="th" style="width:4%;"><b>Weight</b></td>
+		   <td rowspan="2" class="th" style="width:2%;"><b>Group</b></td>
 		   <?php /*?><td rowspan="2" class="th" style="width:30%;"><b>SkillComment</b></td><?php */?>
    <?php  if($CompanyId==1){$sql=mysql_query("select GradeId from hrm_grade where GradeStatus='A' AND GradeId>=61 AND CompanyId=".$CompanyId, $con);}else{$sql=mysql_query("select GradeId from hrm_grade where GradeStatus='A' AND GradeValue>0 AND CompanyId=".$CompanyId, $con);} $n=1;
 	  while($res=mysql_fetch_array($sql)){ echo '<input type="hidden" value="'.$n.'" />'; $n++; } $n2=$n-1; ?>
@@ -216,17 +239,23 @@ else{$sqlG=mysql_query("select GradeId,GradeValue from hrm_grade where GradeStat
 		 
 <?php if($_REQUEST['DPid']){ $_SESSION['DPid']=$_REQUEST['DPid']; ?>
       <input type="hidden" name="DPid" value="<?php echo $_SESSION['DPid']; ?>" />	
-<?php $sqlGrade=mysql_query("select FormBId,Skill,SkillComment,Weightage from hrm_pms_formb where SkillStatus='A' AND CompanyId=".$CompanyId." AND DepartmentId=".$_REQUEST['DPid'], $con); $Sno=1; while($resGrade=mysql_fetch_array($sqlGrade)){ ?>			 		      
+<?php $sqlGrade=mysql_query("select FormBId,Skill,SkillComment,Weightage,GroupFor from hrm_pms_formb where SkillStatus='A' AND CompanyId=".$CompanyId." AND DepartmentId=".$_REQUEST['DPid'], $con); $Sno=1; while($resGrade=mysql_fetch_array($sqlGrade)){ ?>			 		      
         <tr>
 		  <td class="td"><?php echo $Sno; ?><input type="hidden" name="FormBid_<?php echo $Sno; ?>" value="<?php echo $resGrade['FormBId']; ?>" /></td>
 		  <td class="tdl"><a href="javascript:void(0);" onClick="PopupCenter('FormBDes.php?Bid=<?php echo $resGrade['FormBId']; ?>', 'VNR(HRIMS)',350,300);"><?php echo $resGrade['Skill']; ?></a></td>
 		  <td class="td"><?php echo $resGrade['Weightage']; ?></td>
+		  <td class="td"><?php echo $resGrade['GroupFor']; ?></td>
 		  
 		  <?php /*?><td class="tdl"><textarea class="tdl" style="width:100%;border:hidden;" rows="1"><?php echo $resGrade['SkillComment']; ?></textarea></td><?php */?>
 		  	  
 <?php if($CompanyId==1){$sqlG2=mysql_query("select GradeId from hrm_grade where GradeStatus='A' AND GradeId>=61 AND CompanyId=".$CompanyId." order by GradeId ASC", $con);}else{$sqlG2=mysql_query("select GradeId from hrm_grade where GradeStatus='A' AND GradeValue>0 AND CompanyId=".$CompanyId." order by GradeId ASC", $con);} $GNo=1;
-	  while($resG2=mysql_fetch_array($sqlG2)){ $sqlG3=mysql_query("select * from hrm_pms_formb_grade where FormBId=".$resGrade['FormBId']." AND GradeId=".$resG2['GradeId'], $con); $row2=mysql_num_rows($sqlG3);?>
-		  <td class="td" style="background-color:<?php if($row2>0){echo '#C1FF84';}else{echo '#FFFFFF';}?>;" id="<?php echo 'TD'.$Sno.'_'.$GNo; ?>"><input type="checkbox" name="<?php echo 'FormB'.$Sno.'_'.$GNo; ?>" id="<?php echo 'FormB'.$Sno.'_'.$GNo; ?>" value="<?php echo $resG2['GradeId']; ?>"  <?php if($row2>0){echo 'checked';}?> onClick="Click(<?php echo $resGrade['FormBId'].','.$resG2['GradeId'].','.$Sno.','.$GNo; ?>)" /></td>
+	  while($resG2=mysql_fetch_array($sqlG2))
+	  { 
+	    if($_REQUEST['VPid']>0){ $sqlG3=mysql_query("select * from hrm_pms_formb_grade where FormBId=".$resGrade['FormBId']." AND GradeId=".$resG2['GradeId']." AND Vertical=".$_REQUEST['VPid'], $con); }else { $sqlG3=mysql_query("select * from hrm_pms_formb_grade where FormBId=".$resGrade['FormBId']." AND GradeId=".$resG2['GradeId']." AND Vertical=".$_REQUEST['VPid'], $con); }
+	    
+	    
+	    $row2=mysql_num_rows($sqlG3);?>
+		  <td class="td" style="background-color:<?php if($row2>0){echo '#C1FF84';}else{echo '#FFFFFF';}?>;" id="<?php echo 'TD'.$Sno.'_'.$GNo; ?>"><input type="checkbox" name="<?php echo 'FormB'.$Sno.'_'.$GNo; ?>" id="<?php echo 'FormB'.$Sno.'_'.$GNo; ?>" value="<?php echo $resG2['GradeId']; ?>"  <?php if($row2>0){echo 'checked';}?> onClick="Click(<?php echo $resGrade['FormBId'].','.$resG2['GradeId'].','.$Sno.','.$GNo.','.$_REQUEST['VPid']; ?>)" /></td>
 <?php $GNo++;} $GNo2=$GNo-1; ?>
           
 		  <?php $rowBY=mysql_num_rows(mysql_query("select * from hrm_employee_pms_behavioralformb where FormBId=".$resGrade['FormBId']." AND YearId=".$RunYId, $con)); ?>

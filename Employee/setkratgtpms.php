@@ -1,6 +1,9 @@
 <?php session_start();
 require_once('../AdminUser/config/config.php');
-$sqlSY=mysql_query("select * from hrm_pms_setting where CompanyId=".$_REQUEST['c']." AND Process='KRA'", $con); $resSY=mysql_fetch_array($sqlSY); $spms = mysql_query("select UnLckKRA from hrm_employee_pms where EmployeeID=".$_REQUEST['e']." AND AssessmentYear=".$resSY['CurrY'],$con); $rpms=mysql_fetch_assoc($spms); 
+
+if(!isset($_REQUEST['c'])){ $CcId=$CompanyId;  }else{ $CcId=$_REQUEST['c']; }
+
+$sqlSY=mysql_query("select * from hrm_pms_setting where CompanyId=".$CcId." AND Process='KRA'", $con); $resSY=mysql_fetch_array($sqlSY); $spms = mysql_query("select UnLckKRA from hrm_employee_pms where EmployeeID=".$_REQUEST['e']." AND AssessmentYear=".$resSY['CurrY'],$con); $rpms=mysql_fetch_assoc($spms); 
 
 if($_REQUEST['n']==1){ $fn='KRAId'; $sqlk=mysql_query("select KRA,KRA_Description from hrm_pms_kra where KRAId=".$_REQUEST['kid'],$con); }elseif($_REQUEST['n']==2){ $fn='KRASubId'; $sqlk=mysql_query("select KRA,KRA_Description from hrm_pms_krasub where KRASubId=".$_REQUEST['kid'],$con); } $resk=mysql_fetch_assoc($sqlk);
 
@@ -234,6 +237,14 @@ function FunEnterAch(v,i) //LogScr Scor
  {
   if(ach<=tgt){var EScore=document.getElementById("LogScr"+i).value=ach;}
   else{var EScore=document.getElementById("LogScr"+i).value=tgt;}
+  var MScore=document.getElementById("Scor"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
+ }
+ else if(lgc=='Logic2a')
+ {
+  var Per10=Math.round(((tgt*10)/100)*100)/100; 
+  var Per110=Math.round((tgt+Per10)*100)/100;      
+  if(ach>=Per110){var EScore=document.getElementById("LogScr"+i).value=Per110;}
+  else{var EScore=document.getElementById("LogScr"+i).value=ach;}
   var MScore=document.getElementById("Scor"+i).value=Math.round(((EScore/tgt)*wgt)*100)/100;
  }
  else if(lgc=='Logic3')

@@ -137,7 +137,7 @@ if(isset($_POST['SendRequest']))
  else
  { 
    if($_POST['AssetNId']==11 OR $_POST['AssetNId']==12 OR $_POST['AssetNId']==18){ $sqlIns=mysql_query("insert into hrm_asset_employee_request(EmployeeID, AssetNId, ReqAmt, ReqDate, ReqAmtExpiryNOM, ReqAmtExpiryDate, ComName, Srn, ModelNo, ModelName, WarrantyNOY, WarrantyExpiry, PurDate, BillNo, Price, EmiNo, ReportingId, HodId, HODApprovalStatus, ITId, MaxLimitAmt, ReqAssestImgExtName, ReqAssestImgExt, ReqBillImgExtName, ReqBillImgExt, DealeName, DealerContNo, BatteryCom, BatteryModel, AnyOtherRemark, ApprovalStatus) values(".$EmployeeId.", ".$_POST['AssetNId'].", '".$_POST['ReqAmt']."', '".date("Y-m-d")."', 36, '".$ExpMDate."', '".$_POST['ComName']."', '".$_POST['Srn']."', '".$_POST['ModelNo']."', '".$_POST['ModelName']."', '".$_POST['WarrantyNOY']."', '".date("Y-m-d",strtotime($_POST['WarrantyExpiry']))."', '".date("Y-m-d",strtotime($_POST['PurDate']))."', '".$_POST['BillNo']."', '".$_POST['Price']."', '".$_POST['EmiNo']."', '".$_POST['RID']."', '".$_POST['HID']."', 2, '".$_POST['ITID']."', '".$_POST['MaxLimitAmt']."', '".$newfilenameAsset."', '".$extAsset."', '".$newfilenameBill."', '".$extBill."', '".$_POST['DealeName']."', '".$_POST['DealerContNo']."', '".$_POST['BatteryCom']."', '".$_POST['BatteryModel']."', '".$_POST['Remark']."', 1)", $con); }
-   else{ $sqlIns=mysql_query("insert into hrm_asset_employee_request(EmployeeID, AssetNId, ReqAmt, ReqDate, ReqAmtExpiryNOM, ReqAmtExpiryDate, ComName, Srn, ModelNo, ModelName, WarrantyNOY, WarrantyExpiry, PurDate, BillNo, Price, EmiNo, ReportingId, HodId, ITId, MaxLimitAmt, ReqAssestImgExtName, ReqAssestImgExt, ReqBillImgExtName, ReqBillImgExt, DealeName, DealerContNo, BatteryCom, BatteryModel, AnyOtherRemark, RCNo, RCNo_File, DLNo, DLNo_File, InsuNo, InsuNo_File, VehiNo, DLExpTo, ChasNo, EngNo, RegNo, RegDate, Beg_OdoPhoto, Beg_OdoRead, Owenship) values(".$EmployeeId.", ".$_POST['AssetNId'].", '".$_POST['ReqAmt']."', '".date("Y-m-d")."', 36, '".$ExpMDate."', '".$_POST['ComName']."', '".$_POST['Srn']."', '".$_POST['ModelNo']."', '".$_POST['ModelName']."', '".$_POST['WarrantyNOY']."', '".date("Y-m-d",strtotime($_POST['WarrantyExpiry']))."', '".date("Y-m-d",strtotime($_POST['PurDate']))."', '".$_POST['BillNo']."', '".$_POST['Price']."', '".$_POST['EmiNo']."', '".$_POST['RID']."', '".$_POST['HID']."', '".$_POST['ITID']."', '".$_POST['MaxLimitAmt']."', '".$newfilenameAsset."', '".$extAsset."', '".$newfilenameBill."', '".$extBill."', '".$_POST['DealeName']."', '".$_POST['DealerContNo']."', '".$_POST['BatteryCom']."', '".$_POST['BatteryModel']."', '".$_POST['Remark']."', '".$RCNo."', '".$RCImg_File."', '".$DLNo."', '".$DLImg_File."', '".$InsuNo."', '".$InsuImg_File."', '".$VehiNo."', '".date("Y-m-d",strtotime($DLExpTo))."', '".addslashes($ChasNo)."', '".addslashes($EngNo)."', '".addslashes($RegNo)."', '".$RegDate."', '".$Beg_OdoPhoto."', '".$Beg_OdoRead."', '".$Owenship."')", $con); }
+   else{ $sqlIns=mysql_query("insert into hrm_asset_employee_request(EmployeeID, AssetNId, ReqAmt, ReqDate, ReqAmtExpiryNOM, ReqAmtExpiryDate, ComName, Srn, ModelNo, ModelName, WarrantyNOY, WarrantyExpiry, PurDate, BillNo, Price, EmiNo, ReportingId, HodId, ITId, MaxLimitAmt, ReqAssestImgExtName, ReqAssestImgExt, ReqBillImgExtName, ReqBillImgExt, DealeName, DealerContNo, BatteryCom, BatteryModel, AnyOtherRemark, FuelType, RCNo, RCNo_File, DLNo, DLNo_File, InsuNo, InsuNo_File, VehiNo, DLExpTo, ChasNo, EngNo, RegNo, RegDate, Beg_OdoPhoto, Beg_OdoRead, Owenship) values(".$EmployeeId.", ".$_POST['AssetNId'].", '".$_POST['ReqAmt']."', '".date("Y-m-d")."', 36, '".$ExpMDate."', '".$_POST['ComName']."', '".$_POST['Srn']."', '".$_POST['ModelNo']."', '".$_POST['ModelName']."', '".$_POST['WarrantyNOY']."', '".date("Y-m-d",strtotime($_POST['WarrantyExpiry']))."', '".date("Y-m-d",strtotime($_POST['PurDate']))."', '".$_POST['BillNo']."', '".$_POST['Price']."', '".$_POST['EmiNo']."', '".$_POST['RID']."', '".$_POST['HID']."', '".$_POST['ITID']."', '".$_POST['MaxLimitAmt']."', '".$newfilenameAsset."', '".$extAsset."', '".$newfilenameBill."', '".$extBill."', '".$_POST['DealeName']."', '".$_POST['DealerContNo']."', '".$_POST['BatteryCom']."', '".$_POST['BatteryModel']."', '".$_POST['Remark']."', '".$_POST['FuelType']."', '".$RCNo."', '".$RCImg_File."', '".$DLNo."', '".$DLImg_File."', '".$InsuNo."', '".$InsuImg_File."', '".$VehiNo."', '".date("Y-m-d",strtotime($DLExpTo))."', '".addslashes($ChasNo)."', '".addslashes($EngNo)."', '".addslashes($RegNo)."', '".$RegDate."', '".$Beg_OdoPhoto."', '".$Beg_OdoRead."', '".$Owenship."')", $con); }
  }
   
   if($sqlIns)
@@ -313,14 +313,25 @@ function FunChgAsset(v,ei,gi)
 { 
   //if(v==1){ document.getElementById("ForCar").style.display='block'; }
   //else{ document.getElementById("ForCar").style.display='none'; }
+  
+   
+  
   if(v==1)
   { document.getElementById("ForCar").style.display='block'; document.getElementById("ForNCar").style.display='none';    
-    document.getElementById("ForN2Car").style.display='block';
+    document.getElementById("ForN2Car").style.display='block'; 
+	document.getElementById("Opt1v").style.display='none'; document.getElementById("Opt2v").style.display='block';
+	document.getElementById("Opt3v").style.display='none';
+	document.getElementById("Opt4v").style.display='none'; document.getElementById("Opt5v").style.display='block';
+	var keyV='Vehicle Photo';
   }
   else
   { 
     document.getElementById("ForCar").style.display='none'; document.getElementById("ForNCar").style.display='block'; 
     document.getElementById("ForN2Car").style.display='none';
+	document.getElementById("Opt1v").style.display='block'; document.getElementById("Opt2v").style.display='none';
+	document.getElementById("Opt3v").style.display='block';
+	document.getElementById("Opt4v").style.display='block'; document.getElementById("Opt5v").style.display='none';
+	var keyV='Asset Copy';
   }
   var url = 'MyAssetReqAct.php'; var pars = 'act=SetAssetMaxMint&v='+v+'&gi='+gi+'&ei='+ei; 
   var myAjax = new Ajax.Request( url, { method: 'post', parameters: pars, onComplete: show_valueMax });
@@ -330,7 +341,11 @@ function show_valueMax(originalRequest)
   var v=document.getElementById("v").value; var gi=document.getElementById("gi").value;
   var ei=document.getElementById("ei").value; var actionAmt=document.getElementById("actionAmt1").value; 
   var ActualAmt=document.getElementById("ActualAmt").value; var PriviousAmt=document.getElementById("PriviousAmt").value;
-  var MaxLimitAmt=document.getElementById("MaxLimitAmt").value=document.getElementById("ActualAmt").value;
+  
+  //var OvalL=document.getElementById("OvalL").value; var NvalL=document.getElementById("NvalL").value;
+  if(v==1){ var MaxLimitAmt=document.getElementById("MaxLimitAmt").value=document.getElementById("VhclAmt").value; }
+  else{ var MaxLimitAmt=document.getElementById("MaxLimitAmt").value=document.getElementById("ActualAmt").value; }
+  
   if(v!=3){document.getElementById("EmiNo").readOnly=false; document.getElementById("EmiSpan").style.color='#E0DBE3';}
   if(v!=11)
   { document.getElementById("EmiNo").readOnly=false; document.getElementById("BatteryCom").readOnly=true; 
@@ -375,6 +390,11 @@ function validate(form1)
    //if(WarrantyExpiry.length===0){ alert("You must enter warranty expiry date.");  return false; }
    
    var DealeName = document.getElementById("DealeName").value;
+   if(AssetNId!=1)
+   {
+    if(DealeName.length===0){ alert("You must enter Dealer name");  return false; }
+   }
+   
    var testb_DealeName = filter.test(DealeName);
    if(testb_DealeName==false){ alert('Please enter only alphabets in the dealer name field');  return false; }
    
@@ -388,7 +408,7 @@ function validate(form1)
    var uAssImg = document.getElementById("uAssImg").value;
    var extt = uAssImg.substring(uAssImg.lastIndexOf('.') + 1); 
    if(extt != "jpg" && extt != "jpeg" && extt != "JPEG" && extt != "JPG" && extt != "png" && extt != "pdf")
-   { alert("Asset copy: only image file accepted!"); return false; }
+   { alert(keyV+": only image file accepted!"); return false; }
    
    var uBill = document.getElementById("uBill").value;
    var ext = uBill.substring(uBill.lastIndexOf('.') + 1); 
@@ -422,25 +442,33 @@ function validate(form1)
    
    if(AssetNId==1)
    {
-     var ChasNo = document.getElementById("ChasNo").value; var EngNo = document.getElementById("EngNo").value; 
-	 var RegNo = document.getElementById("RegNo").value; var RegDate = document.getElementById("RegDate").value;
-     var VehiNo = document.getElementById("VehiNo").value; var DLExpTo = document.getElementById("DLExpTo").value;
+     //var ChasNo = document.getElementById("ChasNo").value; var EngNo = document.getElementById("EngNo").value; 
+	 //var VehiNo = document.getElementById("VehiNo").value; var DLExpTo = document.getElementById("DLExpTo").value;
+	 
 	 var DLNo = document.getElementById("DLNo").value; var DLImg = document.getElementById("DLImg").value;
+	 var RegNo = document.getElementById("RegNo").value; var RegDate = document.getElementById("RegDate").value;
 	 var RCNo = document.getElementById("RCNo").value; var RCImg = document.getElementById("RCImg").value;
 	 var InsuNo = document.getElementById("InsuNo").value; var InsuImg = document.getElementById("InsuImg").value;
 	 
-	 if(ChasNo.length===0){ alert("Chasis no. is required"); return false; }
-	 if(EngNo.length===0){ alert("Emgine no. is required"); return false; }
+	 //if(ChasNo.length===0){ alert("Chasis no. is required"); return false; }
+	 //if(EngNo.length===0){ alert("Emgine no. is required"); return false; }
+	 //if(VehiNo.length===0){ alert("Vehical no. is required"); return false; }
+	 //if(DLExpTo.length===0){ alert("DL expiry date is required"); return false; }<br>
+
 	 if(RegNo.length===0){ alert("Registration no. is required"); return false; }
 	 if(RegDate.length===0){ alert("Registration Date is required"); return false; }
-	 if(VehiNo.length===0){ alert("Vehical no. is required"); return false; }
-	 if(DLExpTo.length===0){ alert("DL expiry date is required"); return false; }
 	 if(DLNo.length===0){ alert("DL no. is required"); return false; }
 	 if(DLImg.length===0){ alert("DL copy is required"); return false; }
 	 if(RCNo.length===0){ alert("RC no. is required"); return false; }
 	 if(RCImg.length===0){ alert("RC copy is required"); return false; }
 	 if(InsuNo.length===0){ alert("Insurance no. is required"); return false; }
 	 if(InsuImg.length===0){ alert("Insurance copy is required"); return false; } 
+	 
+	 if(Price<MaxLimitAmt)
+     { 
+	  alert("Vehicle Price is less than the vehicle value, the eligible reimbursement rate might reduce or maybe denied");
+	 }
+	 
    }
    
    var Remark = document.getElementById("Remark").value;
@@ -500,7 +528,58 @@ function OpenHelpfile(value){window.open("HelpFile.php?a=assetopen&v="+value,"He
 <?php $ei=$EmployeeId;
 $sqlG=mysql_query("select GradeId,DepartmentId from hrm_employee_general where EmployeeID=".$ei,$con); 
 $sqlMax=mysql_query("select AssetEmpReqId from hrm_asset_employee_request where EmployeeID=".$ei, $con); 
-$sqlElg=mysql_query("select Mobile_Hand_Elig from hrm_employee_eligibility where EmployeeID=".$ei." AND Status='A'",$con); $resG=mysql_fetch_assoc($sqlG); $rowMax=mysql_num_rows($sqlMax); $resElig=mysql_fetch_assoc($sqlElg); ?>
+$sqlElg=mysql_query("select Mobile_Hand_Elig from hrm_employee_eligibility where EmployeeID=".$ei." AND Status='A'",$con); $resG=mysql_fetch_assoc($sqlG); $rowMax=mysql_num_rows($sqlMax); $resElig=mysql_fetch_assoc($sqlElg); 
+
+/*
+$sVol=mysql_query("select LimitsSal,LimitsPrd,LimitsOth from hrm_vehiclepolicy where GradeId=".$resG['GradeId'],$con); 
+$sVnl=mysql_query("select LimitsSal,LimitsPrd,LimitsOth from hrm_vehiclepolicy_new where GradeId=".$resG['GradeId'],$con);
+$rVol=mysql_fetch_assoc($sVol); $rVnl=mysql_fetch_assoc($sVnl);
+if($resG['DepartmentId']==4){ ?>
+ <input type="hidden" id="OvalL" value="<?=$rVol['LimitsPrd']?>"/>
+ <input type="hidden" id="NvalL" value="<?=$rVnl['LimitsPrd']?>"/>
+<?php }elseif($resG['DepartmentId']==6){ ?>
+ <input type="hidden" id="OvalL" value="<?=$rVol['LimitsSal']?>"/>
+ <input type="hidden" id="NvalL" value="<?=$rVnl['LimitsSal']?>"/>
+<?php }else{ ?>
+ <input type="hidden" id="OvalL" value="<?=$rVol['LimitsOth']?>"/>
+ <input type="hidden" id="NvalL" value="<?=$rVnl['LimitsOth']?>"/>
+<?php } */?>
+
+<?php 
+$VhAmt='';
+$sPly=mysql_query("select VehiclePolicy from hrm_employee_eligibility where EmployeeID=".$ei." AND Status='A'",$con);
+$rPly=mysql_fetch_assoc($sPly); 
+if($rPly['VehiclePolicy']>0)
+{ 
+ $sRt=mysql_query("select Fn2 from hrm_master_eligibility_policy_tbl".$rPly['VehiclePolicy']." where GradeId=".$resG['GradeId'],$con); $rRt=mysql_fetch_assoc($sRt); 
+ if($rRt['Fn2']!='')
+ {
+  $Str=$rRt['Fn2']; $word='Lakh';
+  if(strpos($Str, $word)!== false){ $lakh='Y'; }else{ $lakh='N'; } 
+  if($lakh=='Y')
+  {
+   $numV=preg_replace('/[^0-9.]/', '', $rRt['Fn2']); 
+   if(strpos($numV, '.')!== false){ $point='Y'; }else{ $point='N'; }
+   if($point=='Y')
+   {
+    $numVV=preg_replace('/[^0-9]/', '', $rRt['Fn2']); 
+    if(strlen($numVV)==1){ $VhAmt=$numVV.'00000'; }
+    elseif(strlen($numVV)==2){ $VhAmt=$numVV.'0000'; }
+    elseif(strlen($numVV)==3){ $VhAmt=$numVV.'000'; }
+   }
+   else
+   {
+    $numVV=preg_replace('/[^0-9]/', '', $rRt['Fn2']);
+	$VhAmt=$numV.'00000';
+   }
+   
+   
+  }
+  else{ $VhAmt=$rRt['Fn2']; }
+ }
+}
+?>
+<input type="hidden" id="VhclAmt" value="<?=$VhAmt?>"/>
 	  
   <td style="width:600px;" valign="top">
    <table border="0">
@@ -535,21 +614,21 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
     </tr>
     
     <tr height="20">
-     <td class="th">&nbsp;Company_Name<font color="#FF0000">*</font> :</td>
+     <td class="th">&nbsp;<span id="Opt1v">Company_Name<font color="#FF0000">*</font>:</span><span id="Opt2v" style="display:none;">Vehicle_Brand<font color="#FF0000">*</font>:</span></td>
      <td><input name="ComName" id="ComName" class="inp5" value="" readonly required/></td>
      <td class="th">Purchase_Date<font color="#FF0000">*</font> :</td>
      <td><input name="PurDate" id="PurDate" class="inpc" readonly required/><button id="PurDateBtn" class="CalenderButton" disabled></button></td>
     </tr>
 	
 	<tr height="20">
-     <td class="th">&nbsp;Dealer_Name<font color="#FF0000">*</font> :</td>
-     <td><input name="DealeName" id="DealeName" class="inp5" value="" readonly required/></td>
+     <td class="th">&nbsp;Dealer_Name<span id="Opt3v"><font color="#FF0000">*</font></span> :</td>
+     <td><input name="DealeName" id="DealeName" class="inp5" value="" readonly/></td>
      <td class="th">Dealer_Contact :</td>
      <td><input name="DealerContNo" id="DealerContNo" class="inp" readonly maxlength="10"/></td>
     </tr>
 	
 	<tr height="20">
-     <td class="thh">&nbsp;Price</td>
+     <td class="thh">&nbsp;Price<font color="#FF0000">*</font></td>
      <td class="th2"><input name="Price" id="Price" class="inp5" value="" readonly required/></td>
      <td class="thh2">Bill No<font color="#FF0000">*</font> :</td>
      <td><input name="BillNo" id="BillNo" class="inp" readonly required/></td>
@@ -557,7 +636,7 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
     <tr height="20">
      <td class="th">&nbsp;Bill_Copy(Img)<font color="#FF0000">*</font> :</td>
      <td><input type="file" size="" name="uBill" id="uBill" style="width:150px;" disabled required></td>
-     <td class="th">Asset_Copy(Img) :</td>
+     <td class="th"><span id="Opt4v">Asset_Copy(Img) :</span><span id="Opt5v" style="display:none;">Vehicle Photo(Img) :</span></td>
      <td><input type="file" size="" name="uAssImg" id="uAssImg" style="width:120px;" disabled required></td>
     </tr>
 	
@@ -608,13 +687,22 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
      <td colspan="4">
 	 <div id="ForCar" style="display:none;">
      <table>
-	 
+	<tr height="20">
+     <td class="thh" style="width:130px;">Fuel Type<font color="#FF0000">*</font> :</td>
+     <td class="th2"><select name="FuelType" id="FuelType" name="FuelType" class="inp" required>
+	      <option value="Petrol">Petrol</option><option value="Diesel">Diesel</option></select></td>
+     
+    </tr> 
+	<?php /*
 	<tr height="20">
      <td class="thh" style="width:130px;">Chassis No.<font color="#FF0000">*</font> :</td>
      <td class="th2"><input type="text" name="ChasNo" id="ChasNo" class="inp5" readonly></td>
      <td class="thh2">Engine No.<font color="#FF0000">*</font> :</td>
      <td><input type="text" name="EngNo" id="EngNo" class="inp" readonly></td>
     </tr>
+	*/ ?>
+	<input type="hidden" name="EngNo" id="EngNo" class="inp" readonly>
+	<input type="hidden" name="ChasNo" id="ChasNo" class="inp5" readonly>
 	<tr height="20">
      <td class="thh">Regis. No.<font color="#FF0000">*</font> :</td>
      <td class="th2"><input type="text" name="RegNo" id="RegNo" class="inp5" readonly></td>
@@ -622,12 +710,16 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
      <td><input type="text" name="RegDate" id="RegDate" class="inp" readonly><button id="RegDateBtn" class="CalenderButton" disabled></button></td> 
     </tr> 
 	 
+	<?php /* 
     <tr height="20">
      <td class="thh">Vehicle No.<font color="#FF0000">*</font> :</td>
      <td class="th2"><input type="text" name="VehiNo" id="VehiNo" class="inp5" readonly></td>
      <td class="thh2">DL ExpiryDate<font color="#FF0000">*</font> :</td>
      <td><input type="text" name="DLExpTo" id="DLExpTo" class="inp" readonly><button id="DLExpToBtn" class="CalenderButton" disabled></button></td>
     </tr>
+	*/ ?>
+	<input type="hidden" name="VehiNo" id="VehiNo" class="inp5" readonly>
+	<input type="hidden" name="DLExpTo" id="DLExpTo" class="inp" readonly>
 	<tr height="20">
      <td class="thh">DL Copy<font color="#FF0000">*</font> :</td>
      <td class="th2"><input type="file" size="" name="DLImg" id="DLImg" style="width:120px;"></td>
@@ -637,17 +729,17 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
 	<tr height="20">
      <td class="thh">Insurance Copy<font color="#FF0000">*</font> :</td>
      <td class="th2"><input type="file" size="" name="InsuImg" id="InsuImg" style="width:120px;"></td>
-     <td class="thh2">Odomoter_reading photograph:<font color="#FF0000">*</font</td>
+     <td class="thh2">1st_Odometer reading_photo:<font color="#FF0000">*</font></td>
      <td><input type="file" size="" name="Beg_OdoPhoto" id="Beg_OdoPhoto" style="width:120px;"></td>
     </tr>
 	<tr height="20">
-     <td class="thh">Current_odomoter reading.<font color="#FF0000">*</font> :</td>
+     <td class="thh">Current_odometer reading.<font color="#FF0000">*</font> :</td>
      <td class="th2"><input type="text" name="Beg_OdoRead" id="Beg_OdoRead" class="inp5"></td>
      <td class="thh2">Ownership<font color="#FF0000">*</font> :</td>
      <td><select name="Owenship" id="Owenship" class="inp" >
-	      <option value="1">First</option>
-		  <option value="2">Second</option>
-		  <option value="3">Third</option>
+	      <option value="1">1st</option>
+		  <option value="2">2nd</option>
+		  <?php /*<option value="3">3rd</option>*/?>
          </select></td>
     </tr>
 	
@@ -666,7 +758,7 @@ $sqlNA=mysql_query("select ne.AssetNId,AssetName,AssetELimit,AssetLimit from hrm
     <?php /*************************** For Car Close */ ?>
  
     <tr height="20">
-     <td class="th">&nbsp;Comment :</td>
+     <td class="th">&nbsp;Remarks :</td>
      <td colspan="3"><textarea name="Remark" id="Remark" cols="52" rows="1"></textarea></td>
     </tr>
     <tr height="20">

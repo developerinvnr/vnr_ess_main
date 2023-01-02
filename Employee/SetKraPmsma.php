@@ -56,7 +56,9 @@
 <td class="tdc"><?php $sqlCh = mysql_query("select * from hrm_pms_allow where Appraiser_EmployeeID=".$EmployeeId." AND CompanyId=".$CompanyId." AND AssesmentYear=".$_SESSION['PmsYId'], $con); $sqlCh2  = mysql_query("select EmpPmsId from hrm_employee_pms where (Appraiser_PmsStatus=1 OR Appraiser_PmsStatus=3) AND Reviewer_PmsStatus=3 AND Appraiser_EmployeeID=".$EmployeeId." AND CompanyId=".$CompanyId." AND AssessmentYear=".$_SESSION['PmsYId'], $con); $rowCh=mysql_num_rows($sqlCh); $rowCh2=mysql_num_rows($sqlCh2);  if(($CuDate>=$_SESSION['aFrom'] AND $CuDate<=$_SESSION['aTo'] AND $_SESSION['aSts']=='A') OR $rowCh>0 OR ($CuDate>$_SESSION['aTo'] AND $rowCh2>0)){ ?><a href="ManagerTeamStatus.php?action=teamS&ee=1&aa=0&rr=1&hh=1&sh=1&hp=1&fr=1&kr=1&fq=1&prt=1&msg=1&pd=1&mt=1&mts=0&scr=1&prom=1&inc=1&incr=1&pmsr=1&rg=1&h=1&fachiv=1&fa=1&fb=1&ffeedb=1&org=1"><img src="images/TeamStatus1.png" border="0" style="display:<?php if($_REQUEST['mts']==1){echo 'block';}else{echo 'none';} ?>"/></a><img src="images/TeamStatus.png" border="0" style="display:<?php if($_REQUEST['mts']==0){echo 'block';}else{echo 'none';} ?>"/><?php } ?>
 
 <?php /*
-<a href="ManagerTeamStatus.php?action=teamS&ee=1&aa=0&rr=1&hh=1&sh=1&hp=1&fr=1&kr=1&fq=1&prt=1&msg=1&pd=1&mt=1&mts=0&scr=1&prom=1&inc=1&incr=1&pmsr=1&rg=1&h=1&fachiv=1&fa=1&fb=1&ffeedb=1&org=1">.</a> */ ?>
+<a href="ManagerTeamStatus.php?action=teamS&ee=1&aa=0&rr=1&hh=1&sh=1&hp=1&fr=1&kr=1&fq=1&prt=1&msg=1&pd=1&mt=1&mts=0&scr=1&prom=1&inc=1&incr=1&pmsr=1&rg=1&h=1&fachiv=1&fa=1&fb=1&ffeedb=1&org=1">.</a> */ 
+
+?>
 
 
 </td>
@@ -66,8 +68,19 @@
 <td class="tdc"><a href="ManagerRatingGraph.php?ee=1&aa=0&rr=1&hh=1&sh=1&hp=1&fr=1&kr=1&fq=1&prt=1&msg=1&pd=1&mt=1&mts=1&scr=1&prom=1&inc=1&incr=1&pmsr=1&rg=0&h=1&fachiv=1&fa=1&fb=1&ffeedb=1&org=1"><img src="images/ratinggraph1.png" border="0" style="display:<?php if($_REQUEST['rg']==1){echo 'block';}else{echo 'none';} ?>"/></a><img src="images/ratinggraph.png" border="0" style="display:<?php if($_REQUEST['rg']==0){echo 'block';}else{echo 'none';} ?>"/></td>
 
 <!-- Kra form -->
-<?php } if($_SESSION['eKraform']=='Y' AND $CuDate>=$_SESSION['akFrom'] AND $_SESSION['akSts']=='A'){ if($CompanyId==1){$Lblk='KraYearMyTeam_1.png'; $Lblk1='KraYearMyTeam1_1.png';}else{$Lblk='KraYearMyTeam.png'; $Lblk1='KraYearMyTeam1.png';} ?> 
+<?php } 
+
+$sdp=mysql_query("select DepartmentId from hrm_employee_general where EmployeeID=".$EmployeeId,$con); 
+$rdp=mysql_fetch_assoc($sdp);
+
+
+if($_SESSION['eKraform']=='Y' AND $CuDate>=$_SESSION['akFrom'] AND $_SESSION['akSts']=='A'){ if($CompanyId==1){$Lblk='KraYearMyTeam_1.png'; $Lblk1='KraYearMyTeam1_1.png'; $LblB='FormBMyTeam.png'; $LblB1='FormBMyTeam_1.png';}else{$Lblk='KraYearMyTeam.png'; $Lblk1='KraYearMyTeam1.png'; $LblB='FormBMyTeam.png'; $LblB1='FormBMyTeam_1.png';} ?> 
 <td class="tdc"><a href="AppCheckNewKRA.php?ee=1&aa=0&rr=1&hh=1&sh=1&hp=1&fr=1&kr=0&fq=1&prt=1&msg=1&pd=1&mt=1&mts=1&scr=1&prom=1&inc=1&incr=1&pmsr=1&rg=1&h=1&fachiv=1&fa=1&fb=1&ffeedb=1&org=1"/><img src="images/<?php echo $Lblk1;?>" border="0" style="display:<?php if($_REQUEST['kr']==1){echo 'block';}else{echo 'none';} ?>"/></a><img src="images/<?php echo $Lblk;?>" border="0" style="display:<?php if($_REQUEST['kr']==0){echo 'block';}else{echo 'none';} ?>"/></td>
+
+<?php /* if($rdp['DepartmentId']==3 OR $rdp['DepartmentId']==6){ ?>
+<td class="tdc"><a href="AppCheckNewFormB.php?ee=0&aa=1&rr=1&hh=1&sh=1&hp=1&fr=1&kr=1&formb=1&fq=1&prt=1&msg=1&pd=1&mt=1&mts=1&scr=1&prom=1&inc=1&incr=1&pmsr=1&rg=1&h=1&fachiv=0&fa=1&fb=1&ffeedb=1&org=1"/><img src="images/<?php echo $LblB;?>" border="0" style="display:<?php if($_REQUEST['formb']==0){echo 'block';}else{echo 'none';} ?>"/></a><img src="images/<?php echo $LblB1;?>" border="0" style="display:<?php if($_REQUEST['formb']==1){echo 'block';}else{echo 'none';} ?>;"/></td>
+<?php } */ ?>
+
 <?php } ?>
 
    </tr>

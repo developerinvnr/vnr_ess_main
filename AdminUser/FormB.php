@@ -7,13 +7,13 @@ if($_SESSION['logCheckUser']!=$logadmin){header('Location:../index.php');}
 if($_SESSION['login'] = true){require_once('AdminMenuSession.php');} else {$msg= "Session Expiry...............";}
 //*****************************************************************************************
 if(isset($_POST['SaveNew']))
-{ $SqlInseart = mysql_query("INSERT INTO hrm_pms_formb(Year,DepartmentId,Skill,SkillComment,Weightage,Logic,Period,Target,SkillStatus,CompanyId,CreatedBy,CreatedDate,YearId) VALUES('".date("Y")."', ".$_SESSION['DPid'].", '".$_POST['Skill']."', '".$_POST['SkillComment']."', ".$_POST['Weightage'].", '".$_POST['Logic']."', '".$_POST['Period']."', ".$_POST['Target'].", '".$_POST['SkillStatus']."', ".$CompanyId.", ".$UserId.", '".date('Y-m-d')."', ".$YearId.")", $con); 
+{ $SqlInseart = mysql_query("INSERT INTO hrm_pms_formb(Year,DepartmentId,Skill,SkillComment,GroupFor,Weightage,Logic,Period,Target,SkillStatus,CompanyId,CreatedBy,CreatedDate,YearId) VALUES('".date("Y")."', ".$_SESSION['DPid'].", '".$_POST['Skill']."', '".$_POST['SkillComment']."', '".$_POST['GroupFor']."', ".$_POST['Weightage'].", '".$_POST['Logic']."', '".$_POST['Period']."', ".$_POST['Target'].", '".$_POST['SkillStatus']."', ".$CompanyId.", ".$UserId.", '".date('Y-m-d')."', ".$YearId.")", $con); 
    if($SqlInseart){ $msg = "Data has been Inserted successfully..."; }
 }
 
 if(isset($_POST['SaveEdit']))
 {
-   $SqlUpdate = mysql_query("UPDATE hrm_pms_formb SET Year='".date("Y")."', Skill='".$_POST['Skill']."', SkillComment='".$_POST['SkillComment']."',Weightage=".$_POST['Weightage'].", Logic='".$_POST['Logic']."', Period='".$_POST['Period']."', Target=".$_POST['Target'].", SkillStatus='".$_POST['SkillStatus']."' WHERE FormBId=".$_POST['FormBId']) or die(mysql_error());
+   $SqlUpdate = mysql_query("UPDATE hrm_pms_formb SET Year='".date("Y")."', Skill='".$_POST['Skill']."', SkillComment='".$_POST['SkillComment']."', GroupFor='".$_POST['GroupFor']."', Weightage=".$_POST['Weightage'].", Logic='".$_POST['Logic']."', Period='".$_POST['Period']."', Target=".$_POST['Target'].", SkillStatus='".$_POST['SkillStatus']."' WHERE FormBId=".$_POST['FormBId']) or die(mysql_error());
      if($SqlUpdate)
 	 { 
 	  $msg = "Data has been Updeted successfully...";
@@ -293,10 +293,11 @@ function SaveFormB(k,m)
     <tr bgcolor="#7a6189">
 	 <td class="th" style="width:3%;">SNo</td>
 	 <td class="th" style="width:20%;">Capability/Skill</td>
-	 <td class="th" style="width:40%;">Description</td>
-	 <td class="th" style="width:8%;">Weightage</td>
+	 <td class="th" style="width:38%;">Description</td>
+	 <td class="th" style="width:4%;">Group</td>
+	 <td class="th" style="width:6%;">Weightage</td>
 	 <td class="th" style="width:5%;">Logic</td>
-	 <td class="th" style="width:8%;">Period</td>
+	 <td class="th" style="width:5%;">Period</td>
      <td class="th" style="width:5%;">Target</td>
 	 <td class="th" style="width:5%;">Status</td>
 	 <td class="th" style="width:7%;">Action</td>
@@ -307,6 +308,8 @@ function SaveFormB(k,m)
  <td class="td"><?php echo $SNo; ?></td>
  <td><input class="InputTl" name="Skill" id="Skill"></td>
  <td><input class="InputTl" name="SkillComment" id="SkillComment"></td>
+ <td><select class="InputS" id="GroupFor" name="GroupFor"><option value=""></option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option><option value="J">J</option><option value="K">K</option><option value="L">L</option><option value="M">M</option><option value="N">N</option><option value="O">O</option><option value="P">P</option><option value="Q">Q</option><option value="R">R</option><option value="S">S</option><option value="T">T</option><option value="U">U</option><option value="V">V</option><option value="W">W</option><option value="X">X</option><option value="Y">Y</option><option value="Z">Z</option></select></td>
+ 
  <td><input class="InputT" name="Weightage" id="Weightage"></td>
  <td><select class="InputS" id="Logic"><option value="Logic1">Logic1</option><option value="Logic2">Logic2</option>
  <!--<option value="Logic3">Logic3</option><option value="Logic4">Logic4</option><option value="Logic5">Logic5</option>-->
@@ -329,6 +332,9 @@ function SaveFormB(k,m)
  <td class="td"><?php echo $SNo; ?></td>
  <td><input class="InputTl" name="Skill" id="Skill" value="<?php echo ucwords(strtolower($resPer['Skill'])); ?>"></td>
  <td><input class="InputTl" name="SkillComment" id="SkillComment" value="<?php echo $resPer['SkillComment']; ?>"></td>
+ <td><select class="InputS" id="GroupFor" name="GroupFor"><option value="" <?php if($resPer['GroupFor']==''){echo 'selected';}?>></option><option value="A" <?php if($resPer['GroupFor']=='A'){echo 'selected';}?>>A</option><option value="B" <?php if($resPer['GroupFor']=='B'){echo 'selected';}?>>B</option><option value="C" <?php if($resPer['GroupFor']=='C'){echo 'selected';}?>>C</option><option value="D" <?php if($resPer['GroupFor']=='D'){echo 'selected';}?>>D</option><option value="E" <?php if($resPer['GroupFor']=='E'){echo 'selected';}?>>E</option><option value="F" <?php if($resPer['GroupFor']=='F'){echo 'selected';}?>>F</option><option value="G" <?php if($resPer['GroupFor']=='G'){echo 'selected';}?>>G</option><option value="H" <?php if($resPer['GroupFor']=='H'){echo 'selected';}?>>H</option><option value="I" <?php if($resPer['GroupFor']=='I'){echo 'selected';}?>>I</option><option value="J" <?php if($resPer['GroupFor']=='J'){echo 'selected';}?>>J</option><option value="K" <?php if($resPer['GroupFor']=='K'){echo 'selected';}?>>K</option><option value="L" <?php if($resPer['GroupFor']=='L'){echo 'selected';}?>>L</option><option value="M" <?php if($resPer['GroupFor']=='M'){echo 'selected';}?>>M</option><option value="N" <?php if($resPer['GroupFor']=='N'){echo 'selected';}?>>N</option><option value="O" <?php if($resPer['GroupFor']=='O'){echo 'selected';}?>>O</option><option value="P" <?php if($resPer['GroupFor']=='P'){echo 'selected';}?>>P</option><option value="Q" <?php if($resPer['GroupFor']=='Q'){echo 'selected';}?>>Q</option><option value="R" <?php if($resPer['GroupFor']=='R'){echo 'selected';}?>>R</option><option value="S" <?php if($resPer['GroupFor']=='S'){echo 'selected';}?>>S</option><option value="T" <?php if($resPer['GroupFor']=='T'){echo 'selected';}?>>T</option><option value="U" <?php if($resPer['GroupFor']=='U'){echo 'selected';}?>>U</option><option value="V" <?php if($resPer['GroupFor']=='V'){echo 'selected';}?>>V</option><option value="W" <?php if($resPer['GroupFor']=='W'){echo 'selected';}?>>W</option><option value="X" <?php if($resPer['GroupFor']=='X'){echo 'selected';}?>>X</option><option value="Y" <?php if($resPer['GroupFor']=='Y'){echo 'selected';}?>>Y</option><option value="Z" <?php if($resPer['GroupFor']=='Z'){echo 'selected';}?>>Z</option></select></td>
+ 
+ 
  <td><input class="InputT" name="Weightage" id="Weightage" value="<?php echo $resPer['Weightage'];?>"></td>
  <td><select class="InputS" id="Logic" name="Logic"><option value="<?php echo $resPer['Logic']; ?>" selected><?php echo $resPer['Logic']; ?></option><option value="Logic1">Logic1</option><option value="Logic2">Logic2</option>
  <!--<option value="Logic3">Logic3</option><option value="Logic4">Logic4</option><option value="Logic5">Logic5</option>-->
@@ -345,10 +351,15 @@ function SaveFormB(k,m)
 <?php } else { $sSubB=mysql_query("select * from hrm_pms_formbsub where FormBId=".$resPer['FormBId']." AND BSubStatus='A' order by FormBSubId ASC",$con); $rowSubB=mysql_num_rows($sSubB); ?>	 
 <tr>
  <td class="td" style="text-align:center;"><?php echo $SNo; ?><br>
+ <?php /*
  <span style="cursor:pointer;"><img src="images/open-folder.png" style="height:12px;display:<?php if($rowSubB>0){echo 'block';}else{echo 'none';}?>;" onClick="FunSubC(<?php echo $SNo; ?>)" id="SpanO<?php echo $SNo; ?>"/><img src="images/close-folder.png" style="height:12px;display:<?php if($rowSubB>0){echo 'none';}else{echo 'block';}?>;" onClick="FunSubO(<?php echo $SNo; ?>)" id="SpanC<?php echo $SNo; ?>"/></span>
+ */ ?>
  </td>
  <td class="tdl">&nbsp;<?php echo ucwords(strtolower($resPer['Skill'])); ?></td>
  <td class="tdl">&nbsp;<?php echo $resPer['SkillComment']; ?></td>
+ <td class="tdl" style="text-align:center;">&nbsp;<?php echo $resPer['GroupFor']; ?></td>
+ 
+ 
  <td class="td"><?php echo $resPer['Weightage']; ?><input type="hidden" id="Weightage_<?php echo $SNo; ?>" value="<?php echo $resPer['Weightage']; ?>" readonly/></td>
  <td class="td"><?php echo $resPer['Logic']; ?></td>
  <td class="td"><?php if($resPer['Period']=='Annual'){echo 'Annually';}elseif($resPer['Period']=='1/2 Annual'){echo 'Half Yearly';}elseif($resPer['Period']=='Quarter'){echo 'Quarterly';}//elseif($resPer['Period']=='Monthly'){echo 'Monthly';} ?></td>

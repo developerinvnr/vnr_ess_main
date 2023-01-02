@@ -61,7 +61,10 @@ if ($_REQUEST['action'] = 'ExportReportAll') {
 
     $Sno = 1;
     while ($res = mysql_fetch_array($result)) {
-        $Ename = $res['Fname'] . ' ' . $res['Sname'] . ' ' . $res['Lname'];
+        if($res['Sname']==''){ $Ename=trim($res['Fname']).' '.trim($res['Lname']); }
+else{ $Ename=trim($res['Fname']).' '.trim($res['Sname']).' '.trim($res['Lname']); }
+
+        //$Ename = $res['Fname'] . ' ' . $res['Sname'] . ' ' . $res['Lname'];
         $sqlDept = mysql_query('select DepartmentCode from hrm_department where DepartmentId=' . $res['DepartmentId'], $con);
         $resDept = mysql_fetch_assoc($sqlDept);
         $sqlDesig = mysql_query('select DesigCode,DesigName from hrm_designation where DesigId=' . $res['DesigId'], $con);

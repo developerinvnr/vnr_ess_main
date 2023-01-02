@@ -33,7 +33,11 @@ $sqlE1=mysql_query("select Fname, Sname, Lname from hrm_employee where EmployeeI
 $sqlE2=mysql_query("select Fname, Sname, Lname from hrm_employee where EmployeeID=".$res['Reviewer_EmployeeID'], $con); $resE2=mysql_fetch_assoc($sqlE2);
 $sqlE3=mysql_query("select Fname, Sname, Lname from hrm_employee where EmployeeID=".$res['HOD_EmployeeID'], $con); $resE3=mysql_fetch_assoc($sqlE3); 
 $csv_output .= '"'.str_replace('"', '""', $res['EmpCode']).'",';
-$csv_output .= '"'.str_replace('"', '""', $res['Fname'].' '.$res['Sname'].' '.$res['Lname']).'",';
+
+if($res['Sname']==''){ $Ename=trim($res['Fname']).' '.trim($res['Lname']); }
+else{ $Ename=trim($res['Fname']).' '.trim($res['Sname']).' '.trim($res['Lname']); }
+$csv_output .= '"'.str_replace('"', '""', $Ename).'",';
+//$csv_output .= '"'.str_replace('"', '""', $res['Fname'].' '.$res['Sname'].' '.$res['Lname']).'",';
 $csv_output .= '"'.str_replace('"', '""', $resDept['DepartmentCode']).'",';
 $csv_output .= '"'.str_replace('"', '""', $resDesig['DesigName']).'",';
 $csv_output .= '"'.str_replace('"', '""', $resE1['Fname'].' '.$resE1['Sname'].' '.$resE1['Lname']).'",';	

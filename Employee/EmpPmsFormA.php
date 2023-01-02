@@ -155,6 +155,15 @@ function EnterEmpKra(i)
    var MScore=document.getElementById("EmpKRAScore"+i).value=Math.round(((EScore/KRATarget)*KRAWeight)*100)/100;
    var Score=document.getElementById("KraScore"+i).value=MScore;
   }
+  else if(lgc=='Logic2a')
+  {
+   var Per10=Math.round(((KRATarget*10)/100)*100)/100; 
+   var Per110=Math.round((KRATarget+Per10)*100)/100;      
+   if(EmpKRARating>=Per110){var EScore=document.getElementById("EmpKRALogic"+i).value=Per110;}
+   else{var EScore=document.getElementById("EmpKRALogic"+i).value=EmpKRARating;}
+   var MScore=document.getElementById("EmpKRAScore"+i).value=Math.round(((EScore/KRATarget)*KRAWeight)*100)/100;
+   var Score=document.getElementById("KraScore"+i).value=MScore;
+  }
   else if(lgc=='Logic3')
   { 
    if(EmpKRARating==KRATarget){var EScore=document.getElementById("EmpKRALogic"+i).value=EmpKRARating;}
@@ -505,6 +514,15 @@ function EnterEmpKraSub(i,k)
   {
    if(Rating<=Target){var EScore=document.getElementById("EmpKRALogic"+i+"_"+k).value=Rating;}
    else{var EScore=document.getElementById("EmpKRALogic"+i+"_"+k).value=Target;}
+   var MScore=document.getElementById("EmpKRAScore"+i+"_"+k).value=Math.round(((EScore/Target)*Weight)*100)/100;
+   if(MScore>0){document.getElementById("EmpKRAScore"+i+"_"+k).value=MScore; document.getElementById("KraScoreSub"+i+"_"+k).value=MScore;}else{document.getElementById("EmpKRAScore"+i+"_"+k).value=0;}
+  }
+  else if(lgc=='Logic2a')
+  {
+   var Per10=Math.round(((Target*10)/100)*100)/100; 
+   var Per110=Math.round((Target+Per10)*100)/100;      
+   if(Rating>=Per110){var EScore=document.getElementById("EmpKRALogic"+i+"_"+k).value=Per110;}
+   else{var EScore=document.getElementById("EmpKRALogic"+i+"_"+k).value=Rating;}
    var MScore=document.getElementById("EmpKRAScore"+i+"_"+k).value=Math.round(((EScore/Target)*Weight)*100)/100;
    if(MScore>0){document.getElementById("EmpKRAScore"+i+"_"+k).value=MScore; document.getElementById("KraScoreSub"+i+"_"+k).value=MScore;}else{document.getElementById("EmpKRAScore"+i+"_"+k).value=0;}
   }

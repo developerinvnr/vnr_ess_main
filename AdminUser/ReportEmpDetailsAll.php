@@ -409,7 +409,7 @@ if ($_SESSION['login'] = true) {
                                                             <td colspan="23" align="center"
                                                                 style="color:#FFFFFF;font-size:11px;"><b>Cost To
                                                                     Company</b></td>
-                                                            <td colspan="15" align="center"
+                                                            <td colspan="16" align="center"
                                                                 style="color:#FFFFFF;font-size:11px;"><b>Eligibility</b>
                                                             </td>
                                                             <td align="center" style="color:#FFFFFF;font-size:11px;">
@@ -1140,11 +1140,11 @@ $sqlch=mysql_query("select * from hrm_employee_separation where EmployeeID=".$re
                                                             <td align="center" style="" class="All_80"
                                                                 valign="top"><?php echo $TotalExp; ?></td>
 
-                                                            <?php $sqlQuali = mysql_query('select Qualification,Specialization,Institute from hrm_employee_qualification where EmployeeID=' . $res['EmployeeID'], $con);
-                                                            $sqlQ1 = mysql_query("select Qualification,Specialization,Institute from hrm_employee_qualification where Qualification='10th' AND EmployeeID=" . $res['EmployeeID'], $con);
-                                                            $sqlQ2 = mysql_query("select Qualification,Specialization,Institute from hrm_employee_qualification where Qualification='12th' AND EmployeeID=" . $res['EmployeeID'], $con);
-                                                            $sqlQ3 = mysql_query("select Qualification,Specialization,Institute from hrm_employee_qualification where Qualification='Graduation' AND EmployeeID=" . $res['EmployeeID'], $con);
-                                                            $sqlQ4 = mysql_query("select Qualification,Specialization,Institute from hrm_employee_qualification where Qualification='Post_Graduation' AND EmployeeID=" . $res['EmployeeID'], $con);
+                                                            <?php $sqlQuali = mysql_query('select Qualification,Specialization,Institute,Subject from hrm_employee_qualification where EmployeeID=' . $res['EmployeeID'], $con);
+                                                            $sqlQ1 = mysql_query("select Qualification,Specialization,Institute,Subject from hrm_employee_qualification where Qualification='10th' AND EmployeeID=" . $res['EmployeeID'], $con);
+                                                            $sqlQ2 = mysql_query("select Qualification,Specialization,Institute,Subject from hrm_employee_qualification where Qualification='12th' AND EmployeeID=" . $res['EmployeeID'], $con);
+                                                            $sqlQ3 = mysql_query("select Qualification,Specialization,Institute,Subject from hrm_employee_qualification where Qualification='Graduation' AND EmployeeID=" . $res['EmployeeID'], $con);
+                                                            $sqlQ4 = mysql_query("select Qualification,Specialization,Institute,Subject from hrm_employee_qualification where Qualification='Post_Graduation' AND EmployeeID=" . $res['EmployeeID'], $con);
                                                             $rowQ1 = mysql_num_rows($sqlQ1);
                                                             $rowQ2 = mysql_num_rows($sqlQ2);
                                                             $rowQ3 = mysql_num_rows($sqlQ3);
@@ -1161,7 +1161,7 @@ $sqlch=mysql_query("select * from hrm_employee_separation where EmployeeID=".$re
                                                             if ($rowQ4 > 0) {
                                                                 $resQ4 = mysql_fetch_assoc($sqlQ4);
                                                             }
-                                                            $sqlQQ = mysql_query("select Qualification,Specialization from hrm_employee_qualification where Qualification!='10th' AND Qualification!='12th' AND Qualification!='Graduation' AND Qualification!='Post_Graduation' AND EmployeeID=" . $res['EmployeeID'], $con);
+                                                            $sqlQQ = mysql_query("select Qualification,Specialization,Subject from hrm_employee_qualification where Qualification!='10th' AND Qualification!='12th' AND Qualification!='Graduation' AND Qualification!='Post_Graduation' AND EmployeeID=" . $res['EmployeeID'], $con);
                                                             $rowQQ = mysql_num_rows($sqlQQ); if($rowQQ>0){$resQQ=mysql_fetch_assoc($sqlQQ);}
                                                             ?>
                                                             <td style="background-color:#FFCEE7;"
@@ -1184,13 +1184,13 @@ $sqlch=mysql_query("select * from hrm_employee_separation where EmployeeID=".$re
                                                             <td style="background-color:#FFCEE7;"
                                                                 class="All_100" valign="top">
                                                                 <?php if ($resQ4['Specialization'] != '' and $resQ4['Institute'] != '') {
-                                                                    echo $resQ4['Specialization'];
+                                                                    echo $resQ4['Specialization'].' '.$resQ4['Subject'];
                                                                 } elseif ($resQ3['Specialization'] != '' and $resQ3['Institute'] != '') {
-                                                                    echo $resQ3['Specialization'];
+                                                                    echo $resQ3['Specialization'].' '.$resQ3['Subject'];
                                                                 } elseif ($resQ2['Institute'] != '') {
-                                                                    echo '12th';
+                                                                    echo '12th'.' '.$resQ2['Subject'];
                                                                 } elseif ($resQ1['Institute'] != '') {
-                                                                    echo '10th';
+                                                                    echo '10th'.' '.$resQ1['Subject'];
                                                                 } ?></td>
                                                             <td style="background-color:#FFCEE7;"
                                                                 class="All_100" valign="top">

@@ -31,7 +31,11 @@ while($res = mysql_fetch_array($sql))
 {
   if($res['TimeApply']=='Y')
   {
-  $Ename=$res['Fname'].' '.$res['Sname'].' '.$res['Lname']; $month=$_REQUEST['m'];
+  
+  if($res['Sname']==''){ $Ename=trim($res['Fname']).' '.trim($res['Lname']); }
+else{ $Ename=trim($res['Fname']).' '.trim($res['Sname']).' '.trim($res['Lname']); }
+  //$Ename=$res['Fname'].' '.$res['Sname'].' '.$res['Lname']; 
+  $month=$_REQUEST['m'];
   
   $schema_insert = "";
   $schema_insert .= $res['EmpCode'].$sep;

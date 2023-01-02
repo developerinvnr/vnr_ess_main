@@ -228,6 +228,15 @@ function EnterAppKra(v,n)
    var MScore=document.getElementById("AppKRAScore"+n).value=Math.round(((EScore/KRATarget)*KRAWeight)*100)/100;
    var Score=document.getElementById("KraScore"+n).value=MScore;
   }
+  else if(lgc=='Logic2a')
+  {
+   var Per10=Math.round(((KRATarget*10)/100)*100)/100; 
+   var Per110=Math.round((KRATarget+Per10)*100)/100; 
+   if(AppKRARating>=Per110){var EScore=document.getElementById("AppKRALogic"+n).value=Per110;}
+   else{var EScore=document.getElementById("AppKRALogic"+n).value=AppKRARating;}
+   var MScore=document.getElementById("AppKRAScore"+n).value=Math.round(((EScore/KRATarget)*KRAWeight)*100)/100;
+   var Score=document.getElementById("KraScore"+n).value=MScore;
+  }
   else if(lgc=='Logic3')
   { 
    if(AppKRARating==KRATarget){var EScore=document.getElementById("AppKRALogic"+n).value=AppKRARating;}
@@ -578,6 +587,15 @@ function EnterAppKraSub(v,i,j)
   {
    if(Rating<=Target){var EScore=document.getElementById("AppKRALogic"+i+"_"+j).value=Rating;}
    else{var EScore=document.getElementById("AppKRALogic"+i+"_"+j).value=Target;}
+   var MScore=Math.round(((EScore/Target)*Weight)*100)/100;
+   if(MScore>0){document.getElementById("AppKRAScore"+i+"_"+j).value=MScore; document.getElementById("KraScoreSub"+i+"_"+j).value=MScore;}else{document.getElementById("AppKRAScore"+i+"_"+j).value=0;}
+  }
+  else if(lgc=='Logic2a')
+  {
+   var Per10=Math.round(((Target*10)/100)*100)/100; 
+   var Per110=Math.round((Target+Per10)*100)/100;      
+   if(Rating>=Per110){var EScore=document.getElementById("AppKRALogic"+i+"_"+j).value=Per110;}
+   else{var EScore=document.getElementById("AppKRALogic"+i+"_"+j).value=Rating;}
    var MScore=Math.round(((EScore/Target)*Weight)*100)/100;
    if(MScore>0){document.getElementById("AppKRAScore"+i+"_"+j).value=MScore; document.getElementById("KraScoreSub"+i+"_"+j).value=MScore;}else{document.getElementById("AppKRAScore"+i+"_"+j).value=0;}
   }
